@@ -19,7 +19,9 @@
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
+    "gatsby-plugin-typescript": "^2.4.18",
+    "prettier": "2.0.5",
+    "typescript": "^4.0.2"
   },
   "repository": {
     "type": "git",
