@@ -1,0 +1,28 @@
+{
+  "name": "drafter-sk-gatsby",
+  "private": true,
+  "description": "Source code of drafter.sk built in GatsbyJS",
+  "version": "0.1.0",
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"No tests yet...\" && exit 1"
+  },
+  "dependencies": {
+    "gatsby": "^2.24.47",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suzii/drafter-sk-gatsby"
+  }
+}
