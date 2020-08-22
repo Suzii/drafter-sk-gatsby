@@ -25,5 +25,17 @@ module.exports = {
         authorizationKey: usePreviewApi ? config.KONTENT_PREVIEW_API_KEY : undefined,
       },
     },
+    {
+      resolve: `gatsby-plugin-graphql-codegen`,
+      options: {
+        fileName: `./graphql-types.ts`,
+        documentPaths: [
+          './src/**/*.{ts,tsx}',
+        ],
+        codegenPlugins: [{
+          resolve: 'typescript',
+        }]
+      }
+    }
   ],
 }
