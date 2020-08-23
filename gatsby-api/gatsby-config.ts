@@ -5,7 +5,7 @@ dotenv.config({
 });
 
 const config = require('gatsby-plugin-config').default;
-const usePreviewApi = config.NODE_ENV === 'development';
+const usePreviewUrl = config.KONTENT_PREVIEW_ENABLED === 'true';
 
 module.exports = {
   plugins: [
@@ -20,11 +20,11 @@ module.exports = {
     {
       resolve: '@kentico/gatsby-source-kontent',
       options: {
-        projectId: 'f408ff21-bb77-0017-334f-f1ea95739f2a',
-        languageCodenames: [`sk-SK`],
+        projectId: config.KONTENT_PROJECT_ID,
+        languageCodenames: [config.KONTENT_LANGUAGE_CODENAMES],
         includeTaxonomies: true,
-        usePreviewUrl: usePreviewApi,
-        authorizationKey: usePreviewApi ? config.KONTENT_PREVIEW_API_KEY : undefined,
+        usePreviewUrl,
+        authorizationKey: usePreviewUrl ? config.KONTENT_PREVIEW_API_KEY : undefined,
       },
     },
     {
