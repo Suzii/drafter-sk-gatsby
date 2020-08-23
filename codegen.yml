@@ -1,0 +1,16 @@
+schema: schema.graphql
+documents:
+  - ./src/**/*.{ts,tsx}
+  - ./gatsby-api/**/*.{ts,tsx}
+  - ./node_modules/gatsby*/!(node_modules)/**/*.js
+pluckConfig:
+  globalGqlIdentifierName: graphql
+generates:
+  ./graphql-types.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      immutableTypes: true
+      namingConvention:
+        enumValues: keep

@@ -34,6 +34,7 @@ module.exports = {
         documentPaths: [
           './src/**/*.{ts,tsx}',
           './gatsby-api/**/*.{ts,tsx}',
+          './node_modules/gatsby*/!(node_modules)/**/*.js',
         ],
         codegenPlugins: [
           {
