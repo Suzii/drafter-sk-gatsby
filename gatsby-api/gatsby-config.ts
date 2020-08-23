@@ -1,11 +1,11 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
-const config = require('gatsby-plugin-config').default
-const usePreviewApi = config.NODE_ENV === 'development'
+const config = require('gatsby-plugin-config').default;
+const usePreviewApi = config.NODE_ENV === 'development';
 
 module.exports = {
   plugins: [
@@ -33,7 +33,7 @@ module.exports = {
         fileName: `./graphql-types.ts`,
         documentPaths: [
           './src/**/*.{ts,tsx}',
-          './gatsby-api/**/*.{ts,tsx}'
+          './gatsby-api/**/*.{ts,tsx}',
         ],
         codegenPlugins: [
           {
@@ -43,4 +43,4 @@ module.exports = {
       },
     },
   ],
-}
+};

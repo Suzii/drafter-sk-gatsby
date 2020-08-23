@@ -630,6 +630,12 @@ type kontent_item_produktEdge {
     previous: kontent_item_produkt
 }
 
+type kontent_item_produktElementsUrl_slug {
+    name: String
+    type: String
+    value: String
+}
+
 type kontent_item_produktGroupConnection {
     edges: [kontent_item_produktEdge!]!
     field: String!
@@ -648,6 +654,7 @@ type kontent_item_produkt_elements {
     nazov: kontent_item_text_element_value
     pocet_kusov_v_baleni: kontent_item_number_element_value
     popis: kontent_item_rich_text_element_value
+    url_slug: kontent_item_produktElementsUrl_slug
     vyrobca: kontent_item_taxonomy_element_value
 }
 
@@ -1595,6 +1602,9 @@ enum kontent_item_produktFieldsEnum {
     elements___popis___name
     elements___popis___type
     elements___popis___value
+    elements___url_slug___name
+    elements___url_slug___type
+    elements___url_slug___value
     elements___vyrobca___name
     elements___vyrobca___taxonomy_group
     elements___vyrobca___type
@@ -2091,6 +2101,12 @@ input kontent_item_number_element_valueFilterInput {
     value: FloatQueryOperatorInput
 }
 
+input kontent_item_produktElementsUrl_slugFilterInput {
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+    value: StringQueryOperatorInput
+}
+
 input kontent_item_produktFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_produkt_elementsFilterInput
@@ -2115,6 +2131,7 @@ input kontent_item_produkt_elementsFilterInput {
     nazov: kontent_item_text_element_valueFilterInput
     pocet_kusov_v_baleni: kontent_item_number_element_valueFilterInput
     popis: kontent_item_rich_text_element_valueFilterInput
+    url_slug: kontent_item_produktElementsUrl_slugFilterInput
     vyrobca: kontent_item_taxonomy_element_valueFilterInput
 }
 
