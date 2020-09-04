@@ -13,13 +13,16 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"No tests yet...\" && exit 1"
+    "test": "echo \"No tests yet...\" && exit 1",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@graphql-codegen/cli": "^1.17.8",
     "@graphql-codegen/typescript": "^1.17.9",
     "@graphql-codegen/typescript-operations": "^1.17.8",
     "@kentico/gatsby-source-kontent": "^6.0.1",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
     "dotenv": "^8.2.0",
     "gatsby": "^2.24.47",
     "gatsby-plugin-config": "^1.0.7",
