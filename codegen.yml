@@ -12,5 +12,6 @@ generates:
       - typescript-operations
     config:
       immutableTypes: true
+      avoidOptionals: true
       namingConvention:
         enumValues: keep

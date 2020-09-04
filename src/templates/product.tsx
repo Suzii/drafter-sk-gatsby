@@ -1,4 +1,6 @@
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import { FixedObject } from 'gatsby-image/index';
 import React from 'react';
 import { ProductQuery } from '../../graphql-types';
 import Layout from '../components/Layout';
@@ -19,7 +21,7 @@ const Product: React.FC<ProductProps> = ({ data }) => {
         <h1>{data.kontentItemProdukt?.elements?.nazov?.value}</h1>
       </div>
       <div>
-        <img src={data.kontentItemProdukt?.elements?.foto?.value?.[0]?.url ?? ''} />
+        <Img fixed={data?.kontentItemProdukt?.elements?.foto?.value?.[0]?.fixed as FixedObject} />
       </div>
     </Layout>
   );
@@ -47,7 +49,13 @@ export const query = graphql`
                 }
                 foto {
                     value {
-                        url
+                        fixed(width: 350) {
+                            base64
+                            height
+                            src
+                            srcSet
+                            width
+                        }
                     }
                 }
             }
