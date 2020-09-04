@@ -1,6 +1,7 @@
 import { graphql, Link } from 'gatsby';
 import React from 'react';
 import { ProductsQuery } from '../../graphql-types';
+import { Container, Row, Stack } from '../components/Container';
 import Layout from '../components/Layout';
 import { PRODUCT_URL } from '../constants/urls';
 
@@ -10,21 +11,24 @@ type ProductsProps = {
 
 const Products: React.FC<ProductsProps> = ({ data }) => (
   <Layout>
-    <div>
-      <h1>Products</h1>
-    </div>
-    <div>
-      <p>Check out our portfolio</p>
-      <ul>
-        {data.allKontentItemProdukt.edges.map(product => (
-          <li key={product.node.id}>
-            <Link to={PRODUCT_URL(product.node.elements?.url_slug?.value)}>
-              {product.node.elements?.nazov?.value}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Container>
+      <Stack>
+        <Row>
+          <h1>Products</h1>
+        </Row>
+        <Row>
+          <ul>
+            {data.allKontentItemProdukt.edges.map(product => (
+              <li key={product.node.id}>
+                <Link to={PRODUCT_URL(product.node.elements?.url_slug?.value)}>
+                  {product.node.elements?.nazov?.value}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Row>
+      </Stack>
+    </Container>
   </Layout>
 );
 

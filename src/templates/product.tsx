@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import { FixedObject } from 'gatsby-image/index';
 import React from 'react';
 import { ProductQuery } from '../../graphql-types';
+import { Container, Stack } from '../components/Container';
 import Layout from '../components/Layout';
 
 type ProductProps = {
@@ -17,12 +18,12 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 
   return (
     <Layout>
-      <div>
-        <h1>{data.kontentItemProdukt?.elements?.nazov?.value}</h1>
-      </div>
-      <div>
-        <Img fixed={data?.kontentItemProdukt?.elements?.foto?.value?.[0]?.fixed as FixedObject} />
-      </div>
+      <Container>
+        <Stack>
+          <h1>{data.kontentItemProdukt?.elements?.nazov?.value}</h1>
+          <Img fixed={data?.kontentItemProdukt?.elements?.foto?.value?.[0]?.fixed as FixedObject} />
+        </Stack>
+      </Container>
     </Layout>
   );
 };

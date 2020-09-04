@@ -1,0 +1,112 @@
+@logo-height: 3rem * 1.5;
+@title-font-size: 3rem;
+@subtitle-font-size: 1.3rem;
+@title-padding-vertical: 1.3rem;
+@title-padding-horizontal: 2.3rem;
+@shrink-constant: 0.7;
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.56),
+    rgba(0, 0, 0, 0.56)
+  ),
+  url("../../images/hero.jpg") no-repeat 30% 60%;
+
+  background-size: cover;
+  min-height: 100vh;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: @light-gray;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    //font-weight: normal;
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+
+    .hero__text--logo {
+      fill: @primary-color;
+
+      height: @logo-height;
+      margin: @logo-height/4;
+    }
+
+    .hero__text--title {
+      font-size: @title-font-size;
+      line-height: @title-font-size;
+      padding: @title-padding-vertical @title-padding-horizontal;
+      border: 0.3rem solid @primary-color;
+      margin: 0;
+    }
+
+    .hero__text--subtitle {
+      font-size: @subtitle-font-size;
+      line-height: @subtitle-font-size;
+    }
+
+    .hero__text--cta {
+      text-transform: uppercase;
+      color: @white;
+      padding: 0.8rem 1rem;
+      //border: 1px solid white;
+      background-color: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+
+      &:hover {
+        background-color: rgba(255, 219, 11, 1);
+        border-color: rgba(255, 255, 255, 0.7);
+        color: @black;
+      }
+    }
+
+    @media (max-width: @screen-sm + 1) {
+      .hero__text--logo {
+        height: @logo-height * @shrink-constant;
+      }
+
+      .hero__text--title {
+        font-size: @title-font-size * @shrink-constant;
+        line-height: @title-font-size * @shrink-constant;
+        padding: @title-padding-vertical * @shrink-constant @title-padding-horizontal * @shrink-constant;
+      }
+
+      .hero__text--subtitle {
+        font-size: @subtitle-font-size * 0.8;
+        line-height: @subtitle-font-size * 0.8;
+      }
+    }
+
+    @media (max-width: @screen-xs + 1) {
+      .hero__text--logo {
+        height: @logo-height * @shrink-constant;
+      }
+
+      .hero__text--title {
+        font-size: @title-font-size * @shrink-constant * @shrink-constant;
+        line-height: @title-font-size * @shrink-constant * @shrink-constant;
+        padding: @title-padding-vertical * @shrink-constant * @shrink-constant @title-padding-horizontal * @shrink-constant * @shrink-constant;
+      }
+
+      .hero__text--subtitle {
+        font-size: @subtitle-font-size * 0.7;
+        line-height: @subtitle-font-size * 0.7;
+      }
+    }
+  }
+}

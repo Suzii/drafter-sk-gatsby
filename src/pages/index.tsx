@@ -12,12 +12,11 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = ({ data }) => (
   <Layout>
-    <h1>Drafter.sk</h1>
-    <div>
-      <p>
-        Go and check out our <Link to={PRODUCTS_URL}>products</Link>!
-      </p>
-    </div>
+    {/*<div>*/}
+    {/*  <p>*/}
+    {/*    Go and check out our <Link to={PRODUCTS_URL}>products</Link>!*/}
+    {/*  </p>*/}
+    {/*</div>*/}
     <Img fluid={data.file!.childImageSharp!.fluid! as FluidObject} />
   </Layout>
 );

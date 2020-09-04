@@ -1,10 +1,12 @@
-import '../styles/index.less';
 import React from 'react';
+import '../styles/index.less';
+import { Navigation } from './Navigation';
 
 const Layout: React.FC = ({ children }) => (
-  <div style={{ margin: `0 auto`, minWidth: `100%`, padding: `0` }}>
+  <>
+    <Navigation />
     {children}
-  </div>
+  </>
 );
 
 export default Layout;
