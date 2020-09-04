@@ -43,5 +43,14 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-less`,
+      options: {
+        loaderOptions: {
+        },
+        lessOptions: {
+        },
+      },
+    },
   ],
 };

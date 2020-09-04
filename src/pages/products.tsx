@@ -1,7 +1,7 @@
 import { graphql, Link } from 'gatsby';
 import React from 'react';
 import { ProductsQuery } from '../../graphql-types';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import { PRODUCT_URL } from '../constants/urls';
 
 type ProductsProps = {

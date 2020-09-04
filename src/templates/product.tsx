@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 import { ProductQuery } from '../../graphql-types';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 type ProductProps = {
   readonly data?: ProductQuery

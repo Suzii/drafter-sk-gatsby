@@ -1,3 +1,4 @@
+import '../styles/index.less';
 import React from 'react';
 
 const Layout: React.FC = ({ children }) => (
