@@ -44,6 +44,9 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-styled-components`,
+    },
+    {
       resolve: `gatsby-plugin-less`,
       options: {
         loaderOptions: {

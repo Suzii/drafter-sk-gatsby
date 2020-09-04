@@ -2,6 +2,7 @@
 @import 'variables.less';
 @import 'utils/responsive-utils.less';
 @import (css) url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600&subset=latin-ext');
+@import './sections/nav';
 
 @font-face {
   font-family: 'Titillium Web', 'Open Sans';
@@ -28,4 +29,12 @@ body {
   color: @dark-gray;
   line-height: 1.6;
   text-align: justify;
+}
+
+.a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
