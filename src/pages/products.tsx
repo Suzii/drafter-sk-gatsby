@@ -1,7 +1,7 @@
 import { graphql, Link } from 'gatsby';
 import React from 'react';
 import { ProductsQuery } from '../../graphql-types';
-import { Container, Row, Stack } from '../components/Container';
+import { Container, Row, Stack } from '../_ui-components/Container';
 import Layout from '../components/Layout';
 import { PRODUCT_URL } from '../constants/urls';
 

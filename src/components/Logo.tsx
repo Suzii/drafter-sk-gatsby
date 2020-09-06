@@ -7,7 +7,7 @@ export enum LogoType {
 
 type Props = {
   readonly variant: LogoType;
-  readonly className?: string; // TODO change to use styled components
+  readonly className?: string;
 };
 
 export const Logo: React.FC<Props> = ({variant, className}) => {

@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { FixedObject } from 'gatsby-image/index';
 import React from 'react';
 import { ProductQuery } from '../../graphql-types';
-import { Container, Stack } from '../components/Container';
+import { Container, Stack } from '../_ui-components/Container';
 import Layout from '../components/Layout';
 
 type ProductProps = {

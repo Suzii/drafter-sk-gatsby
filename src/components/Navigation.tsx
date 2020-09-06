@@ -11,17 +11,17 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = ({ sitemap })
       <LogoStyled variant={LogoType.Full} />
     </LinkStyled>
 
-    <UlStyled role="navigation">
+    <ul role="navigation">
       {sitemap.map((node, index) =>
         node.isVisible && !node.isIndex && (
-          <LiStyled key={index}>
+          <li key={index}>
             <LinkStyled to={node.url} activeClassName="active" partiallyActive isActive={isActive(node.url)}>
               {node.title}
             </LinkStyled>
-          </LiStyled>
+          </li>
         )
       )}
-    </UlStyled>
+    </ul>
   </Nav>
 );
 
@@ -41,6 +41,22 @@ const Nav = styled.nav`
   justify-content: space-around;
   
   background-color: ${props => props.theme.colors.primary};
+  
+  ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    
+    li {
+      margin-right: 0.5rem;
+      margin-left: 0.5rem;
+      text-transform: uppercase;
+      font-weight: bolder;
+    }
+  }
 `;
 
 type LinkStyledProps = { readonly isActive?: boolean };
@@ -70,20 +86,4 @@ const LogoStyled = styled(Logo)`
   a:hover {
     text-decoration: none;
   }
-`;
-
-const UlStyled = styled.ul`
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  align-items: center;
-`;
-
-const LiStyled = styled.li`
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
-  text-transform: uppercase;
-  font-weight: bolder;
 `;
