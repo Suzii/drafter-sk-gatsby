@@ -4,6 +4,7 @@ import { ProductsQuery } from '../../graphql-types';
 import { Container, Row, Stack } from '../_ui-components/Container';
 import Layout from '../components/Layout';
 import { PRODUCT_URL } from '../constants/urls';
+import { Feature, isFeatureEnabled } from '../utils/featureToggles';
 
 type ProductsProps = {
   readonly data: ProductsQuery
@@ -17,15 +18,22 @@ const Products: React.FC<ProductsProps> = ({ data }) => (
           <h1>Products</h1>
         </Row>
         <Row>
-          <ul>
-            {data.allKontentItemProdukt.edges.map(product => (
-              <li key={product.node.id}>
-                <Link to={PRODUCT_URL(product.node.elements?.url_slug?.value)}>
-                  {product.node.elements?.nazov?.value}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {isFeatureEnabled(Feature.ProductsPage)
+            ? (
+              <h2>Na stránke pracujeme...</h2>
+            )
+            : (
+              <ul>
+                {data.allKontentItemProdukt.edges.map(product => (
+                  <li key={product.node.id}>
+                    <Link to={PRODUCT_URL(product.node.elements?.url_slug?.value)}>
+                      {product.node.elements?.nazov?.value}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
         </Row>
       </Stack>
     </Container>
@@ -44,7 +52,9 @@ export const query = graphql`
                         nazov {
                             value
                         }
-                        url_slug{ value }
+                        url_slug {
+                            value
+                        }
                     }
                 }
             }
