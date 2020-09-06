@@ -19,5 +19,5 @@ export const sitemap: Sitemap = [
   { title: 'Kto sme', url: WHO_WE_ARE_URL, isVisible: true },
   { title: 'Produkty', url: PRODUCTS_URL, isVisible: true },
   { title: 'Partneri', url: PARTNERS_URL, isVisible: true },
-  { title: 'Kontak', url: CONTACT_URL, isVisible: true },
+  { title: 'Kontakt', url: CONTACT_URL, isVisible: true },
 ];

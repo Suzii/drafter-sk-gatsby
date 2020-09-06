@@ -1,12 +1,16 @@
 import React from 'react';
-import '../styles/index.less';
+import { ThemeProvider } from 'styled-components';
 import { sitemap } from '../constants/urls';
+import '../styles/index.less';
+import { theme } from '../styles/theme';
 import { Navigation } from './Navigation';
 
 const Layout: React.FC = ({ children }) => (
   <>
-    <Navigation sitemap={sitemap}/>
-    {children}
+    <ThemeProvider theme={theme}>
+      <Navigation sitemap={sitemap} />
+      {children}
+    </ThemeProvider>
   </>
 );
 
