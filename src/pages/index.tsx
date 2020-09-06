@@ -17,12 +17,11 @@ const Home: React.FC<HomeProps> = ({ data }) => (
     {/*    Go and check out our <Link to={PRODUCTS_URL}>products</Link>!*/}
     {/*  </p>*/}
     {/*</div>*/}
-    <Img fluid={data.file!.childImageSharp!.fluid! as FluidObject} />
+    {/*<Img fluid={data.file!.childImageSharp!.fluid! as FluidObject} />*/}
   </Layout>
 );
 
 export default Home;
-
 
 export const query = graphql`
     query HeroImage {
