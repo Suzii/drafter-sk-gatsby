@@ -44,7 +44,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-less`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
