@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
@@ -19,7 +20,7 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = ({ sitemap })
               {node.title}
             </LinkStyled>
           </li>
-        )
+        ),
       )}
     </ul>
   </Nav>
@@ -61,9 +62,10 @@ const Nav = styled.nav`
 
 type LinkStyledProps = { readonly isActive?: boolean };
 
-const LinkStyled = styled(Link).attrs<LinkStyledProps>(props => ({
-  className: props.isActive ? 'active' : '',
-}))<LinkStyledProps>`
+const LinkStyled = styled
+(({ isActive, ...rest }) =>
+  <Link {...rest} className={classnames(rest.className, isActive && 'active')} />,
+)<LinkStyledProps>`
   text-decoration: none;
   color: ${props => props.theme.colors.secondary};
   
