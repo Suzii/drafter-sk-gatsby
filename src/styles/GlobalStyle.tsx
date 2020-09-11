@@ -19,8 +19,8 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
   
     font-family: 'Titillium Web', 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: @dark-gray;
+    font-weight: ${p => p.theme.fontWeight.normal};
+    color: ${p => p.theme.colors.darkGray};
     line-height: 1.6;
     text-align: justify;
   
@@ -36,6 +36,14 @@ export const GlobalStyle = createGlobalStyle`
     &:hover {
       text-decoration: underline;
     }
+  }
+  
+  h1,
+  h2,
+  h3 {
+    color: ${p => p.theme.colors.secondary};
+    text-transform: uppercase;
+    font-weight: ${p => p.theme.fontWeight.bolder};
   }
 `
 

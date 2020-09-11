@@ -31,6 +31,7 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   right:0;
+  z-index: ${p => p.theme.zIndex.z900};
 
   width: 100%;
   min-height: 80px;
@@ -55,7 +56,7 @@ const Nav = styled.nav`
       margin-right: 0.5rem;
       margin-left: 0.5rem;
       text-transform: uppercase;
-      font-weight: bolder;
+      font-weight: ${p => p.theme.fontWeight.bold};
     }
   }
 `;
