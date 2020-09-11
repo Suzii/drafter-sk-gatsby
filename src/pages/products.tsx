@@ -18,7 +18,7 @@ const Products: React.FC<ProductsProps> = ({ data }) => (
           <h1>Products</h1>
         </Row>
         <Row>
-          {isFeatureEnabled(Feature.ProductsPage)
+          {!isFeatureEnabled(Feature.ProductsPage)
             ? (
               <h2>Na stránke pracujeme...</h2>
             )

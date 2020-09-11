@@ -124,7 +124,6 @@ const DlStyled = styled.dl`
 `;
 
 const DtStyled = styled.dt`
-  //flex: 0 0 33.33%;
   flex: 0 0 45%;
   margin-left: auto;
   margin-right: auto;
@@ -134,11 +133,9 @@ const DtStyled = styled.dt`
 `;
 
 const DdStyled = styled.dd`
-  //flex: 0 0 66.67%;
-   flex: 0 0 45%;
+  flex: 0 0 45%;
   margin-left: auto;
   margin-right: auto;
-  //text-align: left;
   text-align: right;
   text-overflow: ellipsis;
   overflow: hidden;
