@@ -12,7 +12,6 @@
   },
   "exclude": ["node_modules", "public", ".cache"],
   "includes": [
-    "styled.d.ts",
-    "global.d.ts"
+    "styled.d.ts"
   ]
 }

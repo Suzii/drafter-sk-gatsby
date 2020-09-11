@@ -6,8 +6,8 @@
   "license": "0BSD",
   "scripts": {
     "postinstall": "npm run generate-types",
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "npm run generate-types&& gatsby build",
+    "develop": "npm run generate-types&& gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "generate-types": "graphql-codegen",
     "start": "npm run develop",
