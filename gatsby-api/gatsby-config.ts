@@ -20,8 +20,8 @@ module.exports = {
     {
       resolve: '@kentico/gatsby-source-kontent',
       options: {
-        projectId: config.KONTENT_PROJECT_ID,
-        languageCodenames: [config.KONTENT_LANGUAGE_CODENAMES],
+        projectId: config.GATSBY_KONTENT_PROJECT_ID,
+        languageCodenames: [config.GATSBY_KONTENT_LANGUAGE_CODENAMES],
         includeTaxonomies: true,
         usePreviewUrl,
         authorizationKey: usePreviewUrl ? config.KONTENT_PREVIEW_API_KEY : undefined,
@@ -43,6 +43,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-use-query-params`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

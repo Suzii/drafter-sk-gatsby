@@ -18,10 +18,12 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 
   return (
     <Layout>
-      <Container>
+      <Container
+        data-kontent-item-id={data.kontentItemProdukt?.system.id}
+      >
         <Stack>
-          <h1>{data.kontentItemProdukt?.elements?.nazov?.value}</h1>
-          <Img fixed={data?.kontentItemProdukt?.elements?.foto?.value?.[0]?.fixed as FixedObject} />
+          <h1 data-kontent-element-codename={`nazov`}>{data.kontentItemProdukt?.elements?.nazov?.value}</h1>
+          <Img data-kontent-element-codename={`foto`} fixed={data?.kontentItemProdukt?.elements?.foto?.value?.[0]?.fixed as FixedObject} />
         </Stack>
       </Container>
     </Layout>
@@ -33,10 +35,11 @@ export default Product;
 export const query = graphql`
     query Product($slug: String!) {
         kontentItemProdukt(elements: { url_slug: {value: { eq: $slug } }}) {
+            system { id }
             elements {
-                url_slug { value}
-            }
-            elements {
+                url_slug { 
+                    value
+                }
                 nazov {
                     value
                 }
