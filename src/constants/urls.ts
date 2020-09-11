@@ -4,7 +4,7 @@ export const HOME_URL = '/';
 export const WHO_WE_ARE_URL = '/#kto-sme';
 export const PARTNERS_URL = '/#partneri';
 export const CONTACT_URL = '/#kontakt';
-export const PRODUCTS_URL = '/products';
+export const PRODUCTS_URL = '/produkty';
 
 export const PRODUCT_URL = (productSlug: string | null | undefined) =>
   `${PRODUCTS_URL}/${productSlug ?? ''}`;
