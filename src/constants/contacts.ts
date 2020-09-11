@@ -21,3 +21,19 @@ export const secondaryContact: Contact = {
   email: 'zahora@drafter.sk',
   phone: '+421 905 795 641',
 };
+
+const COMPANY_EMAIL = 'drafter.sro@gmail.com';
+export const companyInfo = {
+  address: {
+    line1: `DRAFTER, s.r.o.`,
+    line2: `Príles 604/40`,
+    line3: `Trenčianska Teplá, 91401`,
+  },
+  email: COMPANY_EMAIL,
+  ico: `36694215`,
+  dic: `2022265784`,
+  icDph: `SK2022265784`,
+};
+
+export type CompanyInfo = typeof companyInfo;
+export type Address = typeof companyInfo.address;

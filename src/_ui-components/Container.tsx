@@ -35,11 +35,15 @@ export const Section = styled.section<{
   padding-top: 2rem;
   padding-bottom: 3rem;
 
-  background-color: ${p => p.isInverted ? p.theme.colors.primary : p.theme.colors.lightGray}
-  
+  background-color: ${p => p.isInverted ? p.theme.colors.primary : p.theme.colors.lightGray};
+
   ${p => p.isFullHeight && (
     `min-height: 100%;`
   )}
+  
+  a {
+    color: ${p => p.theme.colors.secondary};
+  }
 `;
 
 export const SectionTitle = styled.h1`

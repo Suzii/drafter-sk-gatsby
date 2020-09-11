@@ -12,7 +12,7 @@ const isActiveNormalized = (url: string) => {
 }
 
 
-const stripSlashes = (urlFragment: string) =>
+export const stripSlashes = (urlFragment: string) =>
   urlFragment
     .replace(/^\/+/, '')
     .replace(/\/+$/, '');

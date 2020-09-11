@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container, Row, Section, SectionTitle } from '../../_ui-components/Container';
 import { WHO_WE_ARE_URL } from '../../constants/urls';
+import { stripSlashes } from '../../utils/urlUtils';
 
 export const WhoWeAreSection: React.FC = () => (
-  <Section isFullHeight id={WHO_WE_ARE_URL}>
+  <Section isFullHeight id={stripSlashes(WHO_WE_ARE_URL)}>
     <Container>
       <Row>
         <SectionTitle>Kto sme</SectionTitle>

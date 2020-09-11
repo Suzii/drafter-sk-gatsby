@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import { darken, lighten } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
+import { EmailLink } from '../_ui-components/EmailLink';
 import { developerContact, primaryContact } from '../constants/contacts';
 import { Sitemap } from '../constants/urls';
 
@@ -17,7 +18,7 @@ export const Footer: React.FC<{ sitemap: Sitemap }> = ({ sitemap }) => (
     </FooterPrimary>
 
     <FooterSecondary>
-      Created by&nbsp;<a href={`mailto:${developerContact.email}`}>{developerContact.name}</a>&nbsp;{new Date().getFullYear()}
+      Created by&nbsp;<EmailLink email={developerContact.email}>{developerContact.name}</EmailLink>&nbsp;{new Date().getFullYear()}
     </FooterSecondary>
   </FooterStyled>
 );
@@ -39,7 +40,7 @@ const FooterSitemap: React.FC<{ sitemap: Sitemap }> = ({ sitemap }) => (
 const FooterContact: React.FC = () => (
   <ul>
     <li>
-      <a href={`mailto:${primaryContact.email}`}>{primaryContact.email}</a>
+      <EmailLink email={primaryContact.email} />
     </li>
     <li>
       {primaryContact.phone}
@@ -94,11 +95,9 @@ const FooterSecondary = styled.div`
 
   a {
     color: ${p => darken(0.1, p.theme.colors.primary)};
-    text-decoration: none;
 
     &:hover {
       color: ${p => p.theme.colors.primary};
-      text-decoration: none;
     }
   }
 `;

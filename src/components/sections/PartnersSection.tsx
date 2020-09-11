@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Container, Row, Section, SectionTitle, Stack } from '../../_ui-components/Container';
 import { partners, PartnerType } from '../../constants/partners';
 import { PARTNERS_URL } from '../../constants/urls';
+import { stripSlashes } from '../../utils/urlUtils';
 
 export const PartnersSection: React.FC = () => (
-  <Section id={PARTNERS_URL}>
+  <Section id={stripSlashes(PARTNERS_URL)}>
     <Container>
       <Stack>
         <Row>
