@@ -5,7 +5,7 @@ dotenv.config({
 });
 
 const config = require('gatsby-plugin-config').default;
-const usePreviewUrl = config.KONTENT_PREVIEW_ENABLED === 'true';
+const usePreviewUrl = !!config.KONTENT_PREVIEW_API_KEY;
 
 module.exports = {
   plugins: [

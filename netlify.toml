@@ -1,0 +1,25 @@
+# Settings in the [build] context are global and are applied to all contexts
+# unless otherwise overridden by more specific contexts.
+[build]
+base = "/"
+publish = "public/"
+command = "npm run build"
+
+[context.production]
+[context.production.environment]
+NODE_ENV = "production"
+
+# Deploy Preview context: all deploys generated from a pull/merge request will inherit these settings.
+[context.deploy-preview]
+[context.deploy-preview.environment]
+
+# Branch Deploy context: all deploys that are not from a pull/merge request or from the Production branch will inherit these settings.
+[context.branch-deploy]
+[context.branch-deploy.environment]
+NODE_ENV = "development"
+
+# Specific branch context: all deploys from this specific branch will inherit these settings.
+[context.dev] # 'staging' is a branch name
+[context.dev.environment]
+NODE_ENV = "development"
+GATSBY_ENABLED_FEATURES= "products-page"
