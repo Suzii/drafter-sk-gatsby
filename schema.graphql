@@ -484,7 +484,7 @@ type Query {
     allFile(filter: FileFilterInput, limit: Int, skip: Int, sort: FileSortInput): FileConnection!
     allImageSharp(filter: ImageSharpFilterInput, limit: Int, skip: Int, sort: ImageSharpSortInput): ImageSharpConnection!
     allKontentItem(filter: kontent_itemFilterInput, limit: Int, skip: Int, sort: kontent_itemSortInput): kontent_itemConnection!
-    allKontentItemProdukt(filter: kontent_item_produktFilterInput, limit: Int, skip: Int, sort: kontent_item_produktSortInput): kontent_item_produktConnection!
+    allKontentItemProduct(filter: kontent_item_productFilterInput, limit: Int, skip: Int, sort: kontent_item_productSortInput): kontent_item_productConnection!
     allKontentTaxonomy(filter: kontent_taxonomyFilterInput, limit: Int, skip: Int, sort: kontent_taxonomySortInput): kontent_taxonomyConnection!
     allSite(filter: SiteFilterInput, limit: Int, skip: Int, sort: SiteSortInput): SiteConnection!
     allSiteBuildMetadata(filter: SiteBuildMetadataFilterInput, limit: Int, skip: Int, sort: SiteBuildMetadataSortInput): SiteBuildMetadataConnection!
@@ -494,12 +494,12 @@ type Query {
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
-    kontentItemProdukt(children: NodeFilterListInput, elements: kontent_item_produkt_elementsFilterInput, fields: kontent_item_produktFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_produkt
+    kontentItemProduct(children: NodeFilterListInput, elements: kontent_item_product_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
     site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
-    sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, componentPath: StringQueryOperatorInput, context: SitePageContextFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, matchPath: StringQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput): SitePage
-    sitePlugin(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, nodeAPIs: StringQueryOperatorInput, packageJson: SitePluginPackageJsonFilterInput, parent: NodeFilterInput, pluginFilepath: StringQueryOperatorInput, pluginOptions: SitePluginPluginOptionsFilterInput, resolve: StringQueryOperatorInput, version: StringQueryOperatorInput): SitePlugin
+    sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, componentPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, matchPath: StringQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput): SitePage
+    sitePlugin(browserAPIs: StringQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, nodeAPIs: StringQueryOperatorInput, packageJson: SitePluginPackageJsonFilterInput, parent: NodeFilterInput, pluginFilepath: StringQueryOperatorInput, pluginOptions: SitePluginPluginOptionsFilterInput, resolve: StringQueryOperatorInput, ssrAPIs: StringQueryOperatorInput, version: StringQueryOperatorInput): SitePlugin
 }
 
 type Site implements Node {
@@ -593,7 +593,6 @@ type SitePage implements Node {
     component: String!
     componentChunkName: String!
     componentPath: String
-    context: SitePageContext
     id: ID!
     internal: Internal!
     internalComponentName: String!
@@ -614,10 +613,6 @@ type SitePageConnection {
     totalCount: Int!
 }
 
-type SitePageContext {
-    slug: String
-}
-
 type SitePageEdge {
     next: SitePage
     node: SitePage!
@@ -634,6 +629,7 @@ type SitePageGroupConnection {
 }
 
 type SitePlugin implements Node {
+    browserAPIs: [String]
     children: [Node!]!
     id: ID!
     internal: Internal!
@@ -644,6 +640,7 @@ type SitePlugin implements Node {
     pluginFilepath: String
     pluginOptions: SitePluginPluginOptions
     resolve: String
+    ssrAPIs: [String]
     version: String
 }
 
@@ -700,7 +697,6 @@ type SitePluginPackageJsonPeerDependencies {
 
 type SitePluginPluginOptions {
     allExtensions: Boolean
-    authorizationKey: String
     codegenPlugins: [SitePluginPluginOptionsCodegenPlugins]
     documentPaths: [String]
     fileName: String
@@ -806,10 +802,9 @@ type kontent_item_number_element_value {
     value: Float
 }
 
-type kontent_item_produkt implements Node & kontent_item {
+type kontent_item_product implements Node & kontent_item {
     children: [Node!]!
-    elements: kontent_item_produkt_elements
-    fields: kontent_item_produktFields
+    elements: kontent_item_product_elements
     id: ID!
     internal: Internal!
     parent: Node
@@ -817,45 +812,40 @@ type kontent_item_produkt implements Node & kontent_item {
     system: kontent_item_system!
 }
 
-type kontent_item_produktConnection {
-    distinct(field: kontent_item_produktFieldsEnum!): [String!]!
-    edges: [kontent_item_produktEdge!]!
-    group(field: kontent_item_produktFieldsEnum!, limit: Int, skip: Int): [kontent_item_produktGroupConnection!]!
-    nodes: [kontent_item_produkt!]!
+type kontent_item_productConnection {
+    distinct(field: kontent_item_productFieldsEnum!): [String!]!
+    edges: [kontent_item_productEdge!]!
+    group(field: kontent_item_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_productGroupConnection!]!
+    nodes: [kontent_item_product!]!
     pageInfo: PageInfo!
     totalCount: Int!
 }
 
-type kontent_item_produktEdge {
-    next: kontent_item_produkt
-    node: kontent_item_produkt!
-    previous: kontent_item_produkt
+type kontent_item_productEdge {
+    next: kontent_item_product
+    node: kontent_item_product!
+    previous: kontent_item_product
 }
 
-type kontent_item_produktFields {
-    slug: String
-}
-
-type kontent_item_produktGroupConnection {
-    edges: [kontent_item_produktEdge!]!
+type kontent_item_productGroupConnection {
+    edges: [kontent_item_productEdge!]!
     field: String!
     fieldValue: String
-    nodes: [kontent_item_produkt!]!
+    nodes: [kontent_item_product!]!
     pageInfo: PageInfo!
     totalCount: Int!
 }
 
-type kontent_item_produkt_elements {
-    cena: kontent_item_text_element_value
-    foto: kontent_item_asset_element_value
-    hmotnost: kontent_item_text_element_value
+type kontent_item_product_elements {
+    description: kontent_item_rich_text_element_value
+    image: kontent_item_asset_element_value
     kategoria: kontent_item_taxonomy_element_value
     krajina: kontent_item_taxonomy_element_value
-    nazov: kontent_item_text_element_value
-    pocet_kusov_v_baleni: kontent_item_number_element_value
-    popis: kontent_item_rich_text_element_value
+    name: kontent_item_text_element_value
+    pieces_in_package: kontent_item_number_element_value
     url_slug: kontent_item_url_slug_element_value
     vyrobca: kontent_item_taxonomy_element_value
+    weight: kontent_item_number_element_value
 }
 
 type kontent_item_rich_text_element_image {
@@ -1725,7 +1715,6 @@ enum SitePageFieldsEnum {
     component
     componentChunkName
     componentPath
-    context___slug
     id
     internalComponentName
     internal___content
@@ -1778,6 +1767,7 @@ enum SitePageFieldsEnum {
     parent___parent___parent___id
     path
     pluginCreatorId
+    pluginCreator___browserAPIs
     pluginCreator___children
     pluginCreator___children___children
     pluginCreator___children___children___children
@@ -1835,7 +1825,6 @@ enum SitePageFieldsEnum {
     pluginCreator___parent___parent___id
     pluginCreator___pluginFilepath
     pluginCreator___pluginOptions___allExtensions
-    pluginCreator___pluginOptions___authorizationKey
     pluginCreator___pluginOptions___codegenPlugins
     pluginCreator___pluginOptions___codegenPlugins___resolve
     pluginCreator___pluginOptions___documentPaths
@@ -1850,10 +1839,12 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___projectId
     pluginCreator___pluginOptions___usePreviewUrl
     pluginCreator___resolve
+    pluginCreator___ssrAPIs
     pluginCreator___version
 }
 
 enum SitePluginFieldsEnum {
+    browserAPIs
     children
     children___children
     children___children___children
@@ -1959,7 +1950,6 @@ enum SitePluginFieldsEnum {
     parent___parent___parent___id
     pluginFilepath
     pluginOptions___allExtensions
-    pluginOptions___authorizationKey
     pluginOptions___codegenPlugins
     pluginOptions___codegenPlugins___resolve
     pluginOptions___documentPaths
@@ -1974,6 +1964,7 @@ enum SitePluginFieldsEnum {
     pluginOptions___projectId
     pluginOptions___usePreviewUrl
     resolve
+    ssrAPIs
     version
 }
 
@@ -1993,7 +1984,7 @@ enum kontent_itemFieldsEnum {
     system___type
 }
 
-enum kontent_item_produktFieldsEnum {
+enum kontent_item_productFieldsEnum {
     children
     children___children
     children___children___children
@@ -2033,22 +2024,33 @@ enum kontent_item_produktFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
-    elements___cena___name
-    elements___cena___type
-    elements___cena___value
-    elements___foto___name
-    elements___foto___type
-    elements___foto___value
-    elements___foto___value___description
-    elements___foto___value___height
-    elements___foto___value___name
-    elements___foto___value___size
-    elements___foto___value___type
-    elements___foto___value___url
-    elements___foto___value___width
-    elements___hmotnost___name
-    elements___hmotnost___type
-    elements___hmotnost___value
+    elements___description___images
+    elements___description___images___description
+    elements___description___images___height
+    elements___description___images___image_id
+    elements___description___images___url
+    elements___description___images___width
+    elements___description___links
+    elements___description___links___codename
+    elements___description___links___link_id
+    elements___description___links___type
+    elements___description___links___url_slug
+    elements___description___modular_content
+    elements___description___modular_content___id
+    elements___description___modular_content___preferred_language
+    elements___description___name
+    elements___description___type
+    elements___description___value
+    elements___image___name
+    elements___image___type
+    elements___image___value
+    elements___image___value___description
+    elements___image___value___height
+    elements___image___value___name
+    elements___image___value___size
+    elements___image___value___type
+    elements___image___value___url
+    elements___image___value___width
     elements___kategoria___name
     elements___kategoria___taxonomy_group
     elements___kategoria___type
@@ -2061,29 +2063,12 @@ enum kontent_item_produktFieldsEnum {
     elements___krajina___value
     elements___krajina___value___codename
     elements___krajina___value___name
-    elements___nazov___name
-    elements___nazov___type
-    elements___nazov___value
-    elements___pocet_kusov_v_baleni___name
-    elements___pocet_kusov_v_baleni___type
-    elements___pocet_kusov_v_baleni___value
-    elements___popis___images
-    elements___popis___images___description
-    elements___popis___images___height
-    elements___popis___images___image_id
-    elements___popis___images___url
-    elements___popis___images___width
-    elements___popis___links
-    elements___popis___links___codename
-    elements___popis___links___link_id
-    elements___popis___links___type
-    elements___popis___links___url_slug
-    elements___popis___modular_content
-    elements___popis___modular_content___id
-    elements___popis___modular_content___preferred_language
-    elements___popis___name
-    elements___popis___type
-    elements___popis___value
+    elements___name___name
+    elements___name___type
+    elements___name___value
+    elements___pieces_in_package___name
+    elements___pieces_in_package___type
+    elements___pieces_in_package___value
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
@@ -2093,7 +2078,9 @@ enum kontent_item_produktFieldsEnum {
     elements___vyrobca___value
     elements___vyrobca___value___codename
     elements___vyrobca___value___name
-    fields___slug
+    elements___weight___name
+    elements___weight___type
+    elements___weight___value
     id
     internal___content
     internal___contentDigest
@@ -2539,16 +2526,11 @@ input SiteFilterInput {
     port: IntQueryOperatorInput
 }
 
-input SitePageContextFilterInput {
-    slug: StringQueryOperatorInput
-}
-
 input SitePageFilterInput {
     children: NodeFilterListInput
     component: StringQueryOperatorInput
     componentChunkName: StringQueryOperatorInput
     componentPath: StringQueryOperatorInput
-    context: SitePageContextFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     internalComponentName: StringQueryOperatorInput
@@ -2566,6 +2548,7 @@ input SitePageSortInput {
 }
 
 input SitePluginFilterInput {
+    browserAPIs: StringQueryOperatorInput
     children: NodeFilterListInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
@@ -2576,6 +2559,7 @@ input SitePluginFilterInput {
     pluginFilepath: StringQueryOperatorInput
     pluginOptions: SitePluginPluginOptionsFilterInput
     resolve: StringQueryOperatorInput
+    ssrAPIs: StringQueryOperatorInput
     version: StringQueryOperatorInput
 }
 
@@ -2628,7 +2612,6 @@ input SitePluginPluginOptionsCodegenPluginsFilterListInput {
 
 input SitePluginPluginOptionsFilterInput {
     allExtensions: BooleanQueryOperatorInput
-    authorizationKey: StringQueryOperatorInput
     codegenPlugins: SitePluginPluginOptionsCodegenPluginsFilterListInput
     documentPaths: StringQueryOperatorInput
     fileName: StringQueryOperatorInput
@@ -2703,14 +2686,9 @@ input kontent_item_number_element_valueFilterInput {
     value: FloatQueryOperatorInput
 }
 
-input kontent_item_produktFieldsFilterInput {
-    slug: StringQueryOperatorInput
-}
-
-input kontent_item_produktFilterInput {
+input kontent_item_productFilterInput {
     children: NodeFilterListInput
-    elements: kontent_item_produkt_elementsFilterInput
-    fields: kontent_item_produktFieldsFilterInput
+    elements: kontent_item_product_elementsFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
@@ -2718,22 +2696,21 @@ input kontent_item_produktFilterInput {
     system: kontent_item_systemFilterInput
 }
 
-input kontent_item_produktSortInput {
-    fields: [kontent_item_produktFieldsEnum]
+input kontent_item_productSortInput {
+    fields: [kontent_item_productFieldsEnum]
     order: [SortOrderEnum] = [ASC]
 }
 
-input kontent_item_produkt_elementsFilterInput {
-    cena: kontent_item_text_element_valueFilterInput
-    foto: kontent_item_asset_element_valueFilterInput
-    hmotnost: kontent_item_text_element_valueFilterInput
+input kontent_item_product_elementsFilterInput {
+    description: kontent_item_rich_text_element_valueFilterInput
+    image: kontent_item_asset_element_valueFilterInput
     kategoria: kontent_item_taxonomy_element_valueFilterInput
     krajina: kontent_item_taxonomy_element_valueFilterInput
-    nazov: kontent_item_text_element_valueFilterInput
-    pocet_kusov_v_baleni: kontent_item_number_element_valueFilterInput
-    popis: kontent_item_rich_text_element_valueFilterInput
+    name: kontent_item_text_element_valueFilterInput
+    pieces_in_package: kontent_item_number_element_valueFilterInput
     url_slug: kontent_item_url_slug_element_valueFilterInput
     vyrobca: kontent_item_taxonomy_element_valueFilterInput
+    weight: kontent_item_number_element_valueFilterInput
 }
 
 input kontent_item_rich_text_element_imageFilterInput {

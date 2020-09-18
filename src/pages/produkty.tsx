@@ -24,10 +24,10 @@ const Products: React.FC<ProductsProps> = ({ data }) => (
             )
             : (
               <ul>
-                {data.allKontentItemProdukt.edges.map(product => (
+                {data.allKontentItemProduct.edges.map(product => (
                   <li key={product.node.id}>
                     <Link to={PRODUCT_URL(product.node.elements?.url_slug?.value)}>
-                      {product.node.elements?.nazov?.value}
+                      {product.node.elements?.name?.value}
                     </Link>
                   </li>
                 ))}
@@ -44,12 +44,12 @@ export default Products;
 
 export const query = graphql`
     query Products {
-        allKontentItemProdukt {
+        allKontentItemProduct {
             edges {
                 node {
                     id
                     elements {
-                        nazov {
+                        name {
                             value
                         }
                         url_slug {
