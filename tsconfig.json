@@ -8,10 +8,16 @@
     "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "noUnusedLocals": false
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": false,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "public", ".cache"],
-  "includes": [
-    "styled.d.ts"
+  "include": [
+    "**/*"
+  ],
+  "files": [
+    "src/@types/global.d.ts",
+    "src/@types/styled.d.ts"
   ]
 }
