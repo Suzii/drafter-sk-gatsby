@@ -494,11 +494,11 @@ type Query {
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
-    kontentItemProduct(children: NodeFilterListInput, elements: kontent_item_product_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product
+    kontentItemProduct(children: NodeFilterListInput, elements: kontent_item_product_elementsFilterInput, fields: kontent_item_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
     site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
-    sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, componentPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, matchPath: StringQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput): SitePage
+    sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, componentPath: StringQueryOperatorInput, context: SitePageContextFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, matchPath: StringQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput): SitePage
     sitePlugin(browserAPIs: StringQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, nodeAPIs: StringQueryOperatorInput, packageJson: SitePluginPackageJsonFilterInput, parent: NodeFilterInput, pluginFilepath: StringQueryOperatorInput, pluginOptions: SitePluginPluginOptionsFilterInput, resolve: StringQueryOperatorInput, ssrAPIs: StringQueryOperatorInput, version: StringQueryOperatorInput): SitePlugin
 }
 
@@ -593,6 +593,7 @@ type SitePage implements Node {
     component: String!
     componentChunkName: String!
     componentPath: String
+    context: SitePageContext
     id: ID!
     internal: Internal!
     internalComponentName: String!
@@ -611,6 +612,10 @@ type SitePageConnection {
     nodes: [SitePage!]!
     pageInfo: PageInfo!
     totalCount: Int!
+}
+
+type SitePageContext {
+    slug: String
 }
 
 type SitePageEdge {
@@ -805,6 +810,7 @@ type kontent_item_number_element_value {
 type kontent_item_product implements Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_product_elements
+    fields: kontent_item_productFields
     id: ID!
     internal: Internal!
     parent: Node
@@ -827,6 +833,10 @@ type kontent_item_productEdge {
     previous: kontent_item_product
 }
 
+type kontent_item_productFields {
+    slug: String
+}
+
 type kontent_item_productGroupConnection {
     edges: [kontent_item_productEdge!]!
     field: String!
@@ -837,14 +847,14 @@ type kontent_item_productGroupConnection {
 }
 
 type kontent_item_product_elements {
+    category: kontent_item_taxonomy_element_value
+    country: kontent_item_taxonomy_element_value
     description: kontent_item_rich_text_element_value
     image: kontent_item_asset_element_value
-    kategoria: kontent_item_taxonomy_element_value
-    krajina: kontent_item_taxonomy_element_value
     name: kontent_item_text_element_value
     pieces_in_package: kontent_item_number_element_value
+    producer: kontent_item_taxonomy_element_value
     url_slug: kontent_item_url_slug_element_value
-    vyrobca: kontent_item_taxonomy_element_value
     weight: kontent_item_number_element_value
 }
 
@@ -1715,6 +1725,7 @@ enum SitePageFieldsEnum {
     component
     componentChunkName
     componentPath
+    context___slug
     id
     internalComponentName
     internal___content
@@ -2024,6 +2035,18 @@ enum kontent_item_productFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
+    elements___category___name
+    elements___category___taxonomy_group
+    elements___category___type
+    elements___category___value
+    elements___category___value___codename
+    elements___category___value___name
+    elements___country___name
+    elements___country___taxonomy_group
+    elements___country___type
+    elements___country___value
+    elements___country___value___codename
+    elements___country___value___name
     elements___description___images
     elements___description___images___description
     elements___description___images___height
@@ -2051,36 +2074,25 @@ enum kontent_item_productFieldsEnum {
     elements___image___value___type
     elements___image___value___url
     elements___image___value___width
-    elements___kategoria___name
-    elements___kategoria___taxonomy_group
-    elements___kategoria___type
-    elements___kategoria___value
-    elements___kategoria___value___codename
-    elements___kategoria___value___name
-    elements___krajina___name
-    elements___krajina___taxonomy_group
-    elements___krajina___type
-    elements___krajina___value
-    elements___krajina___value___codename
-    elements___krajina___value___name
     elements___name___name
     elements___name___type
     elements___name___value
     elements___pieces_in_package___name
     elements___pieces_in_package___type
     elements___pieces_in_package___value
+    elements___producer___name
+    elements___producer___taxonomy_group
+    elements___producer___type
+    elements___producer___value
+    elements___producer___value___codename
+    elements___producer___value___name
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
-    elements___vyrobca___name
-    elements___vyrobca___taxonomy_group
-    elements___vyrobca___type
-    elements___vyrobca___value
-    elements___vyrobca___value___codename
-    elements___vyrobca___value___name
     elements___weight___name
     elements___weight___type
     elements___weight___value
+    fields___slug
     id
     internal___content
     internal___contentDigest
@@ -2526,11 +2538,16 @@ input SiteFilterInput {
     port: IntQueryOperatorInput
 }
 
+input SitePageContextFilterInput {
+    slug: StringQueryOperatorInput
+}
+
 input SitePageFilterInput {
     children: NodeFilterListInput
     component: StringQueryOperatorInput
     componentChunkName: StringQueryOperatorInput
     componentPath: StringQueryOperatorInput
+    context: SitePageContextFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     internalComponentName: StringQueryOperatorInput
@@ -2686,9 +2703,14 @@ input kontent_item_number_element_valueFilterInput {
     value: FloatQueryOperatorInput
 }
 
+input kontent_item_productFieldsFilterInput {
+    slug: StringQueryOperatorInput
+}
+
 input kontent_item_productFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_product_elementsFilterInput
+    fields: kontent_item_productFieldsFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
@@ -2702,14 +2724,14 @@ input kontent_item_productSortInput {
 }
 
 input kontent_item_product_elementsFilterInput {
+    category: kontent_item_taxonomy_element_valueFilterInput
+    country: kontent_item_taxonomy_element_valueFilterInput
     description: kontent_item_rich_text_element_valueFilterInput
     image: kontent_item_asset_element_valueFilterInput
-    kategoria: kontent_item_taxonomy_element_valueFilterInput
-    krajina: kontent_item_taxonomy_element_valueFilterInput
     name: kontent_item_text_element_valueFilterInput
     pieces_in_package: kontent_item_number_element_valueFilterInput
+    producer: kontent_item_taxonomy_element_valueFilterInput
     url_slug: kontent_item_url_slug_element_valueFilterInput
-    vyrobca: kontent_item_taxonomy_element_valueFilterInput
     weight: kontent_item_number_element_valueFilterInput
 }
 
