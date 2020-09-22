@@ -35,7 +35,7 @@ const PersonsStyled = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
-  color: ${p => p.theme.colors.secondary};
+  color: ${p => p.theme.palette.secondary.main};
   
   & > * {
     display: flex;
@@ -43,7 +43,7 @@ const PersonsStyled = styled.div`
   }
 
   a {
-    color: ${p => p.theme.colors.secondary};
+    color: ${p => p.theme.palette.secondary.main};
   }
 
   i {
@@ -139,13 +139,13 @@ const DdStyled = styled.dd`
   text-align: right;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: ${p => p.theme.fontWeight.bolder};
+  font-weight: ${p => p.theme.typography.fontWeightMedium};
 `;
 
 const SeparatorStyled = styled.hr`
   width: 100%;
-  color: ${p => p.theme.colors.secondary};
+  color: ${p => p.theme.palette.secondary.main};
   border: 0;
   height: 1px;
-  background: ${p => p.theme.colors.secondary};
+  background: ${p => p.theme.palette.secondary.main};
 `;

@@ -69,7 +69,7 @@ const HeroHeader = styled(BackgroundImage)`
   h4,
   h5,
   h6 {
-    color: ${p => p.theme.colors.lightGray};
+    color: ${p => p.theme.palette.common.lightGray};
   }
 
   .hero__text {
@@ -79,7 +79,7 @@ const HeroHeader = styled(BackgroundImage)`
     margin: auto;
 
     .hero__text--logo {
-      fill: ${p => p.theme.colors.primary};
+      fill: ${p => p.theme.palette.primary.main};
 
       height: ${logoHeight};
       margin: ${logoHeight}/4;
@@ -89,7 +89,7 @@ const HeroHeader = styled(BackgroundImage)`
       font-size: ${titleFontSize};
       line-height: ${titleFontSize};
       padding: ${titlePaddingVertical} ${titlePaddingHorizontal};
-      border: 0.3rem solid ${p => p.theme.colors.primary};
+      border: 0.3rem solid ${p => p.theme.palette.primary.main};
       margin: 0;
     }
 
@@ -100,7 +100,7 @@ const HeroHeader = styled(BackgroundImage)`
 
     .hero__text--cta {
       text-transform: uppercase;
-      color: ${p => p.theme.colors.white};
+      color: ${p => p.theme.palette.common.white};
       padding: 0.8rem 1rem;
       background-color: rgba(255, 255, 255, 0.3);
       text-decoration: none;
@@ -108,11 +108,11 @@ const HeroHeader = styled(BackgroundImage)`
       &:hover {
         background-color: rgba(255, 219, 11, 1);
         border-color: rgba(255, 255, 255, 0.7);
-        color: ${p => p.theme.colors.black};
+        color: ${p => p.theme.palette.common.black};
       }
     }
 
-    @media (max-width: ${p => p.theme.media.sm} + 1) {
+    @media (max-width: ${p => p.theme.breakpoints.values.md} + 1) {
       .hero__text--logo {
         height: ${logoHeight} * ${shrinkConstant};
       }
@@ -129,7 +129,7 @@ const HeroHeader = styled(BackgroundImage)`
       }
     }
 
-    @media (max-width: ${p => p.theme.media.xs} + 1) {
+    @media (max-width: ${p => p.theme.breakpoints.values.sm} + 1) {
       .hero__text--logo {
         height: ${logoHeight} * ${shrinkConstant};
       }

@@ -35,23 +35,23 @@ export const PreviewLinksToggle: React.FC = () => {
 };
 
 const PreviewLinksToggleStyled = styled.button`
-  z-index: ${p => p.theme.zIndex.z900};
+  z-index: ${p => p.theme.zIndex.snackbar};
   position: fixed;
   right: 2rem;
   bottom: 2rem;
 
   text-transform: uppercase;
-  background-color: ${p => p.theme.colors.lighterGray};
+  background-color: ${p => p.theme.palette.common.lighterGray};
   opacity: 0.8;
   border-radius: 0.3rem;
   border: 0;
-  color: ${p => p.theme.colors.black};
+  color: ${p => p.theme.palette.common.black};
   padding: 0.4rem 0.4rem;
   text-decoration: none;
 
   &:hover {
-    background-color: ${p => p.theme.colors.primary};
+    background-color: ${p => p.theme.palette.primary.main};
     opacity: 0.8;
-    color: ${p => p.theme.colors.secondary};
+    color: ${p => p.theme.palette.secondary.main};
   }
 `;

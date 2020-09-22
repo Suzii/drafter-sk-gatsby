@@ -1,38 +1,55 @@
-export const theme = {
-  colors: {
-    primary: '#ffc914',
-    secondary: '#26471F',
-    white: '#fff',
-    lightGray: '#eee',
-    lighterGray: '#ccc',
-    darkerGray: '#999',
-    darkGray: '#333',
-    black: '#000',
+import { createMuiTheme, responsiveFontSizes, TypographyStyle } from '@material-ui/core/styles';
+
+const primaryColor = '#ffc914';
+const secondaryColor = '#26471f';
+const white = '#fff';
+const lightGray = '#eee';
+const lighterGray = '#ccc';
+const darkerGray = '#999';
+const darkGray = '#333';
+const black = '#000';
+
+const fontWeightLight = 300;
+const fontWeightRegular = 400;
+const fontWeightMedium = 500;
+const fontWeightBold = 600;
+
+const headings = (level: number): TypographyStyle => ({
+  fontWeight: fontWeightBold,
+  fontSize: `${(8 - level)/2}rem`,
+});
+
+export const theme = responsiveFontSizes(createMuiTheme({
+  palette: {
+    primary: {
+      main: primaryColor,
+    },
+    secondary: {
+      main: secondaryColor,
+    },
+    common: {
+      white,
+      lightGray,
+      lighterGray,
+      darkerGray,
+      darkGray,
+      black,
+    },
   },
-  fontWeight: {
-    lighter: 200,
-    normal: 400,
-    bolder: 600,
-    bold: 700,
+  typography: {
+    fontFamily: 'Titillium Web, Open Sans',
+    fontSize: 18,
+    fontWeightLight,
+    fontWeightRegular,
+    fontWeightMedium,
+    fontWeightBold,
+    h1: headings(1),
+    h2: headings(2),
+    h3: headings(3),
+    h4: headings(4),
+    h5: headings(5),
+    h6: headings(6),
   },
-  media: {
-    xxs: '380px',
-    xs: '576px',
-    sm: '768px',
-    md: '992px',
-    lg: '1200px',
-  },
-  zIndex: {
-    z100: '100',
-    z200: '200',
-    z300: '300',
-    z400: '400',
-    z500: '500',
-    z600: '600',
-    z700: '700',
-    z800: '800',
-    z900: '900',
-  }
-};
+}));
 
 export type Theme = typeof theme;
