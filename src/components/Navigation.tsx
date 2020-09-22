@@ -31,7 +31,7 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   right:0;
-  z-index: ${p => p.theme.zIndex.z900};
+  z-index: ${p => p.theme.zIndex.appBar};
 
   width: 100%;
   min-height: 80px;
@@ -42,7 +42,7 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-around;
   
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${p => p.theme.palette.primary.main};
   
   ul {
     padding: 0;
@@ -56,7 +56,7 @@ const Nav = styled.nav`
       margin-right: 0.5rem;
       margin-left: 0.5rem;
       text-transform: uppercase;
-      font-weight: ${p => p.theme.fontWeight.bold};
+      font-weight: ${p => p.theme.typography.fontWeightBold};
     }
   }
 `;
@@ -68,17 +68,17 @@ const LinkStyled = styled
   <Link {...rest} className={classnames(rest.className, isActive && 'active')} />,
 )<LinkStyledProps>`
   text-decoration: none;
-  color: ${props => props.theme.colors.secondary};
+  color: ${props => props.theme.palette.secondary.main};
   
   li > &:hover {
-    color: ${props => props.theme.colors.black};
-    box-shadow: ${props => props.theme.colors.black};
+    color: ${props => props.theme.palette.black};
+    box-shadow: ${props => props.theme.palette.black};
     text-decoration: none;
-    border-bottom: 0.2rem solid ${props => props.theme.colors.secondary};
+    border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
   }
   
   &.active {
-    border-bottom: 0.2rem solid ${props => props.theme.colors.secondary};
+    border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
   }
 `;
 

@@ -59,16 +59,16 @@ const FooterPrimary = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: 2rem;
-  background-color: ${p => lighten(0.05, p.theme.colors.secondary)};
-  color: ${p => p.theme.colors.primary};
+  background-color: ${p => lighten(0.05, p.theme.palette.secondary.main)};
+  color: ${p => p.theme.palette.primary.main};
   line-height: 1.5rem;
 
   a {
-    color: ${p => p.theme.colors.primary};
+    color: ${p => p.theme.palette.primary.main};
     text-decoration: none;
 
     &:hover {
-      color: ${p => p.theme.colors.primary};
+      color: ${p => p.theme.palette.primary.main};
       text-decoration: underline;
     }
   }
@@ -90,14 +90,14 @@ const FooterSecondary = styled.div`
   justify-content: center;
   height: 3rem;
   text-align: center;
-  background-color: ${p => p.theme.colors.secondary};
-  color: ${p => darken(0.1, p.theme.colors.primary)};
+  background-color: ${p => p.theme.palette.secondary.main};
+  color: ${p => darken(0.1, p.theme.palette.primary.main)};
 
   a {
-    color: ${p => darken(0.1, p.theme.colors.primary)};
+    color: ${p => darken(0.1, p.theme.palette.primary.main)};
 
     &:hover {
-      color: ${p => p.theme.colors.primary};
+      color: ${p => p.theme.palette.primary.main};
     }
   }
 `;

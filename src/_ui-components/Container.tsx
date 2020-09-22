@@ -1,3 +1,5 @@
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -35,47 +37,20 @@ export const Section = styled.section<{
   padding-top: 2rem;
   padding-bottom: 3rem;
 
-  background-color: ${p => p.isInverted ? p.theme.colors.primary : p.theme.colors.lightGray};
+  background-color: ${p => p.isInverted ? p.theme.palette.primary.main : p.theme.palette.common.lightGray};
 
   ${p => p.isFullHeight && (
     `min-height: 100%;`
   )}
   
   a {
-    color: ${p => p.theme.colors.secondary};
+    color: ${p => p.theme.palette.secondary.main};
   }
 `;
 
-export const SectionTitle = styled.h1`
-  text-align: center;
+export const SectionTitle = styled(({children, className}) =>
+  <Typography variant="h1" className={className}>{children}</Typography>
+)`
+  text-transform: uppercase;
+  color: ${p => p.theme.palette.secondary.main};
 `;
-
-//
-// @media only screen and (max-width: 380px) {
-// .col-xxs-12 {
-//     flex-basis: 100%;
-//     max-width: 100%;
-//   }
-// }
-//
-// dl.inline-flex {
-//   display: flex;
-//   flex-flow: row;
-//   flex-wrap: wrap;
-//   width: 100%;
-//   overflow: visible;
-//
-//   dt {
-//     flex: 0 0 33.33%;
-//     text-overflow: ellipsis;
-//     overflow: hidden;
-//   }
-//
-//   dd {
-//     flex: 0 0 66.67%;
-//     margin-left: auto;
-//     text-align: left;
-//     text-overflow: ellipsis;
-//     overflow: hidden;
-//   }
-// }

@@ -43,8 +43,16 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-use-query-params`,
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-use-query-params`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
