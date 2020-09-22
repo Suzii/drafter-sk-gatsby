@@ -44,11 +44,6 @@ export const query = graphql`
                 name {
                     value
                 }
-                krajina {
-                    value {
-                        name
-                    }
-                }
                 image {
                     value {
                         fixed(width: 350) {

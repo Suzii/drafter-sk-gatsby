@@ -7,7 +7,7 @@
   "scripts": {
     "postinstall": "npm run generate-types",
     "build": "npm run generate-types&& gatsby build",
-    "develop": "npm run generate-types&& gatsby develop",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "generate-types": "graphql-codegen",
     "start": "npm run develop",
