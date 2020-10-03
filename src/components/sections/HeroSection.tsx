@@ -1,7 +1,7 @@
+import { Typography } from '@material-ui/core';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-import { math } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
 import { HeroImageQuery } from '../../../graphql-types';
@@ -36,113 +36,61 @@ export const HeroSection: React.FC = () => {
     >
       <div className="hero__text">
         <Logo variant={LogoType.Compact} className="hero__text--logo" />
-        <h1 className="hero__text--title">Farmárske potraviny</h1>
-        <h3 className="hero__text--subtitle">od výrobcov až na vaše pulty</h3>
+        <Typography variant="h1" component="h1" className="hero__text--title">Farmárske potraviny</Typography>
+        <Typography variant="h5" component="p" className="hero__text--subtitle">od&nbsp;výrobcov až&nbsp;na&nbsp;vaše pulty</Typography>
         {isFeatureEnabled(Feature.ProductsPage) && (
-          <Link to={PRODUCTS_URL} className="hero__text--cta Sortiment">Sortiment</Link>
+          <Typography variant="button">
+            <Link to={PRODUCTS_URL} className="hero__text--cta">Sortiment</Link>
+          </Typography>
         )}
       </div>
     </HeroHeader>
   );
 };
 
-const logoHeight = math(`3rem * 1.5`);
-const titleFontSize = math(`3rem`);
-const subtitleFontSize = math(`1.3rem`);
-const titlePaddingVertical = math(`1.3rem`);
-const titlePaddingHorizontal = math(`2.3rem`);
-const shrinkConstant = math(`0.7`);
-
 const HeroHeader = styled(BackgroundImage)`
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;
   background-position: 30% 60%;
-
   background-size: cover;
-  min-height: 100vh;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: ${p => p.theme.palette.common.lightGray};
-  }
 
   .hero__text {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
+    text-align: center;
 
+    color: ${p => p.theme.palette.common.lightGray};
+    text-transform: uppercase;
+    
+    * {
+      margin: 0.8rem 1.2rem;
+    }
+    
     .hero__text--logo {
       fill: ${p => p.theme.palette.primary.main};
-
-      height: ${logoHeight};
-      margin: ${logoHeight}/4;
+      height: 4.5rem;
     }
 
     .hero__text--title {
-      font-size: ${titleFontSize};
-      line-height: ${titleFontSize};
-      padding: ${titlePaddingVertical} ${titlePaddingHorizontal};
+      padding: 1.3rem 2.3rem;
       border: 0.3rem solid ${p => p.theme.palette.primary.main};
-      margin: 0;
-    }
-
-    .hero__text--subtitle {
-      font-size: ${subtitleFontSize};
-      line-height: ${subtitleFontSize};
     }
 
     .hero__text--cta {
-      text-transform: uppercase;
       color: ${p => p.theme.palette.common.white};
       padding: 0.8rem 1rem;
       background-color: rgba(255, 255, 255, 0.3);
       text-decoration: none;
 
       &:hover {
-        background-color: rgba(255, 219, 11, 1);
+        background-color: ${p => p.theme.palette.primary.main};
         border-color: rgba(255, 255, 255, 0.7);
-        color: ${p => p.theme.palette.common.black};
-      }
-    }
-
-    @media (max-width: ${p => p.theme.breakpoints.values.md} + 1) {
-      .hero__text--logo {
-        height: ${logoHeight} * ${shrinkConstant};
-      }
-
-      .hero__text--title {
-        font-size: ${titleFontSize} * ${shrinkConstant};
-        line-height: ${titleFontSize} * ${shrinkConstant};
-        padding: ${titlePaddingVertical} * ${shrinkConstant} ${titlePaddingHorizontal} * ${shrinkConstant};
-      }
-
-      .hero__text--subtitle {
-        font-size: ${subtitleFontSize} * 0.8;
-        line-height: ${subtitleFontSize} * 0.8;
-      }
-    }
-
-    @media (max-width: ${p => p.theme.breakpoints.values.sm} + 1) {
-      .hero__text--logo {
-        height: ${logoHeight} * ${shrinkConstant};
-      }
-
-      .hero__text--title {
-        font-size: ${titleFontSize} * ${shrinkConstant} * ${shrinkConstant};
-        line-height: ${titleFontSize} * ${shrinkConstant} * ${shrinkConstant};
-        padding: ${titlePaddingVertical} * ${shrinkConstant} * ${shrinkConstant} ${titlePaddingHorizontal} * ${shrinkConstant} * ${shrinkConstant};
-      }
-
-      .hero__text--subtitle {
-        font-size: ${subtitleFontSize} * 0.7;
-        line-height: ${subtitleFontSize} * 0.7;
+        color: rgba(0, 0, 0, 0.7);;
       }
     }
 `;
