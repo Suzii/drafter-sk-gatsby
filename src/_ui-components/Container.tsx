@@ -40,7 +40,7 @@ export const Section = styled.section<{
   background-color: ${p => p.isInverted ? p.theme.palette.primary.main : p.theme.palette.common.lightGray};
 
   ${p => p.isFullHeight && (
-    `min-height: 100%;`
+    `min-height: 100vh;`
   )}
   
   a {
