@@ -1,9 +1,13 @@
 import { Feature, isFeatureEnabled } from '../utils/featureToggles';
 
+export const WHO_WE_ARE_FRAGMENT = 'kto-sme';
+export const PARTNERS_FRAGMENT = 'partneri';
+export const CONTACT_FRAGMENT = 'kontakt';
+
 export const HOME_URL = '/';
-export const WHO_WE_ARE_URL = '/#kto-sme';
-export const PARTNERS_URL = '/#partneri';
-export const CONTACT_URL = '/#kontakt';
+export const WHO_WE_ARE_URL = `/#${WHO_WE_ARE_FRAGMENT}`;
+export const PARTNERS_URL = `/#${PARTNERS_FRAGMENT}`;
+export const CONTACT_URL = `/#${CONTACT_FRAGMENT}`;
 export const PRODUCTS_URL = '/produkty';
 
 export const PRODUCT_URL = (productSlug: string | null | undefined) =>

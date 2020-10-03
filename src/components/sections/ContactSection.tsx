@@ -4,11 +4,10 @@ import { Container, Row, Section, SectionTitle, Stack } from '../../_ui-componen
 import { EmailLink } from '../../_ui-components/EmailLink';
 import { NonBreakable } from '../../_ui-components/NonBreakable';
 import { CompanyInfo, companyInfo, Contact, primaryContact, secondaryContact } from '../../constants/contacts';
-import { CONTACT_URL } from '../../constants/urls';
-import { stripSlashes } from '../../utils/urlUtils';
+import { CONTACT_FRAGMENT } from '../../constants/urls';
 
 export const ContactSection: React.FC = () => (
-  <Section id={stripSlashes(CONTACT_URL)} isInverted>
+  <Section id={CONTACT_FRAGMENT} color="primary">
     <Container>
       <Stack>
         <Row>

@@ -49,6 +49,9 @@ export const theme = responsiveFontSizes(createMuiTheme({
     h4: headings(4),
     h5: headings(5),
     h6: headings(6),
+    subtitle1: {
+      fontWeight: fontWeightBold,
+    },
   },
 }));
 
