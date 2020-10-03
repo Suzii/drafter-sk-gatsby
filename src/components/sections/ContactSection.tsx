@@ -1,7 +1,9 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import { Container, Row, Section, SectionTitle, Stack } from '../../_ui-components/Container';
 import { EmailLink } from '../../_ui-components/EmailLink';
+import { Icon } from '../../_ui-components/Icon';
 import { NonBreakable } from '../../_ui-components/NonBreakable';
 import { CompanyInfo, companyInfo, Contact, primaryContact, secondaryContact } from '../../constants/contacts';
 import { CONTACT_FRAGMENT } from '../../constants/urls';
@@ -38,7 +40,6 @@ const PersonsStyled = styled.div`
   
   & > * {
     display: flex;
-    padding: 0.5rem;
   }
 
   a {
@@ -61,50 +62,52 @@ const PersonsStyled = styled.div`
 `;
 
 const Person: React.FC<{ readonly person: Contact, readonly title: string }> = ({ person, title }) => (
-  <div>
+  <Typography variant={'body2'} component="div">
     <ul>
       <li>{title}</li>
       <li>
-        <i className="fas fa-fw fa-address-card" />
+        <Icon type={'contact-person'} />&nbsp;
         <b>{person.name}</b>
       </li>
       <li>
-        <i className="fas fa-fw fa-envelope" />
+        <Icon type={'email'}/>&nbsp;
         <EmailLink email={person.email} />
       </li>
       {person.phone && (
         <li>
-          <i className="fas fa-fw phone" />
+          <Icon type={'phone'} />&nbsp;
           <NonBreakable>{person.phone}</NonBreakable>
         </li>
       )}
     </ul>
-  </div>
+  </Typography>
 );
 
 const CompanyInfoComponent: React.FC<{ readonly info: CompanyInfo }> = ({ info }) => (
-  <DlStyled>
-    <DdStyled>Adresa</DdStyled>
-    <DtStyled>
-      {info.address.line1}
-      <br />
-      {info.address.line2}, {info.address.line3}
-    </DtStyled>
+  <Typography variant={'body2'} component="div">
+    <DlStyled>
+      <DdStyled>Adresa</DdStyled>
+      <DtStyled>
+        {info.address.line1}
+        <br />
+        {info.address.line2}, {info.address.line3}
+      </DtStyled>
 
-    <DdStyled>Email</DdStyled>
-    <DtStyled>
-      <EmailLink email={info.email} />
-    </DtStyled>
+      <DdStyled>Email</DdStyled>
+      <DtStyled>
+        <EmailLink email={info.email} />
+      </DtStyled>
 
-    <DdStyled>IČO</DdStyled>
-    <DtStyled>{info.ico}</DtStyled>
+      <DdStyled>IČO</DdStyled>
+      <DtStyled>{info.ico}</DtStyled>
 
-    <DdStyled>DIČ</DdStyled>
-    <DtStyled>{info.dic}</DtStyled>
+      <DdStyled>DIČ</DdStyled>
+      <DtStyled>{info.dic}</DtStyled>
 
-    <DdStyled>IČ DPH</DdStyled>
-    <DtStyled>{info.icDph}</DtStyled>
-  </DlStyled>
+      <DdStyled>IČ DPH</DdStyled>
+      <DtStyled>{info.icDph}</DtStyled>
+    </DlStyled>
+  </Typography>
 );
 
 const CompanyInfoStyled = styled(CompanyInfoComponent)`
@@ -138,7 +141,7 @@ const DdStyled = styled.dd`
   text-align: right;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: ${p => p.theme.typography.fontWeightMedium};
+  font-weight: ${p => p.theme.typography.fontWeightBold};
 `;
 
 const SeparatorStyled = styled.hr`

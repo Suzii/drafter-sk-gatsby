@@ -57,6 +57,7 @@ const Nav = styled.nav`
       margin-left: 0.5rem;
       text-transform: uppercase;
       font-weight: ${p => p.theme.typography.fontWeightBold};
+      font-size: ${p => p.theme.typography.fontSize}px;
     }
   }
 `;

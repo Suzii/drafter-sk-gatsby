@@ -3,6 +3,7 @@ import { darken, lighten } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
 import { EmailLink } from '../_ui-components/EmailLink';
+import { Icon } from '../_ui-components/Icon';
 import { developerContact, primaryContact } from '../constants/contacts';
 import { Sitemap } from '../constants/urls';
 
@@ -40,9 +41,11 @@ const FooterSitemap: React.FC<{ sitemap: Sitemap }> = ({ sitemap }) => (
 const FooterContact: React.FC = () => (
   <ul>
     <li>
+      <Icon type={'email'} />&nbsp;
       <EmailLink email={primaryContact.email} />
     </li>
     <li>
+      <Icon type={'phone'} />&nbsp;
       {primaryContact.phone}
     </li>
   </ul>

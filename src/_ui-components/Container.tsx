@@ -59,8 +59,9 @@ export const Section = styled.section<{
 `;
 
 export const SectionTitle = styled(({children, className}) =>
-  <Typography variant="h1" className={className}>{children}</Typography>
+  <Typography variant="h1" className={className} align="center">{children}</Typography>
 )`
   text-transform: uppercase;
   color: ${p => p.theme.palette.secondary.main};
+  margin-bottom: 2rem;
 `;
