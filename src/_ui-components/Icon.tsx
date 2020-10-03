@@ -1,37 +1,47 @@
-import { SvgIconComponent } from '@material-ui/icons';
-import AccountBalance from '@material-ui/icons/AccountBalance';
-import Group from '@material-ui/icons/Group';
-import ThumbUp from '@material-ui/icons/ThumbUp';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import {
+  faAddressCard,
+  faEnvelope,
+  faHandshake,
+  faPhone,
+  faThumbsUp,
+  faUsers,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 export type IconType =
   'contact-person' |
-  'adress' |
+  'address' |
   'phone' |
+  'email' |
   'experience' |
   'customers' |
   'fair-approach';
 
-const mapToIcon = (type: IconType): SvgIconComponent | null => {
+const mapToIcon = (type: IconType): IconDefinition | null => {
   switch (type) {
     case 'customers':
-      return Group;
+      return faUsers;
     case 'experience':
-      return AccountBalance;
+      return faThumbsUp;
     case 'fair-approach':
-      return ThumbUp;
-
+      return faHandshake;
+    case 'phone':
+      return faPhone;
+    case 'email':
+      return faEnvelope;
+    case 'contact-person':
+      return faAddressCard;
     default:
       return null;
   }
 };
 
-export const Icon: React.FC<{
+export const Icon: React.FC<Omit<FontAwesomeIconProps, 'icon'> & {
   readonly type: IconType;
-  readonly fontSize?: 'inherit' | 'default' | 'small' | 'large';
-  readonly color?: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
-}> = ({type, ...otherProps}) => {
-  const MappedIcon = mapToIcon(type);
+}> = ({ type, ...otherProps }) => {
+  const iconDefinition = mapToIcon(type);
 
-  return MappedIcon && <MappedIcon {...otherProps} />;
+  return iconDefinition && <FontAwesomeIcon icon={iconDefinition} {...otherProps} />;
 };

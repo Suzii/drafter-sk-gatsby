@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import { Container, Row, Section, SectionTitle, Stack } from '../../_ui-components/Container';
@@ -13,9 +14,9 @@ export const PartnersSection: React.FC = () => (
         </Row>
         <Row>
           <Stack>
-            <TagLine>
+            <Typography variant="body1" align="center" gutterBottom>
               Po kliknutí na logo budete presmerovaný na stránky partnera, kde si môžete prozrieť ich výrobky.
-            </TagLine>
+            </Typography>
             <Partners>
               {partners.map((partner, index) => (
                 <Partner partner={partner} key={index} />
@@ -48,6 +49,7 @@ const Partners = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  margin-top: 2rem;
 `;
 
 const PartnerStyled = styled.div`
@@ -56,10 +58,4 @@ const PartnerStyled = styled.div`
     max-height: 6rem;
     max-width: 12rem;
   }
-`;
-
-const TagLine = styled.div`
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
 `;
