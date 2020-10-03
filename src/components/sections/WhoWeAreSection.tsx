@@ -1,12 +1,9 @@
 import { Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import { SvgIconComponent } from '@material-ui/icons';
-import AccountBalance from '@material-ui/icons/AccountBalance';
-import Group from '@material-ui/icons/Group';
-import ThumbUp from '@material-ui/icons/ThumbUp';
 import React from 'react';
 import { Row, Section, SectionTitle, Stack } from '../../_ui-components/Container';
+import { Icon, IconType } from '../../_ui-components/Icon';
 import { WHO_WE_ARE_FRAGMENT } from '../../constants/urls';
 
 export const WhoWeAreSection: React.FC = () => (
@@ -50,7 +47,7 @@ export const WhoWeAreSection: React.FC = () => (
       <Grid container justify={'space-between'}>
         {features.map((feature, index) => (
           <Grid container item sm={12} md={4} key={index} alignItems={'center'} direction={'column'} justify={'center'}>
-            <feature.icon color="secondary" fontSize={'large'} />
+            <Icon type={feature.icon} color="secondary" fontSize={'large'} />
             <Typography variant="subtitle1" color="secondary">{feature.title}</Typography>
           </Grid>
         ))}
@@ -59,9 +56,9 @@ export const WhoWeAreSection: React.FC = () => (
   </Section>
 );
 
-type FeatureType = Readonly<{ title: string; icon: SvgIconComponent; }>;
+type FeatureType = Readonly<{ title: string; icon: IconType; }>;
 const features: readonly FeatureType[] = [
-  { title: 'Dlhoročné skúsenosti', icon: AccountBalance },
-  { title: 'Férový prístup', icon: ThumbUp },
-  { title: 'Spokojní zákazníci', icon: Group },
+  { title: 'Dlhoročné skúsenosti', icon: 'experience' },
+  { title: 'Férový prístup', icon: 'fair-approach' },
+  { title: 'Spokojní zákazníci', icon: 'customers' },
 ];
