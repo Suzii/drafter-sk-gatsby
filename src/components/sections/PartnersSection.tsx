@@ -13,7 +13,7 @@ export const PartnersSection: React.FC = () => (
       <Stack>
         <SectionTitle>Partneri</SectionTitle>
         <Typography variant="body1" align="center" gutterBottom>
-          Po kliknutí na logo budete presmerovaný na stránky partnera, kde si môžete prozrieť ich výrobky.
+          Po kliknutí na logo budete presmerovaný na stránky partnera, kde si môžete pozrieť ich výrobky.
         </Typography>
         <Partners>
           {partners.map((partner, index) => (
