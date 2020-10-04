@@ -1,7 +1,8 @@
 import { Typography } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import React from 'react';
 import styled from 'styled-components';
-import { Container, Row, Section, SectionTitle, Stack } from '../../_ui-components/Container';
+import { Section, SectionTitle, Stack } from '../../_ui-components/Container';
 import { EmailLink } from '../../_ui-components/EmailLink';
 import { Icon } from '../../_ui-components/Icon';
 import { NonBreakable } from '../../_ui-components/NonBreakable';
@@ -10,21 +11,15 @@ import { CONTACT_FRAGMENT } from '../../constants/urls';
 
 export const ContactSection: React.FC = () => (
   <Section id={CONTACT_FRAGMENT} color="primary">
-    <Container>
+    <Container maxWidth="md">
       <Stack>
-        <Row>
-          <SectionTitle>Kontakt</SectionTitle>
-        </Row>
-        <Row>
-          <PersonsStyled>
-            <Person title="Konateľ:" person={primaryContact} />
-            <Person title="Obchodný zástupca:" person={secondaryContact} />
-          </PersonsStyled>
-        </Row>
+        <SectionTitle>Kontakt</SectionTitle>
+        <PersonsStyled>
+          <Person title="Konateľ:" person={primaryContact} />
+          <Person title="Obchodný zástupca:" person={secondaryContact} />
+        </PersonsStyled>
         <SeparatorStyled />
-        <Row>
-          <CompanyInfoStyled info={companyInfo} />
-        </Row>
+        <CompanyInfoStyled info={companyInfo} />
       </Stack>
     </Container>
   </Section>
@@ -126,7 +121,7 @@ const DlStyled = styled.dl`
 `;
 
 const DtStyled = styled.dt`
-  flex: 0 0 45%;
+  flex: 0 0 55%;
   margin-left: auto;
   margin-right: auto;
   text-overflow: ellipsis;
@@ -135,7 +130,7 @@ const DtStyled = styled.dt`
 `;
 
 const DdStyled = styled.dd`
-  flex: 0 0 45%;
+  flex: 0 0 35%;
   margin-left: auto;
   margin-right: auto;
   text-align: right;

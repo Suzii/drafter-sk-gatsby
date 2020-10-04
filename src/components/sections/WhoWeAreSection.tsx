@@ -43,7 +43,7 @@ export const WhoWeAreSection: React.FC = () => (
             <Typography variant="h1" color="secondary" component="span">
               <Icon type={feature.icon} />
             </Typography>
-            <Typography variant="subtitle1" color="secondary">
+            <Typography variant="subtitle1" color="secondary" gutterBottom>
               {feature.title}
             </Typography>
           </Grid>
