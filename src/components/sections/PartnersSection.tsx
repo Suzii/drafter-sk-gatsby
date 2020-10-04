@@ -2,6 +2,7 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import { Container, Row, Section, SectionTitle, Stack } from '../../_ui-components/Container';
+import { OutwardLink } from '../../_ui-components/OutwardLink';
 import { partners, PartnerType } from '../../constants/partners';
 import { PARTNERS_FRAGMENT } from '../../constants/urls';
 
@@ -31,16 +32,15 @@ export const PartnersSection: React.FC = () => (
 
 const Partner: React.FC<{ readonly partner: PartnerType }> = ({ partner }) => (
   <PartnerStyled>
-    <a
+    <OutwardLink
       href={partner.link.url}
       title={partner.name}
-      target="_blank"
     >
       <img
         src={partner.logo.imgSrc}
         alt={partner.name}
       />
-    </a>
+    </OutwardLink>
   </PartnerStyled>
 );
 
