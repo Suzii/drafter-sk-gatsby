@@ -8,8 +8,8 @@ import { OutwardLink } from '../../_ui-components/OutwardLink';
 import { MAMAS_PDF_LINK, WHO_WE_ARE_FRAGMENT } from '../../constants/urls';
 
 export const WhoWeAreSection: React.FC = () => (
-  <Section isFullHeight id={WHO_WE_ARE_FRAGMENT}>
-    <Container maxWidth="md">
+  <Section id={WHO_WE_ARE_FRAGMENT}>
+    <Container maxWidth="md" >
       <Stack>
         <SectionTitle>Kto sme</SectionTitle>
         <Typography variant="body1" paragraph>
@@ -36,19 +36,19 @@ export const WhoWeAreSection: React.FC = () => (
         <Typography variant="subtitle1" gutterBottom>
           Radi Vás privítame do rodiny našich spokojných zákazníkov.
         </Typography>
+        <Grid container justify={'space-between'}>
+          {features.map((feature, index) => (
+            <Grid container item sm={12} md={4} key={index} alignItems={'center'} direction={'column'} justify={'center'}>
+              <Typography variant="h1" color="secondary" component="span">
+                <Icon type={feature.icon} />
+              </Typography>
+              <Typography variant="subtitle1" color="secondary" gutterBottom>
+                {feature.title}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
       </Stack>
-      <Grid container justify={'space-between'}>
-        {features.map((feature, index) => (
-          <Grid container item sm={12} md={4} key={index} alignItems={'center'} direction={'column'} justify={'center'}>
-            <Typography variant="h1" color="secondary" component="span">
-              <Icon type={feature.icon} />
-            </Typography>
-            <Typography variant="subtitle1" color="secondary" gutterBottom>
-              {feature.title}
-            </Typography>
-          </Grid>
-        ))}
-      </Grid>
     </Container>
   </Section>
 );
