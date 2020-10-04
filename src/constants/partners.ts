@@ -1,3 +1,5 @@
+import { MAMAS_PDF_LINK } from './urls';
+
 export type PartnerType = {
   readonly name: string;
   readonly logo: {
@@ -41,8 +43,8 @@ export const partners: readonly PartnerType[] = [
     link: { url: 'http://pdmestecko.sk/', isExternal: true },
   },
   {
-    name: './files/mamas_v2.pdf',
+    name: `MAMA's`,
     logo: { imgSrc: '/partners/mamas.png' },
-    link: { url: 'MAMA\'s', isExternal: true },
+    link: { url: MAMAS_PDF_LINK, isExternal: true },
   },
 ];

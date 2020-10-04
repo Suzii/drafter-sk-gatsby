@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { Section, SectionTitle, Stack } from '../../_ui-components/Container';
 import { Icon, IconType } from '../../_ui-components/Icon';
-import { WHO_WE_ARE_FRAGMENT } from '../../constants/urls';
+import { OutwardLink } from '../../_ui-components/OutwardLink';
+import { MAMAS_PDF_LINK, WHO_WE_ARE_FRAGMENT } from '../../constants/urls';
 
 export const WhoWeAreSection: React.FC = () => (
   <Section isFullHeight id={WHO_WE_ARE_FRAGMENT}>
@@ -21,7 +22,7 @@ export const WhoWeAreSection: React.FC = () => (
           mäsové
           výrobky spoločnosti Mäsovýroba Hôrka, ktorá vsadila na ich tradičné a poctivé spracovanie. Od roku 2017
           dovážame do Slovenskej republiky špičkové produkty od spoločnosti TRGOPPRODUCT z Macedónska pod ich
-          exkluzívnou značkou <a href="/files/mamas_v2.pdf" target='_blank'>MAMA´S</a>. Ide o pochutiny ako je
+          exkluzívnou značkou <OutwardLink href={MAMAS_PDF_LINK}>MAMA´S</OutwardLink>. Ide o pochutiny ako je
           Ajvar,
           Zelený ajvar, Lutenica a ďalšie.
         </Typography>
