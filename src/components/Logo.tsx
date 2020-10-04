@@ -20,7 +20,13 @@ export const Logo: React.FC<Props> = ({variant, className}) => {
 };
 
 const LogoCompact: React.FC<Pick<Props, 'className'>> = ({ className }) => (
-  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="50 0 566.000000 566.000000" className={className}>
+  <svg
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="50 0 566.000000 566.000000"
+    className={className}
+  >
+    <title>Drafter</title>
     <g transform="translate(0.000000,566.000000) scale(0.100000,-0.100000)" stroke="none">
       <path d="M2635 5154 c-272 -62 -556 -184 -789 -339 -421 -281 -754 -711 -917 -1185 -38 -108 -87 -300 -95 -371 -12 -102 31 -184 120 -232 l41 -22 920 0 920 0 42 22 c53 29 98 84 112 139 15 59 15 1803 0 1858 -15 54 -80 121 -136 140 -61 21 -86 20 -218 -10z"/>
       <path d="M949 2670 c-84 -44 -126 -129 -115 -229 8 -71 57 -263 95 -371 173 -504 539 -957 995 -1234 243 -147 485 -243 757 -298 104 -22 109 -22 162 -5 65 21 130 84 146 143 15 55 15 1799 0 1858 -13 54 -59 110 -110 136 -37 19 -62 20 -966 20 -892 -1 -929 -2 -964 -20z"/>
