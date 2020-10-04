@@ -10,6 +10,8 @@ export const PARTNERS_URL = `/#${PARTNERS_FRAGMENT}`;
 export const CONTACT_URL = `/#${CONTACT_FRAGMENT}`;
 export const PRODUCTS_URL = '/produkty';
 
+export const MAMAS_PDF_LINK = 'https://assets-us-01.kc-usercontent.com/f408ff21-bb77-0017-334f-f1ea95739f2a/7bdfc31c-1927-4b88-87c6-61959b6ce3fa/mamas.pdf';
+
 export const PRODUCT_URL = (productSlug: string | null | undefined) =>
   `${PRODUCTS_URL}/${productSlug ?? ''}`;
 
