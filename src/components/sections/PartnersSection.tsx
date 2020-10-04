@@ -8,7 +8,7 @@ import { partners, PartnerType } from '../../constants/partners';
 import { PARTNERS_FRAGMENT } from '../../constants/urls';
 
 export const PartnersSection: React.FC = () => (
-  <Section id={PARTNERS_FRAGMENT} color="gray">
+  <Section id={PARTNERS_FRAGMENT} variant="gray">
     <Container maxWidth="xl">
       <Stack>
         <SectionTitle>Partneri</SectionTitle>

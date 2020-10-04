@@ -5,7 +5,7 @@ const HtmlAttributes = {
 };
 
 const HeadComponents = [
-  <meta charSet="UTF-8" />,
+  <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />,
   <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />,
   <meta httpEquiv="X-UA-Compatible" content="ie=edge" />,
   <title>Drafter, s.r.o.</title>,

@@ -10,7 +10,7 @@ import { CompanyInfo, companyInfo, Contact, primaryContact, secondaryContact } f
 import { CONTACT_FRAGMENT } from '../../constants/urls';
 
 export const ContactSection: React.FC = () => (
-  <Section id={CONTACT_FRAGMENT} color="primary">
+  <Section id={CONTACT_FRAGMENT} variant="primary">
     <Container maxWidth="md">
       <Stack>
         <SectionTitle>Kontakt</SectionTitle>
@@ -81,26 +81,26 @@ const Person: React.FC<{ readonly person: Contact, readonly title: string }> = (
 const CompanyInfoComponent: React.FC<{ readonly info: CompanyInfo }> = ({ info }) => (
   <Typography variant={'body2'} component="div">
     <DlStyled>
-      <DdStyled>Adresa</DdStyled>
-      <DtStyled>
+      <DtStyled>Adresa</DtStyled>
+      <DdStyled>
         {info.address.line1}
         <br />
         {info.address.line2}, {info.address.line3}
-      </DtStyled>
+      </DdStyled>
 
-      <DdStyled>Email</DdStyled>
-      <DtStyled>
+      <DtStyled>Email</DtStyled>
+      <DdStyled>
         <EmailLink email={info.email} />
-      </DtStyled>
+      </DdStyled>
 
-      <DdStyled>IČO</DdStyled>
-      <DtStyled>{info.ico}</DtStyled>
+      <DtStyled>IČO</DtStyled>
+      <DdStyled>{info.ico}</DdStyled>
 
-      <DdStyled>DIČ</DdStyled>
-      <DtStyled>{info.dic}</DtStyled>
+      <DtStyled>DIČ</DtStyled>
+      <DdStyled>{info.dic}</DdStyled>
 
-      <DdStyled>IČ DPH</DdStyled>
-      <DtStyled>{info.icDph}</DtStyled>
+      <DtStyled>IČ DPH</DtStyled>
+      <DdStyled>{info.icDph}</DdStyled>
     </DlStyled>
   </Typography>
 );
@@ -120,7 +120,7 @@ const DlStyled = styled.dl`
   align-content: center;
 `;
 
-const DtStyled = styled.dt`
+const DdStyled = styled.dd`
   flex: 0 0 55%;
   margin-left: auto;
   margin-right: auto;
@@ -129,7 +129,7 @@ const DtStyled = styled.dt`
   text-align: left;
 `;
 
-const DdStyled = styled.dd`
+const DtStyled = styled.dt`
   flex: 0 0 35%;
   margin-left: auto;
   margin-right: auto;

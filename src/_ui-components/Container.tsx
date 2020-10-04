@@ -41,13 +41,13 @@ const translateSectionColor = (c: SectionColor | undefined, t: DefaultTheme): st
 
 export const Section = styled.section<{
   readonly isFullHeight?: boolean;
-  readonly color?: SectionColor;
+  readonly variant?: SectionColor;
 }>`
   width: 100%;
   padding-top: 2rem;
   padding-bottom: 3rem;
 
-  background-color: ${p => translateSectionColor(p.color, p.theme)};
+  background-color: ${p => translateSectionColor(p.variant, p.theme)};
 
   ${p => p.isFullHeight && (
     `min-height: 100vh;`
