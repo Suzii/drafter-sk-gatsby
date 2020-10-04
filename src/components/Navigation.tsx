@@ -8,7 +8,7 @@ import { Logo, LogoType } from './Logo';
 
 export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = ({ sitemap }) => (
   <Nav>
-    <LinkStyled to="/">
+    <LinkStyled to="/" alt="Drafter.sk">
       <LogoStyled variant={LogoType.Full} />
     </LinkStyled>
 
