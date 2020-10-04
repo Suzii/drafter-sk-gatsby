@@ -8,6 +8,7 @@ import { PreviewLinksToggle } from '../_ui-components/PreviewLinksToggle';
 import { sitemap } from '../constants/urls';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { theme } from '../styles/theme';
+import { isPreviewEnv } from '../utils/featureToggles';
 import { Footer } from './Footer';
 import { Navigation } from './Navigation';
 
@@ -22,7 +23,7 @@ const Layout: React.FC = ({ children }) => {
           {children}
         </Main>
         <Footer sitemap={sitemap} />
-        <PreviewLinksToggle />
+        {isPreviewEnv && <PreviewLinksToggle />}
       </MuiThemeProvider>
     </ThemeProvider>
   );
