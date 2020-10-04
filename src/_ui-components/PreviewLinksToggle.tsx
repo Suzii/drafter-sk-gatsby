@@ -3,34 +3,27 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
-const isPreviewEnv = process.env.GATSBY_IS_PREVIEW === 'true';
 const queryParam = 'preview';
 
 export const PreviewLinksToggle: React.FC = () => {
   useEffect(() => {
-    if (isPreviewEnv) {
-      const kontentSmartLink = KontentSmartLink.initialize({
-        queryParam,
-      });
-      return () => {
-        kontentSmartLink.destroy();
-      };
-    }
-  }, [isPreviewEnv]);
+    const kontentSmartLink = KontentSmartLink.initialize({
+      queryParam,
+    });
+    return () => {
+      kontentSmartLink.destroy();
+    };
+  }, []);
 
   const [values, setValues] = useQueryParams({ [queryParam]: StringParam });
 
   const isOn = values[queryParam] !== undefined;
-  const toggle = () =>  setValues({ [queryParam]: isOn ? undefined : null }, 'pushIn');
+  const toggle = () => setValues({ [queryParam]: isOn ? undefined : null }, 'pushIn');
 
   return (
-    <>
-      {isPreviewEnv && (
-        <PreviewLinksToggleStyled onClick={toggle}>
-          {isOn ? 'Disable edit' : 'Enable edit'}
-        </PreviewLinksToggleStyled>
-      )}
-    </>
+    <PreviewLinksToggleStyled onClick={toggle}>
+      {isOn ? 'Disable edit' : 'Enable edit'}
+    </PreviewLinksToggleStyled>
   );
 };
 
