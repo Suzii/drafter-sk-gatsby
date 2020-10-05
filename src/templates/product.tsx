@@ -23,8 +23,10 @@ const Product: React.FC<ProductProps> = ({ data }) => {
       >
         <Stack>
           <h1 data-kontent-element-codename={`name`}>{data.kontentItemProduct?.elements?.name?.value}</h1>
-          <Img data-kontent-element-codename={`image`}
-               fixed={data?.kontentItemProduct?.elements?.image?.value?.[0]?.fixed as FixedObject} />
+          <Img
+            data-kontent-element-codename={`image`}
+            fixed={data?.kontentItemProduct?.elements?.image?.value?.[0]?.fixed as FixedObject}
+          />
         </Stack>
       </Container>
     </Layout>
