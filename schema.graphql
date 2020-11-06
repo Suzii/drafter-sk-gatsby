@@ -496,8 +496,8 @@ type Query {
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
-    kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepageElementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_homepageSystemFilterInput): kontent_item_homepage
-    kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partnerElementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_partnerSystemFilterInput): kontent_item_partner
+    kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepage_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_homepage
+    kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partner_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partner
     kontentItemProduct(children: NodeFilterListInput, elements: kontent_item_product_elementsFilterInput, fields: kontent_item_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
     site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput): Site
@@ -706,7 +706,6 @@ type SitePluginPackageJsonPeerDependencies {
 
 type SitePluginPluginOptions {
     allExtensions: Boolean
-    authorizationKey: String
     codegenPlugins: [SitePluginPluginOptionsCodegenPlugins]
     documentPaths: [String]
     fileName: String
@@ -794,14 +793,14 @@ type kontent_item_date_time_element_value {
     ): Date
 }
 
-type kontent_item_homepage implements Node {
+type kontent_item_homepage implements Node & kontent_item {
     children: [Node!]!
-    elements: kontent_item_homepageElements
+    elements: kontent_item_homepage_elements
     id: ID!
     internal: Internal!
     parent: Node
-    preferred_language: String
-    system: kontent_item_homepageSystem
+    preferred_language: String!
+    system: kontent_item_system!
 }
 
 type kontent_item_homepageConnection {
@@ -819,16 +818,6 @@ type kontent_item_homepageEdge {
     previous: kontent_item_homepage
 }
 
-type kontent_item_homepageElements {
-    partners: kontent_item_homepageElementsPartners
-}
-
-type kontent_item_homepageElementsPartners {
-    name: String
-    type: String
-    value: [String]
-}
-
 type kontent_item_homepageGroupConnection {
     edges: [kontent_item_homepageEdge!]!
     field: String!
@@ -838,22 +827,8 @@ type kontent_item_homepageGroupConnection {
     totalCount: Int!
 }
 
-type kontent_item_homepageSystem {
-    codename: String
-    id: String
-    language: String
-    last_modified(
-        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
-        difference: String,
-        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
-        formatString: String,
-        "Returns a string generated with Moment.js' `fromNow` function"
-        fromNow: Boolean,
-        "Configures the locale Moment.js will use to format the date."
-        locale: String
-    ): Date
-    name: String
-    type: String
+type kontent_item_homepage_elements {
+    partners: kontent_item_modular_content_element_value
 }
 
 type kontent_item_modular_content_element_value {
@@ -879,14 +854,14 @@ type kontent_item_number_element_value {
     value: Float
 }
 
-type kontent_item_partner implements Node {
+type kontent_item_partner implements Node & kontent_item {
     children: [Node!]!
-    elements: kontent_item_partnerElements
+    elements: kontent_item_partner_elements
     id: ID!
     internal: Internal!
     parent: Node
-    preferred_language: String
-    system: kontent_item_partnerSystem
+    preferred_language: String!
+    system: kontent_item_system!
 }
 
 type kontent_item_partnerConnection {
@@ -904,39 +879,6 @@ type kontent_item_partnerEdge {
     previous: kontent_item_partner
 }
 
-type kontent_item_partnerElements {
-    link: kontent_item_partnerElementsLink
-    logo: kontent_item_partnerElementsLogo
-    title: kontent_item_partnerElementsTitle
-}
-
-type kontent_item_partnerElementsLink {
-    name: String
-    type: String
-    value: String
-}
-
-type kontent_item_partnerElementsLogo {
-    name: String
-    type: String
-    value: [kontent_item_partnerElementsLogoValue]
-}
-
-type kontent_item_partnerElementsLogoValue {
-    height: Int
-    name: String
-    size: Int
-    type: String
-    url: String
-    width: Int
-}
-
-type kontent_item_partnerElementsTitle {
-    name: String
-    type: String
-    value: String
-}
-
 type kontent_item_partnerGroupConnection {
     edges: [kontent_item_partnerEdge!]!
     field: String!
@@ -946,22 +888,10 @@ type kontent_item_partnerGroupConnection {
     totalCount: Int!
 }
 
-type kontent_item_partnerSystem {
-    codename: String
-    id: String
-    language: String
-    last_modified(
-        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
-        difference: String,
-        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
-        formatString: String,
-        "Returns a string generated with Moment.js' `fromNow` function"
-        fromNow: Boolean,
-        "Configures the locale Moment.js will use to format the date."
-        locale: String
-    ): Date
-    name: String
-    type: String
+type kontent_item_partner_elements {
+    link: kontent_item_text_element_value
+    logo: kontent_item_asset_element_value
+    title: kontent_item_text_element_value
 }
 
 type kontent_item_product implements Node & kontent_item {
@@ -1993,7 +1923,6 @@ enum SitePageFieldsEnum {
     pluginCreator___parent___parent___id
     pluginCreator___pluginFilepath
     pluginCreator___pluginOptions___allExtensions
-    pluginCreator___pluginOptions___authorizationKey
     pluginCreator___pluginOptions___codegenPlugins
     pluginCreator___pluginOptions___codegenPlugins___resolve
     pluginCreator___pluginOptions___documentPaths
@@ -2120,7 +2049,6 @@ enum SitePluginFieldsEnum {
     parent___parent___parent___id
     pluginFilepath
     pluginOptions___allExtensions
-    pluginOptions___authorizationKey
     pluginOptions___codegenPlugins
     pluginOptions___codegenPlugins___resolve
     pluginOptions___documentPaths
@@ -2199,6 +2127,8 @@ enum kontent_item_homepageFieldsEnum {
     elements___partners___name
     elements___partners___type
     elements___partners___value
+    elements___partners___value___id
+    elements___partners___value___preferred_language
     id
     internal___content
     internal___contentDigest
@@ -2301,6 +2231,7 @@ enum kontent_item_partnerFieldsEnum {
     elements___logo___name
     elements___logo___type
     elements___logo___value
+    elements___logo___value___description
     elements___logo___value___height
     elements___logo___value___name
     elements___logo___value___size
@@ -3000,7 +2931,6 @@ input SitePluginPluginOptionsCodegenPluginsFilterListInput {
 
 input SitePluginPluginOptionsFilterInput {
     allExtensions: BooleanQueryOperatorInput
-    authorizationKey: StringQueryOperatorInput
     codegenPlugins: SitePluginPluginOptionsCodegenPluginsFilterListInput
     documentPaths: StringQueryOperatorInput
     fileName: StringQueryOperatorInput
@@ -3074,24 +3004,14 @@ input kontent_item_asset_element_valueFilterInput {
     value: kontent_item_asset_elementFilterListInput
 }
 
-input kontent_item_homepageElementsFilterInput {
-    partners: kontent_item_homepageElementsPartnersFilterInput
-}
-
-input kontent_item_homepageElementsPartnersFilterInput {
-    name: StringQueryOperatorInput
-    type: StringQueryOperatorInput
-    value: StringQueryOperatorInput
-}
-
 input kontent_item_homepageFilterInput {
     children: NodeFilterListInput
-    elements: kontent_item_homepageElementsFilterInput
+    elements: kontent_item_homepage_elementsFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
     preferred_language: StringQueryOperatorInput
-    system: kontent_item_homepageSystemFilterInput
+    system: kontent_item_systemFilterInput
 }
 
 input kontent_item_homepageSortInput {
@@ -3099,13 +3019,14 @@ input kontent_item_homepageSortInput {
     order: [SortOrderEnum] = [ASC]
 }
 
-input kontent_item_homepageSystemFilterInput {
-    codename: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    language: StringQueryOperatorInput
-    last_modified: DateQueryOperatorInput
+input kontent_item_homepage_elementsFilterInput {
+    partners: kontent_item_modular_content_element_valueFilterInput
+}
+
+input kontent_item_modular_content_element_valueFilterInput {
     name: StringQueryOperatorInput
     type: StringQueryOperatorInput
+    value: kontent_itemFilterListInput
 }
 
 input kontent_item_number_element_valueFilterInput {
@@ -3114,51 +3035,14 @@ input kontent_item_number_element_valueFilterInput {
     value: FloatQueryOperatorInput
 }
 
-input kontent_item_partnerElementsFilterInput {
-    link: kontent_item_partnerElementsLinkFilterInput
-    logo: kontent_item_partnerElementsLogoFilterInput
-    title: kontent_item_partnerElementsTitleFilterInput
-}
-
-input kontent_item_partnerElementsLinkFilterInput {
-    name: StringQueryOperatorInput
-    type: StringQueryOperatorInput
-    value: StringQueryOperatorInput
-}
-
-input kontent_item_partnerElementsLogoFilterInput {
-    name: StringQueryOperatorInput
-    type: StringQueryOperatorInput
-    value: kontent_item_partnerElementsLogoValueFilterListInput
-}
-
-input kontent_item_partnerElementsLogoValueFilterInput {
-    height: IntQueryOperatorInput
-    name: StringQueryOperatorInput
-    size: IntQueryOperatorInput
-    type: StringQueryOperatorInput
-    url: StringQueryOperatorInput
-    width: IntQueryOperatorInput
-}
-
-input kontent_item_partnerElementsLogoValueFilterListInput {
-    elemMatch: kontent_item_partnerElementsLogoValueFilterInput
-}
-
-input kontent_item_partnerElementsTitleFilterInput {
-    name: StringQueryOperatorInput
-    type: StringQueryOperatorInput
-    value: StringQueryOperatorInput
-}
-
 input kontent_item_partnerFilterInput {
     children: NodeFilterListInput
-    elements: kontent_item_partnerElementsFilterInput
+    elements: kontent_item_partner_elementsFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
     preferred_language: StringQueryOperatorInput
-    system: kontent_item_partnerSystemFilterInput
+    system: kontent_item_systemFilterInput
 }
 
 input kontent_item_partnerSortInput {
@@ -3166,13 +3050,10 @@ input kontent_item_partnerSortInput {
     order: [SortOrderEnum] = [ASC]
 }
 
-input kontent_item_partnerSystemFilterInput {
-    codename: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    language: StringQueryOperatorInput
-    last_modified: DateQueryOperatorInput
-    name: StringQueryOperatorInput
-    type: StringQueryOperatorInput
+input kontent_item_partner_elementsFilterInput {
+    link: kontent_item_text_element_valueFilterInput
+    logo: kontent_item_asset_element_valueFilterInput
+    title: kontent_item_text_element_valueFilterInput
 }
 
 input kontent_item_productFieldsFilterInput {
