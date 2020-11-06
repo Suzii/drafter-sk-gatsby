@@ -484,6 +484,8 @@ type Query {
     allFile(filter: FileFilterInput, limit: Int, skip: Int, sort: FileSortInput): FileConnection!
     allImageSharp(filter: ImageSharpFilterInput, limit: Int, skip: Int, sort: ImageSharpSortInput): ImageSharpConnection!
     allKontentItem(filter: kontent_itemFilterInput, limit: Int, skip: Int, sort: kontent_itemSortInput): kontent_itemConnection!
+    allKontentItemHomepage(filter: kontent_item_homepageFilterInput, limit: Int, skip: Int, sort: kontent_item_homepageSortInput): kontent_item_homepageConnection!
+    allKontentItemPartner(filter: kontent_item_partnerFilterInput, limit: Int, skip: Int, sort: kontent_item_partnerSortInput): kontent_item_partnerConnection!
     allKontentItemProduct(filter: kontent_item_productFilterInput, limit: Int, skip: Int, sort: kontent_item_productSortInput): kontent_item_productConnection!
     allKontentTaxonomy(filter: kontent_taxonomyFilterInput, limit: Int, skip: Int, sort: kontent_taxonomySortInput): kontent_taxonomyConnection!
     allSite(filter: SiteFilterInput, limit: Int, skip: Int, sort: SiteSortInput): SiteConnection!
@@ -494,6 +496,8 @@ type Query {
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
+    kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepageElementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_homepageSystemFilterInput): kontent_item_homepage
+    kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partnerElementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_partnerSystemFilterInput): kontent_item_partner
     kontentItemProduct(children: NodeFilterListInput, elements: kontent_item_product_elementsFilterInput, fields: kontent_item_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
     site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput): Site
@@ -702,6 +706,7 @@ type SitePluginPackageJsonPeerDependencies {
 
 type SitePluginPluginOptions {
     allExtensions: Boolean
+    authorizationKey: String
     codegenPlugins: [SitePluginPluginOptionsCodegenPlugins]
     documentPaths: [String]
     fileName: String
@@ -713,11 +718,16 @@ type SitePluginPluginOptions {
     path: String
     pathCheck: Boolean
     projectId: String
+    stylesProvider: SitePluginPluginOptionsStylesProvider
     usePreviewUrl: Boolean
 }
 
 type SitePluginPluginOptionsCodegenPlugins {
     resolve: String
+}
+
+type SitePluginPluginOptionsStylesProvider {
+    injectFirst: Boolean
 }
 
 type kontent_itemConnection {
@@ -784,6 +794,68 @@ type kontent_item_date_time_element_value {
     ): Date
 }
 
+type kontent_item_homepage implements Node {
+    children: [Node!]!
+    elements: kontent_item_homepageElements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String
+    system: kontent_item_homepageSystem
+}
+
+type kontent_item_homepageConnection {
+    distinct(field: kontent_item_homepageFieldsEnum!): [String!]!
+    edges: [kontent_item_homepageEdge!]!
+    group(field: kontent_item_homepageFieldsEnum!, limit: Int, skip: Int): [kontent_item_homepageGroupConnection!]!
+    nodes: [kontent_item_homepage!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_homepageEdge {
+    next: kontent_item_homepage
+    node: kontent_item_homepage!
+    previous: kontent_item_homepage
+}
+
+type kontent_item_homepageElements {
+    partners: kontent_item_homepageElementsPartners
+}
+
+type kontent_item_homepageElementsPartners {
+    name: String
+    type: String
+    value: [String]
+}
+
+type kontent_item_homepageGroupConnection {
+    edges: [kontent_item_homepageEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_homepage!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_homepageSystem {
+    codename: String
+    id: String
+    language: String
+    last_modified(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    name: String
+    type: String
+}
+
 type kontent_item_modular_content_element_value {
     name: String!
     type: String!
@@ -805,6 +877,91 @@ type kontent_item_number_element_value {
     name: String!
     type: String!
     value: Float
+}
+
+type kontent_item_partner implements Node {
+    children: [Node!]!
+    elements: kontent_item_partnerElements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String
+    system: kontent_item_partnerSystem
+}
+
+type kontent_item_partnerConnection {
+    distinct(field: kontent_item_partnerFieldsEnum!): [String!]!
+    edges: [kontent_item_partnerEdge!]!
+    group(field: kontent_item_partnerFieldsEnum!, limit: Int, skip: Int): [kontent_item_partnerGroupConnection!]!
+    nodes: [kontent_item_partner!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_partnerEdge {
+    next: kontent_item_partner
+    node: kontent_item_partner!
+    previous: kontent_item_partner
+}
+
+type kontent_item_partnerElements {
+    link: kontent_item_partnerElementsLink
+    logo: kontent_item_partnerElementsLogo
+    title: kontent_item_partnerElementsTitle
+}
+
+type kontent_item_partnerElementsLink {
+    name: String
+    type: String
+    value: String
+}
+
+type kontent_item_partnerElementsLogo {
+    name: String
+    type: String
+    value: [kontent_item_partnerElementsLogoValue]
+}
+
+type kontent_item_partnerElementsLogoValue {
+    height: Int
+    name: String
+    size: Int
+    type: String
+    url: String
+    width: Int
+}
+
+type kontent_item_partnerElementsTitle {
+    name: String
+    type: String
+    value: String
+}
+
+type kontent_item_partnerGroupConnection {
+    edges: [kontent_item_partnerEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_partner!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_partnerSystem {
+    codename: String
+    id: String
+    language: String
+    last_modified(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    name: String
+    type: String
 }
 
 type kontent_item_product implements Node & kontent_item {
@@ -1836,6 +1993,7 @@ enum SitePageFieldsEnum {
     pluginCreator___parent___parent___id
     pluginCreator___pluginFilepath
     pluginCreator___pluginOptions___allExtensions
+    pluginCreator___pluginOptions___authorizationKey
     pluginCreator___pluginOptions___codegenPlugins
     pluginCreator___pluginOptions___codegenPlugins___resolve
     pluginCreator___pluginOptions___documentPaths
@@ -1848,6 +2006,7 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginOptions___path
     pluginCreator___pluginOptions___pathCheck
     pluginCreator___pluginOptions___projectId
+    pluginCreator___pluginOptions___stylesProvider___injectFirst
     pluginCreator___pluginOptions___usePreviewUrl
     pluginCreator___resolve
     pluginCreator___ssrAPIs
@@ -1961,6 +2120,7 @@ enum SitePluginFieldsEnum {
     parent___parent___parent___id
     pluginFilepath
     pluginOptions___allExtensions
+    pluginOptions___authorizationKey
     pluginOptions___codegenPlugins
     pluginOptions___codegenPlugins___resolve
     pluginOptions___documentPaths
@@ -1973,6 +2133,7 @@ enum SitePluginFieldsEnum {
     pluginOptions___path
     pluginOptions___pathCheck
     pluginOptions___projectId
+    pluginOptions___stylesProvider___injectFirst
     pluginOptions___usePreviewUrl
     resolve
     ssrAPIs
@@ -1986,6 +2147,216 @@ enum SortOrderEnum {
 
 enum kontent_itemFieldsEnum {
     id
+    preferred_language
+    system___codename
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_homepageFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___partners___name
+    elements___partners___type
+    elements___partners___value
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_partnerFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___link___name
+    elements___link___type
+    elements___link___value
+    elements___logo___name
+    elements___logo___type
+    elements___logo___value
+    elements___logo___value___height
+    elements___logo___value___name
+    elements___logo___value___size
+    elements___logo___value___type
+    elements___logo___value___url
+    elements___logo___value___width
+    elements___title___name
+    elements___title___type
+    elements___title___value
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
     preferred_language
     system___codename
     system___id
@@ -2629,6 +3000,7 @@ input SitePluginPluginOptionsCodegenPluginsFilterListInput {
 
 input SitePluginPluginOptionsFilterInput {
     allExtensions: BooleanQueryOperatorInput
+    authorizationKey: StringQueryOperatorInput
     codegenPlugins: SitePluginPluginOptionsCodegenPluginsFilterListInput
     documentPaths: StringQueryOperatorInput
     fileName: StringQueryOperatorInput
@@ -2640,7 +3012,12 @@ input SitePluginPluginOptionsFilterInput {
     path: StringQueryOperatorInput
     pathCheck: BooleanQueryOperatorInput
     projectId: StringQueryOperatorInput
+    stylesProvider: SitePluginPluginOptionsStylesProviderFilterInput
     usePreviewUrl: BooleanQueryOperatorInput
+}
+
+input SitePluginPluginOptionsStylesProviderFilterInput {
+    injectFirst: BooleanQueryOperatorInput
 }
 
 input SitePluginSortInput {
@@ -2697,10 +3074,105 @@ input kontent_item_asset_element_valueFilterInput {
     value: kontent_item_asset_elementFilterListInput
 }
 
+input kontent_item_homepageElementsFilterInput {
+    partners: kontent_item_homepageElementsPartnersFilterInput
+}
+
+input kontent_item_homepageElementsPartnersFilterInput {
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+    value: StringQueryOperatorInput
+}
+
+input kontent_item_homepageFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_homepageElementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_homepageSystemFilterInput
+}
+
+input kontent_item_homepageSortInput {
+    fields: [kontent_item_homepageFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_homepageSystemFilterInput {
+    codename: StringQueryOperatorInput
+    id: StringQueryOperatorInput
+    language: StringQueryOperatorInput
+    last_modified: DateQueryOperatorInput
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+}
+
 input kontent_item_number_element_valueFilterInput {
     name: StringQueryOperatorInput
     type: StringQueryOperatorInput
     value: FloatQueryOperatorInput
+}
+
+input kontent_item_partnerElementsFilterInput {
+    link: kontent_item_partnerElementsLinkFilterInput
+    logo: kontent_item_partnerElementsLogoFilterInput
+    title: kontent_item_partnerElementsTitleFilterInput
+}
+
+input kontent_item_partnerElementsLinkFilterInput {
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+    value: StringQueryOperatorInput
+}
+
+input kontent_item_partnerElementsLogoFilterInput {
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+    value: kontent_item_partnerElementsLogoValueFilterListInput
+}
+
+input kontent_item_partnerElementsLogoValueFilterInput {
+    height: IntQueryOperatorInput
+    name: StringQueryOperatorInput
+    size: IntQueryOperatorInput
+    type: StringQueryOperatorInput
+    url: StringQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input kontent_item_partnerElementsLogoValueFilterListInput {
+    elemMatch: kontent_item_partnerElementsLogoValueFilterInput
+}
+
+input kontent_item_partnerElementsTitleFilterInput {
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+    value: StringQueryOperatorInput
+}
+
+input kontent_item_partnerFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_partnerElementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_partnerSystemFilterInput
+}
+
+input kontent_item_partnerSortInput {
+    fields: [kontent_item_partnerFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_partnerSystemFilterInput {
+    codename: StringQueryOperatorInput
+    id: StringQueryOperatorInput
+    language: StringQueryOperatorInput
+    last_modified: DateQueryOperatorInput
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
 }
 
 input kontent_item_productFieldsFilterInput {

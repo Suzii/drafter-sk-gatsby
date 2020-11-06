@@ -4,10 +4,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Section, SectionTitle, Stack } from '../../_ui-components/Container';
 import { OutwardLink } from '../../_ui-components/OutwardLink';
-import { partners, PartnerType } from '../../constants/partners';
+import { PartnerType } from '../../constants/partners';
 import { PARTNERS_FRAGMENT } from '../../constants/urls';
 
-export const PartnersSection: React.FC = () => (
+type PartnersSectionProps = {
+  readonly partners: ReadonlyArray<PartnerType>;
+};
+
+export const PartnersSection: React.FC<PartnersSectionProps> = ({partners}) => (
   <Section id={PARTNERS_FRAGMENT} variant="gray">
     <Container maxWidth="xl">
       <Stack>
@@ -29,11 +33,11 @@ const Partner: React.FC<{ readonly partner: PartnerType }> = ({ partner }) => (
   <PartnerStyled>
     <OutwardLink
       href={partner.link.url}
-      title={partner.name}
+      title={partner.title.value}
     >
       <img
         src={partner.logo.imgSrc}
-        alt={partner.name}
+        alt={partner.title.value}
       />
     </OutwardLink>
   </PartnerStyled>
