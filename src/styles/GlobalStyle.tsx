@@ -17,6 +17,11 @@ export const GlobalStyle = createGlobalStyle`
     // gatsby wrappers hack
     & > div { 
       width: 100%;
+      min-height: 100vh;
+      
+      & > div {
+        min-height: 100vh;
+      }
     }
   }
   

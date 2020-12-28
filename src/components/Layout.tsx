@@ -1,4 +1,5 @@
 import '@kentico/kontent-smart-link/dist/kontent-smart-link.styles.css';
+import { Grid } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
@@ -18,11 +19,13 @@ const Layout: React.FC = ({ children }) => {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyle />
-        <Navigation sitemap={sitemap} />
-        <Main>
-          {children}
-        </Main>
-        <Footer sitemap={sitemap} />
+        <Grid container justify="space-between" direction="column" alignItems="stretch" style={{ height: '100%' }}>
+          <Navigation sitemap={sitemap} />
+          <Main>
+            {children}
+          </Main>
+          <Footer sitemap={sitemap} />
+        </Grid>
         {isPreviewEnv && <PreviewLinksToggle />}
       </MuiThemeProvider>
     </ThemeProvider>
