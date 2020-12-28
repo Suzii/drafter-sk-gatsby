@@ -14,6 +14,8 @@ const fontWeightRegular = 400;
 const fontWeightMedium = 500;
 const fontWeightBold = 600;
 
+export const navBarHeight = '80px';
+
 const headings = (level: number): TypographyStyle => ({
   fontWeight: fontWeightBold,
   fontSize: `${(8 - level)/2}rem`,

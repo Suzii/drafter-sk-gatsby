@@ -5,6 +5,7 @@ import { FluidObject } from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 import { HeroImageQuery } from '../../../graphql-types';
+import { navBarHeight } from '../../styles/theme';
 import { Logo, LogoType } from '../Logo';
 import { PRODUCTS_URL } from '../../constants/urls';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
@@ -49,7 +50,7 @@ export const HeroSection: React.FC = () => {
 };
 
 const HeroHeader = styled(BackgroundImage)`
-  min-height: 100vh;
+  min-height: ${`calc(100vh - ${navBarHeight})`};
   display: flex;
   align-items: center;
   justify-content: center;

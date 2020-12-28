@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import { Sitemap } from '../constants/urls';
+import { navBarHeight } from '../styles/theme';
 import { isActive } from '../utils/urlUtils';
 import { Logo, LogoType } from './Logo';
 
@@ -27,14 +28,14 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = ({ sitemap })
 );
 
 const Nav = styled.nav`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right:0;
+  //position: absolute;
+  //top: 0;
+  //left: 0;
+  //right:0;
   z-index: ${p => p.theme.zIndex.appBar};
 
   width: 100%;
-  min-height: 80px;
+  min-height: ${navBarHeight};
   padding: 0;
   display: flex;
   flex-wrap: wrap;
