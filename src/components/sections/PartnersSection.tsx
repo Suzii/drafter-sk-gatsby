@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Section, SectionTitle, Stack } from '../../_ui-components/Container';
 import { OutwardLink } from '../../_ui-components/OutwardLink';
-import { PartnerType } from '../../constants/partners';
+import { PartnerType } from '../../models/partners';
 import { PARTNERS_FRAGMENT } from '../../constants/urls';
 
 type PartnersSectionProps = {

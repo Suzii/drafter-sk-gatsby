@@ -6,7 +6,7 @@ import { ContactSection } from '../components/sections/ContactSection';
 import { HeroSection } from '../components/sections/HeroSection';
 import { PartnersSection } from '../components/sections/PartnersSection';
 import { WhoWeAreSection } from '../components/sections/WhoWeAreSection';
-import { mapFromKontent } from '../constants/partners';
+import { mapFromKontent } from '../models/partners';
 
 type HomeProps = {
   readonly data: HomeQuery;

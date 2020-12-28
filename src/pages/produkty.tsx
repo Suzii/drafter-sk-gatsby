@@ -7,6 +7,7 @@ import { ProductsQuery } from '../../graphql-types';
 import { Section, SectionTitle } from '../_ui-components/Container';
 import Layout from '../components/Layout';
 import { ProductTile } from '../components/products/ProductTile';
+import { mapProductsFromKontent } from '../models/product';
 import { Feature, isFeatureEnabled } from '../utils/featureToggles';
 
 type ProductsProps = {
@@ -30,24 +31,18 @@ const Products: React.FC<ProductsProps> = ({ data }) => (
               justify="flex-start"
               alignItems="stretch"
             >
-              {data.allKontentItemProduct.edges.map(product => (
+              {mapProductsFromKontent(data).map(product => (
                 <Grid
-                  key={product.node.system.id}
+                  key={product.id}
                   item
                   style={{ display: 'flex' }}
-                  spacing={4}
                   xl={3}
                   lg={3}
                   md={4}
                   sm={4}
                   xs={6}
                 >
-                  <ProductTile
-                    id={product.node.system.id}
-                    name={product.node.elements?.name?.value}
-                    urlSlug={product.node.elements?.url_slug?.value}
-                    img={product.node.elements?.image?.value?.[0]}
-                  />
+                  <ProductTile product={product} />
                 </Grid>
               ))}
             </Grid>
@@ -74,6 +69,16 @@ export const query = graphql`
                         }
                         url_slug {
                             value
+                        }
+                        producer {
+                            name
+                            taxonomy_group
+                            value { name codename }
+                        }
+                        country {
+                            name
+                            taxonomy_group
+                            value { name codename }
                         }
                         image {
                             value {
