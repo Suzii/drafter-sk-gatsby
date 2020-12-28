@@ -6,6 +6,7 @@ import React from 'react';
 import { ProductQuery } from '../../graphql-types';
 import { Section, SectionTitle } from '../_ui-components/Container';
 import Layout from '../components/Layout';
+import { ProductDescription } from '../components/products/ProductDescription';
 import { ProductInfo } from '../components/products/ProductInfo';
 import { mapProductFromKontent } from '../models/product';
 
@@ -23,11 +24,8 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 
   return (
     <Layout>
-      <Container
-        data-kontent-item-id={product.id}
-        maxWidth="lg"
-      >
-        <Section>
+      <Container maxWidth="lg">
+        <Section data-kontent-item-id={product.id}>
           <Grid
             container
             spacing={4}
@@ -55,10 +53,10 @@ const Product: React.FC<ProductProps> = ({ data }) => {
               sm={7}
               xs={12}
             >
-              <SectionTitle data-kontent-element-codename={`name`}>{product.name}</SectionTitle>
+              <SectionTitle elementCodename={`name`}>{product.name}</SectionTitle>
               <ProductInfo info={product} />
-              <Typography variant="body1">
-                {product.description}
+              <Typography variant="body1" component="div">
+                <ProductDescription rte={product.description} />
               </Typography>
             </Grid>
           </Grid>

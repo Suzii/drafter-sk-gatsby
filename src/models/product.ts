@@ -1,6 +1,14 @@
-import { Kontent_Item_Asset_Element, KontentAssetFluid, ProductQuery, ProductsQuery } from '../../graphql-types';
+import {
+  Kontent_Item_Asset_Element,
+  Kontent_Item_Rich_Text_Element_Value,
+  KontentAssetFluid,
+  ProductQuery,
+  ProductsQuery,
+} from '../../graphql-types';
 import { Maybe, Uuid } from '../@types/global';
 import { Term } from './taxonomies/_common';
+
+export type ProductDescriptionRte = Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>;
 
 export type ProductCommon = {
   readonly id: Maybe<Uuid>;
@@ -11,7 +19,7 @@ export type ProductCommon = {
 };
 
 export type ProductDetail = ProductCommon & {
-  readonly description: Maybe<string>;
+  readonly description: ProductDescriptionRte;
   readonly img: Maybe<(
     Pick<Kontent_Item_Asset_Element, 'description'>
     & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
@@ -41,7 +49,7 @@ export const mapProductsFromKontent = (query: ProductsQuery): ProductListing[] =
 export const mapProductFromKontent = ({ kontentItemProduct: p }: ProductQuery): ProductDetail => ({
   id: p?.system.id,
   name: p?.elements?.name?.value ?? '',
-  description: p?.elements?.description?.value ?? '',
+  description: p?.elements?.description,
   img: p?.elements?.image?.value?.[0] ?? null,
   urlSlug: p?.elements?.url_slug?.value ?? '',
   producer: p?.elements?.producer?.value?.[0],
