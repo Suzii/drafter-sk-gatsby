@@ -1,10 +1,13 @@
+import { Container, Grid } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import { FixedObject } from 'gatsby-image/index';
+import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import { ProductQuery } from '../../graphql-types';
-import { Container, Stack } from '../_ui-components/Container';
+import { Section, SectionTitle } from '../_ui-components/Container';
 import Layout from '../components/Layout';
+import { ProductInfo } from '../components/products/ProductInfo';
+import { mapProductFromKontent } from '../models/product';
 
 type ProductProps = {
   readonly data?: ProductQuery
@@ -16,18 +19,50 @@ const Product: React.FC<ProductProps> = ({ data }) => {
     return null;
   }
 
+  const product = mapProductFromKontent(data);
+
   return (
     <Layout>
       <Container
-        data-kontent-item-id={data.kontentItemProduct?.system.id}
+        data-kontent-item-id={product.id}
+        maxWidth="lg"
       >
-        <Stack>
-          <h1 data-kontent-element-codename={`name`}>{data.kontentItemProduct?.elements?.name?.value}</h1>
-          <Img
-            data-kontent-element-codename={`image`}
-            fixed={data?.kontentItemProduct?.elements?.image?.value?.[0]?.fixed as FixedObject}
-          />
-        </Stack>
+        <Section>
+          <Grid
+            container
+            spacing={4}
+            direction="row"
+            alignContent="stretch"
+          >
+            <Grid
+              item
+              xl={4}
+              lg={4}
+              md={4}
+              sm={5}
+              xs={12}
+            >
+              <Img
+                data-kontent-element-codename={`image`}
+                fluid={product.img?.fluid as FluidObject}
+              />
+            </Grid>
+            <Grid
+              item
+              xl={8}
+              lg={8}
+              md={8}
+              sm={7}
+              xs={12}
+            >
+              <SectionTitle data-kontent-element-codename={`name`}>{product.name}</SectionTitle>
+              <ProductInfo info={product} />
+              <Typography variant="body1">
+                {product.description}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Section>
       </Container>
     </Layout>
   );
@@ -46,14 +81,28 @@ export const query = graphql`
                 name {
                     value
                 }
+                description {
+                    value
+                }
+                producer {
+                    name
+                    taxonomy_group
+                    value { name codename }
+                }
+                country {
+                    name
+                    taxonomy_group
+                    value { name codename }
+                }
                 image {
                     value {
-                        fixed(width: 350) {
+                        description
+                        fluid(maxWidth: 350) {
+                            aspectRatio
                             base64
-                            height
+                            sizes
                             src
                             srcSet
-                            width
                         }
                     }
                 }
