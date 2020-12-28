@@ -13,4 +13,5 @@ declare global {
   }
 }
 
-export {}
+export type Maybe<T> = T | null | undefined;
+export type Uuid = string;
