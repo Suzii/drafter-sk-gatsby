@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
-import { Filters, SelectedTermsByGroup, useSelectedTaxonomies } from '../../_ui-components/filter/Filters';
+import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-components/filter/Filters';
 import { ProductTaxonomy, T_COUNTRY, T_PRODUCER } from '../../constants/taxonomies';
 import { ProductListing } from '../../models/product';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
@@ -13,7 +13,7 @@ import { ProductTile } from './ProductTile';
 
 type Props = {
   readonly allProducts: ReadonlyArray<ProductListing>;
-  readonly productTaxonomies: ReadonlyArray<TaxonomyGroup>;
+  readonly productTaxonomies: ReadonlyArray<TaxonomyGroup<ProductTaxonomy>>;
 }
 
 const satisfiesGroupFilter = (product: ProductListing, groupCodename: ProductTaxonomy, selectedTerms: Maybe<ReadonlyArray<string>>): boolean =>
@@ -21,11 +21,11 @@ const satisfiesGroupFilter = (product: ProductListing, groupCodename: ProductTax
   !selectedTerms.length ||
   selectedTerms.includes(product[groupCodename]?.codename ?? '');
 
-const satisfiesFilter = (product: ProductListing, selectedTermsByGroup: SelectedTermsByGroup): boolean =>
+const satisfiesFilter = (product: ProductListing, selectedTermsByGroup: SelectedTermsByGroup<ProductTaxonomy>): boolean =>
   satisfiesGroupFilter(product, T_PRODUCER, selectedTermsByGroup[T_PRODUCER]) &&
   satisfiesGroupFilter(product, T_COUNTRY, selectedTermsByGroup[T_COUNTRY]);
 
-const filterProducts = (allProducts: ReadonlyArray<ProductListing>, selectedTermsByGroup: SelectedTermsByGroup): ReadonlyArray<ProductListing> => allProducts.reduce(
+const filterProducts = (allProducts: ReadonlyArray<ProductListing>, selectedTermsByGroup: SelectedTermsByGroup<ProductTaxonomy>): ReadonlyArray<ProductListing> => allProducts.reduce(
   (agg: ReadonlyArray<ProductListing>, product: ProductListing) =>
     satisfiesFilter(product, selectedTermsByGroup)
       ? [...agg, product]
@@ -33,7 +33,7 @@ const filterProducts = (allProducts: ReadonlyArray<ProductListing>, selectedTerm
   []);
 
 export const ProductsList: React.FC<Props> = ({ allProducts, productTaxonomies }) => {
-  const selectedTermsByGroup = useSelectedTaxonomies<ProductTaxonomy>(productTaxonomies);
+  const [selectedTermsByGroup] = useFilterQuery(productTaxonomies);
   const filteredProducts = filterProducts(allProducts, selectedTermsByGroup);
 
   if (!isFeatureEnabled(Feature.ProductsPage)) {
@@ -46,7 +46,7 @@ export const ProductsList: React.FC<Props> = ({ allProducts, productTaxonomies }
 
   return (
     <ProductsPageWrapper>
-      <Filters filters={productTaxonomies} />
+      <Filters<ProductTaxonomy> filters={productTaxonomies} />
       {!filteredProducts.length
         ? (<Typography variant="h4">Nenašli sa žiadne produkty vyhovujúce filtrom...</Typography>)
         : (<ProductsGrid products={filteredProducts} />)
