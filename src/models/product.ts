@@ -6,16 +6,19 @@ import {
   ProductsQuery,
 } from '../../graphql-types';
 import { Maybe, Uuid } from '../@types/global';
+import { ProductTaxonomy } from '../constants/taxonomies';
 import { Term } from './taxonomies/_common';
 
 export type ProductDescriptionRte = Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>;
 
-export type ProductCommon = {
+type ProductTaxonomies = {
+  readonly [P in ProductTaxonomy]: Maybe<Term>;
+};
+
+export type ProductCommon = ProductTaxonomies & {
   readonly id: Maybe<Uuid>;
   readonly name: Maybe<string>;
   readonly urlSlug: Maybe<string>;
-  readonly producer: Maybe<Term>;
-  readonly country: Maybe<Term>;
 };
 
 export type ProductDetail = ProductCommon & {
