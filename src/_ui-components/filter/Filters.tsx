@@ -1,70 +1,63 @@
-import { ContentItem, MultipleItemQuery } from '@kentico/kontent-delivery';
 import React from 'react';
-import { ObjectParam, useQueryParam } from 'use-query-params';
+import { ArrayParam, useQueryParams } from 'use-query-params';
 import { Term } from '../../models/taxonomies/_common';
 import { FilterSection } from './FilterSection';
 
-export type FilterConfig = {
+export type FilterConfig<TGroupNames extends string> = {
   readonly groupName: string;
-  readonly groupCodename: string;
+  readonly groupCodename: TGroupNames;
   readonly allTerms: ReadonlyArray<Term>;
 };
 
-export type FiltersConfig = ReadonlyArray<FilterConfig>;
+export type FiltersConfig<TGroupNames extends string> = ReadonlyArray<FilterConfig<TGroupNames>>;
 
-type FiltersProps = {
-  readonly filters: FiltersConfig;
+type FiltersProps<TGroupNames extends string> = {
+  readonly filters: FiltersConfig<TGroupNames>;
 };
 
-export type SelectedTermsByGroup<T extends string = string> = Record<T, ReadonlyArray<string>>;
-
-const getArrayFromQueryParam = (value: string[] | string | null | undefined): ReadonlyArray<string> => {
-  if (!value) {
-    return [];
-  }
-
-  return Array.isArray(value)
-    ? value as string[]
-    : (value as string).split(',');
+export type SelectedTermsByGroup<TGroupNames extends string> = {
+  [P in TGroupNames]: ReadonlyArray<string>;
 };
 
-const parseFiltersFromQuery = (filters: FiltersConfig, query: Record<string, string | string[] | undefined>): SelectedTermsByGroup =>
-  filters.reduce(
-    (acc, nextGroup) => ({
-      ...acc,
-      [nextGroup.groupCodename]: getArrayFromQueryParam(query[nextGroup.groupCodename]),
-    }),
-    {},
+type QueryArrayValue = (string | null)[] | null | undefined;
+type QueryMap<TGroupNames extends string> = {
+  [P in TGroupNames]: QueryArrayValue;
+};
+const fixArrayType = (value: QueryArrayValue): ReadonlyArray<string> =>
+  !value || !Array.isArray(value)
+    ? []
+    : value.filter(x => !!x) as string[];
+
+const parseFiltersFromQuery = <TGroupNames extends string>(filters: FiltersConfig<TGroupNames>, query: QueryMap<TGroupNames>): SelectedTermsByGroup<TGroupNames> =>
+  filters.reduce((acc, nextGroup) =>
+      ({ ...acc, [nextGroup.groupCodename]: fixArrayType(query[nextGroup.groupCodename]) }),
+    {} as any,
   );
 
-const encodeSelectedFiltersToQueryObject = (selectedTermsByGroup: SelectedTermsByGroup): Record<string, string> =>
-  Object.keys(selectedTermsByGroup).reduce((acc, nextGroup) => ({
-    ...acc,
-    [nextGroup]: encodeURI(selectedTermsByGroup[nextGroup].join(',')),
-  }), {});
+export const useFilterQuery = <TGroupNames extends string>(filters: FiltersConfig<TGroupNames>) => {
+  const queryParamsMap = filters.map(f => f.groupCodename).reduce((acc, groupName) =>
+      ({ ...acc, [groupName]: ArrayParam }),
+    {});
 
-export const useSelectedTaxonomies = <TGroupNames extends string>(filters: FiltersConfig) => {
-  const [filtersQuery] = useQueryParam(filterName, ObjectParam);
-  return parseFiltersFromQuery(filters, filtersQuery ?? {});
-};
-
-const filterName = 'q';
-
-export const Filters: React.FC<FiltersProps> = ({ filters }) => {
-  const [filtersQuery, setFiltersQuery] = useQueryParam(filterName, ObjectParam);
-  const selectedTermsByGroup = parseFiltersFromQuery(filters, filtersQuery ?? {});
+  const [filtersQuery, setFiltersQuery] = useQueryParams(queryParamsMap);
+  const selectedTermsByGroup = parseFiltersFromQuery(filters, filtersQuery as QueryMap<TGroupNames>);
 
   const onSelectedTermsChanged = (
-    groupCodename: string,
+    groupCodename: TGroupNames,
     termsUpdateCallback: (prev: ReadonlyArray<string>) => ReadonlyArray<string>,
   ) => {
     const newFilter = {
       ...selectedTermsByGroup,
       [groupCodename]: termsUpdateCallback(selectedTermsByGroup[groupCodename]),
     };
-
-    setFiltersQuery(encodeSelectedFiltersToQueryObject(newFilter), 'pushIn');
+    setFiltersQuery(newFilter, 'pushIn');
   };
+
+  return [selectedTermsByGroup, onSelectedTermsChanged] as const;
+};
+
+export const Filters = <TGroupNames extends string>({ filters }: FiltersProps<TGroupNames>) => {
+  const [selectedTermsByGroup, onSelectedTermsChanged] = useFilterQuery<TGroupNames>(filters);
 
   return (
     <div className="filter">
