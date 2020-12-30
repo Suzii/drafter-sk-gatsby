@@ -4300,44 +4300,24 @@ export type HomeQuery = { allKontentItemHomepage: { nodes: Array<{ elements?: Ma
 export type DiaryProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DiaryProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: Maybe<Array<Maybe<Pick<Kontent_Taxonomy_Term, 'codename' | 'name'>>>>, system: Pick<Kontent_Taxonomy_System, 'codename' | 'name'> }> }, allKontentItemDiaryProduct: { edges: Array<{ node: { system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__producer?: Maybe<(
-            Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-            & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-          )>, produkt_core__country?: Maybe<(
-            Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-            & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-          )>, diary_type?: Maybe<(
-            Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-            & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-          )>, milk_type?: Maybe<(
-            Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-            & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-          )>, produkt_core__image?: Maybe<{ value?: Maybe<Array<Maybe<(
-              Pick<Kontent_Item_Asset_Element, 'description'>
-              & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
-            )>>> }> }> } }> } };
+export type DiaryProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: Maybe<Array<Maybe<Pick<Kontent_Taxonomy_Term, 'codename' | 'name'>>>>, system: Pick<Kontent_Taxonomy_System, 'codename' | 'name'> }> }, allKontentItemDiaryProduct: { edges: Array<{ node: { system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, diary_type?: Maybe<TaxonomyElementFieldsFragment>, milk_type?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> } }> } };
 
 export type DiaryProductQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type DiaryProductQuery = { kontentItemDiaryProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<(
-        Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-        & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-      )>, produkt_core__country?: Maybe<(
-        Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-        & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-      )>, diary_type?: Maybe<(
-        Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-        & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-      )>, milk_type?: Maybe<(
-        Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-        & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-      )>, produkt_core__image?: Maybe<{ value?: Maybe<Array<Maybe<(
-          Pick<Kontent_Item_Asset_Element, 'description'>
-          & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
-        )>>> }> }> }> };
+export type DiaryProductQuery = { kontentItemDiaryProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, diary_type?: Maybe<TaxonomyElementFieldsFragment>, milk_type?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> }> };
+
+export type TaxonomyElementFieldsFragment = (
+  Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
+  & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
+);
+
+export type FluidImage350wFragment = { value?: Maybe<Array<Maybe<(
+    Pick<Kontent_Item_Asset_Element, 'description'>
+    & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
+  )>>> };
 
 export type ProductsUrlSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
