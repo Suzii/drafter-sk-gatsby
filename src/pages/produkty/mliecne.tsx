@@ -1,10 +1,11 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { DiaryProductsQuery } from '../../graphql-types';
-import Layout from '../components/Layout';
-import { ProductsList } from '../components/products/ProductsList';
-import { mapProductsFromKontent } from '../models/product';
-import { mapAllTaxonomyFromKontent } from '../models/taxonomies/_common';
+import { DiaryProductsQuery } from '../../../graphql-types';
+import Layout from '../../components/Layout';
+import { ProductsList } from '../../components/products/ProductsList';
+import { mapProductsFromKontent } from '../../models/product';
+import { mapAllTaxonomyFromKontent } from '../../models/taxonomies/_common';
+
 
 type ProductsProps = {
   readonly data: DiaryProductsQuery
