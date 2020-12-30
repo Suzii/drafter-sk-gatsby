@@ -1,8 +1,5 @@
 .idea
 
-# generated
-graphql-types.ts
-
 # Logs
 logs
 *.log
