@@ -1,13 +1,13 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { ProductsQuery } from '../../graphql-types';
+import { DiaryProductsQuery } from '../../graphql-types';
 import Layout from '../components/Layout';
 import { ProductsList } from '../components/products/ProductsList';
 import { mapProductsFromKontent } from '../models/product';
 import { mapAllTaxonomyFromKontent } from '../models/taxonomies/_common';
 
 type ProductsProps = {
-  readonly data: ProductsQuery
+  readonly data: DiaryProductsQuery
 }
 
 const Products: React.FC<ProductsProps> = ({ data }) => (
@@ -22,7 +22,7 @@ const Products: React.FC<ProductsProps> = ({ data }) => (
 export default Products;
 
 export const query = graphql`
-    query Products {
+    query DiaryProducts {
         allKontentTaxonomy(filter: {system: {codename: {in: ["producer", "country"]}}}) {
             nodes {
                 terms {
@@ -35,30 +35,30 @@ export const query = graphql`
                 }
             }
         }
-        allKontentItemProduct {
+        allKontentItemDiaryProduct {
             edges {
                 node {
                     system {
                         id
                     }
                     elements {
-                        name {
+                        produkt_core__name {
                             value
                         }
                         url_slug {
                             value
                         }
-                        producer {
+                        produkt_core__producer {
                             name
                             taxonomy_group
                             value { name codename }
                         }
-                        country {
+                        produkt_core__country {
                             name
                             taxonomy_group
                             value { name codename }
                         }
-                        image {
+                        produkt_core__image {
                             value {
                                 description
                                 fluid(maxWidth: 350) {

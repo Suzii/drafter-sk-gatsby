@@ -484,9 +484,11 @@ type Query {
     allFile(filter: FileFilterInput, limit: Int, skip: Int, sort: FileSortInput): FileConnection!
     allImageSharp(filter: ImageSharpFilterInput, limit: Int, skip: Int, sort: ImageSharpSortInput): ImageSharpConnection!
     allKontentItem(filter: kontent_itemFilterInput, limit: Int, skip: Int, sort: kontent_itemSortInput): kontent_itemConnection!
+    allKontentItemDiaryProduct(filter: kontent_item_diary_productFilterInput, limit: Int, skip: Int, sort: kontent_item_diary_productSortInput): kontent_item_diary_productConnection!
     allKontentItemHomepage(filter: kontent_item_homepageFilterInput, limit: Int, skip: Int, sort: kontent_item_homepageSortInput): kontent_item_homepageConnection!
+    allKontentItemMeatProduct(filter: kontent_item_meat_productFilterInput, limit: Int, skip: Int, sort: kontent_item_meat_productSortInput): kontent_item_meat_productConnection!
+    allKontentItemOtherProduct(filter: kontent_item_other_productFilterInput, limit: Int, skip: Int, sort: kontent_item_other_productSortInput): kontent_item_other_productConnection!
     allKontentItemPartner(filter: kontent_item_partnerFilterInput, limit: Int, skip: Int, sort: kontent_item_partnerSortInput): kontent_item_partnerConnection!
-    allKontentItemProduct(filter: kontent_item_productFilterInput, limit: Int, skip: Int, sort: kontent_item_productSortInput): kontent_item_productConnection!
     allKontentTaxonomy(filter: kontent_taxonomyFilterInput, limit: Int, skip: Int, sort: kontent_taxonomySortInput): kontent_taxonomyConnection!
     allSite(filter: SiteFilterInput, limit: Int, skip: Int, sort: SiteSortInput): SiteConnection!
     allSiteBuildMetadata(filter: SiteBuildMetadataFilterInput, limit: Int, skip: Int, sort: SiteBuildMetadataSortInput): SiteBuildMetadataConnection!
@@ -496,9 +498,11 @@ type Query {
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
+    kontentItemDiaryProduct(children: NodeFilterListInput, elements: kontent_item_diary_product_elementsFilterInput, fields: kontent_item_diary_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_diary_product
     kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepage_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_homepage
+    kontentItemMeatProduct(children: NodeFilterListInput, elements: kontent_item_meat_product_elementsFilterInput, fields: kontent_item_meat_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_meat_product
+    kontentItemOtherProduct(children: NodeFilterListInput, elements: kontent_item_other_product_elementsFilterInput, fields: kontent_item_other_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_other_product
     kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partner_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partner
-    kontentItemProduct(children: NodeFilterListInput, elements: kontent_item_product_elementsFilterInput, fields: kontent_item_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
     site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
@@ -794,6 +798,58 @@ type kontent_item_date_time_element_value {
     ): Date
 }
 
+type kontent_item_diary_product implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_diary_product_elements
+    fields: kontent_item_diary_productFields
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_diary_productConnection {
+    distinct(field: kontent_item_diary_productFieldsEnum!): [String!]!
+    edges: [kontent_item_diary_productEdge!]!
+    group(field: kontent_item_diary_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_diary_productGroupConnection!]!
+    nodes: [kontent_item_diary_product!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_diary_productEdge {
+    next: kontent_item_diary_product
+    node: kontent_item_diary_product!
+    previous: kontent_item_diary_product
+}
+
+type kontent_item_diary_productFields {
+    slug: String
+}
+
+type kontent_item_diary_productGroupConnection {
+    edges: [kontent_item_diary_productEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_diary_product!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_diary_product_elements {
+    diary_type: kontent_item_taxonomy_element_value
+    milk_type: kontent_item_taxonomy_element_value
+    pieces_in_package: kontent_item_number_element_value
+    produkt_core__country: kontent_item_taxonomy_element_value
+    produkt_core__description: kontent_item_rich_text_element_value
+    produkt_core__image: kontent_item_asset_element_value
+    produkt_core__name: kontent_item_text_element_value
+    produkt_core__producer: kontent_item_taxonomy_element_value
+    url_slug: kontent_item_url_slug_element_value
+    weight: kontent_item_number_element_value
+}
+
 type kontent_item_homepage implements Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_homepage_elements
@@ -832,6 +888,54 @@ type kontent_item_homepage_elements {
     partners: kontent_item_modular_content_element_value
 }
 
+type kontent_item_meat_product implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_meat_product_elements
+    fields: kontent_item_meat_productFields
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_meat_productConnection {
+    distinct(field: kontent_item_meat_productFieldsEnum!): [String!]!
+    edges: [kontent_item_meat_productEdge!]!
+    group(field: kontent_item_meat_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_meat_productGroupConnection!]!
+    nodes: [kontent_item_meat_product!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_meat_productEdge {
+    next: kontent_item_meat_product
+    node: kontent_item_meat_product!
+    previous: kontent_item_meat_product
+}
+
+type kontent_item_meat_productFields {
+    slug: String
+}
+
+type kontent_item_meat_productGroupConnection {
+    edges: [kontent_item_meat_productEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_meat_product!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_meat_product_elements {
+    produkt_core__country: kontent_item_taxonomy_element_value
+    produkt_core__description: kontent_item_rich_text_element_value
+    produkt_core__image: kontent_item_asset_element_value
+    produkt_core__name: kontent_item_text_element_value
+    produkt_core__producer: kontent_item_taxonomy_element_value
+    url_slug: kontent_item_url_slug_element_value
+}
+
 type kontent_item_modular_content_element_value {
     name: String!
     type: String!
@@ -853,6 +957,54 @@ type kontent_item_number_element_value {
     name: String!
     type: String!
     value: Float
+}
+
+type kontent_item_other_product implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_other_product_elements
+    fields: kontent_item_other_productFields
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_other_productConnection {
+    distinct(field: kontent_item_other_productFieldsEnum!): [String!]!
+    edges: [kontent_item_other_productEdge!]!
+    group(field: kontent_item_other_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_other_productGroupConnection!]!
+    nodes: [kontent_item_other_product!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_other_productEdge {
+    next: kontent_item_other_product
+    node: kontent_item_other_product!
+    previous: kontent_item_other_product
+}
+
+type kontent_item_other_productFields {
+    slug: String
+}
+
+type kontent_item_other_productGroupConnection {
+    edges: [kontent_item_other_productEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_other_product!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_other_product_elements {
+    produkt_core__country: kontent_item_taxonomy_element_value
+    produkt_core__description: kontent_item_rich_text_element_value
+    produkt_core__image: kontent_item_asset_element_value
+    produkt_core__name: kontent_item_text_element_value
+    produkt_core__producer: kontent_item_taxonomy_element_value
+    url_slug: kontent_item_url_slug_element_value
 }
 
 type kontent_item_partner implements Node & kontent_item {
@@ -893,57 +1045,6 @@ type kontent_item_partner_elements {
     link: kontent_item_text_element_value
     logo: kontent_item_asset_element_value
     title: kontent_item_text_element_value
-}
-
-type kontent_item_product implements Node & kontent_item {
-    children: [Node!]!
-    elements: kontent_item_product_elements
-    fields: kontent_item_productFields
-    id: ID!
-    internal: Internal!
-    parent: Node
-    preferred_language: String!
-    system: kontent_item_system!
-}
-
-type kontent_item_productConnection {
-    distinct(field: kontent_item_productFieldsEnum!): [String!]!
-    edges: [kontent_item_productEdge!]!
-    group(field: kontent_item_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_productGroupConnection!]!
-    nodes: [kontent_item_product!]!
-    pageInfo: PageInfo!
-    totalCount: Int!
-}
-
-type kontent_item_productEdge {
-    next: kontent_item_product
-    node: kontent_item_product!
-    previous: kontent_item_product
-}
-
-type kontent_item_productFields {
-    slug: String
-}
-
-type kontent_item_productGroupConnection {
-    edges: [kontent_item_productEdge!]!
-    field: String!
-    fieldValue: String
-    nodes: [kontent_item_product!]!
-    pageInfo: PageInfo!
-    totalCount: Int!
-}
-
-type kontent_item_product_elements {
-    category: kontent_item_taxonomy_element_value
-    country: kontent_item_taxonomy_element_value
-    description: kontent_item_rich_text_element_value
-    image: kontent_item_asset_element_value
-    name: kontent_item_text_element_value
-    pieces_in_package: kontent_item_number_element_value
-    producer: kontent_item_taxonomy_element_value
-    url_slug: kontent_item_url_slug_element_value
-    weight: kontent_item_number_element_value
 }
 
 type kontent_item_rich_text_element_image {
@@ -2089,7 +2190,7 @@ enum kontent_itemFieldsEnum {
     system___type
 }
 
-enum kontent_item_homepageFieldsEnum {
+enum kontent_item_diary_productFieldsEnum {
     children
     children___children
     children___children___children
@@ -2129,485 +2230,63 @@ enum kontent_item_homepageFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
-    elements___partners___name
-    elements___partners___type
-    elements___partners___value
-    elements___partners___value___id
-    elements___partners___value___preferred_language
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    preferred_language
-    system___codename
-    system___collection
-    system___id
-    system___language
-    system___last_modified
-    system___name
-    system___type
-}
-
-enum kontent_item_partnerFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    elements___link___name
-    elements___link___type
-    elements___link___value
-    elements___logo___name
-    elements___logo___type
-    elements___logo___value
-    elements___logo___value___description
-    elements___logo___value___height
-    elements___logo___value___name
-    elements___logo___value___size
-    elements___logo___value___type
-    elements___logo___value___url
-    elements___logo___value___width
-    elements___title___name
-    elements___title___type
-    elements___title___value
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    preferred_language
-    system___codename
-    system___collection
-    system___id
-    system___language
-    system___last_modified
-    system___name
-    system___type
-}
-
-enum kontent_item_homepageFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    elements___partners___name
-    elements___partners___type
-    elements___partners___value
-    elements___partners___value___id
-    elements___partners___value___preferred_language
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    preferred_language
-    system___codename
-    system___id
-    system___language
-    system___last_modified
-    system___name
-    system___type
-}
-
-enum kontent_item_partnerFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    elements___link___name
-    elements___link___type
-    elements___link___value
-    elements___logo___name
-    elements___logo___type
-    elements___logo___value
-    elements___logo___value___description
-    elements___logo___value___height
-    elements___logo___value___name
-    elements___logo___value___size
-    elements___logo___value___type
-    elements___logo___value___url
-    elements___logo___value___width
-    elements___title___name
-    elements___title___type
-    elements___title___value
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    preferred_language
-    system___codename
-    system___id
-    system___language
-    system___last_modified
-    system___name
-    system___type
-}
-
-enum kontent_item_productFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    elements___category___name
-    elements___category___taxonomy_group
-    elements___category___type
-    elements___category___value
-    elements___category___value___codename
-    elements___category___value___name
-    elements___country___name
-    elements___country___taxonomy_group
-    elements___country___type
-    elements___country___value
-    elements___country___value___codename
-    elements___country___value___name
-    elements___description___images
-    elements___description___images___description
-    elements___description___images___height
-    elements___description___images___image_id
-    elements___description___images___url
-    elements___description___images___width
-    elements___description___links
-    elements___description___links___codename
-    elements___description___links___link_id
-    elements___description___links___type
-    elements___description___links___url_slug
-    elements___description___modular_content
-    elements___description___modular_content___id
-    elements___description___modular_content___preferred_language
-    elements___description___name
-    elements___description___type
-    elements___description___value
-    elements___image___name
-    elements___image___type
-    elements___image___value
-    elements___image___value___description
-    elements___image___value___height
-    elements___image___value___name
-    elements___image___value___size
-    elements___image___value___type
-    elements___image___value___url
-    elements___image___value___width
-    elements___name___name
-    elements___name___type
-    elements___name___value
+    elements___diary_type___name
+    elements___diary_type___taxonomy_group
+    elements___diary_type___type
+    elements___diary_type___value
+    elements___diary_type___value___codename
+    elements___diary_type___value___name
+    elements___milk_type___name
+    elements___milk_type___taxonomy_group
+    elements___milk_type___type
+    elements___milk_type___value
+    elements___milk_type___value___codename
+    elements___milk_type___value___name
     elements___pieces_in_package___name
     elements___pieces_in_package___type
     elements___pieces_in_package___value
-    elements___producer___name
-    elements___producer___taxonomy_group
-    elements___producer___type
-    elements___producer___value
-    elements___producer___value___codename
-    elements___producer___value___name
+    elements___produkt_core__country___name
+    elements___produkt_core__country___taxonomy_group
+    elements___produkt_core__country___type
+    elements___produkt_core__country___value
+    elements___produkt_core__country___value___codename
+    elements___produkt_core__country___value___name
+    elements___produkt_core__description___images
+    elements___produkt_core__description___images___description
+    elements___produkt_core__description___images___height
+    elements___produkt_core__description___images___image_id
+    elements___produkt_core__description___images___url
+    elements___produkt_core__description___images___width
+    elements___produkt_core__description___links
+    elements___produkt_core__description___links___codename
+    elements___produkt_core__description___links___link_id
+    elements___produkt_core__description___links___type
+    elements___produkt_core__description___links___url_slug
+    elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___id
+    elements___produkt_core__description___modular_content___preferred_language
+    elements___produkt_core__description___name
+    elements___produkt_core__description___type
+    elements___produkt_core__description___value
+    elements___produkt_core__image___name
+    elements___produkt_core__image___type
+    elements___produkt_core__image___value
+    elements___produkt_core__image___value___description
+    elements___produkt_core__image___value___height
+    elements___produkt_core__image___value___name
+    elements___produkt_core__image___value___size
+    elements___produkt_core__image___value___type
+    elements___produkt_core__image___value___url
+    elements___produkt_core__image___value___width
+    elements___produkt_core__name___name
+    elements___produkt_core__name___type
+    elements___produkt_core__name___value
+    elements___produkt_core__producer___name
+    elements___produkt_core__producer___taxonomy_group
+    elements___produkt_core__producer___type
+    elements___produkt_core__producer___value
+    elements___produkt_core__producer___value___codename
+    elements___produkt_core__producer___value___name
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
@@ -2615,6 +2294,507 @@ enum kontent_item_productFieldsEnum {
     elements___weight___type
     elements___weight___value
     fields___slug
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_homepageFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___partners___name
+    elements___partners___type
+    elements___partners___value
+    elements___partners___value___id
+    elements___partners___value___preferred_language
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_meat_productFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___produkt_core__country___name
+    elements___produkt_core__country___taxonomy_group
+    elements___produkt_core__country___type
+    elements___produkt_core__country___value
+    elements___produkt_core__country___value___codename
+    elements___produkt_core__country___value___name
+    elements___produkt_core__description___images
+    elements___produkt_core__description___images___description
+    elements___produkt_core__description___images___height
+    elements___produkt_core__description___images___image_id
+    elements___produkt_core__description___images___url
+    elements___produkt_core__description___images___width
+    elements___produkt_core__description___links
+    elements___produkt_core__description___links___codename
+    elements___produkt_core__description___links___link_id
+    elements___produkt_core__description___links___type
+    elements___produkt_core__description___links___url_slug
+    elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___id
+    elements___produkt_core__description___modular_content___preferred_language
+    elements___produkt_core__description___name
+    elements___produkt_core__description___type
+    elements___produkt_core__description___value
+    elements___produkt_core__image___name
+    elements___produkt_core__image___type
+    elements___produkt_core__image___value
+    elements___produkt_core__image___value___description
+    elements___produkt_core__image___value___height
+    elements___produkt_core__image___value___name
+    elements___produkt_core__image___value___size
+    elements___produkt_core__image___value___type
+    elements___produkt_core__image___value___url
+    elements___produkt_core__image___value___width
+    elements___produkt_core__name___name
+    elements___produkt_core__name___type
+    elements___produkt_core__name___value
+    elements___produkt_core__producer___name
+    elements___produkt_core__producer___taxonomy_group
+    elements___produkt_core__producer___type
+    elements___produkt_core__producer___value
+    elements___produkt_core__producer___value___codename
+    elements___produkt_core__producer___value___name
+    elements___url_slug___name
+    elements___url_slug___type
+    elements___url_slug___value
+    fields___slug
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_other_productFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___produkt_core__country___name
+    elements___produkt_core__country___taxonomy_group
+    elements___produkt_core__country___type
+    elements___produkt_core__country___value
+    elements___produkt_core__country___value___codename
+    elements___produkt_core__country___value___name
+    elements___produkt_core__description___images
+    elements___produkt_core__description___images___description
+    elements___produkt_core__description___images___height
+    elements___produkt_core__description___images___image_id
+    elements___produkt_core__description___images___url
+    elements___produkt_core__description___images___width
+    elements___produkt_core__description___links
+    elements___produkt_core__description___links___codename
+    elements___produkt_core__description___links___link_id
+    elements___produkt_core__description___links___type
+    elements___produkt_core__description___links___url_slug
+    elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___id
+    elements___produkt_core__description___modular_content___preferred_language
+    elements___produkt_core__description___name
+    elements___produkt_core__description___type
+    elements___produkt_core__description___value
+    elements___produkt_core__image___name
+    elements___produkt_core__image___type
+    elements___produkt_core__image___value
+    elements___produkt_core__image___value___description
+    elements___produkt_core__image___value___height
+    elements___produkt_core__image___value___name
+    elements___produkt_core__image___value___size
+    elements___produkt_core__image___value___type
+    elements___produkt_core__image___value___url
+    elements___produkt_core__image___value___width
+    elements___produkt_core__name___name
+    elements___produkt_core__name___type
+    elements___produkt_core__name___value
+    elements___produkt_core__producer___name
+    elements___produkt_core__producer___taxonomy_group
+    elements___produkt_core__producer___type
+    elements___produkt_core__producer___value
+    elements___produkt_core__producer___value___codename
+    elements___produkt_core__producer___value___name
+    elements___url_slug___name
+    elements___url_slug___type
+    elements___url_slug___value
+    fields___slug
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_partnerFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___link___name
+    elements___link___type
+    elements___link___value
+    elements___logo___name
+    elements___logo___type
+    elements___logo___value
+    elements___logo___value___description
+    elements___logo___value___height
+    elements___logo___value___name
+    elements___logo___value___size
+    elements___logo___value___type
+    elements___logo___value___url
+    elements___logo___value___width
+    elements___title___name
+    elements___title___type
+    elements___title___value
     id
     internal___content
     internal___contentDigest
@@ -3226,6 +3406,39 @@ input kontent_item_asset_element_valueFilterInput {
     value: kontent_item_asset_elementFilterListInput
 }
 
+input kontent_item_diary_productFieldsFilterInput {
+    slug: StringQueryOperatorInput
+}
+
+input kontent_item_diary_productFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_diary_product_elementsFilterInput
+    fields: kontent_item_diary_productFieldsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_diary_productSortInput {
+    fields: [kontent_item_diary_productFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_diary_product_elementsFilterInput {
+    diary_type: kontent_item_taxonomy_element_valueFilterInput
+    milk_type: kontent_item_taxonomy_element_valueFilterInput
+    pieces_in_package: kontent_item_number_element_valueFilterInput
+    produkt_core__country: kontent_item_taxonomy_element_valueFilterInput
+    produkt_core__description: kontent_item_rich_text_element_valueFilterInput
+    produkt_core__image: kontent_item_asset_element_valueFilterInput
+    produkt_core__name: kontent_item_text_element_valueFilterInput
+    produkt_core__producer: kontent_item_taxonomy_element_valueFilterInput
+    url_slug: kontent_item_url_slug_element_valueFilterInput
+    weight: kontent_item_number_element_valueFilterInput
+}
+
 input kontent_item_homepageFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_homepage_elementsFilterInput
@@ -3245,6 +3458,35 @@ input kontent_item_homepage_elementsFilterInput {
     partners: kontent_item_modular_content_element_valueFilterInput
 }
 
+input kontent_item_meat_productFieldsFilterInput {
+    slug: StringQueryOperatorInput
+}
+
+input kontent_item_meat_productFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_meat_product_elementsFilterInput
+    fields: kontent_item_meat_productFieldsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_meat_productSortInput {
+    fields: [kontent_item_meat_productFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_meat_product_elementsFilterInput {
+    produkt_core__country: kontent_item_taxonomy_element_valueFilterInput
+    produkt_core__description: kontent_item_rich_text_element_valueFilterInput
+    produkt_core__image: kontent_item_asset_element_valueFilterInput
+    produkt_core__name: kontent_item_text_element_valueFilterInput
+    produkt_core__producer: kontent_item_taxonomy_element_valueFilterInput
+    url_slug: kontent_item_url_slug_element_valueFilterInput
+}
+
 input kontent_item_modular_content_element_valueFilterInput {
     name: StringQueryOperatorInput
     type: StringQueryOperatorInput
@@ -3255,6 +3497,35 @@ input kontent_item_number_element_valueFilterInput {
     name: StringQueryOperatorInput
     type: StringQueryOperatorInput
     value: FloatQueryOperatorInput
+}
+
+input kontent_item_other_productFieldsFilterInput {
+    slug: StringQueryOperatorInput
+}
+
+input kontent_item_other_productFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_other_product_elementsFilterInput
+    fields: kontent_item_other_productFieldsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_other_productSortInput {
+    fields: [kontent_item_other_productFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_other_product_elementsFilterInput {
+    produkt_core__country: kontent_item_taxonomy_element_valueFilterInput
+    produkt_core__description: kontent_item_rich_text_element_valueFilterInput
+    produkt_core__image: kontent_item_asset_element_valueFilterInput
+    produkt_core__name: kontent_item_text_element_valueFilterInput
+    produkt_core__producer: kontent_item_taxonomy_element_valueFilterInput
+    url_slug: kontent_item_url_slug_element_valueFilterInput
 }
 
 input kontent_item_partnerFilterInput {
@@ -3276,38 +3547,6 @@ input kontent_item_partner_elementsFilterInput {
     link: kontent_item_text_element_valueFilterInput
     logo: kontent_item_asset_element_valueFilterInput
     title: kontent_item_text_element_valueFilterInput
-}
-
-input kontent_item_productFieldsFilterInput {
-    slug: StringQueryOperatorInput
-}
-
-input kontent_item_productFilterInput {
-    children: NodeFilterListInput
-    elements: kontent_item_product_elementsFilterInput
-    fields: kontent_item_productFieldsFilterInput
-    id: StringQueryOperatorInput
-    internal: InternalFilterInput
-    parent: NodeFilterInput
-    preferred_language: StringQueryOperatorInput
-    system: kontent_item_systemFilterInput
-}
-
-input kontent_item_productSortInput {
-    fields: [kontent_item_productFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
-}
-
-input kontent_item_product_elementsFilterInput {
-    category: kontent_item_taxonomy_element_valueFilterInput
-    country: kontent_item_taxonomy_element_valueFilterInput
-    description: kontent_item_rich_text_element_valueFilterInput
-    image: kontent_item_asset_element_valueFilterInput
-    name: kontent_item_text_element_valueFilterInput
-    pieces_in_package: kontent_item_number_element_valueFilterInput
-    producer: kontent_item_taxonomy_element_valueFilterInput
-    url_slug: kontent_item_url_slug_element_valueFilterInput
-    weight: kontent_item_number_element_valueFilterInput
 }
 
 input kontent_item_rich_text_element_imageFilterInput {

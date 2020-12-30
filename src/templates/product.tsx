@@ -1,13 +1,13 @@
 import { Container } from '@material-ui/core';
 import { graphql } from 'gatsby';
 import React from 'react';
-import { ProductQuery } from '../../graphql-types';
+import { DiaryProductQuery } from '../../graphql-types';
 import Layout from '../components/Layout';
 import { ProductDetail } from '../components/products/ProductDetail';
 import { mapProductFromKontent } from '../models/product';
 
 type ProductProps = {
-  readonly data?: ProductQuery
+  readonly data?: DiaryProductQuery
 }
 
 const Product: React.FC<ProductProps> = ({ data }) => {
@@ -28,30 +28,30 @@ const Product: React.FC<ProductProps> = ({ data }) => {
 export default Product;
 
 export const query = graphql`
-    query Product($slug: String!) {
-        kontentItemProduct(elements: { url_slug: { value: { eq: $slug } } }) {
+    query DiaryProduct($slug: String!) {
+        kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $slug } } }) {
             system { id }
             elements {
                 url_slug {
                     value
                 }
-                name {
+                produkt_core__name {
                     value
                 }
-                description {
+                produkt_core__description {
                     value
                 }
-                producer {
+                produkt_core__producer {
                     name
                     taxonomy_group
                     value { name codename }
                 }
-                country {
+                produkt_core__country {
                     name
                     taxonomy_group
                     value { name codename }
                 }
-                image {
+                produkt_core__image {
                     value {
                         description
                         fluid(maxWidth: 350) {
