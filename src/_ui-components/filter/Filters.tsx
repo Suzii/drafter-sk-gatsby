@@ -59,18 +59,14 @@ export const useFilterQuery = <TGroupNames extends string>(filters: FiltersConfi
 export const Filters = <TGroupNames extends string>({ filters }: FiltersProps<TGroupNames>) => {
   const [selectedTermsByGroup, onSelectedTermsChanged] = useFilterQuery<TGroupNames>(filters);
 
-  return (
-    <div className="filter">
-      {filters.map(f => (
-        <FilterSection
-          key={f.groupCodename}
-          selectedTerms={selectedTermsByGroup[f.groupCodename]}
-          onSelectedTermsChanged={(termUpdateCallback) => onSelectedTermsChanged(f.groupCodename, termUpdateCallback)}
-          filterName={f.groupName}
-          getTermName={(t) => t.name}
-          allTerms={f.allTerms}
-        />
-      ))}
-    </div>
-  );
+  return filters.map(f => (
+    <FilterSection
+      key={f.groupCodename}
+      selectedTerms={selectedTermsByGroup[f.groupCodename]}
+      onSelectedTermsChanged={(termUpdateCallback) => onSelectedTermsChanged(f.groupCodename, termUpdateCallback)}
+      filterName={f.groupName}
+      getTermName={(t) => t.name}
+      allTerms={f.allTerms}
+    />
+  ));
 };
