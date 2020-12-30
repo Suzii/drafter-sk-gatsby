@@ -1,18 +1,21 @@
+import { RecentActors } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { ProductCommon } from '../../models/product';
+import { ProductProperties, ProductProperty } from '../../models/product';
+import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 
-export type ProductInfoProps = {
-  readonly info: ProductCommon;
+export type ProductInfoProps<TGroupName extends AllKnownProductTaxonomies> = {
+  readonly properties: ProductProperties<TGroupName>;
 };
 
-export const ProductInfo: React.FC<ProductInfoProps> = ({ info }) => (
+export const ProductInfo = <TGroupName extends AllKnownProductTaxonomies>({ properties }: ProductInfoProps<TGroupName>) => (
   <ProductInfoStyled>
-    <div className="label">Výrobca</div>
-    <div className="value">{info.producer?.name ?? '-'}</div>
-
-    <div className="label">Krajina</div>
-    <div className="value">{info.country?.name ?? '-'}</div>
+    {Object.values<ProductProperty<TGroupName>>(properties).map(p => (
+      <React.Fragment key={p.groupCodename}>
+        <div className="label">{p.groupName}</div>
+        <div className="value">{p.term?.name ?? '-'}</div>
+      </React.Fragment>
+    ))}
   </ProductInfoStyled>
 );
 

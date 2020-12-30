@@ -19,7 +19,7 @@ type Props = {
 const satisfiesGroupFilter = (product: ProductListing, groupCodename: ProductCommonTaxonomy, selectedTerms: Maybe<ReadonlyArray<string>>): boolean =>
   !selectedTerms ||
   !selectedTerms.length ||
-  selectedTerms.includes(product[groupCodename]?.codename ?? '');
+  selectedTerms.includes(product.properties[groupCodename]?.term?.codename ?? '');
 
 const satisfiesFilter = (product: ProductListing, selectedTermsByGroup: SelectedTermsByGroup<ProductCommonTaxonomy>): boolean =>
   satisfiesGroupFilter(product, T_PRODUCER, selectedTermsByGroup[T_PRODUCER]) &&
