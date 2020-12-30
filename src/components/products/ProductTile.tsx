@@ -3,18 +3,19 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import React, { useState } from 'react';
-import { ProductListing } from '../../models/product';
+import { ProductCommon } from '../../models/product';
+import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { ProductInfo } from './ProductInfo';
 
-type ProductTileProps = {
-  readonly product: ProductListing;
+type Props<TGroupName extends AllKnownProductTaxonomies> = {
+  readonly product: ProductCommon<TGroupName>;
 };
 
 const useStyles = makeStyles({
   media: {},
 });
 
-export const ProductTile: React.FC<ProductTileProps> = ({ product }) => {
+export const ProductTile = <TGroupName extends AllKnownProductTaxonomies>({ product }: Props<TGroupName>) => {
   const classes = useStyles();
   const [isHovered, setIsHovered] = useState(false);
 

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { ProductProperties, ProductProperty } from '../../models/product';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 
-export type ProductInfoProps<TGroupName extends AllKnownProductTaxonomies> = {
+export type Props<TGroupName extends AllKnownProductTaxonomies> = {
   readonly properties: ProductProperties<TGroupName>;
 };
 
-export const ProductInfo = <TGroupName extends AllKnownProductTaxonomies>({ properties }: ProductInfoProps<TGroupName>) => (
+export const ProductInfo = <TGroupName extends AllKnownProductTaxonomies>({ properties }: Props<TGroupName>) => (
   <ProductInfoStyled>
     {Object.values<ProductProperty<TGroupName>>(properties).map(p => (
       <React.Fragment key={p.groupCodename}>

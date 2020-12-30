@@ -5,34 +5,45 @@ import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
 import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-components/filter/Filters';
-import { ProductListing } from '../../models/product';
+import { ProductCommon } from '../../models/product';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
-import { T_COUNTRY, T_PRODUCER, ProductCommonTaxonomy } from '../../models/taxonomies/taxonomies';
+import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
 import { ProductTile } from './ProductTile';
 
-type Props = {
-  readonly allProducts: ReadonlyArray<ProductListing>;
-  readonly productTaxonomies: ReadonlyArray<TaxonomyGroup<ProductCommonTaxonomy>>;
+type Props<TGroupName extends AllKnownProductTaxonomies> = {
+  readonly allProducts: ReadonlyArray<ProductCommon<TGroupName>>;
+  readonly productTaxonomies: ReadonlyArray<TaxonomyGroup<TGroupName>>;
 }
 
-const satisfiesGroupFilter = (product: ProductListing, groupCodename: ProductCommonTaxonomy, selectedTerms: Maybe<ReadonlyArray<string>>): boolean =>
+const satisfiesGroupFilter = <TGroupName extends AllKnownProductTaxonomies>(
+  product: ProductCommon<TGroupName>,
+  groupCodename: TGroupName,
+  selectedTerms: Maybe<ReadonlyArray<string>>
+): boolean =>
   !selectedTerms ||
   !selectedTerms.length ||
   selectedTerms.includes(product.properties[groupCodename]?.term?.codename ?? '');
 
-const satisfiesFilter = (product: ProductListing, selectedTermsByGroup: SelectedTermsByGroup<ProductCommonTaxonomy>): boolean =>
-  satisfiesGroupFilter(product, T_PRODUCER, selectedTermsByGroup[T_PRODUCER]) &&
-  satisfiesGroupFilter(product, T_COUNTRY, selectedTermsByGroup[T_COUNTRY]);
+const satisfiesFilter = <TGroupName extends AllKnownProductTaxonomies>(
+  product: ProductCommon<TGroupName>,
+  selectedTermsByGroup: SelectedTermsByGroup<TGroupName>
+): boolean =>
+  Object.keys(selectedTermsByGroup).every(groupCodename =>
+    satisfiesGroupFilter(product, groupCodename as TGroupName, selectedTermsByGroup[groupCodename as TGroupName]));
 
-const filterProducts = (allProducts: ReadonlyArray<ProductListing>, selectedTermsByGroup: SelectedTermsByGroup<ProductCommonTaxonomy>): ReadonlyArray<ProductListing> => allProducts.reduce(
-  (agg: ReadonlyArray<ProductListing>, product: ProductListing) =>
+
+const filterProducts = <TGroupName extends AllKnownProductTaxonomies>(
+  allProducts: ReadonlyArray<ProductCommon<TGroupName>>,
+  selectedTermsByGroup: SelectedTermsByGroup<TGroupName>
+): ReadonlyArray<ProductCommon<TGroupName>> => allProducts.reduce(
+  (agg: ReadonlyArray<ProductCommon<TGroupName>>, product: ProductCommon<TGroupName>) =>
     satisfiesFilter(product, selectedTermsByGroup)
       ? [...agg, product]
       : agg,
   []);
 
-export const ProductsList: React.FC<Props> = ({ allProducts, productTaxonomies }) => {
+export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({ allProducts, productTaxonomies }: Props<TGroupName>) => {
   const [selectedTermsByGroup] = useFilterQuery(productTaxonomies);
   const filteredProducts = filterProducts(allProducts, selectedTermsByGroup);
 
@@ -46,7 +57,7 @@ export const ProductsList: React.FC<Props> = ({ allProducts, productTaxonomies }
 
   return (
     <ProductsPageWrapper>
-      <Filters<ProductCommonTaxonomy> filters={productTaxonomies} />
+      <Filters<TGroupName> filters={productTaxonomies} />
       {!filteredProducts.length
         ? (<Typography variant="h4">Nenašli sa žiadne produkty vyhovujúce filtrom...</Typography>)
         : (<ProductsGrid products={filteredProducts} />)
@@ -64,7 +75,11 @@ const ProductsPageWrapper: React.FC = ({ children }) => (
   </Section>
 );
 
-export const ProductsGrid: React.FC<{ readonly products: ReadonlyArray<ProductListing> }> = ({ products }) => (
+type GridProps<TGroupName extends AllKnownProductTaxonomies> = {
+  readonly products: ReadonlyArray<ProductCommon<TGroupName>>;
+}
+
+export const ProductsGrid = <TGroupName extends AllKnownProductTaxonomies>({ products }: GridProps<TGroupName>) => (
   <Grid
     container
     spacing={4}
