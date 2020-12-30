@@ -3,7 +3,7 @@ import {
   DiaryProductsQuery,
 } from '../../graphql-types';
 import { Maybe, Uuid } from '../@types/global';
-import { AllKnownProductTaxonomies, DiaryProductTaxonomy, ProductCommonTaxonomy } from './taxonomies/taxonomies';
+import { AllKnownProductTaxonomies, DiaryProductTaxonomy } from './taxonomies/taxonomies';
 import { PRODUCT_URL } from '../constants/urls';
 import { FluidImg, KontentRte, TaxonomyElement } from './_common';
 import { Term } from './taxonomies/_common';
@@ -18,18 +18,16 @@ export type ProductProperties<TGroupName extends AllKnownProductTaxonomies> = {
   readonly [P in TGroupName]: ProductProperty<TGroupName>;
 };
 
-export type ProductCommon = {
+export type ProductCommon<TGroupName extends AllKnownProductTaxonomies> = {
   readonly id: Maybe<Uuid>;
   readonly name: Maybe<string>;
   readonly url: string;
   readonly description: KontentRte;
   readonly img: FluidImg;
-  readonly properties: ProductProperties<DiaryProductTaxonomy>
+  readonly properties: ProductProperties<TGroupName>
 };
 
-export type ProductDetail = ProductCommon;
-
-export type ProductListing = ProductCommon;
+export type DiaryProduct = ProductCommon<DiaryProductTaxonomy>;
 
 const mapTaxonomyElement = <TGroupName extends AllKnownProductTaxonomies>(e: TaxonomyElement): ProductProperty<TGroupName> => ({
   groupCodename: e?.taxonomy_group as unknown as TGroupName,
@@ -38,7 +36,7 @@ const mapTaxonomyElement = <TGroupName extends AllKnownProductTaxonomies>(e: Tax
 
 });
 
-export const mapProductsFromKontent = <TGroupName extends AllKnownProductTaxonomies>(query: DiaryProductsQuery): ProductListing[] =>
+export const mapProductsFromKontent = <TGroupName extends AllKnownProductTaxonomies>(query: DiaryProductsQuery): DiaryProduct[] =>
   query.allKontentItemDiaryProduct.edges
   ?.map(p => ({
     id: p?.node.system.id,
@@ -56,7 +54,7 @@ export const mapProductsFromKontent = <TGroupName extends AllKnownProductTaxonom
   ?? [];
 
 
-export const mapProductFromKontent = ({ kontentItemDiaryProduct: p }: DiaryProductQuery): ProductDetail => ({
+export const mapProductFromKontent = ({ kontentItemDiaryProduct: p }: DiaryProductQuery): DiaryProduct => ({
   id: p?.system.id,
   name: p?.elements?.produkt_core__name?.value ?? '',
   description: p?.elements?.produkt_core__description,

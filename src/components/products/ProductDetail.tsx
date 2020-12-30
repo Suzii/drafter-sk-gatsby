@@ -3,15 +3,16 @@ import Typography from '@material-ui/core/Typography';
 import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import { Section, SectionTitle } from '../../_ui-components/Container';
-import { ProductDetail as ProductDetailModel} from '../../models/product';
+import { ProductCommon } from '../../models/product';
+import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { ProductDescription } from './ProductDescription';
 import { ProductInfo } from './ProductInfo';
 
-type Props = {
-  readonly product: ProductDetailModel;
+type Props<TGroupName extends AllKnownProductTaxonomies> = {
+  readonly product: ProductCommon<TGroupName>;
 }
 
-export const ProductDetail: React.FC<Props> = ({ product }) => (
+export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ product }: Props<TGroupName>) => (
   <Section data-kontent-item-id={product.id}>
     <Grid
       container
