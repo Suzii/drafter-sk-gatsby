@@ -3,7 +3,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import React, { useState } from 'react';
-import { ProductCommon } from '../../models/product';
+import { ProductCommon } from '../../models/products';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { ProductInfo } from './ProductInfo';
 

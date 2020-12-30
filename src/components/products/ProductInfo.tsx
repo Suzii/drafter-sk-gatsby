@@ -1,7 +1,7 @@
 import { RecentActors } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
-import { ProductProperties, ProductProperty } from '../../models/product';
+import { ProductProperties, ProductProperty } from '../../models/products';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 
 export type Props<TGroupName extends AllKnownProductTaxonomies> = {

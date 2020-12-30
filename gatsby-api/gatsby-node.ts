@@ -42,7 +42,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result?.data?.allKontentItemDiaryProduct.edges.forEach(({ node }) => {
       createPage({
         path: PRODUCT_URL('diary', node.elements?.url_slug?.value),
-        component: resolve(`src/templates/product.tsx`),
+        component: resolve(`src/templates/diaryProduct.tsx`),
         context: {
           slug: node.elements?.url_slug?.value,
         },
@@ -52,7 +52,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result?.data?.allKontentItemMeatProduct.edges.forEach(({ node }) => {
       createPage({
         path: PRODUCT_URL('meat', node.elements?.url_slug?.value),
-        component: resolve(`src/templates/product.tsx`),
+        component: resolve(`src/templates/meatProduct.tsx`),
         context: {
           slug: node.elements?.url_slug?.value,
         },
@@ -62,7 +62,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result?.data?.allKontentItemOtherProduct.edges.forEach(({ node }) => {
       createPage({
         path: PRODUCT_URL('other', node.elements?.url_slug?.value),
-        component: resolve(`src/templates/product.tsx`),
+        component: resolve(`src/templates/otherProduct.tsx`),
         context: {
           slug: node.elements?.url_slug?.value,
         },

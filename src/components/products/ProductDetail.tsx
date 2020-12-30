@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import { Section, SectionTitle } from '../../_ui-components/Container';
-import { ProductCommon } from '../../models/product';
+import { ProductCommon } from '../../models/products';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { ProductDescription } from './ProductDescription';
 import { ProductInfo } from './ProductInfo';

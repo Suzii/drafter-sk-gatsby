@@ -1,16 +1,16 @@
 import { Container } from '@material-ui/core';
 import { graphql } from 'gatsby';
 import React from 'react';
-import { DiaryProductQuery } from '../../graphql-types';
+import { MeatProductQuery } from '../../graphql-types';
 import Layout from '../components/Layout';
 import { ProductDetail } from '../components/products/ProductDetail';
-import { mapProductFromKontent } from '../models/product';
+import { mapMeatProductFromKontent } from '../models/products/meatProduct';
 
 type ProductProps = {
-  readonly data?: DiaryProductQuery
+  readonly data?: MeatProductQuery
 }
 
-const Product: React.FC<ProductProps> = ({ data }) => {
+const MeatProduct: React.FC<ProductProps> = ({ data }) => {
   if (!data) {
     console.log('Product: no data found');
     return null;
@@ -19,17 +19,17 @@ const Product: React.FC<ProductProps> = ({ data }) => {
   return (
     <Layout>
       <Container maxWidth="lg">
-        <ProductDetail product={mapProductFromKontent(data)} />
+        <ProductDetail product={mapMeatProductFromKontent(data)} />
       </Container>
     </Layout>
   );
 };
 
-export default Product;
+export default MeatProduct;
 
 export const query = graphql`
-    query DiaryProduct($slug: String!) {
-        kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $slug } } }) {
+    query MeatProduct($slug: String!) {
+        kontentItemMeatProduct(elements: { url_slug: { value: { eq: $slug } } }) {
             system { id }
             elements {
                 url_slug { value }
@@ -37,8 +37,6 @@ export const query = graphql`
                 produkt_core__description { value }
                 produkt_core__producer { ...TaxonomyElementFields }
                 produkt_core__country { ...TaxonomyElementFields }
-                diary_type { ...TaxonomyElementFields }
-                milk_type { ...TaxonomyElementFields }
                 produkt_core__image { ...FluidImage350w }
             }
         }
