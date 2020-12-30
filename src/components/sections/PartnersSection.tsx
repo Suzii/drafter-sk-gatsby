@@ -57,4 +57,9 @@ const PartnerStyled = styled.div`
     max-height: 6rem;
     max-width: 12rem;
   }
+
+  &:hover {
+    transform: translate(0%, -10%);
+    transition: 0.3s ease-out;
+  }
 `;
