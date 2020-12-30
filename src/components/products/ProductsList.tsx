@@ -5,7 +5,7 @@ import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
 import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-components/filter/Filters';
-import { ProductCommon } from '../../models/product';
+import { ProductCommon } from '../../models/products';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
