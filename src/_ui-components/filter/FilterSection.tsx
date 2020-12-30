@@ -1,14 +1,14 @@
 import { Checkbox, FormControlLabel, Typography } from '@material-ui/core';
 import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { Term } from '../../models/taxonomies/_common';
+import { FilterTerm } from './Filters';
 
 type FilterSectionProps = {
   readonly selectedTerms: ReadonlyArray<string>;
   readonly onSelectedTermsChanged: (updateCallback: (prev: ReadonlyArray<string>) => ReadonlyArray<string>) => void;
   readonly filterName: string;
-  readonly getTermName: (term: Term) => string;
-  readonly allTerms: ReadonlyArray<Term>;
+  readonly getTermName: (term: FilterTerm) => string;
+  readonly allTerms: ReadonlyArray<FilterTerm>;
 };
 
 export const FilterSection: React.FC<FilterSectionProps> = ({

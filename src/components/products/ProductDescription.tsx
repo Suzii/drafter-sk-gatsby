@@ -1,9 +1,9 @@
 import { RichTextElement } from '@kentico/gatsby-kontent-components';
 import React, { FC } from 'react';
-import { ProductDescriptionRte } from '../../models/product';
+import { KontentRte } from '../../models/_common';
 
 type Props = {
-  readonly rte: ProductDescriptionRte;
+  readonly rte: KontentRte;
 };
 
 export const ProductDescription: FC<Props> = ({ rte }) => {

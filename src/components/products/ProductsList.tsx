@@ -5,27 +5,27 @@ import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
 import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-components/filter/Filters';
-import { ProductTaxonomy, T_COUNTRY, T_PRODUCER } from '../../constants/taxonomies';
 import { ProductListing } from '../../models/product';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
+import { T_COUNTRY, T_PRODUCER, ProductCommonTaxonomy } from '../../models/taxonomies/taxonomies';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
 import { ProductTile } from './ProductTile';
 
 type Props = {
   readonly allProducts: ReadonlyArray<ProductListing>;
-  readonly productTaxonomies: ReadonlyArray<TaxonomyGroup<ProductTaxonomy>>;
+  readonly productTaxonomies: ReadonlyArray<TaxonomyGroup<ProductCommonTaxonomy>>;
 }
 
-const satisfiesGroupFilter = (product: ProductListing, groupCodename: ProductTaxonomy, selectedTerms: Maybe<ReadonlyArray<string>>): boolean =>
+const satisfiesGroupFilter = (product: ProductListing, groupCodename: ProductCommonTaxonomy, selectedTerms: Maybe<ReadonlyArray<string>>): boolean =>
   !selectedTerms ||
   !selectedTerms.length ||
   selectedTerms.includes(product[groupCodename]?.codename ?? '');
 
-const satisfiesFilter = (product: ProductListing, selectedTermsByGroup: SelectedTermsByGroup<ProductTaxonomy>): boolean =>
+const satisfiesFilter = (product: ProductListing, selectedTermsByGroup: SelectedTermsByGroup<ProductCommonTaxonomy>): boolean =>
   satisfiesGroupFilter(product, T_PRODUCER, selectedTermsByGroup[T_PRODUCER]) &&
   satisfiesGroupFilter(product, T_COUNTRY, selectedTermsByGroup[T_COUNTRY]);
 
-const filterProducts = (allProducts: ReadonlyArray<ProductListing>, selectedTermsByGroup: SelectedTermsByGroup<ProductTaxonomy>): ReadonlyArray<ProductListing> => allProducts.reduce(
+const filterProducts = (allProducts: ReadonlyArray<ProductListing>, selectedTermsByGroup: SelectedTermsByGroup<ProductCommonTaxonomy>): ReadonlyArray<ProductListing> => allProducts.reduce(
   (agg: ReadonlyArray<ProductListing>, product: ProductListing) =>
     satisfiesFilter(product, selectedTermsByGroup)
       ? [...agg, product]
@@ -46,7 +46,7 @@ export const ProductsList: React.FC<Props> = ({ allProducts, productTaxonomies }
 
   return (
     <ProductsPageWrapper>
-      <Filters<ProductTaxonomy> filters={productTaxonomies} />
+      <Filters<ProductCommonTaxonomy> filters={productTaxonomies} />
       {!filteredProducts.length
         ? (<Typography variant="h4">Nenašli sa žiadne produkty vyhovujúce filtrom...</Typography>)
         : (<ProductsGrid products={filteredProducts} />)

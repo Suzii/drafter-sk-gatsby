@@ -45,6 +45,9 @@ export const query = graphql`
                         produkt_core__name {
                             value
                         }
+                        produkt_core__description {
+                            value
+                        }
                         url_slug {
                             value
                         }
