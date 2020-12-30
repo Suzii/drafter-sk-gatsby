@@ -58,6 +58,16 @@ export const query = graphql`
                             taxonomy_group
                             value { name codename }
                         }
+                        diary_type {
+                            name
+                            taxonomy_group
+                            value { name codename }
+                        }
+                        milk_type {
+                            name
+                            taxonomy_group
+                            value { name codename }
+                        }
                         produkt_core__image {
                             value {
                                 description

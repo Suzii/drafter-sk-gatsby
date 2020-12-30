@@ -2,14 +2,13 @@ import {
   Kontent_Item_Asset_Element,
   Kontent_Item_Rich_Text_Element_Value,
   KontentAssetFluid,
-  ProductQuery,
-  ProductsQuery,
+  DiaryProductQuery,
+  DiaryProductsQuery,
 } from '../../graphql-types';
 import { Maybe, Uuid } from '../@types/global';
 import { ProductTaxonomy } from '../constants/taxonomies';
+import { FluidImg, KontentRte } from './_common';
 import { Term } from './taxonomies/_common';
-
-export type ProductDescriptionRte = Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>;
 
 type ProductTaxonomies = {
   readonly [P in ProductTaxonomy]: Maybe<Term>;
@@ -22,39 +21,33 @@ export type ProductCommon = ProductTaxonomies & {
 };
 
 export type ProductDetail = ProductCommon & {
-  readonly description: ProductDescriptionRte;
-  readonly img: Maybe<(
-    Pick<Kontent_Item_Asset_Element, 'description'>
-    & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
-    )>;
+  readonly description: KontentRte;
+  readonly img: FluidImg;
 };
 
 export type ProductListing = ProductCommon & {
-  readonly img: Maybe<(
-    Pick<Kontent_Item_Asset_Element, 'description'>
-    & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
-    )>;
+  readonly img: FluidImg;
 };
 
-export const mapProductsFromKontent = (query: ProductsQuery): ProductListing[] =>
-  query.allKontentItemProduct.edges
+export const mapProductsFromKontent = (query: DiaryProductsQuery): ProductListing[] =>
+  query.allKontentItemDiaryProduct.edges
   ?.map(p => ({
     id: p?.node.system.id,
-    name: p?.node.elements?.name?.value ?? '',
-    img: p?.node.elements?.image?.value?.[0] ?? null,
+    name: p?.node.elements?.produkt_core__name?.value ?? '',
+    img: p?.node.elements?.produkt_core__image?.value?.[0] ?? null,
     urlSlug: p?.node.elements?.url_slug?.value || '',
-    producer: p?.node.elements?.producer?.value?.[0],
-    country: p?.node.elements?.country?.value?.[0],
+    producer: p?.node.elements?.produkt_core__producer?.value?.[0],
+    country: p?.node.elements?.produkt_core__country?.value?.[0],
   }))
   ?? [];
 
 
-export const mapProductFromKontent = ({ kontentItemProduct: p }: ProductQuery): ProductDetail => ({
+export const mapProductFromKontent = ({ kontentItemDiaryProduct: p }: DiaryProductQuery): ProductDetail => ({
   id: p?.system.id,
-  name: p?.elements?.name?.value ?? '',
-  description: p?.elements?.description,
-  img: p?.elements?.image?.value?.[0] ?? null,
+  name: p?.elements?.produkt_core__name?.value ?? '',
+  description: p?.elements?.produkt_core__description,
+  img: p?.elements?.produkt_core__image?.value?.[0] ?? null,
   urlSlug: p?.elements?.url_slug?.value ?? '',
-  producer: p?.elements?.producer?.value?.[0],
-  country: p?.elements?.country?.value?.[0],
+  producer: p?.elements?.produkt_core__producer?.value?.[0],
+  country: p?.elements?.produkt_core__country?.value?.[0],
 });

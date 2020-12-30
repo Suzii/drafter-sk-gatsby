@@ -4306,6 +4306,12 @@ export type DiaryProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: 
           )>, produkt_core__country?: Maybe<(
             Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
             & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
+          )>, diary_type?: Maybe<(
+            Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
+            & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
+          )>, milk_type?: Maybe<(
+            Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
+            & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
           )>, produkt_core__image?: Maybe<{ value?: Maybe<Array<Maybe<(
               Pick<Kontent_Item_Asset_Element, 'description'>
               & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
@@ -4320,6 +4326,12 @@ export type DiaryProductQuery = { kontentItemDiaryProduct?: Maybe<{ system: Pick
         Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
         & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
       )>, produkt_core__country?: Maybe<(
+        Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
+        & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
+      )>, diary_type?: Maybe<(
+        Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
+        & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
+      )>, milk_type?: Maybe<(
         Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
         & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
       )>, produkt_core__image?: Maybe<{ value?: Maybe<Array<Maybe<(
