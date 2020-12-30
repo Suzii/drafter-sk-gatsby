@@ -11,8 +11,3 @@ export type FluidImg = Maybe<(
   Pick<Kontent_Item_Asset_Element, 'description'>
   & { fluid?: Maybe<Pick<KontentAssetFluid, 'aspectRatio' | 'base64' | 'sizes' | 'src' | 'srcSet'>> }
   )>;
-
-export type TaxonomyElement = Maybe<(
-  Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
-  & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
-  )>;

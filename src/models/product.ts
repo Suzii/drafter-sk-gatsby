@@ -1,11 +1,11 @@
 import {
   DiaryProductQuery,
-  DiaryProductsQuery,
+  DiaryProductsQuery, TaxonomyElementFieldsFragment,
 } from '../../graphql-types';
 import { Maybe, Uuid } from '../@types/global';
 import { AllKnownProductTaxonomies, DiaryProductTaxonomy } from './taxonomies/taxonomies';
 import { PRODUCT_URL } from '../constants/urls';
-import { FluidImg, KontentRte, TaxonomyElement } from './_common';
+import { FluidImg, KontentRte } from './_common';
 import { Term } from './taxonomies/_common';
 
 export type ProductProperty<TGroupName extends AllKnownProductTaxonomies> = {
@@ -29,14 +29,13 @@ export type ProductCommon<TGroupName extends AllKnownProductTaxonomies> = {
 
 export type DiaryProduct = ProductCommon<DiaryProductTaxonomy>;
 
-const mapTaxonomyElement = <TGroupName extends AllKnownProductTaxonomies>(e: TaxonomyElement): ProductProperty<TGroupName> => ({
+const mapTaxonomyElement = <TGroupName extends AllKnownProductTaxonomies>(e: Maybe<TaxonomyElementFieldsFragment>): ProductProperty<TGroupName> => ({
   groupCodename: e?.taxonomy_group as unknown as TGroupName,
   groupName: e?.name ?? '',
   term: e?.value?.[0],
-
 });
 
-export const mapProductsFromKontent = <TGroupName extends AllKnownProductTaxonomies>(query: DiaryProductsQuery): DiaryProduct[] =>
+export const mapProductsFromKontent = (query: DiaryProductsQuery): DiaryProduct[] =>
   query.allKontentItemDiaryProduct.edges
   ?.map(p => ({
     id: p?.node.system.id,

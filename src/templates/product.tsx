@@ -32,47 +32,14 @@ export const query = graphql`
         kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $slug } } }) {
             system { id }
             elements {
-                url_slug {
-                    value
-                }
-                produkt_core__name {
-                    value
-                }
-                produkt_core__description {
-                    value
-                }
-                produkt_core__producer {
-                    name
-                    taxonomy_group
-                    value { name codename }
-                }
-                produkt_core__country {
-                    name
-                    taxonomy_group
-                    value { name codename }
-                }
-                diary_type {
-                    name
-                    taxonomy_group
-                    value { name codename }
-                }
-                milk_type {
-                    name
-                    taxonomy_group
-                    value { name codename }
-                }
-                produkt_core__image {
-                    value {
-                        description
-                        fluid(maxWidth: 350) {
-                            aspectRatio
-                            base64
-                            sizes
-                            src
-                            srcSet
-                        }
-                    }
-                }
+                url_slug { value }
+                produkt_core__name { value }
+                produkt_core__description { value }
+                produkt_core__producer { ...TaxonomyElementFields }
+                produkt_core__country { ...TaxonomyElementFields }
+                diary_type { ...TaxonomyElementFields }
+                milk_type { ...TaxonomyElementFields }
+                produkt_core__image { ...FluidImage350w }
             }
         }
     }
