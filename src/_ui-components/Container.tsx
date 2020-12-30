@@ -58,8 +58,15 @@ export const Section = styled.section<{
   }
 `;
 
-export const SectionTitle = styled(({children, className, elementCodename}) =>
-  <Typography variant="h1" className={className} align="center" data-kontent-element-codename={elementCodename}>{children}</Typography>
+export const SectionTitle = styled(({children, className, elementCodename, center = true}) =>
+  <Typography
+    variant="h1"
+    className={className}
+    align={center ? "center" : "left"}
+    data-kontent-element-codename={elementCodename}
+  >
+    {children}
+  </Typography>
 )`
   text-transform: uppercase;
   color: ${p => p.theme.palette.secondary.main};

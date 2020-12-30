@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
@@ -39,7 +39,9 @@ export const ProductTile: React.FC<ProductTileProps> = ({ product }) => {
             {product.name}
           </Typography>
         </Link>
-        <ProductInfo info={product} />
+        <Typography variant="body2" color="textSecondary" component="div">
+          <ProductInfo info={product} />
+        </Typography>
       </CardContent>
     </Card>
   );
