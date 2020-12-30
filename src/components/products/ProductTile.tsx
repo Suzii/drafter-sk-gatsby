@@ -39,7 +39,7 @@ export const ProductTile: React.FC<ProductTileProps> = ({ product }) => {
           </Typography>
         </Link>
         <Typography variant="body2" color="textSecondary" component="div">
-          <ProductInfo info={product} />
+          <ProductInfo properties={product.properties} />
         </Typography>
       </CardContent>
     </Card>

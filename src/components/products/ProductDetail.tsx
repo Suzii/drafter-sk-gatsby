@@ -45,7 +45,7 @@ export const ProductDetail: React.FC<Props> = ({ product }) => (
         </SectionTitle>
 
         <Typography variant="body1" color="textPrimary" component="div">
-          <ProductInfo info={product} />
+          <ProductInfo properties={product.properties} />
         </Typography>
 
         <Typography variant="body1" component="div">
