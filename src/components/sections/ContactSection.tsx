@@ -16,7 +16,7 @@ export const ContactSection: React.FC = () => (
         <SectionTitle>Kontakt</SectionTitle>
         <PersonsStyled>
           <Person title="Konateľ:" person={primaryContact} />
-          <Person title="Obchodný zástupca:" person={secondaryContact} />
+          <Person title="Spolumajiteľ:" person={secondaryContact} />
         </PersonsStyled>
         <SeparatorStyled />
         <CompanyInfoStyled info={companyInfo} />
