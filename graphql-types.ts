@@ -4300,7 +4300,7 @@ export type HomeQuery = { allKontentItemHomepage: { nodes: Array<{ elements?: Ma
 export type DiaryProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DiaryProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: Maybe<Array<Maybe<Pick<Kontent_Taxonomy_Term, 'codename' | 'name'>>>>, system: Pick<Kontent_Taxonomy_System, 'codename' | 'name'> }> }, allKontentItemDiaryProduct: { edges: Array<{ node: { system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__producer?: Maybe<(
+export type DiaryProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: Maybe<Array<Maybe<Pick<Kontent_Taxonomy_Term, 'codename' | 'name'>>>>, system: Pick<Kontent_Taxonomy_System, 'codename' | 'name'> }> }, allKontentItemDiaryProduct: { edges: Array<{ node: { system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__producer?: Maybe<(
             Pick<Kontent_Item_Taxonomy_Element_Value, 'name' | 'taxonomy_group'>
             & { value?: Maybe<Array<Maybe<Pick<Kontent_Item_Taxonomy_Element, 'name' | 'codename'>>>> }
           )>, produkt_core__country?: Maybe<(
@@ -4342,7 +4342,7 @@ export type DiaryProductQuery = { kontentItemDiaryProduct?: Maybe<{ system: Pick
 export type ProductsUrlSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsUrlSlugsQuery = { allKontentItemDiaryProduct: { edges: Array<{ node: { elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>> }> } }> } };
+export type ProductsUrlSlugsQuery = { allKontentItemDiaryProduct: { edges: Array<{ node: { elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>> }> } }> }, allKontentItemMeatProduct: { edges: Array<{ node: { elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>> }> } }> }, allKontentItemOtherProduct: { edges: Array<{ node: { elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>> }> } }> } };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

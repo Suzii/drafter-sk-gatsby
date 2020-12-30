@@ -8,12 +8,25 @@ export const HOME_URL = '/';
 export const WHO_WE_ARE_URL = `/#${WHO_WE_ARE_FRAGMENT}`;
 export const PARTNERS_URL = `/#${PARTNERS_FRAGMENT}`;
 export const CONTACT_URL = `/#${CONTACT_FRAGMENT}`;
-export const PRODUCTS_URL = '/produkty';
+export const PRODUCTS_URL = `/produkty`;
+export const PRODUCTS_DIARY_URL = `${PRODUCTS_URL}/mliecne`;
+export const PRODUCTS_MEAT_URL = `${PRODUCTS_URL}/masove`;
+export const PRODUCTS_OTHER_URL = `${PRODUCTS_URL}/ine`;
 
 export const MAMAS_PDF_LINK = 'https://assets-us-01.kc-usercontent.com/f408ff21-bb77-0017-334f-f1ea95739f2a/7bdfc31c-1927-4b88-87c6-61959b6ce3fa/mamas.pdf';
 
-export const PRODUCT_URL = (productSlug: string | null | undefined) =>
-  `${PRODUCTS_URL}/${productSlug ?? ''}`;
+type ProductType = 'diary' | 'meat' | 'other';
+const getUrlByProductType = (type: ProductType): string =>
+{
+  switch (type) {
+    case 'diary': return PRODUCTS_DIARY_URL;
+    case 'meat': return PRODUCTS_MEAT_URL;
+    case 'other': return PRODUCTS_OTHER_URL;
+    default: return PRODUCTS_URL;
+  }
+}
+export const PRODUCT_URL = (type: ProductType, productSlug: string | null | undefined) =>
+  `${getUrlByProductType(type)}/${productSlug ?? ''}`;
 
 export type Sitemap = readonly {
   readonly title: string;

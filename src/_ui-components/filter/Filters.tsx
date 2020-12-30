@@ -1,12 +1,16 @@
 import React from 'react';
 import { ArrayParam, useQueryParams } from 'use-query-params';
-import { Term } from '../../models/taxonomies/_common';
 import { FilterSection } from './FilterSection';
+
+export type FilterTerm = {
+  readonly codename: string;
+  readonly name: string;
+};
 
 export type FilterConfig<TGroupNames extends string> = {
   readonly groupName: string;
   readonly groupCodename: TGroupNames;
-  readonly allTerms: ReadonlyArray<Term>;
+  readonly allTerms: ReadonlyArray<FilterTerm>;
 };
 
 export type FiltersConfig<TGroupNames extends string> = ReadonlyArray<FilterConfig<TGroupNames>>;
@@ -59,14 +63,18 @@ export const useFilterQuery = <TGroupNames extends string>(filters: FiltersConfi
 export const Filters = <TGroupNames extends string>({ filters }: FiltersProps<TGroupNames>) => {
   const [selectedTermsByGroup, onSelectedTermsChanged] = useFilterQuery<TGroupNames>(filters);
 
-  return filters.map(f => (
-    <FilterSection
-      key={f.groupCodename}
-      selectedTerms={selectedTermsByGroup[f.groupCodename]}
-      onSelectedTermsChanged={(termUpdateCallback) => onSelectedTermsChanged(f.groupCodename, termUpdateCallback)}
-      filterName={f.groupName}
-      getTermName={(t) => t.name}
-      allTerms={f.allTerms}
-    />
-  ));
+  return (
+    <>
+      {filters.map(f => (
+        <FilterSection
+          key={f.groupCodename}
+          selectedTerms={selectedTermsByGroup[f.groupCodename]}
+          onSelectedTermsChanged={(termUpdateCallback) => onSelectedTermsChanged(f.groupCodename, termUpdateCallback)}
+          filterName={f.groupName}
+          getTermName={(t) => t.name}
+          allTerms={f.allTerms}
+        />
+      ))}
+    </>
+  );
 };

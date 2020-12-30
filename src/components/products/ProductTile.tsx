@@ -1,9 +1,8 @@
-import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import React, { useState } from 'react';
-import { PRODUCT_URL } from '../../constants/urls';
 import { ProductListing } from '../../models/product';
 import { ProductInfo } from './ProductInfo';
 
@@ -34,7 +33,7 @@ export const ProductTile: React.FC<ProductTileProps> = ({ product }) => {
         />
       </CardMedia>
       <CardContent>
-        <Link to={PRODUCT_URL(product.urlSlug)}>
+        <Link to={product.url}>
           <Typography gutterBottom variant="h5" component="h2" data-kontent-element-codename={`name`}>
             {product.name}
           </Typography>
