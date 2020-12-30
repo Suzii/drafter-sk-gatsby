@@ -9,6 +9,7 @@ import { ProductCommon } from '../../models/products';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
+import { ProductDisambiguation } from './ProductDisambiguation';
 import { ProductTile } from './ProductTile';
 
 type Props<TGroupName extends AllKnownProductTaxonomies> = {
@@ -70,6 +71,7 @@ const ProductsPageWrapper: React.FC = ({ children }) => (
   <Section>
     <SectionTitle>Produkty</SectionTitle>
     <Container maxWidth="lg">
+      <ProductDisambiguation />
       {children as any}
     </Container>
   </Section>
