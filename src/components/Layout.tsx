@@ -19,7 +19,7 @@ const Layout: React.FC = ({ children }) => {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyle />
-        <Grid container justify="space-between" direction="column" alignItems="stretch" style={{ height: '100%' }}>
+        <Grid container direction="column" style={{ height: '100%', minHeight: '100vh' }}>
           <Navigation sitemap={sitemap} />
           <Main>
             {children}
