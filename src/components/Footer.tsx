@@ -55,6 +55,7 @@ const FooterContact: React.FC = () => (
 const FooterStyled = styled.footer`
   padding: 0;
   width: 100%;
+  margin-top: auto;
 `;
 
 const FooterPrimary = styled.div`
