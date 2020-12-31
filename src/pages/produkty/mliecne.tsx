@@ -4,7 +4,8 @@ import { DiaryProductsQuery } from '../../../graphql-types';
 import Layout from '../../components/Layout';
 import { ProductsList } from '../../components/products/ProductsList';
 import { mapDiaryProductsFromKontent } from '../../models/products/diaryProduct';
-import { mapAllTaxonomyFromKontent } from '../../models/taxonomies/_common';
+import { mapAllTaxonomyFromKontent, sortTaxonomyFilters } from '../../models/taxonomies/_common';
+import { DiaryProductTaxonomy } from '../../models/taxonomies/taxonomies';
 
 type ProductsProps = {
   readonly data: DiaryProductsQuery
@@ -12,9 +13,9 @@ type ProductsProps = {
 
 const Products: React.FC<ProductsProps> = ({ data }) => (
   <Layout>
-    <ProductsList
+    <ProductsList<DiaryProductTaxonomy>
       allProducts={mapDiaryProductsFromKontent(data)}
-      productTaxonomies={mapAllTaxonomyFromKontent(data.allKontentTaxonomy)}
+      productTaxonomies={sortTaxonomyFilters(mapAllTaxonomyFromKontent(data.allKontentTaxonomy), ['milk_type', 'diary_type', 'producer', 'country'])}
     />
   </Layout>
 );

@@ -4,7 +4,8 @@ import { OtherProductsQuery } from '../../../graphql-types';
 import Layout from '../../components/Layout';
 import { ProductsList } from '../../components/products/ProductsList';
 import { mapOtherProductsFromKontent } from '../../models/products/otherProduct';
-import { mapAllTaxonomyFromKontent } from '../../models/taxonomies/_common';
+import { mapAllTaxonomyFromKontent, sortTaxonomyFilters } from '../../models/taxonomies/_common';
+import { OtherProductTaxonomy } from '../../models/taxonomies/taxonomies';
 
 type ProductsProps = {
   readonly data: OtherProductsQuery
@@ -12,9 +13,9 @@ type ProductsProps = {
 
 const Products: React.FC<ProductsProps> = ({ data }) => (
   <Layout>
-    <ProductsList
+    <ProductsList<OtherProductTaxonomy>
       allProducts={mapOtherProductsFromKontent(data)}
-      productTaxonomies={mapAllTaxonomyFromKontent(data.allKontentTaxonomy)}
+      productTaxonomies={sortTaxonomyFilters(mapAllTaxonomyFromKontent(data.allKontentTaxonomy), ['producer', 'country'])}
     />
   </Layout>
 );
