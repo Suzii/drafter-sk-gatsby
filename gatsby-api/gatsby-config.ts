@@ -8,6 +8,7 @@ const config = require('gatsby-plugin-config').default;
 const usePreviewUrl = !!config.KONTENT_PREVIEW_API_KEY;
 
 module.exports = {
+  flags: { },
   plugins: [
     {
       resolve: 'gatsby-plugin-typescript',
