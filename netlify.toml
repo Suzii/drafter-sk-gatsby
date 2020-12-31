@@ -23,3 +23,6 @@ NODE_ENV = "development"
 [context.dev.environment]
 NODE_ENV = "development"
 GATSBY_ENABLED_FEATURES= "products-page"
+
+[[plugins]]
+package = "netlify-plugin-gatsby-cache"
