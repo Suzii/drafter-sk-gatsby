@@ -30,7 +30,7 @@ export const ProductTile = <TGroupName extends AllKnownProductTaxonomies>({ prod
       <CardMedia className={classes.media}>
         <Img
           fluid={product.img?.fluid as FluidObject}
-          alt={product.img?.description ?? name ?? 'Product image'}
+          alt={product.img?.description ?? product.name ?? 'Obrázok produktu'}
         />
       </CardMedia>
       <CardContent>
