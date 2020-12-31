@@ -4,7 +4,8 @@ import { MeatProductsQuery } from '../../../graphql-types';
 import Layout from '../../components/Layout';
 import { ProductsList } from '../../components/products/ProductsList';
 import { mapMeatProductsFromKontent } from '../../models/products/meatProduct';
-import { mapAllTaxonomyFromKontent } from '../../models/taxonomies/_common';
+import { mapAllTaxonomyFromKontent, sortTaxonomyFilters } from '../../models/taxonomies/_common';
+import { MeatProductTaxonomy } from '../../models/taxonomies/taxonomies';
 
 type ProductsProps = {
   readonly data: MeatProductsQuery
@@ -12,9 +13,9 @@ type ProductsProps = {
 
 const Products: React.FC<ProductsProps> = ({ data }) => (
   <Layout>
-    <ProductsList
+    <ProductsList<MeatProductTaxonomy>
       allProducts={mapMeatProductsFromKontent(data)}
-      productTaxonomies={mapAllTaxonomyFromKontent(data.allKontentTaxonomy)}
+      productTaxonomies={sortTaxonomyFilters(mapAllTaxonomyFromKontent(data.allKontentTaxonomy), ['producer', 'country'])}
     />
   </Layout>
 );
