@@ -20,7 +20,7 @@ type Props<TGroupName extends AllKnownProductTaxonomies> = {
 const satisfiesGroupFilter = <TGroupName extends AllKnownProductTaxonomies>(
   product: ProductCommon<TGroupName>,
   groupCodename: TGroupName,
-  selectedTerms: Maybe<ReadonlyArray<string>>
+  selectedTerms: Maybe<ReadonlyArray<string>>,
 ): boolean =>
   !selectedTerms ||
   !selectedTerms.length ||
@@ -28,7 +28,7 @@ const satisfiesGroupFilter = <TGroupName extends AllKnownProductTaxonomies>(
 
 const satisfiesFilter = <TGroupName extends AllKnownProductTaxonomies>(
   product: ProductCommon<TGroupName>,
-  selectedTermsByGroup: SelectedTermsByGroup<TGroupName>
+  selectedTermsByGroup: SelectedTermsByGroup<TGroupName>,
 ): boolean =>
   Object.keys(selectedTermsByGroup).every(groupCodename =>
     satisfiesGroupFilter(product, groupCodename as TGroupName, selectedTermsByGroup[groupCodename as TGroupName]));
@@ -36,7 +36,7 @@ const satisfiesFilter = <TGroupName extends AllKnownProductTaxonomies>(
 
 const filterProducts = <TGroupName extends AllKnownProductTaxonomies>(
   allProducts: ReadonlyArray<ProductCommon<TGroupName>>,
-  selectedTermsByGroup: SelectedTermsByGroup<TGroupName>
+  selectedTermsByGroup: SelectedTermsByGroup<TGroupName>,
 ): ReadonlyArray<ProductCommon<TGroupName>> => allProducts.reduce(
   (agg: ReadonlyArray<ProductCommon<TGroupName>>, product: ProductCommon<TGroupName>) =>
     satisfiesFilter(product, selectedTermsByGroup)
@@ -44,7 +44,10 @@ const filterProducts = <TGroupName extends AllKnownProductTaxonomies>(
       : agg,
   []);
 
-export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({ allProducts, productTaxonomies }: Props<TGroupName>) => {
+export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
+  allProducts,
+  productTaxonomies,
+}: Props<TGroupName>) => {
   const [selectedTermsByGroup] = useFilterQuery(productTaxonomies);
   const filteredProducts = filterProducts(allProducts, selectedTermsByGroup);
 
@@ -58,11 +61,17 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({ all
 
   return (
     <ProductsPageWrapper>
-      <Filters<TGroupName> filters={productTaxonomies} />
-      {!filteredProducts.length
-        ? (<Typography variant="h4">Nenašli sa žiadne produkty vyhovujúce filtrom...</Typography>)
-        : (<ProductsGrid products={filteredProducts} />)
-      }
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={2}>
+          <Filters<TGroupName> filters={productTaxonomies} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={9} lg={9} xl={10}>
+          {!filteredProducts.length
+            ? (<Typography variant="h4">Nenašli sa žiadne produkty vyhovujúce filtrom...</Typography>)
+            : (<ProductsGrid products={filteredProducts} />)
+          }
+        </Grid>
+      </Grid>
     </ProductsPageWrapper>
   );
 };
@@ -70,7 +79,7 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({ all
 const ProductsPageWrapper: React.FC = ({ children }) => (
   <Section>
     <SectionTitle>Produkty</SectionTitle>
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <ProductDisambiguation />
       {children as any}
     </Container>
@@ -84,7 +93,7 @@ type GridProps<TGroupName extends AllKnownProductTaxonomies> = {
 export const ProductsGrid = <TGroupName extends AllKnownProductTaxonomies>({ products }: GridProps<TGroupName>) => (
   <Grid
     container
-    spacing={4}
+    spacing={2}
     direction="row"
     justify="flex-start"
     alignItems="stretch"
@@ -94,11 +103,11 @@ export const ProductsGrid = <TGroupName extends AllKnownProductTaxonomies>({ pro
         key={product.id}
         item
         style={{ display: 'flex' }}
-        xl={3}
+        xl={2}
         lg={3}
         md={4}
-        sm={4}
-        xs={6}
+        sm={6}
+        xs={12}
       >
         <ProductTile product={product} />
       </Grid>
