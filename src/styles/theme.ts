@@ -68,6 +68,6 @@ export const theme = responsiveFontSizes(createMuiTheme({
   },
 }));
 
-theme.spacing(3);
+theme.spacing(2);
 
 export type Theme = typeof theme;

@@ -71,7 +71,7 @@ const FilterStyled = styled.div`
     justify-content: space-between;
   }
 
-  .PrivateSwitchBase-root-1 {
+  .MuiCheckbox-root {
     padding: 4px;
   }
 
