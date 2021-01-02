@@ -1450,7 +1450,6 @@ export type Kontent_Item_Diary_Product = Node & Kontent_Item & {
   system: Kontent_Item_System;
   elements?: Maybe<Kontent_Item_Diary_Product_Elements>;
   preferred_language: Scalars['String'];
-  fields?: Maybe<Kontent_Item_Diary_ProductFields>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1508,10 +1507,6 @@ export type Kontent_Item_Diary_ProductEdge = {
   next?: Maybe<Kontent_Item_Diary_Product>;
   node: Kontent_Item_Diary_Product;
   previous?: Maybe<Kontent_Item_Diary_Product>;
-};
-
-export type Kontent_Item_Diary_ProductFields = {
-  slug?: Maybe<Scalars['String']>;
 };
 
 export type Kontent_Item_Diary_ProductFieldsEnum = 
@@ -1586,7 +1581,6 @@ export type Kontent_Item_Diary_ProductFieldsEnum =
   | 'elements___url_slug___type'
   | 'elements___url_slug___value'
   | 'preferred_language'
-  | 'fields___slug'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -1674,15 +1668,10 @@ export type Kontent_Item_Diary_ProductFieldsEnum =
   | 'internal___owner'
   | 'internal___type';
 
-export type Kontent_Item_Diary_ProductFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
-};
-
 export type Kontent_Item_Diary_ProductFilterInput = {
   system?: Maybe<Kontent_Item_SystemFilterInput>;
   elements?: Maybe<Kontent_Item_Diary_Product_ElementsFilterInput>;
   preferred_language?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<Kontent_Item_Diary_ProductFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1877,7 +1866,6 @@ export type Kontent_Item_Meat_Product = Node & Kontent_Item & {
   system: Kontent_Item_System;
   elements?: Maybe<Kontent_Item_Meat_Product_Elements>;
   preferred_language: Scalars['String'];
-  fields?: Maybe<Kontent_Item_Meat_ProductFields>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1927,10 +1915,6 @@ export type Kontent_Item_Meat_ProductEdge = {
   next?: Maybe<Kontent_Item_Meat_Product>;
   node: Kontent_Item_Meat_Product;
   previous?: Maybe<Kontent_Item_Meat_Product>;
-};
-
-export type Kontent_Item_Meat_ProductFields = {
-  slug?: Maybe<Scalars['String']>;
 };
 
 export type Kontent_Item_Meat_ProductFieldsEnum = 
@@ -1987,7 +1971,6 @@ export type Kontent_Item_Meat_ProductFieldsEnum =
   | 'elements___produkt_core__description___links___type'
   | 'elements___produkt_core__description___links___url_slug'
   | 'preferred_language'
-  | 'fields___slug'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -2075,15 +2058,10 @@ export type Kontent_Item_Meat_ProductFieldsEnum =
   | 'internal___owner'
   | 'internal___type';
 
-export type Kontent_Item_Meat_ProductFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
-};
-
 export type Kontent_Item_Meat_ProductFilterInput = {
   system?: Maybe<Kontent_Item_SystemFilterInput>;
   elements?: Maybe<Kontent_Item_Meat_Product_ElementsFilterInput>;
   preferred_language?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<Kontent_Item_Meat_ProductFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -2158,7 +2136,6 @@ export type Kontent_Item_Other_Product = Node & Kontent_Item & {
   system: Kontent_Item_System;
   elements?: Maybe<Kontent_Item_Other_Product_Elements>;
   preferred_language: Scalars['String'];
-  fields?: Maybe<Kontent_Item_Other_ProductFields>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -2208,10 +2185,6 @@ export type Kontent_Item_Other_ProductEdge = {
   next?: Maybe<Kontent_Item_Other_Product>;
   node: Kontent_Item_Other_Product;
   previous?: Maybe<Kontent_Item_Other_Product>;
-};
-
-export type Kontent_Item_Other_ProductFields = {
-  slug?: Maybe<Scalars['String']>;
 };
 
 export type Kontent_Item_Other_ProductFieldsEnum = 
@@ -2268,7 +2241,6 @@ export type Kontent_Item_Other_ProductFieldsEnum =
   | 'elements___produkt_core__description___links___type'
   | 'elements___produkt_core__description___links___url_slug'
   | 'preferred_language'
-  | 'fields___slug'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -2356,15 +2328,10 @@ export type Kontent_Item_Other_ProductFieldsEnum =
   | 'internal___owner'
   | 'internal___type';
 
-export type Kontent_Item_Other_ProductFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
-};
-
 export type Kontent_Item_Other_ProductFilterInput = {
   system?: Maybe<Kontent_Item_SystemFilterInput>;
   elements?: Maybe<Kontent_Item_Other_Product_ElementsFilterInput>;
   preferred_language?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<Kontent_Item_Other_ProductFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -3637,7 +3604,6 @@ export type QueryKontentItemDiaryProductArgs = {
   system?: Maybe<Kontent_Item_SystemFilterInput>;
   elements?: Maybe<Kontent_Item_Diary_Product_ElementsFilterInput>;
   preferred_language?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<Kontent_Item_Diary_ProductFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -3676,7 +3642,6 @@ export type QueryKontentItemMeatProductArgs = {
   system?: Maybe<Kontent_Item_SystemFilterInput>;
   elements?: Maybe<Kontent_Item_Meat_Product_ElementsFilterInput>;
   preferred_language?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<Kontent_Item_Meat_ProductFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -3696,7 +3661,6 @@ export type QueryKontentItemOtherProductArgs = {
   system?: Maybe<Kontent_Item_SystemFilterInput>;
   elements?: Maybe<Kontent_Item_Other_Product_ElementsFilterInput>;
   preferred_language?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<Kontent_Item_Other_ProductFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -4360,11 +4324,6 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___isTSX'
   | 'pluginCreator___pluginOptions___jsxPragma'
   | 'pluginCreator___pluginOptions___allExtensions'
-  | 'pluginCreator___pluginOptions___projectId'
-  | 'pluginCreator___pluginOptions___languageCodenames'
-  | 'pluginCreator___pluginOptions___includeTaxonomies'
-  | 'pluginCreator___pluginOptions___usePreviewUrl'
-  | 'pluginCreator___pluginOptions___authorizationKey'
   | 'pluginCreator___pluginOptions___documentPaths'
   | 'pluginCreator___pluginOptions___codegenPlugins'
   | 'pluginCreator___pluginOptions___codegenPlugins___resolve'
@@ -4380,6 +4339,11 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___path'
   | 'pluginCreator___pluginOptions___pathCheck'
+  | 'pluginCreator___pluginOptions___projectId'
+  | 'pluginCreator___pluginOptions___languageCodenames'
+  | 'pluginCreator___pluginOptions___includeTaxonomies'
+  | 'pluginCreator___pluginOptions___usePreviewUrl'
+  | 'pluginCreator___pluginOptions___authorizationKey'
   | 'pluginCreator___nodeAPIs'
   | 'pluginCreator___browserAPIs'
   | 'pluginCreator___ssrAPIs'
@@ -4569,11 +4533,6 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___isTSX'
   | 'pluginOptions___jsxPragma'
   | 'pluginOptions___allExtensions'
-  | 'pluginOptions___projectId'
-  | 'pluginOptions___languageCodenames'
-  | 'pluginOptions___includeTaxonomies'
-  | 'pluginOptions___usePreviewUrl'
-  | 'pluginOptions___authorizationKey'
   | 'pluginOptions___documentPaths'
   | 'pluginOptions___codegenPlugins'
   | 'pluginOptions___codegenPlugins___resolve'
@@ -4589,6 +4548,11 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___name'
   | 'pluginOptions___path'
   | 'pluginOptions___pathCheck'
+  | 'pluginOptions___projectId'
+  | 'pluginOptions___languageCodenames'
+  | 'pluginOptions___includeTaxonomies'
+  | 'pluginOptions___usePreviewUrl'
+  | 'pluginOptions___authorizationKey'
   | 'nodeAPIs'
   | 'browserAPIs'
   | 'ssrAPIs'
@@ -4704,11 +4668,6 @@ export type SitePluginPluginOptions = {
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
   allExtensions?: Maybe<Scalars['Boolean']>;
-  projectId?: Maybe<Scalars['String']>;
-  languageCodenames?: Maybe<Array<Maybe<Scalars['String']>>>;
-  includeTaxonomies?: Maybe<Scalars['Boolean']>;
-  usePreviewUrl?: Maybe<Scalars['Boolean']>;
-  authorizationKey?: Maybe<Scalars['String']>;
   documentPaths?: Maybe<Array<Maybe<Scalars['String']>>>;
   codegenPlugins?: Maybe<Array<Maybe<SitePluginPluginOptionsCodegenPlugins>>>;
   stylesProvider?: Maybe<SitePluginPluginOptionsStylesProvider>;
@@ -4723,6 +4682,11 @@ export type SitePluginPluginOptions = {
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
+  projectId?: Maybe<Scalars['String']>;
+  languageCodenames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  includeTaxonomies?: Maybe<Scalars['Boolean']>;
+  usePreviewUrl?: Maybe<Scalars['Boolean']>;
+  authorizationKey?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsCodegenPlugins = {
@@ -4741,11 +4705,6 @@ export type SitePluginPluginOptionsFilterInput = {
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
-  projectId?: Maybe<StringQueryOperatorInput>;
-  languageCodenames?: Maybe<StringQueryOperatorInput>;
-  includeTaxonomies?: Maybe<BooleanQueryOperatorInput>;
-  usePreviewUrl?: Maybe<BooleanQueryOperatorInput>;
-  authorizationKey?: Maybe<StringQueryOperatorInput>;
   documentPaths?: Maybe<StringQueryOperatorInput>;
   codegenPlugins?: Maybe<SitePluginPluginOptionsCodegenPluginsFilterListInput>;
   stylesProvider?: Maybe<SitePluginPluginOptionsStylesProviderFilterInput>;
@@ -4760,6 +4719,11 @@ export type SitePluginPluginOptionsFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+  projectId?: Maybe<StringQueryOperatorInput>;
+  languageCodenames?: Maybe<StringQueryOperatorInput>;
+  includeTaxonomies?: Maybe<BooleanQueryOperatorInput>;
+  usePreviewUrl?: Maybe<BooleanQueryOperatorInput>;
+  authorizationKey?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsStylesProvider = {

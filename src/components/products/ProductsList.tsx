@@ -1,9 +1,7 @@
 import { Typography } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { Maybe } from '../../@types/global';
-import { Section, SectionTitle } from '../../_ui-components/Container';
 import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-components/filter/Filters';
 import { ProductCommon } from '../../models/products';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
@@ -55,7 +53,7 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
   if (!isFeatureEnabled(Feature.ProductsPage)) {
     return (
       <ProductsPageWrapper>
-        <Typography variant="h2">Na stránke stále pracujeme...</Typography>
+        <Typography variant="h6" component="div" align="center">Na stránke stále pracujeme...</Typography>
       </ProductsPageWrapper>
     );
   }
@@ -69,7 +67,7 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
         </Grid>
         <Grid item xs={12} sm={12} md={9} lg={9} xl={10}>
           {!filteredProducts.length
-            ? (<Typography variant="h4">Nenašli sa žiadne produkty vyhovujúce filtrom...</Typography>)
+            ? (<Typography variant="h6" component="div" align="center">Nenašli sa žiadne produkty vyhovujúce filtrom.</Typography>)
             : (<ProductsGrid products={filteredProducts} />)
           }
         </Grid>
