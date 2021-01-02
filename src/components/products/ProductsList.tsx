@@ -9,7 +9,8 @@ import { ProductCommon } from '../../models/products';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
-import { ProductDisambiguation } from './ProductDisambiguation';
+import { ProductTypeLinks } from './disambiguation/ProductTypeLinks';
+import { ProductsPageWrapper } from './ProductsPageWrapper';
 import { ProductTile } from './ProductTile';
 
 type Props<TGroupName extends AllKnownProductTaxonomies> = {
@@ -61,6 +62,7 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
 
   return (
     <ProductsPageWrapper>
+      <ProductTypeLinks />
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={2}>
           <Filters<TGroupName> filters={productTaxonomies} />
@@ -75,16 +77,6 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
     </ProductsPageWrapper>
   );
 };
-
-const ProductsPageWrapper: React.FC = ({ children }) => (
-  <Section>
-    <SectionTitle>Produkty</SectionTitle>
-    <Container maxWidth="xl">
-      <ProductDisambiguation />
-      {children as any}
-    </Container>
-  </Section>
-);
 
 type GridProps<TGroupName extends AllKnownProductTaxonomies> = {
   readonly products: ReadonlyArray<ProductCommon<TGroupName>>;

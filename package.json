@@ -11,7 +11,8 @@
     "start": "npm run develop",
     "start-preview": "set NODE_ENV=preview&& npm run start",
     "serve": "gatsby serve",
-    "clean": "gatsby clean&& rm -rf node_modules",
+    "clean": "gatsby clean",
+    "clean-all": "gatsby clean&& rm -rf node_modules",
     "test": "echo \"No tests yet...\" && exit 1",
     "typecheck": "tsc --watch",
     "typecheck-once": "tsc"

@@ -1,16 +1,42 @@
+import { graphql } from 'gatsby';
 import React from 'react';
-import { Section } from '../../_ui-components/Container';
+import { ProductsDisambiguationQuery } from '../../../graphql-types';
 import Layout from '../../components/Layout';
-import { ProductDisambiguation } from '../../components/products/ProductDisambiguation';
+import { ProductsDisambiguation } from '../../components/products/disambiguation/ProductDisambiguation';
+import { mapProductTypesFromKontent } from '../../models/products/productTypes';
 
-type ProductsProps = {}
+type ProductsProps = {
+  readonly data: ProductsDisambiguationQuery;
+};
 
-const Products: React.FC<ProductsProps> = () => (
+const Products: React.FC<ProductsProps> = ({ data }) => (
   <Layout>
-    <Section>
-      <ProductDisambiguation withImage />
-    </Section>
+    <ProductsDisambiguation productTypes={mapProductTypesFromKontent(data)} />
   </Layout>
 );
 
 export default Products;
+
+export const query = graphql`
+    query ProductsDisambiguation {
+        kontentItemProductsDisambiguation(system: {codename: {eq: "produkts_disambiguation"}}) {
+            elements {
+                product_types{
+                    name
+                    type
+                    value {
+                        ... on kontent_item_product_type {
+                            id
+                            elements {
+                                type{
+                                    value {name codename}
+                                }
+                                image { ...FluidImage350w }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;

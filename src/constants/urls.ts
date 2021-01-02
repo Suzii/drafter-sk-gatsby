@@ -1,4 +1,5 @@
-import { ProductType } from '../models/_common';
+import { Maybe } from '../@types/global';
+import { ProductType } from '../models/products/productTypes';
 import { Feature, isFeatureEnabled } from '../utils/featureToggles';
 
 export const WHO_WE_ARE_FRAGMENT = 'kto-sme';
@@ -16,13 +17,16 @@ export const PRODUCTS_OTHER_URL = `${PRODUCTS_URL}/ostatne`;
 
 export const MAMAS_PDF_LINK = 'https://assets-us-01.kc-usercontent.com/f408ff21-bb77-0017-334f-f1ea95739f2a/7bdfc31c-1927-4b88-87c6-61959b6ce3fa/mamas.pdf';
 
-export const getUrlByProductType = (type: ProductType): string =>
+export const getUrlByProductType = (type: Maybe<ProductType>): string =>
 {
   switch (type) {
     case 'diary': return PRODUCTS_DIARY_URL;
     case 'meat': return PRODUCTS_MEAT_URL;
     case 'other': return PRODUCTS_OTHER_URL;
-    default: return PRODUCTS_URL;
+    default: {
+      console.log(`Unknown product type:`, type);
+      return PRODUCTS_URL;
+    }
   }
 }
 export const PRODUCT_URL = (type: ProductType, productSlug: string | null | undefined) =>

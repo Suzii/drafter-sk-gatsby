@@ -33,9 +33,9 @@ export const ProductTile = <TGroupName extends AllKnownProductTaxonomies>({ prod
           alt={product.img?.description ?? product.name ?? 'Obrázok produktu'}
         />
       </CardMedia>
-      <CardContent>
+      <CardContent data-kontent-element-codename={`name`}>
         <Link to={product.url}>
-          <Typography gutterBottom variant="h5" component="h2" data-kontent-element-codename={`name`}>
+          <Typography gutterBottom variant="h6" component="div">
             {product.name}
           </Typography>
         </Link>

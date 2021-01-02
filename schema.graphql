@@ -277,7 +277,7 @@ type FileGroupConnection {
 
 type ImageSharp implements Node {
     children: [Node!]!
-    fixed(background: String = "rgba(0,0,0,1)", base64Width: Int, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = NO_CHANGE, toFormatBase64: ImageFormat = NO_CHANGE, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpFixed
+    fixed(background: String = "rgba(0,0,0,1)", base64Width: Int, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = AUTO, toFormatBase64: ImageFormat = AUTO, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpFixed
     fluid(
         background: String = "rgba(0,0,0,1)",
         base64Width: Int,
@@ -296,18 +296,97 @@ type ImageSharp implements Node {
         sizes: String = "",
         "A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]"
         srcSetBreakpoints: [Int] = [],
-        toFormat: ImageFormat = NO_CHANGE,
-        toFormatBase64: ImageFormat = NO_CHANGE,
+        toFormat: ImageFormat = AUTO,
+        toFormatBase64: ImageFormat = AUTO,
         traceSVG: Potrace,
         trim: Float = 0.0,
         webpQuality: Int
     ): ImageSharpFluid
+    gatsbyImageData(
+        "Background color applied to the wrapper. Also passed to sharp to use as a background when \"letterboxing\" an image to another aspect ratio."
+        background: String = "rgba(0,0,0,0)",
+        "Options for the low-resolution placeholder image. Set placeholder to \"BLURRED\" to use this"
+        blurredOptions: BlurredOptions,
+        """
+
+        The image formats to generate. Valid values are "AUTO" (meaning the same format as the source image), "JPG", "PNG" and "WEBP".
+        The default value is [AUTO, WEBP], and you should rarely need to change this. Take care if you specify JPG or PNG when you do
+        not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
+        both PNG and JPG is not supported and will be ignored.
+        """
+        formats: [ImageFormat] = [WEBP],
+        "If set, the height of the generated image. If omitted, it is calculated from the supplied width, matching the aspect ratio of the source image."
+        height: Int,
+        "Options to pass to sharp when generating JPG images."
+        jpgOptions: JPGOptions,
+        """
+
+        The layout for the image.
+        FIXED: A static image sized, that does not resize according to the screen width
+        FLUID: The image resizes to fit its container. Pass a "sizes" option if it isn't going to be the full width of the screen.
+        CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
+        """
+        layout: ImageLayout = FIXED,
+        """
+
+        If set, the generated image is a maximum of this height, cropping if necessary.
+        If the image layout is "constrained" then the image will be limited to this height.
+        If the aspect ratio of the image is different than the source, then the image will be cropped.
+        """
+        maxHeight: Int,
+        """
+
+        Maximum display width of generated files.
+        The actual largest image resolution will be this value multipled by the largest value in outputPixelDensities
+        This only applies when layout = FLUID or CONSTRAINED. For other layout types, use "width"
+    """
+        maxWidth: Int,
+        """
+
+        A list of image pixel densities to generate. It will never generate images larger than the source, and will always include a 1x image.
+        Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, 3x, and [0.25, 0.5, 1, 2] for fluid. In this case, an image with a fluid layout and width = 400 would generate images at 100, 200, 400 and 800px wide
+        """
+        outputPixelDensities: [Float],
+        """
+
+        Format of generated placeholder image, displayed while the main image loads.
+        BLURRED: a blurred, low resolution image, encoded as a base64 data URI (default)
+        DOMINANT_COLOR: a solid color, calculated from the dominant color of the image.
+        TRACED_SVG: a low-resolution traced SVG of the image.
+        NONE: no placeholder. Set "background" to use a fixed background color.
+        """
+        placeholder: ImagePlaceholder = BLURRED,
+        "Options to pass to sharp when generating PNG images."
+        pngOptions: PNGOptions,
+        "The default quality. This is overriden by any format-specific options"
+        quality: Int,
+        """
+
+        The "sizes" property, passed to the img tag. This describes the display size of the image.
+        This does not affect the generated images, but is used by the browser to decide which images to download. You can leave this blank for fixed images, or if the responsive image
+        container will be the full width of the screen. In these cases we will generate an appropriate value.
+        """
+        sizes: String = "",
+        "Options for traced placeholder SVGs. You also should set placeholder to \"SVG\"."
+        tracedSVGOptions: Potrace,
+        "Options to pass to sharp to control cropping and other image manipulations."
+        transformOptions: TransformOptions,
+        "Options to pass to sharp when generating WebP images."
+        webpOptions: WebPOptions,
+        """
+
+        The display width of the generated image.
+        The actual largest image resolution will be this value multipled by the largest value in outputPixelDensities
+        Ignored if layout = FLUID or CONSTRAINED, where you should use "maxWidth" instead.
+        """
+        width: Int
+    ): JSON!
     id: ID!
     internal: Internal!
     original: ImageSharpOriginal
     parent: Node
-    resize(background: String = "rgba(0,0,0,1)", base64: Boolean = false, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionLevel: Int = 9, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = NO_CHANGE, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpResize
-    resolutions(background: String = "rgba(0,0,0,1)", base64Width: Int, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = NO_CHANGE, toFormatBase64: ImageFormat = NO_CHANGE, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpResolutions @deprecated(reason : "Resolutions was deprecated in Gatsby v2. It's been renamed to \"fixed\" https://example.com/write-docs-and-fix-this-example-link")
+    resize(background: String = "rgba(0,0,0,1)", base64: Boolean = false, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionLevel: Int = 9, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = AUTO, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpResize
+    resolutions(background: String = "rgba(0,0,0,1)", base64Width: Int, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = AUTO, toFormatBase64: ImageFormat = AUTO, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpResolutions @deprecated(reason : "Resolutions was deprecated in Gatsby v2. It's been renamed to \"fixed\" https://example.com/write-docs-and-fix-this-example-link")
     sizes(
         background: String = "rgba(0,0,0,1)",
         base64Width: Int,
@@ -326,8 +405,8 @@ type ImageSharp implements Node {
         sizes: String = "",
         "A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]"
         srcSetBreakpoints: [Int] = [],
-        toFormat: ImageFormat = NO_CHANGE,
-        toFormatBase64: ImageFormat = NO_CHANGE,
+        toFormat: ImageFormat = AUTO,
+        toFormatBase64: ImageFormat = AUTO,
         traceSVG: Potrace,
         trim: Float = 0.0,
         webpQuality: Int
@@ -489,6 +568,8 @@ type Query {
     allKontentItemMeatProduct(filter: kontent_item_meat_productFilterInput, limit: Int, skip: Int, sort: kontent_item_meat_productSortInput): kontent_item_meat_productConnection!
     allKontentItemOtherProduct(filter: kontent_item_other_productFilterInput, limit: Int, skip: Int, sort: kontent_item_other_productSortInput): kontent_item_other_productConnection!
     allKontentItemPartner(filter: kontent_item_partnerFilterInput, limit: Int, skip: Int, sort: kontent_item_partnerSortInput): kontent_item_partnerConnection!
+    allKontentItemProductType(filter: kontent_item_product_typeFilterInput, limit: Int, skip: Int, sort: kontent_item_product_typeSortInput): kontent_item_product_typeConnection!
+    allKontentItemProductsDisambiguation(filter: kontent_item_products_disambiguationFilterInput, limit: Int, skip: Int, sort: kontent_item_products_disambiguationSortInput): kontent_item_products_disambiguationConnection!
     allKontentTaxonomy(filter: kontent_taxonomyFilterInput, limit: Int, skip: Int, sort: kontent_taxonomySortInput): kontent_taxonomyConnection!
     allSite(filter: SiteFilterInput, limit: Int, skip: Int, sort: SiteSortInput): SiteConnection!
     allSiteBuildMetadata(filter: SiteBuildMetadataFilterInput, limit: Int, skip: Int, sort: SiteBuildMetadataSortInput): SiteBuildMetadataConnection!
@@ -496,15 +577,17 @@ type Query {
     allSitePlugin(filter: SitePluginFilterInput, limit: Int, skip: Int, sort: SitePluginSortInput): SitePluginConnection!
     directory(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): Directory
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
-    imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
+    imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
     kontentItemDiaryProduct(children: NodeFilterListInput, elements: kontent_item_diary_product_elementsFilterInput, fields: kontent_item_diary_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_diary_product
     kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepage_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_homepage
     kontentItemMeatProduct(children: NodeFilterListInput, elements: kontent_item_meat_product_elementsFilterInput, fields: kontent_item_meat_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_meat_product
     kontentItemOtherProduct(children: NodeFilterListInput, elements: kontent_item_other_product_elementsFilterInput, fields: kontent_item_other_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_other_product
     kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partner_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partner
+    kontentItemProductType(children: NodeFilterListInput, elements: kontent_item_product_type_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product_type
+    kontentItemProductsDisambiguation(children: NodeFilterListInput, elements: kontent_item_products_disambiguation_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_products_disambiguation
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
-    site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput): Site
+    site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
     sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, componentPath: StringQueryOperatorInput, context: SitePageContextFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, matchPath: StringQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput): SitePage
     sitePlugin(browserAPIs: StringQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, nodeAPIs: StringQueryOperatorInput, packageJson: SitePluginPackageJsonFilterInput, parent: NodeFilterInput, pluginFilepath: StringQueryOperatorInput, pluginOptions: SitePluginPluginOptionsFilterInput, resolve: StringQueryOperatorInput, ssrAPIs: StringQueryOperatorInput, version: StringQueryOperatorInput): SitePlugin
@@ -529,6 +612,7 @@ type Site implements Node {
     pathPrefix: String
     polyfill: Boolean
     port: Int
+    siteMetadata: SiteSiteMetadata
 }
 
 type SiteBuildMetadata implements Node {
@@ -711,18 +795,25 @@ type SitePluginPackageJsonPeerDependencies {
 type SitePluginPluginOptions {
     allExtensions: Boolean
     authorizationKey: String
+    base64Width: Int
     codegenPlugins: [SitePluginPluginOptionsCodegenPlugins]
+    defaultQuality: Int
+    displayName: Boolean
     documentPaths: [String]
-    fileName: String
+    failOnError: Boolean
     includeTaxonomies: Boolean
     isTSX: Boolean
     jsxPragma: String
     languageCodenames: [String]
+    minify: Boolean
     name: String
     path: String
     pathCheck: Boolean
     projectId: String
+    pure: Boolean
+    stripMetadata: Boolean
     stylesProvider: SitePluginPluginOptionsStylesProvider
+    transpileTemplateLiterals: Boolean
     usePreviewUrl: Boolean
 }
 
@@ -732,6 +823,11 @@ type SitePluginPluginOptionsCodegenPlugins {
 
 type SitePluginPluginOptionsStylesProvider {
     injectFirst: Boolean
+}
+
+type SiteSiteMetadata {
+    description: String
+    title: String
 }
 
 type kontent_itemConnection {
@@ -1047,6 +1143,83 @@ type kontent_item_partner_elements {
     title: kontent_item_text_element_value
 }
 
+type kontent_item_product_type implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_product_type_elements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_product_typeConnection {
+    distinct(field: kontent_item_product_typeFieldsEnum!): [String!]!
+    edges: [kontent_item_product_typeEdge!]!
+    group(field: kontent_item_product_typeFieldsEnum!, limit: Int, skip: Int): [kontent_item_product_typeGroupConnection!]!
+    nodes: [kontent_item_product_type!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_product_typeEdge {
+    next: kontent_item_product_type
+    node: kontent_item_product_type!
+    previous: kontent_item_product_type
+}
+
+type kontent_item_product_typeGroupConnection {
+    edges: [kontent_item_product_typeEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_product_type!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_product_type_elements {
+    image: kontent_item_asset_element_value
+    type: kontent_item_multiple_choice_element_value
+}
+
+type kontent_item_products_disambiguation implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_products_disambiguation_elements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_products_disambiguationConnection {
+    distinct(field: kontent_item_products_disambiguationFieldsEnum!): [String!]!
+    edges: [kontent_item_products_disambiguationEdge!]!
+    group(field: kontent_item_products_disambiguationFieldsEnum!, limit: Int, skip: Int): [kontent_item_products_disambiguationGroupConnection!]!
+    nodes: [kontent_item_products_disambiguation!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_products_disambiguationEdge {
+    next: kontent_item_products_disambiguation
+    node: kontent_item_products_disambiguation!
+    previous: kontent_item_products_disambiguation
+}
+
+type kontent_item_products_disambiguationGroupConnection {
+    edges: [kontent_item_products_disambiguationEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_products_disambiguation!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_products_disambiguation_elements {
+    product_types: kontent_item_modular_content_element_value
+}
+
 type kontent_item_rich_text_element_image {
     description: String
     fixed(fit: String, format: String, height: Int, quality: Int, width: Int): KontentAssetFixed
@@ -1343,6 +1516,7 @@ enum FileFieldsEnum {
     childImageSharp___fluid___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___fluid___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___fluid___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    childImageSharp___gatsbyImageData @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1531,10 +1705,24 @@ enum ImageFit {
 }
 
 enum ImageFormat {
+    AUTO
     JPG
     NO_CHANGE
     PNG
     WEBP
+}
+
+enum ImageLayout {
+    CONSTRAINED
+    FIXED
+    FLUID
+}
+
+enum ImagePlaceholder {
+    BLURRED
+    DOMINANT_COLOR
+    NONE
+    TRACED_SVG
 }
 
 enum ImageSharpFieldsEnum {
@@ -1599,6 +1787,7 @@ enum ImageSharpFieldsEnum {
     fluid___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     fluid___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     fluid___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    gatsbyImageData @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1870,6 +2059,8 @@ enum SiteFieldsEnum {
     pathPrefix
     polyfill
     port
+    siteMetadata___description
+    siteMetadata___title
 }
 
 enum SitePageFieldsEnum {
@@ -2027,19 +2218,26 @@ enum SitePageFieldsEnum {
     pluginCreator___pluginFilepath
     pluginCreator___pluginOptions___allExtensions
     pluginCreator___pluginOptions___authorizationKey
+    pluginCreator___pluginOptions___base64Width
     pluginCreator___pluginOptions___codegenPlugins
     pluginCreator___pluginOptions___codegenPlugins___resolve
+    pluginCreator___pluginOptions___defaultQuality
+    pluginCreator___pluginOptions___displayName
     pluginCreator___pluginOptions___documentPaths
-    pluginCreator___pluginOptions___fileName
+    pluginCreator___pluginOptions___failOnError
     pluginCreator___pluginOptions___includeTaxonomies
     pluginCreator___pluginOptions___isTSX
     pluginCreator___pluginOptions___jsxPragma
     pluginCreator___pluginOptions___languageCodenames
+    pluginCreator___pluginOptions___minify
     pluginCreator___pluginOptions___name
     pluginCreator___pluginOptions___path
     pluginCreator___pluginOptions___pathCheck
     pluginCreator___pluginOptions___projectId
+    pluginCreator___pluginOptions___pure
+    pluginCreator___pluginOptions___stripMetadata
     pluginCreator___pluginOptions___stylesProvider___injectFirst
+    pluginCreator___pluginOptions___transpileTemplateLiterals
     pluginCreator___pluginOptions___usePreviewUrl
     pluginCreator___resolve
     pluginCreator___ssrAPIs
@@ -2154,19 +2352,26 @@ enum SitePluginFieldsEnum {
     pluginFilepath
     pluginOptions___allExtensions
     pluginOptions___authorizationKey
+    pluginOptions___base64Width
     pluginOptions___codegenPlugins
     pluginOptions___codegenPlugins___resolve
+    pluginOptions___defaultQuality
+    pluginOptions___displayName
     pluginOptions___documentPaths
-    pluginOptions___fileName
+    pluginOptions___failOnError
     pluginOptions___includeTaxonomies
     pluginOptions___isTSX
     pluginOptions___jsxPragma
     pluginOptions___languageCodenames
+    pluginOptions___minify
     pluginOptions___name
     pluginOptions___path
     pluginOptions___pathCheck
     pluginOptions___projectId
+    pluginOptions___pure
+    pluginOptions___stripMetadata
     pluginOptions___stylesProvider___injectFirst
+    pluginOptions___transpileTemplateLiterals
     pluginOptions___usePreviewUrl
     resolve
     ssrAPIs
@@ -2852,6 +3057,220 @@ enum kontent_item_partnerFieldsEnum {
     system___type
 }
 
+enum kontent_item_product_typeFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___image___name
+    elements___image___type
+    elements___image___value
+    elements___image___value___description
+    elements___image___value___height
+    elements___image___value___name
+    elements___image___value___size
+    elements___image___value___type
+    elements___image___value___url
+    elements___image___value___width
+    elements___type___name
+    elements___type___type
+    elements___type___value
+    elements___type___value___codename
+    elements___type___value___name
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_products_disambiguationFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___product_types___name
+    elements___product_types___type
+    elements___product_types___value
+    elements___product_types___value___id
+    elements___product_types___value___preferred_language
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
 enum kontent_taxonomyFieldsEnum {
     children
     children___children
@@ -2953,6 +3372,13 @@ enum kontent_taxonomyFieldsEnum {
     terms___terms___terms___codename
     terms___terms___terms___name
     terms___terms___terms___terms
+}
+
+input BlurredOptions {
+    "Force the output format for the low-res preview. Default is to use the same format as the input. You should rarely need to change this"
+    toFormat: ImageFormat
+    "Width of the generated low-res preview. Default is 20px"
+    width: Int
 }
 
 input BooleanQueryOperatorInput {
@@ -3086,6 +3512,7 @@ input ImageSharpFilterInput {
     children: NodeFilterListInput
     fixed: ImageSharpFixedFilterInput
     fluid: ImageSharpFluidFilterInput
+    gatsbyImageData: JSONQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     original: ImageSharpOriginalFilterInput
@@ -3193,6 +3620,20 @@ input InternalFilterInput {
     type: StringQueryOperatorInput
 }
 
+input JPGOptions {
+    progressive: Boolean = true
+    quality: Int
+}
+
+input JSONQueryOperatorInput {
+    eq: JSON
+    glob: JSON
+    in: [JSON]
+    ne: JSON
+    nin: [JSON]
+    regex: JSON
+}
+
 input NodeFilterInput {
     children: NodeFilterListInput
     id: StringQueryOperatorInput
@@ -3202,6 +3643,11 @@ input NodeFilterInput {
 
 input NodeFilterListInput {
     elemMatch: NodeFilterInput
+}
+
+input PNGOptions {
+    compressionSpeed: Int = 4
+    quality: Int
 }
 
 input Potrace {
@@ -3239,6 +3685,7 @@ input SiteFilterInput {
     pathPrefix: StringQueryOperatorInput
     polyfill: BooleanQueryOperatorInput
     port: IntQueryOperatorInput
+    siteMetadata: SiteSiteMetadataFilterInput
 }
 
 input SitePageContextFilterInput {
@@ -3333,18 +3780,25 @@ input SitePluginPluginOptionsCodegenPluginsFilterListInput {
 input SitePluginPluginOptionsFilterInput {
     allExtensions: BooleanQueryOperatorInput
     authorizationKey: StringQueryOperatorInput
+    base64Width: IntQueryOperatorInput
     codegenPlugins: SitePluginPluginOptionsCodegenPluginsFilterListInput
+    defaultQuality: IntQueryOperatorInput
+    displayName: BooleanQueryOperatorInput
     documentPaths: StringQueryOperatorInput
-    fileName: StringQueryOperatorInput
+    failOnError: BooleanQueryOperatorInput
     includeTaxonomies: BooleanQueryOperatorInput
     isTSX: BooleanQueryOperatorInput
     jsxPragma: StringQueryOperatorInput
     languageCodenames: StringQueryOperatorInput
+    minify: BooleanQueryOperatorInput
     name: StringQueryOperatorInput
     path: StringQueryOperatorInput
     pathCheck: BooleanQueryOperatorInput
     projectId: StringQueryOperatorInput
+    pure: BooleanQueryOperatorInput
+    stripMetadata: BooleanQueryOperatorInput
     stylesProvider: SitePluginPluginOptionsStylesProviderFilterInput
+    transpileTemplateLiterals: BooleanQueryOperatorInput
     usePreviewUrl: BooleanQueryOperatorInput
 }
 
@@ -3355,6 +3809,11 @@ input SitePluginPluginOptionsStylesProviderFilterInput {
 input SitePluginSortInput {
     fields: [SitePluginFieldsEnum]
     order: [SortOrderEnum] = [ASC]
+}
+
+input SiteSiteMetadataFilterInput {
+    description: StringQueryOperatorInput
+    title: StringQueryOperatorInput
 }
 
 input SiteSortInput {
@@ -3369,6 +3828,19 @@ input StringQueryOperatorInput {
     ne: String
     nin: [String]
     regex: String
+}
+
+input TransformOptions {
+    cropFocus: ImageCropFocus = ATTENTION
+    duotone: DuotoneGradient
+    fit: ImageFit = COVER
+    grayscale: Boolean = false
+    rotate: Int = 0
+    trim: Float = 0.0
+}
+
+input WebPOptions {
+    quality: Int
 }
 
 input kontent_itemFilterInput {
@@ -3493,6 +3965,21 @@ input kontent_item_modular_content_element_valueFilterInput {
     value: kontent_itemFilterListInput
 }
 
+input kontent_item_multiple_choice_elementFilterInput {
+    codename: StringQueryOperatorInput
+    name: StringQueryOperatorInput
+}
+
+input kontent_item_multiple_choice_elementFilterListInput {
+    elemMatch: kontent_item_multiple_choice_elementFilterInput
+}
+
+input kontent_item_multiple_choice_element_valueFilterInput {
+    name: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+    value: kontent_item_multiple_choice_elementFilterListInput
+}
+
 input kontent_item_number_element_valueFilterInput {
     name: StringQueryOperatorInput
     type: StringQueryOperatorInput
@@ -3547,6 +4034,45 @@ input kontent_item_partner_elementsFilterInput {
     link: kontent_item_text_element_valueFilterInput
     logo: kontent_item_asset_element_valueFilterInput
     title: kontent_item_text_element_valueFilterInput
+}
+
+input kontent_item_product_typeFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_product_type_elementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_product_typeSortInput {
+    fields: [kontent_item_product_typeFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_product_type_elementsFilterInput {
+    image: kontent_item_asset_element_valueFilterInput
+    type: kontent_item_multiple_choice_element_valueFilterInput
+}
+
+input kontent_item_products_disambiguationFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_products_disambiguation_elementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_products_disambiguationSortInput {
+    fields: [kontent_item_products_disambiguationFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_products_disambiguation_elementsFilterInput {
+    product_types: kontent_item_modular_content_element_valueFilterInput
 }
 
 input kontent_item_rich_text_element_imageFilterInput {
