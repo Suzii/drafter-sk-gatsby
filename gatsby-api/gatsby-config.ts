@@ -8,7 +8,7 @@ const config = require('gatsby-plugin-config').default;
 const usePreviewUrl = !!config.KONTENT_PREVIEW_API_KEY;
 
 module.exports = {
-  flags: { },
+  flags: {},
   plugins: [
     {
       resolve: 'gatsby-plugin-typescript',
@@ -65,6 +65,14 @@ module.exports = {
     },
     {
       resolve: `@rshackleton/gatsby-transformer-kontent-image`,
+    },
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        allPageHeaders: [
+          "Content-Security-Policy: frame-ancestors \'self\' https://*.kontent.ai",
+        ],
+      },
     },
   ],
 };
