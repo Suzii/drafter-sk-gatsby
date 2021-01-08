@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import React from 'react';
 import styled from 'styled-components';
 import { Section, SectionTitle, Stack } from '../../_ui-components/Container';
+import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { OutwardLink } from '../../_ui-components/OutwardLink';
 import { PartnerType } from '../../models/partners';
 import { PARTNERS_FRAGMENT } from '../../constants/urls';
@@ -30,7 +31,7 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({partners}) => (
 );
 
 const Partner: React.FC<{ readonly partner: PartnerType }> = ({ partner }) => (
-  <PartnerStyled>
+  <PartnerStyled {...getKontentAttrs(partner.id, 'logo')}>
     <OutwardLink
       href={partner.link.url}
       title={partner.title.value}

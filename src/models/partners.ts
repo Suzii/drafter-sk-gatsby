@@ -1,6 +1,8 @@
 import { HomeQuery } from '../../graphql-types';
+import { Maybe, Uuid } from '../@types/global';
 
 export type PartnerType = {
+  readonly id: Maybe<Uuid>,
   readonly title: {
     readonly value: string;
   };
@@ -16,6 +18,7 @@ export type PartnerType = {
 export const mapFromKontent = (homeQuery: HomeQuery): PartnerType[] =>
   homeQuery.allKontentItemHomepage.nodes?.[0]?.elements?.partners?.value
     ?.map(p => ({
+      id: p?.system.id,
       title: {
         value: p?.elements?.title?.value ?? '',
       },

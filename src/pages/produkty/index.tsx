@@ -19,7 +19,8 @@ export default Products;
 
 export const query = graphql`
     query ProductsDisambiguation {
-        kontentItemProductsDisambiguation(system: {codename: {eq: "produkts_disambiguation"}}) {
+        kontentItemProductsDisambiguation(system: {codename: {eq: "products_disambiguation"}}) {
+            system { id }
             elements {
                 product_types{
                     name

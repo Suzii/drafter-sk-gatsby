@@ -1,8 +1,9 @@
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { graphql, Link } from 'gatsby';
+import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import React, { useState } from 'react';
+import { getKontentAttrs } from '../../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { getUrlByProductType } from '../../../constants/urls';
 import { ProductTypeModel } from '../../../models/products/productTypes';
 import { ProductsPageWrapper } from '../ProductsPageWrapper';
@@ -12,30 +13,30 @@ type Props = {
 };
 
 export const ProductsDisambiguation: React.FC<Props> = ({ productTypes }) => (
-    <ProductsPageWrapper>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justify="center"
-        alignItems="stretch"
-      >
-        {productTypes.map(t => (
-          <Grid
-            key={t.type}
-            item
-            style={{ display: 'flex' }}
-            xl={2}
-            lg={2}
-            md={3}
-            sm={4}
-            xs={12}
-          >
-            <Tile type={t} />
-          </Grid>
-        ))}
-      </Grid>
-    </ProductsPageWrapper>
+  <ProductsPageWrapper>
+    <Grid
+      container
+      spacing={2}
+      direction="row"
+      justify="center"
+      alignItems="stretch"
+    >
+      {productTypes.map(t => (
+        <Grid
+          key={t.type}
+          item
+          style={{ display: 'flex' }}
+          xl={2}
+          lg={2}
+          md={3}
+          sm={4}
+          xs={12}
+        >
+          <Tile type={t} />
+        </Grid>
+      ))}
+    </Grid>
+  </ProductsPageWrapper>
 );
 
 type TileProps = {
@@ -52,7 +53,7 @@ export const Tile: React.FC<TileProps> = ({ type }) => {
       onMouseOver={() => setIsHovered(true)}
       onMouseOut={() => setIsHovered(false)}
     >
-      <Link to={getUrlByProductType(type.type)}>
+      <Link to={getUrlByProductType(type.type)} {...getKontentAttrs(type.id, 'image')}>
         <CardMedia>
           <Img
             fluid={type.img?.fluid as FluidObject}
