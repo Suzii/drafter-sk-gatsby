@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import { Section, SectionTitle } from '../../_ui-components/Container';
+import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { ProductCommon } from '../../models/products';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { ProductDescription } from './ProductDescription';
@@ -13,7 +14,7 @@ type Props<TGroupName extends AllKnownProductTaxonomies> = {
 }
 
 export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ product }: Props<TGroupName>) => (
-  <Section data-kontent-item-id={product.id}>
+  <Section>
     <Grid
       container
       spacing={4}
@@ -28,10 +29,7 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
         sm={5}
         xs={12}
       >
-        <Img
-          data-kontent-element-codename={`image`}
-          fluid={product.img?.fluid as FluidObject}
-        />
+        <Img fluid={product.img?.fluid as FluidObject} />
       </Grid>
       <Grid
         item
@@ -41,7 +39,7 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
         sm={7}
         xs={12}
       >
-        <SectionTitle elementCodename={`name`} center={false}>
+        <SectionTitle center={false} {...getKontentAttrs(product.id, 'name')}>
           {product.name}
         </SectionTitle>
 

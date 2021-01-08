@@ -58,12 +58,12 @@ export const Section = styled.section<{
   }
 `;
 
-export const SectionTitle = styled(({children, className, elementCodename, center = true}) =>
+export const SectionTitle = styled(({children, className, center = true, ...rest}) =>
   <Typography
     variant="h1"
     className={className}
     align={center ? "center" : "left"}
-    data-kontent-element-codename={elementCodename}
+    {...rest}
   >
     {children}
   </Typography>

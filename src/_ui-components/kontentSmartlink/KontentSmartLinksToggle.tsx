@@ -1,13 +1,13 @@
 import KontentSmartLink from '@kentico/kontent-smart-link';
-import { Button, IconButton } from '@material-ui/core';
-import { Cancel, Edit } from '@material-ui/icons';
+import { IconButton } from '@material-ui/core';
+import { Close, Edit } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
 const queryParam = 'preview';
 
-export const PreviewLinksToggle: React.FC = () => {
+export const KontentSmartLinksToggle: React.FC = () => {
   useEffect(() => {
     const kontentSmartLink = KontentSmartLink.initialize({
       queryParam,
@@ -23,18 +23,20 @@ export const PreviewLinksToggle: React.FC = () => {
   const toggle = () => setValues({ [queryParam]: isOn ? undefined : null }, 'pushIn');
 
   return (
-    <PreviewLinksToggleStyled onClick={toggle}>
+    <ToggleStyled onClick={toggle}>
       <IconButton color="primary">
-        {isOn ? <Cancel /> : <Edit />}
+        {isOn ? <Close /> : <Edit />}
       </IconButton>
-    </PreviewLinksToggleStyled>
+    </ToggleStyled>
   );
 };
 
-const PreviewLinksToggleStyled = styled.div`
+const ToggleStyled = styled.div`
   z-index: ${p => p.theme.zIndex.snackbar};
   position: fixed;
   right: 2rem;
   bottom: 2rem;
   text-transform: uppercase;
+  background-color: ${p => p.theme.palette.secondary.main};
+  border-radius: 50%;
 `;

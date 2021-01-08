@@ -5,7 +5,7 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Main } from '../_ui-components/Container';
-import { PreviewLinksToggle } from '../_ui-components/PreviewLinksToggle';
+import { KontentSmartLinksToggle } from '../_ui-components/kontentSmartlink/KontentSmartLinksToggle';
 import { sitemap } from '../constants/urls';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { theme } from '../styles/theme';
@@ -26,7 +26,7 @@ const Layout: React.FC = ({ children }) => {
           </Main>
           <Footer sitemap={sitemap} />
         </Grid>
-        {isPreviewEnv && <PreviewLinksToggle />}
+        {isPreviewEnv && <KontentSmartLinksToggle />}
       </MuiThemeProvider>
     </ThemeProvider>
   );
