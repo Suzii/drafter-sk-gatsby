@@ -1,16 +1,16 @@
 import { Container } from '@material-ui/core';
 import { graphql } from 'gatsby';
 import React from 'react';
-import { MeatProductQuery } from '../../graphql-types';
-import Layout from '../components/Layout';
-import { ProductDetail } from '../components/products/ProductDetail';
-import { mapMeatProductFromKontent } from '../models/products/meatProduct';
+import { OtherProductQuery } from '../../../../graphql-types';
+import Layout from '../../../components/Layout';
+import { ProductDetail } from '../../../components/products/ProductDetail';
+import { mapOtherProductFromKontent } from '../../../models/products/otherProduct';
 
 type ProductProps = {
-  readonly data?: MeatProductQuery
+  readonly data?: OtherProductQuery
 }
 
-const MeatProduct: React.FC<ProductProps> = ({ data }) => {
+const OtherProduct: React.FC<ProductProps> = ({ data }) => {
   if (!data) {
     console.log('Product: no data found');
     return null;
@@ -19,17 +19,17 @@ const MeatProduct: React.FC<ProductProps> = ({ data }) => {
   return (
     <Layout>
       <Container maxWidth="lg">
-        <ProductDetail product={mapMeatProductFromKontent(data)} />
+        <ProductDetail product={mapOtherProductFromKontent(data)} />
       </Container>
     </Layout>
   );
 };
 
-export default MeatProduct;
+export default OtherProduct;
 
 export const query = graphql`
-    query MeatProduct($slug: String!) {
-        kontentItemMeatProduct(elements: { url_slug: { value: { eq: $slug } } }) {
+    query OtherProduct($elements__url_slug__value: String!) {
+        kontentItemOtherProduct(elements: { url_slug: { value: { eq: $elements__url_slug__value } } }) {
             system { id }
             elements {
                 url_slug { value }

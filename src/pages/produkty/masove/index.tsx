@@ -1,20 +1,20 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { OtherProductsQuery } from '../../../graphql-types';
-import Layout from '../../components/Layout';
-import { ProductsList } from '../../components/products/ProductsList';
-import { mapOtherProductsFromKontent } from '../../models/products/otherProduct';
-import { mapAllTaxonomyFromKontent, sortTaxonomyFilters } from '../../models/taxonomies/_common';
-import { OtherProductTaxonomy } from '../../models/taxonomies/taxonomies';
+import { MeatProductsQuery } from '../../../../graphql-types';
+import Layout from '../../../components/Layout';
+import { ProductsList } from '../../../components/products/ProductsList';
+import { mapMeatProductsFromKontent } from '../../../models/products/meatProduct';
+import { mapAllTaxonomyFromKontent, sortTaxonomyFilters } from '../../../models/taxonomies/_common';
+import { MeatProductTaxonomy } from '../../../models/taxonomies/taxonomies';
 
 type ProductsProps = {
-  readonly data: OtherProductsQuery
+  readonly data: MeatProductsQuery
 }
 
 const Products: React.FC<ProductsProps> = ({ data }) => (
   <Layout>
-    <ProductsList<OtherProductTaxonomy>
-      allProducts={mapOtherProductsFromKontent(data)}
+    <ProductsList<MeatProductTaxonomy>
+      allProducts={mapMeatProductsFromKontent(data)}
       productTaxonomies={sortTaxonomyFilters(mapAllTaxonomyFromKontent(data.allKontentTaxonomy), ['producer', 'country'])}
     />
   </Layout>
@@ -23,14 +23,14 @@ const Products: React.FC<ProductsProps> = ({ data }) => (
 export default Products;
 
 export const query = graphql`
-    query OtherProducts {
+    query MeatProducts {
         allKontentTaxonomy(filter: {system: {codename: {in: ["producer", "country"]}}}) {
             nodes {
                 terms { codename, name }
                 system { codename, name }
             }
         }
-        allKontentItemOtherProduct {
+        allKontentItemMeatProduct {
             edges {
                 node {
                     system { id }

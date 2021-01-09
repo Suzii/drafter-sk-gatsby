@@ -1,10 +1,10 @@
 import { Container } from '@material-ui/core';
 import { graphql } from 'gatsby';
 import React from 'react';
-import { DiaryProductQuery } from '../../graphql-types';
-import Layout from '../components/Layout';
-import { ProductDetail } from '../components/products/ProductDetail';
-import { mapDiaryProductFromKontent } from '../models/products/diaryProduct';
+import { DiaryProductQuery } from '../../../../graphql-types';
+import Layout from '../../../components/Layout';
+import { ProductDetail } from '../../../components/products/ProductDetail';
+import { mapDiaryProductFromKontent } from '../../../models/products/diaryProduct';
 
 type ProductProps = {
   readonly data?: DiaryProductQuery
@@ -28,8 +28,8 @@ const DiaryProduct: React.FC<ProductProps> = ({ data }) => {
 export default DiaryProduct;
 
 export const query = graphql`
-    query DiaryProduct($slug: String!) {
-        kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $slug } } }) {
+    query DiaryProduct($elements__url_slug__value: String!) {
+        kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $elements__url_slug__value } } }) {
             system { id }
             elements {
                 url_slug { value }
