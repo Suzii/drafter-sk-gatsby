@@ -16,7 +16,7 @@ export type PartnerType = {
 };
 
 export const mapFromKontent = (homeQuery: HomeQuery): PartnerType[] =>
-  homeQuery.allKontentItemHomepage.nodes?.[0]?.elements?.partners?.value
+  homeQuery.allKontentItemPartneri.nodes?.[0]?.elements?.partners?.value
     ?.map(p => ({
       id: p?.system.id,
       title: {

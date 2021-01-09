@@ -15,7 +15,7 @@ const MeatProduct: React.FC<ProductProps> = ({ data }) => (
 export default MeatProduct;
 
 export const query = graphql`
-    query MeatProductFallback($fallback_slug: String!) {
+    query MeatProductFallback($fallback_slug: String) {
         kontentItemMeatProduct(elements: { url_slug: { value: { eq: $fallback_slug } } }) {
             system { id }
             elements {

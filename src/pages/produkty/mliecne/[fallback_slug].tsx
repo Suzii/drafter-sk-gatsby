@@ -15,7 +15,7 @@ const DiaryProduct: React.FC<ProductProps> = ({ data }) => (
 export default DiaryProduct;
 
 export const query = graphql`
-    query DiaryProductFallback($fallback_slug: String!) {
+    query DiaryProductFallback($fallback_slug: String) {
         kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $fallback_slug } } }) {
             system { id }
             elements {

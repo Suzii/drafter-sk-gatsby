@@ -25,7 +25,7 @@ export default Home;
 
 export const query = graphql`
     query Home {
-        allKontentItemHomepage(filter: {system: {codename: {eq: "homepage"}}}) {
+        allKontentItemPartneri(filter: {system: {codename: {eq: "partneri"}}}) {
             nodes {
                 elements {
                     partners {

@@ -15,7 +15,7 @@ const OtherProduct: React.FC<ProductProps> = ({ data }) => (
 export default OtherProduct;
 
 export const query = graphql`
-    query OtherProductFallback($fallback_slug: String!) {
+    query OtherProductFallback($fallback_slug: String) {
         kontentItemOtherProduct(elements: { url_slug: { value: { eq: $fallback_slug } } }) {
             system { id }
             elements {
