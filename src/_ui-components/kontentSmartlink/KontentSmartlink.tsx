@@ -2,7 +2,13 @@ import React from 'react';
 import { Maybe, Uuid } from '../../@types/global';
 import { isPreviewEnv } from '../../utils/featureToggles';
 
-type ElementCodenames = 'name' | 'image' | 'logo';
+type ElementCodenames = 'name'
+  | 'image'
+  | 'logo'
+  | 'title'
+  | 'subtitle'
+  | 'cta'
+  ;
 
 type Props = {
   readonly itemId: Maybe<Uuid>;

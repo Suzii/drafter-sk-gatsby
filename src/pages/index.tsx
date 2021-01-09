@@ -6,6 +6,7 @@ import { ContactSection } from '../components/sections/ContactSection';
 import { HeroSection } from '../components/sections/HeroSection';
 import { PartnersSection } from '../components/sections/PartnersSection';
 import { WhoWeAreSection } from '../components/sections/WhoWeAreSection';
+import { mapIntroFromKontent } from '../models/intro';
 import { mapFromKontent } from '../models/partners';
 
 type HomeProps = {
@@ -14,7 +15,7 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = ({ data }) => (
   <Layout>
-    <HeroSection />
+    <HeroSection intro={mapIntroFromKontent(data)} />
     <WhoWeAreSection />
     <ContactSection />
     <PartnersSection partners={mapFromKontent(data)} />
@@ -25,6 +26,35 @@ export default Home;
 
 export const query = graphql`
     query Home {
+        allKontentItemHomepage(filter: {system: {codename: {eq: "homepage"}}}) {
+            nodes {
+                elements {
+                    content {
+                        value {
+                            ... on kontent_item_intro {
+                                system { id }
+                                elements {
+                                    title { value }
+                                    subtitle { value }
+                                    cta { value }
+                                    image {
+                                        value {
+                                            fluid(maxWidth: 1920) {
+                                                aspectRatio
+                                                src
+                                                srcSet
+                                                sizes
+                                                base64
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         allKontentItemPartneri(filter: {system: {codename: {eq: "partneri"}}}) {
             nodes {
                 elements {

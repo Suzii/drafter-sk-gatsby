@@ -565,9 +565,12 @@ type Query {
     allKontentItem(filter: kontent_itemFilterInput, limit: Int, skip: Int, sort: kontent_itemSortInput): kontent_itemConnection!
     allKontentItemDiaryProduct(filter: kontent_item_diary_productFilterInput, limit: Int, skip: Int, sort: kontent_item_diary_productSortInput): kontent_item_diary_productConnection!
     allKontentItemHomepage(filter: kontent_item_homepageFilterInput, limit: Int, skip: Int, sort: kontent_item_homepageSortInput): kontent_item_homepageConnection!
+    allKontentItemIntro(filter: kontent_item_introFilterInput, limit: Int, skip: Int, sort: kontent_item_introSortInput): kontent_item_introConnection!
     allKontentItemMeatProduct(filter: kontent_item_meat_productFilterInput, limit: Int, skip: Int, sort: kontent_item_meat_productSortInput): kontent_item_meat_productConnection!
     allKontentItemOtherProduct(filter: kontent_item_other_productFilterInput, limit: Int, skip: Int, sort: kontent_item_other_productSortInput): kontent_item_other_productConnection!
+    allKontentItemPage(filter: kontent_item_pageFilterInput, limit: Int, skip: Int, sort: kontent_item_pageSortInput): kontent_item_pageConnection!
     allKontentItemPartner(filter: kontent_item_partnerFilterInput, limit: Int, skip: Int, sort: kontent_item_partnerSortInput): kontent_item_partnerConnection!
+    allKontentItemPartneri(filter: kontent_item_partneriFilterInput, limit: Int, skip: Int, sort: kontent_item_partneriSortInput): kontent_item_partneriConnection!
     allKontentItemProductType(filter: kontent_item_product_typeFilterInput, limit: Int, skip: Int, sort: kontent_item_product_typeSortInput): kontent_item_product_typeConnection!
     allKontentItemProductsDisambiguation(filter: kontent_item_products_disambiguationFilterInput, limit: Int, skip: Int, sort: kontent_item_products_disambiguationSortInput): kontent_item_products_disambiguationConnection!
     allKontentTaxonomy(filter: kontent_taxonomyFilterInput, limit: Int, skip: Int, sort: kontent_taxonomySortInput): kontent_taxonomyConnection!
@@ -579,11 +582,14 @@ type Query {
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
     kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
-    kontentItemDiaryProduct(children: NodeFilterListInput, elements: kontent_item_diary_product_elementsFilterInput, fields: kontent_item_diary_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_diary_product
+    kontentItemDiaryProduct(children: NodeFilterListInput, elements: kontent_item_diary_product_elementsFilterInput, gatsbyPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_diary_product
     kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepage_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_homepage
-    kontentItemMeatProduct(children: NodeFilterListInput, elements: kontent_item_meat_product_elementsFilterInput, fields: kontent_item_meat_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_meat_product
-    kontentItemOtherProduct(children: NodeFilterListInput, elements: kontent_item_other_product_elementsFilterInput, fields: kontent_item_other_productFieldsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_other_product
+    kontentItemIntro(children: NodeFilterListInput, elements: kontent_item_intro_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_intro
+    kontentItemMeatProduct(children: NodeFilterListInput, elements: kontent_item_meat_product_elementsFilterInput, gatsbyPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_meat_product
+    kontentItemOtherProduct(children: NodeFilterListInput, elements: kontent_item_other_product_elementsFilterInput, gatsbyPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_other_product
+    kontentItemPage(children: NodeFilterListInput, elements: kontent_item_page_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_page
     kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partner_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partner
+    kontentItemPartneri(children: NodeFilterListInput, elements: kontent_item_partneri_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partneri
     kontentItemProductType(children: NodeFilterListInput, elements: kontent_item_product_type_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product_type
     kontentItemProductsDisambiguation(children: NodeFilterListInput, elements: kontent_item_products_disambiguation_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_products_disambiguation
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
@@ -707,7 +713,13 @@ type SitePageConnection {
 }
 
 type SitePageContext {
-    slug: String
+    _xparams: SitePageContext_xparams
+    elements__url_slug__value: String
+    id: String
+}
+
+type SitePageContext_xparams {
+    elements__url_slug__value: String
 }
 
 type SitePageEdge {
@@ -794,6 +806,7 @@ type SitePluginPackageJsonPeerDependencies {
 
 type SitePluginPluginOptions {
     allExtensions: Boolean
+    allPageHeaders: [String]
     authorizationKey: String
     base64Width: Int
     codegenPlugins: [SitePluginPluginOptionsCodegenPlugins]
@@ -897,7 +910,7 @@ type kontent_item_date_time_element_value {
 type kontent_item_diary_product implements Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_diary_product_elements
-    fields: kontent_item_diary_productFields
+    gatsbyPath(filePath: String): String
     id: ID!
     internal: Internal!
     parent: Node
@@ -918,10 +931,6 @@ type kontent_item_diary_productEdge {
     next: kontent_item_diary_product
     node: kontent_item_diary_product!
     previous: kontent_item_diary_product
-}
-
-type kontent_item_diary_productFields {
-    slug: String
 }
 
 type kontent_item_diary_productGroupConnection {
@@ -981,13 +990,56 @@ type kontent_item_homepageGroupConnection {
 }
 
 type kontent_item_homepage_elements {
-    partners: kontent_item_modular_content_element_value
+    content: kontent_item_modular_content_element_value
+    subpages: kontent_item_modular_content_element_value
+    title: kontent_item_text_element_value
+}
+
+type kontent_item_intro implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_intro_elements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_introConnection {
+    distinct(field: kontent_item_introFieldsEnum!): [String!]!
+    edges: [kontent_item_introEdge!]!
+    group(field: kontent_item_introFieldsEnum!, limit: Int, skip: Int): [kontent_item_introGroupConnection!]!
+    nodes: [kontent_item_intro!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_introEdge {
+    next: kontent_item_intro
+    node: kontent_item_intro!
+    previous: kontent_item_intro
+}
+
+type kontent_item_introGroupConnection {
+    edges: [kontent_item_introEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_intro!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_intro_elements {
+    cta: kontent_item_text_element_value
+    image: kontent_item_asset_element_value
+    subtitle: kontent_item_text_element_value
+    title: kontent_item_text_element_value
 }
 
 type kontent_item_meat_product implements Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_meat_product_elements
-    fields: kontent_item_meat_productFields
+    gatsbyPath(filePath: String): String
     id: ID!
     internal: Internal!
     parent: Node
@@ -1008,10 +1060,6 @@ type kontent_item_meat_productEdge {
     next: kontent_item_meat_product
     node: kontent_item_meat_product!
     previous: kontent_item_meat_product
-}
-
-type kontent_item_meat_productFields {
-    slug: String
 }
 
 type kontent_item_meat_productGroupConnection {
@@ -1058,7 +1106,7 @@ type kontent_item_number_element_value {
 type kontent_item_other_product implements Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_other_product_elements
-    fields: kontent_item_other_productFields
+    gatsbyPath(filePath: String): String
     id: ID!
     internal: Internal!
     parent: Node
@@ -1081,10 +1129,6 @@ type kontent_item_other_productEdge {
     previous: kontent_item_other_product
 }
 
-type kontent_item_other_productFields {
-    slug: String
-}
-
 type kontent_item_other_productGroupConnection {
     edges: [kontent_item_other_productEdge!]!
     field: String!
@@ -1101,6 +1145,48 @@ type kontent_item_other_product_elements {
     produkt_core__name: kontent_item_text_element_value
     produkt_core__producer: kontent_item_taxonomy_element_value
     url_slug: kontent_item_url_slug_element_value
+}
+
+type kontent_item_page implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_page_elements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_pageConnection {
+    distinct(field: kontent_item_pageFieldsEnum!): [String!]!
+    edges: [kontent_item_pageEdge!]!
+    group(field: kontent_item_pageFieldsEnum!, limit: Int, skip: Int): [kontent_item_pageGroupConnection!]!
+    nodes: [kontent_item_page!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_pageEdge {
+    next: kontent_item_page
+    node: kontent_item_page!
+    previous: kontent_item_page
+}
+
+type kontent_item_pageGroupConnection {
+    edges: [kontent_item_pageEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_page!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_page_elements {
+    content: kontent_item_modular_content_element_value
+    show_in_navigation: kontent_item_multiple_choice_element_value
+    subpages: kontent_item_modular_content_element_value
+    title: kontent_item_text_element_value
+    url: kontent_item_url_slug_element_value
 }
 
 type kontent_item_partner implements Node & kontent_item {
@@ -1141,6 +1227,44 @@ type kontent_item_partner_elements {
     link: kontent_item_text_element_value
     logo: kontent_item_asset_element_value
     title: kontent_item_text_element_value
+}
+
+type kontent_item_partneri implements Node & kontent_item {
+    children: [Node!]!
+    elements: kontent_item_partneri_elements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+type kontent_item_partneriConnection {
+    distinct(field: kontent_item_partneriFieldsEnum!): [String!]!
+    edges: [kontent_item_partneriEdge!]!
+    group(field: kontent_item_partneriFieldsEnum!, limit: Int, skip: Int): [kontent_item_partneriGroupConnection!]!
+    nodes: [kontent_item_partneri!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_partneriEdge {
+    next: kontent_item_partneri
+    node: kontent_item_partneri!
+    previous: kontent_item_partneri
+}
+
+type kontent_item_partneriGroupConnection {
+    edges: [kontent_item_partneriEdge!]!
+    field: String!
+    fieldValue: String
+    nodes: [kontent_item_partneri!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type kontent_item_partneri_elements {
+    partners: kontent_item_modular_content_element_value
 }
 
 type kontent_item_product_type implements Node & kontent_item {
@@ -2106,7 +2230,9 @@ enum SitePageFieldsEnum {
     component
     componentChunkName
     componentPath
-    context___slug
+    context____xparams___elements__url_slug__value
+    context___elements__url_slug__value
+    context___id
     id
     internalComponentName
     internal___content
@@ -2217,6 +2343,7 @@ enum SitePageFieldsEnum {
     pluginCreator___parent___parent___id
     pluginCreator___pluginFilepath
     pluginCreator___pluginOptions___allExtensions
+    pluginCreator___pluginOptions___allPageHeaders
     pluginCreator___pluginOptions___authorizationKey
     pluginCreator___pluginOptions___base64Width
     pluginCreator___pluginOptions___codegenPlugins
@@ -2351,6 +2478,7 @@ enum SitePluginFieldsEnum {
     parent___parent___parent___id
     pluginFilepath
     pluginOptions___allExtensions
+    pluginOptions___allPageHeaders
     pluginOptions___authorizationKey
     pluginOptions___base64Width
     pluginOptions___codegenPlugins
@@ -2396,45 +2524,45 @@ enum kontent_itemFieldsEnum {
 }
 
 enum kontent_item_diary_productFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
+    children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     elements___diary_type___name
     elements___diary_type___taxonomy_group
     elements___diary_type___type
@@ -2498,7 +2626,117 @@ enum kontent_item_diary_productFieldsEnum {
     elements___weight___name
     elements___weight___type
     elements___weight___value
-    fields___slug
+    gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_homepageFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___content___name
+    elements___content___type
+    elements___content___value
+    elements___content___value___id
+    elements___content___value___preferred_language
+    elements___subpages___name
+    elements___subpages___type
+    elements___subpages___value
+    elements___subpages___value___id
+    elements___subpages___value___preferred_language
+    elements___title___name
+    elements___title___type
+    elements___title___value
     id
     internal___content
     internal___contentDigest
@@ -2556,7 +2794,7 @@ enum kontent_item_diary_productFieldsEnum {
     system___type
 }
 
-enum kontent_item_homepageFieldsEnum {
+enum kontent_item_introFieldsEnum {
     children
     children___children
     children___children___children
@@ -2596,11 +2834,25 @@ enum kontent_item_homepageFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
-    elements___partners___name
-    elements___partners___type
-    elements___partners___value
-    elements___partners___value___id
-    elements___partners___value___preferred_language
+    elements___cta___name
+    elements___cta___type
+    elements___cta___value
+    elements___image___name
+    elements___image___type
+    elements___image___value
+    elements___image___value___description
+    elements___image___value___height
+    elements___image___value___name
+    elements___image___value___size
+    elements___image___value___type
+    elements___image___value___url
+    elements___image___value___width
+    elements___subtitle___name
+    elements___subtitle___type
+    elements___subtitle___value
+    elements___title___name
+    elements___title___type
+    elements___title___value
     id
     internal___content
     internal___contentDigest
@@ -2659,45 +2911,45 @@ enum kontent_item_homepageFieldsEnum {
 }
 
 enum kontent_item_meat_productFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
+    children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     elements___produkt_core__country___name
     elements___produkt_core__country___taxonomy_group
     elements___produkt_core__country___type
@@ -2743,54 +2995,54 @@ enum kontent_item_meat_productFieldsEnum {
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
-    fields___slug
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
+    gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     preferred_language
     system___codename
     system___collection
@@ -2802,45 +3054,45 @@ enum kontent_item_meat_productFieldsEnum {
 }
 
 enum kontent_item_other_productFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
+    children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     elements___produkt_core__country___name
     elements___produkt_core__country___taxonomy_group
     elements___produkt_core__country___type
@@ -2886,7 +3138,125 @@ enum kontent_item_other_productFieldsEnum {
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
-    fields___slug
+    gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_pageFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___content___name
+    elements___content___type
+    elements___content___value
+    elements___content___value___id
+    elements___content___value___preferred_language
+    elements___show_in_navigation___name
+    elements___show_in_navigation___type
+    elements___show_in_navigation___value
+    elements___show_in_navigation___value___codename
+    elements___show_in_navigation___value___name
+    elements___subpages___name
+    elements___subpages___type
+    elements___subpages___value
+    elements___subpages___value___id
+    elements___subpages___value___preferred_language
+    elements___title___name
+    elements___title___type
+    elements___title___value
+    elements___url___name
+    elements___url___type
+    elements___url___value
     id
     internal___content
     internal___contentDigest
@@ -3000,6 +3370,108 @@ enum kontent_item_partnerFieldsEnum {
     elements___title___name
     elements___title___type
     elements___title___value
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+}
+
+enum kontent_item_partneriFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___partners___name
+    elements___partners___type
+    elements___partners___value
+    elements___partners___value___id
+    elements___partners___value___preferred_language
     id
     internal___content
     internal___contentDigest
@@ -3689,7 +4161,13 @@ input SiteFilterInput {
 }
 
 input SitePageContextFilterInput {
-    slug: StringQueryOperatorInput
+    _xparams: SitePageContext_xparamsFilterInput
+    elements__url_slug__value: StringQueryOperatorInput
+    id: StringQueryOperatorInput
+}
+
+input SitePageContext_xparamsFilterInput {
+    elements__url_slug__value: StringQueryOperatorInput
 }
 
 input SitePageFilterInput {
@@ -3779,6 +4257,7 @@ input SitePluginPluginOptionsCodegenPluginsFilterListInput {
 
 input SitePluginPluginOptionsFilterInput {
     allExtensions: BooleanQueryOperatorInput
+    allPageHeaders: StringQueryOperatorInput
     authorizationKey: StringQueryOperatorInput
     base64Width: IntQueryOperatorInput
     codegenPlugins: SitePluginPluginOptionsCodegenPluginsFilterListInput
@@ -3878,14 +4357,10 @@ input kontent_item_asset_element_valueFilterInput {
     value: kontent_item_asset_elementFilterListInput
 }
 
-input kontent_item_diary_productFieldsFilterInput {
-    slug: StringQueryOperatorInput
-}
-
 input kontent_item_diary_productFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_diary_product_elementsFilterInput
-    fields: kontent_item_diary_productFieldsFilterInput
+    gatsbyPath: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
@@ -3927,17 +4402,37 @@ input kontent_item_homepageSortInput {
 }
 
 input kontent_item_homepage_elementsFilterInput {
-    partners: kontent_item_modular_content_element_valueFilterInput
+    content: kontent_item_modular_content_element_valueFilterInput
+    subpages: kontent_item_modular_content_element_valueFilterInput
+    title: kontent_item_text_element_valueFilterInput
 }
 
-input kontent_item_meat_productFieldsFilterInput {
-    slug: StringQueryOperatorInput
+input kontent_item_introFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_intro_elementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_introSortInput {
+    fields: [kontent_item_introFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_intro_elementsFilterInput {
+    cta: kontent_item_text_element_valueFilterInput
+    image: kontent_item_asset_element_valueFilterInput
+    subtitle: kontent_item_text_element_valueFilterInput
+    title: kontent_item_text_element_valueFilterInput
 }
 
 input kontent_item_meat_productFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_meat_product_elementsFilterInput
-    fields: kontent_item_meat_productFieldsFilterInput
+    gatsbyPath: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
@@ -3986,14 +4481,10 @@ input kontent_item_number_element_valueFilterInput {
     value: FloatQueryOperatorInput
 }
 
-input kontent_item_other_productFieldsFilterInput {
-    slug: StringQueryOperatorInput
-}
-
 input kontent_item_other_productFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_other_product_elementsFilterInput
-    fields: kontent_item_other_productFieldsFilterInput
+    gatsbyPath: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     parent: NodeFilterInput
@@ -4015,6 +4506,29 @@ input kontent_item_other_product_elementsFilterInput {
     url_slug: kontent_item_url_slug_element_valueFilterInput
 }
 
+input kontent_item_pageFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_page_elementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_pageSortInput {
+    fields: [kontent_item_pageFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_page_elementsFilterInput {
+    content: kontent_item_modular_content_element_valueFilterInput
+    show_in_navigation: kontent_item_multiple_choice_element_valueFilterInput
+    subpages: kontent_item_modular_content_element_valueFilterInput
+    title: kontent_item_text_element_valueFilterInput
+    url: kontent_item_url_slug_element_valueFilterInput
+}
+
 input kontent_item_partnerFilterInput {
     children: NodeFilterListInput
     elements: kontent_item_partner_elementsFilterInput
@@ -4034,6 +4548,25 @@ input kontent_item_partner_elementsFilterInput {
     link: kontent_item_text_element_valueFilterInput
     logo: kontent_item_asset_element_valueFilterInput
     title: kontent_item_text_element_valueFilterInput
+}
+
+input kontent_item_partneriFilterInput {
+    children: NodeFilterListInput
+    elements: kontent_item_partneri_elementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input kontent_item_partneriSortInput {
+    fields: [kontent_item_partneriFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input kontent_item_partneri_elementsFilterInput {
+    partners: kontent_item_modular_content_element_valueFilterInput
 }
 
 input kontent_item_product_typeFilterInput {

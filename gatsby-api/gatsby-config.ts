@@ -34,7 +34,7 @@ module.exports = {
         fileName: `./graphql-types.ts`,
         documentPaths: [
           './src/**/*.{ts,tsx}',
-          './gatsby-api/**/*.{ts,tsx}',
+          // './gatsby-api/**/*.{ts,tsx}',
           './node_modules/gatsby*/!(node_modules)/**/*.js',
         ],
         codegenPlugins: [
@@ -56,13 +56,13 @@ module.exports = {
     `gatsby-plugin-use-query-params`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `./src/images`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `images`,
+    //     path: `./src/images`,
+    //   },
+    // },
     {
       resolve: `@rshackleton/gatsby-transformer-kontent-image`,
     },

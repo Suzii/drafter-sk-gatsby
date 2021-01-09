@@ -1,47 +1,47 @@
 import { Typography } from '@material-ui/core';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { Link } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import { FluidObject } from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
-import { HeroImageQuery } from '../../../graphql-types';
-import { navBarHeight } from '../../styles/theme';
-import { Logo, LogoType } from '../Logo';
+import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { PRODUCTS_URL } from '../../constants/urls';
+import { IntroType } from '../../models/intro';
+import { navBarHeight } from '../../styles/theme';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
+import { nbsp } from '../../utils/stringUtils';
+import { Logo, LogoType } from '../Logo';
 
-export const HeroSection: React.FC = () => {
-  const heroImage = useStaticQuery<HeroImageQuery>(graphql`
-      query HeroImage {
-          file(relativePath: { eq: "hero.jpg" }) {
-              childImageSharp {
-                  fluid(maxWidth: 1920) {
-                      aspectRatio
-                      src
-                      srcSet
-                      sizes
-                      base64
-                  }
-              }
-          }
-      }
-  `);
+type Props = {
+  readonly intro: IntroType;
+};
 
+export const HeroSection: React.FC<Props> = ({ intro }) => {
   return (
     <HeroHeader
       Tag={`header`}
       fluid={[
         `linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))`,
-        heroImage.file!.childImageSharp!.fluid! as FluidObject
+        intro.image?.fluid!
       ]}
     >
       <div className="hero__text">
         <Logo variant={LogoType.Compact} className="hero__text--logo" />
-        <Typography variant="h1" component="h1" className="hero__text--title">Farmárske potraviny</Typography>
-        <Typography variant="h5" component="p" className="hero__text--subtitle">od&nbsp;výrobcov až&nbsp;na&nbsp;vaše pulty</Typography>
-        {isFeatureEnabled(Feature.ProductsPage) && (
-          <Typography variant="button">
-            <Link to={PRODUCTS_URL} className="hero__text--cta">Sortiment</Link>
+
+        <Typography variant="h1" component="h1" className="hero__text--title" {...getKontentAttrs(intro.id, 'title')}>
+          {intro?.title}
+        </Typography>
+
+        {intro.subtitle && (
+          <Typography variant="h5" component="p" className="hero__text--subtitle" {...getKontentAttrs(intro.id, 'subtitle')}>
+            {nbsp(intro.subtitle)}
+          </Typography>
+        )}
+
+        {isFeatureEnabled(Feature.ProductsPage) && intro.cta && (
+          <Typography variant="button" {...getKontentAttrs(intro.id, 'cta')}>
+            <Link to={PRODUCTS_URL} className="hero__text--cta">
+              {intro.cta}
+            </Link>
           </Typography>
         )}
       </div>
