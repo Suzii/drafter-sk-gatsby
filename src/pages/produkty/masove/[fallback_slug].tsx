@@ -1,11 +1,11 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { MeatProductQuery } from '../../../../graphql-types';
+import { MeatProductFallbackQuery } from '../../../../graphql-types';
 import { ProductDetail } from '../../../components/products/ProductDetail';
 import { mapMeatProductFromKontent } from '../../../models/products/meatProduct';
 
 type ProductProps = {
-  readonly data?: MeatProductQuery
+  readonly data?: MeatProductFallbackQuery
 }
 
 const MeatProduct: React.FC<ProductProps> = ({ data }) => (
@@ -15,8 +15,8 @@ const MeatProduct: React.FC<ProductProps> = ({ data }) => (
 export default MeatProduct;
 
 export const query = graphql`
-    query MeatProduct($elements__url_slug__value: String!) {
-        kontentItemMeatProduct(elements: { url_slug: { value: { eq: $elements__url_slug__value } } }) {
+    query MeatProductFallback($fallback_slug: String!) {
+        kontentItemMeatProduct(elements: { url_slug: { value: { eq: $fallback_slug } } }) {
             system { id }
             elements {
                 url_slug { value }

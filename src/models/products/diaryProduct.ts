@@ -1,4 +1,4 @@
-import { DiaryProductQuery, DiaryProductsQuery } from '../../../graphql-types';
+import { DiaryProductFallbackQuery, DiaryProductQuery, DiaryProductsQuery } from '../../../graphql-types';
 import { PRODUCT_URL } from '../../constants/urls';
 import { DiaryProductTaxonomy } from '../taxonomies/taxonomies';
 import { mapTaxonomyElement, ProductCommon } from './index';
@@ -23,7 +23,7 @@ export const mapDiaryProductsFromKontent = (query: DiaryProductsQuery): DiaryPro
   ?? [];
 
 
-export const mapDiaryProductFromKontent = ({ kontentItemDiaryProduct: p }: DiaryProductQuery): DiaryProduct => ({
+export const mapDiaryProductFromKontent = ({ kontentItemDiaryProduct: p }: DiaryProductQuery | DiaryProductFallbackQuery): DiaryProduct => ({
   id: p?.system.id,
   name: p?.elements?.produkt_core__name?.value ?? '',
   description: p?.elements?.produkt_core__description,

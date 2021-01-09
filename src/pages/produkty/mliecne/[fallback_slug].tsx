@@ -1,11 +1,11 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { DiaryProductQuery } from '../../../../graphql-types';
+import { DiaryProductFallbackQuery, DiaryProductQuery } from '../../../../graphql-types';
 import { ProductDetail } from '../../../components/products/ProductDetail';
 import { mapDiaryProductFromKontent } from '../../../models/products/diaryProduct';
 
 type ProductProps = {
-  readonly data?: DiaryProductQuery
+  readonly data?: DiaryProductFallbackQuery
 }
 
 const DiaryProduct: React.FC<ProductProps> = ({ data }) => (
@@ -15,8 +15,8 @@ const DiaryProduct: React.FC<ProductProps> = ({ data }) => (
 export default DiaryProduct;
 
 export const query = graphql`
-    query DiaryProduct($elements__url_slug__value: String!) {
-        kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $elements__url_slug__value } } }) {
+    query DiaryProductFallback($fallback_slug: String!) {
+        kontentItemDiaryProduct(elements: { url_slug: { value: { eq: $fallback_slug } } }) {
             system { id }
             elements {
                 url_slug { value }

@@ -5267,6 +5267,13 @@ export type ProductsDisambiguationQuery = { kontentItemProductsDisambiguation?: 
         )>>> }
       )> }> }> };
 
+export type MeatProductFallbackQueryVariables = Exact<{
+  fallback_slug: Scalars['String'];
+}>;
+
+
+export type MeatProductFallbackQuery = { kontentItemMeatProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> }> };
+
 export type MeatProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5279,6 +5286,13 @@ export type MeatProductQueryVariables = Exact<{
 
 export type MeatProductQuery = { kontentItemMeatProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> }> };
 
+export type DiaryProductFallbackQueryVariables = Exact<{
+  fallback_slug: Scalars['String'];
+}>;
+
+
+export type DiaryProductFallbackQuery = { kontentItemDiaryProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, diary_type?: Maybe<TaxonomyElementFieldsFragment>, milk_type?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> }> };
+
 export type DiaryProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5290,6 +5304,13 @@ export type DiaryProductQueryVariables = Exact<{
 
 
 export type DiaryProductQuery = { kontentItemDiaryProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, diary_type?: Maybe<TaxonomyElementFieldsFragment>, milk_type?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> }> };
+
+export type OtherProductFallbackQueryVariables = Exact<{
+  fallback_slug: Scalars['String'];
+}>;
+
+
+export type OtherProductFallbackQuery = { kontentItemOtherProduct?: Maybe<{ system: Pick<Kontent_Item_System, 'id'>, elements?: Maybe<{ url_slug?: Maybe<Pick<Kontent_Item_Url_Slug_Element_Value, 'value'>>, produkt_core__name?: Maybe<Pick<Kontent_Item_Text_Element_Value, 'value'>>, produkt_core__description?: Maybe<Pick<Kontent_Item_Rich_Text_Element_Value, 'value'>>, produkt_core__producer?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__country?: Maybe<TaxonomyElementFieldsFragment>, produkt_core__image?: Maybe<FluidImage350wFragment> }> }> };
 
 export type OtherProductsQueryVariables = Exact<{ [key: string]: never; }>;
 

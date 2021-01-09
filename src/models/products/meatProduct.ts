@@ -1,4 +1,4 @@
-import { MeatProductQuery, MeatProductsQuery } from '../../../graphql-types';
+import { MeatProductQuery, MeatProductsQuery, MeatProductFallbackQuery } from '../../../graphql-types';
 import { PRODUCT_URL } from '../../constants/urls';
 import { MeatProductTaxonomy } from '../taxonomies/taxonomies';
 import { mapTaxonomyElement, ProductCommon } from './index';
@@ -21,7 +21,7 @@ export const mapMeatProductsFromKontent = (query: MeatProductsQuery): MeatProduc
   ?? [];
 
 
-export const mapMeatProductFromKontent = ({ kontentItemMeatProduct: p }: MeatProductQuery): MeatProduct => ({
+export const mapMeatProductFromKontent = ({ kontentItemMeatProduct: p }: MeatProductQuery | MeatProductFallbackQuery): MeatProduct => ({
   id: p?.system.id,
   name: p?.elements?.produkt_core__name?.value ?? '',
   description: p?.elements?.produkt_core__description,

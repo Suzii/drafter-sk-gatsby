@@ -1,4 +1,4 @@
-import { OtherProductQuery, OtherProductsQuery } from '../../../graphql-types';
+import { OtherProductFallbackQuery, OtherProductQuery, OtherProductsQuery } from '../../../graphql-types';
 import { PRODUCT_URL } from '../../constants/urls';
 import { OtherProductTaxonomy } from '../taxonomies/taxonomies';
 import { mapTaxonomyElement, ProductCommon } from './index';
@@ -21,7 +21,7 @@ export const mapOtherProductsFromKontent = (query: OtherProductsQuery): OtherPro
   ?? [];
 
 
-export const mapOtherProductFromKontent = ({ kontentItemOtherProduct: p }: OtherProductQuery): OtherProduct => ({
+export const mapOtherProductFromKontent = ({ kontentItemOtherProduct: p }: OtherProductQuery | OtherProductFallbackQuery): OtherProduct => ({
   id: p?.system.id,
   name: p?.elements?.produkt_core__name?.value ?? '',
   description: p?.elements?.produkt_core__description,
