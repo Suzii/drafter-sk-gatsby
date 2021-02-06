@@ -7,7 +7,7 @@ import { AllKnownProductTaxonomies } from '../taxonomies/taxonomies';
 export type ProductProperty<TGroupName extends AllKnownProductTaxonomies> = {
   readonly groupName: string;
   readonly groupCodename: TGroupName;
-  readonly term: Maybe<Term>;
+  readonly terms: ReadonlyArray<Term>;
 };
 
 export type ProductProperties<TGroupName extends AllKnownProductTaxonomies> = {
@@ -26,5 +26,11 @@ export type ProductCommon<TGroupName extends AllKnownProductTaxonomies> = {
 export const mapTaxonomyElement = <TGroupName extends AllKnownProductTaxonomies>(e: Maybe<TaxonomyElementFieldsFragment>): ProductProperty<TGroupName> => ({
   groupCodename: e?.taxonomy_group as unknown as TGroupName,
   groupName: e?.name ?? '',
-  term: e?.value?.[0],
+  terms: e?.value
+    ?.filter(t => !!t)
+    .map(t => ({
+      name: t!.name,
+      codename: t!.codename
+    }))
+    ?? [],
 });

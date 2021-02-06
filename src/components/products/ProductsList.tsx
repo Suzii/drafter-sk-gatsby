@@ -6,6 +6,7 @@ import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-compone
 import { ProductCommon } from '../../models/products';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
+import { arrayIntersect } from '../../utils/collectionsUtils';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
 import { ProductTypeLinks } from './disambiguation/ProductTypeLinks';
 import { ProductsPageWrapper } from './ProductsPageWrapper';
@@ -23,7 +24,10 @@ const satisfiesGroupFilter = <TGroupName extends AllKnownProductTaxonomies>(
 ): boolean =>
   !selectedTerms ||
   !selectedTerms.length ||
-  selectedTerms.includes(product.properties[groupCodename]?.term?.codename ?? '');
+  !!arrayIntersect(
+    selectedTerms,
+    product.properties[groupCodename]?.terms.map(t => t.codename) ?? []
+  ).length;
 
 const satisfiesFilter = <TGroupName extends AllKnownProductTaxonomies>(
   product: ProductCommon<TGroupName>,

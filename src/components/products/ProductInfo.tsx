@@ -13,7 +13,7 @@ export const ProductInfo = <TGroupName extends AllKnownProductTaxonomies>({ prop
     {Object.values<ProductProperty<TGroupName>>(properties).map(p => (
       <React.Fragment key={p.groupCodename}>
         <div className="label">{p.groupName}</div>
-        <div className="value">{p.term?.name ?? '-'}</div>
+        <div className="value">{p.terms.map(t => t.name).join(', ') || '-'}</div>
       </React.Fragment>
     ))}
   </ProductInfoStyled>
