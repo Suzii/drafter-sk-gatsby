@@ -1616,6 +1616,7 @@ export type Kontent_Item_Diary_ProductFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___produkt_core__producer___name'
   | 'elements___produkt_core__producer___type'
   | 'elements___produkt_core__producer___taxonomy_group'
@@ -1850,6 +1851,7 @@ export type Kontent_Item_HomepageFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___subpages___name'
   | 'elements___subpages___type'
   | 'elements___subpages___value'
@@ -2034,6 +2036,7 @@ export type Kontent_Item_IntroFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___subtitle___name'
   | 'elements___subtitle___type'
   | 'elements___subtitle___value'
@@ -2234,6 +2237,7 @@ export type Kontent_Item_Meat_ProductFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___url_slug___name'
   | 'elements___url_slug___type'
   | 'elements___url_slug___value'
@@ -2512,6 +2516,7 @@ export type Kontent_Item_Other_ProductFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___produkt_core__producer___name'
   | 'elements___produkt_core__producer___type'
   | 'elements___produkt_core__producer___taxonomy_group'
@@ -2732,6 +2737,7 @@ export type Kontent_Item_PageFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___url___name'
   | 'elements___url___type'
   | 'elements___url___value'
@@ -2922,6 +2928,7 @@ export type Kontent_Item_PartnerFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___logo___name'
   | 'elements___logo___type'
   | 'elements___logo___value'
@@ -3098,6 +3105,7 @@ export type Kontent_Item_PartneriFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___partners___name'
   | 'elements___partners___type'
   | 'elements___partners___value'
@@ -3275,6 +3283,7 @@ export type Kontent_Item_Product_TypeFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___type___name'
   | 'elements___type___type'
   | 'elements___type___value'
@@ -3455,6 +3464,7 @@ export type Kontent_Item_Products_DisambiguationFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'elements___product_types___name'
   | 'elements___product_types___type'
   | 'elements___product_types___value'
@@ -3668,6 +3678,7 @@ export type Kontent_Item_System = {
   name: Scalars['String'];
   type: Scalars['String'];
   collection?: Maybe<Scalars['String']>;
+  workflow_step?: Maybe<Scalars['String']>;
 };
 
 
@@ -3686,6 +3697,7 @@ export type Kontent_Item_SystemFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   type?: Maybe<StringQueryOperatorInput>;
   collection?: Maybe<StringQueryOperatorInput>;
+  workflow_step?: Maybe<StringQueryOperatorInput>;
 };
 
 export type Kontent_Item_Taxonomy_Element = {
@@ -3776,6 +3788,7 @@ export type Kontent_ItemFieldsEnum =
   | 'system___name'
   | 'system___type'
   | 'system___collection'
+  | 'system___workflow_step'
   | 'preferred_language';
 
 export type Kontent_ItemFilterInput = {
