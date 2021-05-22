@@ -268,6 +268,8 @@ export type SiteBuildTimeArgs = {
 
 export type SiteFlags = {
   PRESERVE_WEBPACK_CACHE?: Maybe<Scalars['Boolean']>;
+  FAST_DEV?: Maybe<Scalars['Boolean']>;
+  DEV_SSR?: Maybe<Scalars['Boolean']>;
 };
 
 export type SiteSiteMetadata = {
@@ -2271,6 +2273,8 @@ export type SiteSiteMetadataFilterInput = {
 
 export type SiteFlagsFilterInput = {
   PRESERVE_WEBPACK_CACHE?: Maybe<BooleanQueryOperatorInput>;
+  FAST_DEV?: Maybe<BooleanQueryOperatorInput>;
+  DEV_SSR?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SiteConnection = {
@@ -2307,6 +2311,8 @@ export type SiteFieldsEnum =
   | 'port'
   | 'host'
   | 'flags___PRESERVE_WEBPACK_CACHE'
+  | 'flags___FAST_DEV'
+  | 'flags___DEV_SSR'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'

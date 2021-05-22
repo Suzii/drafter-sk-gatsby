@@ -9,7 +9,9 @@ const usePreviewUrl = !!config.KONTENT_PREVIEW_API_KEY;
 
 module.exports = {
   flags: {
-    PRESERVE_WEBPACK_CACHE: true
+    PRESERVE_WEBPACK_CACHE: true,
+    FAST_DEV: true,
+    DEV_SSR: true,
   },
   plugins: [
     {
