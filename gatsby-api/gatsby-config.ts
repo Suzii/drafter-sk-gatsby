@@ -67,9 +67,9 @@ module.exports = {
     //     path: `./src/images`,
     //   },
     // },
-    {
-      resolve: `@rshackleton/gatsby-transformer-kontent-image`,
-    },
+    // {
+    //   resolve: `@rshackleton/gatsby-transformer-kontent-image`,
+    // },
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
