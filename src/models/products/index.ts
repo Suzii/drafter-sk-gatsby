@@ -19,7 +19,7 @@ export type ProductCommon<TGroupName extends AllKnownProductTaxonomies> = {
   readonly name: Maybe<string>;
   readonly url: string;
   readonly description: KontentRte;
-  readonly img: KontentImage;
+  readonly img: Maybe<KontentImage>;
   readonly properties: ProductProperties<TGroupName>
 };
 

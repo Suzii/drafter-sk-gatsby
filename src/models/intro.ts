@@ -7,7 +7,7 @@ export type IntroType = {
   readonly title: Maybe<string>;
   readonly subtitle: Maybe<string>;
   readonly cta: Maybe<string>;
-  readonly image: KontentImage;
+  readonly image: Maybe<KontentImage>;
 };
 
 export const mapIntroFromKontent = (homeQuery: HomeQuery): IntroType => ({

@@ -40,7 +40,7 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
               sm={5}
               xs={12}
             >
-              <ImageElement image={product.img} />
+              <ImageElement image={product.img ?? {} as any} />
             </Grid>
             <Grid
               item
