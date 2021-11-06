@@ -1,7 +1,7 @@
+import { ImageElement } from '@kentico/gatsby-kontent-components';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
 import React, { useState } from 'react';
 import { getKontentAttrs } from '../../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { getUrlByProductType } from '../../../constants/urls';
@@ -55,8 +55,8 @@ export const Tile: React.FC<TileProps> = ({ type }) => {
     >
       <Link to={getUrlByProductType(type.type)} {...getKontentAttrs(type.id, 'image')}>
         <CardMedia>
-          <Img
-            fluid={type.img?.fluid as FluidObject}
+          <ImageElement
+            image={type.img}
             alt={type.img?.description ?? 'Typ produktu'}
           />
         </CardMedia>

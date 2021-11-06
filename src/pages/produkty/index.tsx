@@ -32,7 +32,7 @@ export const query = graphql`
                                 type{
                                     value {name codename}
                                 }
-                                image { ...FluidImage350w }
+                                image { ...KontentImage }
                             }
                         }
                     }

@@ -1,6 +1,6 @@
 import { TaxonomyElementFieldsFragment } from '../../../graphql-types';
 import { Maybe, Uuid } from '../../@types/global';
-import { FluidImg, KontentRte } from '../_common';
+import { KontentImage, KontentRte } from '../_common';
 import { Term } from '../taxonomies/_common';
 import { AllKnownProductTaxonomies } from '../taxonomies/taxonomies';
 
@@ -19,7 +19,7 @@ export type ProductCommon<TGroupName extends AllKnownProductTaxonomies> = {
   readonly name: Maybe<string>;
   readonly url: string;
   readonly description: KontentRte;
-  readonly img: FluidImg;
+  readonly img: KontentImage;
   readonly properties: ProductProperties<TGroupName>
 };
 

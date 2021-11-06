@@ -1,6 +1,6 @@
 import { ProductsDisambiguationQuery } from '../../../graphql-types';
 import { Maybe, Uuid } from '../../@types/global';
-import { FluidImg } from '../_common';
+import { KontentImage } from '../_common';
 
 export type ProductType = 'diary' | 'meat' | 'other';
 
@@ -8,7 +8,7 @@ export type ProductTypeModel = {
   readonly id: Maybe<Uuid>,
   readonly title: Maybe<string>,
   readonly type: Maybe<ProductType>,
-  readonly img: FluidImg;
+  readonly img: KontentImage;
 };
 
 export const mapProductTypesFromKontent = ({ kontentItemProductsDisambiguation }: ProductsDisambiguationQuery): ReadonlyArray<ProductTypeModel> =>

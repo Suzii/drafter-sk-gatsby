@@ -39,13 +39,9 @@ export const query = graphql`
                                     cta { value }
                                     image {
                                         value {
-                                            fluid(maxWidth: 1920) {
-                                                aspectRatio
-                                                src
-                                                srcSet
-                                                sizes
-                                                base64
-                                            }
+                                            url
+                                            width
+                                            height
                                         }
                                     }
                                 }

@@ -1,6 +1,6 @@
+import { ImageElement } from '@kentico/gatsby-kontent-components';
 import { Typography } from '@material-ui/core';
 import { Link } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
 import React from 'react';
 import styled from 'styled-components';
 import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
@@ -17,13 +17,13 @@ type Props = {
 
 export const HeroSection: React.FC<Props> = ({ intro }) => {
   return (
-    <HeroHeader
-      Tag={`header`}
-      fluid={[
-        `linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))`,
-        intro.image?.fluid!
-      ]}
-    >
+    <HeroHeader>
+      <HeroGradient />
+      <ImageElement
+        image={intro.image}
+        alt=""
+        className="hero__background-image"
+      />
       <div className="hero__text">
         <Logo variant={LogoType.Compact} className="hero__text--logo" />
 
@@ -49,14 +49,28 @@ export const HeroSection: React.FC<Props> = ({ intro }) => {
   );
 };
 
-const HeroHeader = styled(BackgroundImage)`
+const HeroGradient = styled.div`
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
+`
+
+const HeroHeader = styled.header`
   min-height: ${`calc(100vh - ${navBarHeight})`};
   display: flex;
   align-items: center;
   justify-content: center;
-  background-repeat: no-repeat;
-  background-position: 30% 60%;
-  background-size: cover;
+  position: relative;
+
+  .hero__background-image {
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
 
   .hero__text {
     display: flex;
@@ -64,14 +78,15 @@ const HeroHeader = styled(BackgroundImage)`
     align-items: center;
     margin: auto;
     text-align: center;
+    z-index: 10;
 
     color: ${p => p.theme.palette.common.lightGray};
     text-transform: uppercase;
-    
+
     * {
       margin: 0.8rem 1.2rem;
     }
-    
+
     .hero__text--logo {
       fill: ${p => p.theme.palette.primary.main};
       height: 4.5rem;

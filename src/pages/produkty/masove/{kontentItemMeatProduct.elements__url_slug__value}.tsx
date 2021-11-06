@@ -24,7 +24,7 @@ export const query = graphql`
                 produkt_core__description { value }
                 produkt_core__producer { ...TaxonomyElementFields }
                 produkt_core__country { ...TaxonomyElementFields }
-                produkt_core__image { ...FluidImage350w }
+                produkt_core__image { ...KontentImage }
             }
         }
     }

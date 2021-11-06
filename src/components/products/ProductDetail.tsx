@@ -1,6 +1,6 @@
+import { ImageElement } from '@kentico/gatsby-kontent-components';
 import { Container, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
@@ -40,7 +40,7 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
               sm={5}
               xs={12}
             >
-              <Img fluid={product.img?.fluid as FluidObject} />
+              <ImageElement image={product.img} />
             </Grid>
             <Grid
               item
