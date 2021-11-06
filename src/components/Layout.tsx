@@ -1,4 +1,4 @@
-import '@kentico/kontent-smart-link/dist/kontent-smart-link.styles.css';
+// import '@kentico/kontent-smart-link/dist/kontent-smart-link.styles.css';
 import { Grid } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';

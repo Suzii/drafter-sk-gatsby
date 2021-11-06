@@ -1,5 +1,4 @@
-
-import { graphql } from 'gatsby'
+import { graphql } from 'gatsby';
 
 export const TaxonomyElementFields = graphql`
     fragment TaxonomyElementFields on kontent_item_taxonomy_element_value {
@@ -9,17 +8,13 @@ export const TaxonomyElementFields = graphql`
     }
 `
 
-export const FluidImage = graphql`
-    fragment FluidImage350w on kontent_item_asset_element_value {
+export const KontentImage = graphql`
+    fragment KontentImage on kontent_item_asset_element_value {
         value {
             description
-            fluid(maxWidth: 350) {
-                aspectRatio
-                base64
-                sizes
-                src
-                srcSet
-            }
+            url
+            width
+            height
         }
     }
 `;

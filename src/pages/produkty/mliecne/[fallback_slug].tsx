@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { DiaryProductFallbackQuery, DiaryProductQuery } from '../../../../graphql-types';
+import { DiaryProductFallbackQuery } from '../../../../graphql-types';
 import { ProductDetail } from '../../../components/products/ProductDetail';
 import { mapDiaryProductFromKontent } from '../../../models/products/diaryProduct';
 
@@ -26,7 +26,7 @@ export const query = graphql`
                 produkt_core__country { ...TaxonomyElementFields }
                 diary_type { ...TaxonomyElementFields }
                 milk_type { ...TaxonomyElementFields }
-                produkt_core__image { ...FluidImage350w }
+                produkt_core__image { ...KontentImage }
             }
         }
     }

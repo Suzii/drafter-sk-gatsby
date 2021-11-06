@@ -1,7 +1,7 @@
+import { ImageElement } from '@kentico/gatsby-kontent-components';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Link } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
 import React, { useState } from 'react';
 import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { ProductCommon } from '../../models/products';
@@ -28,8 +28,8 @@ export const ProductTile = <TGroupName extends AllKnownProductTaxonomies>({ prod
       raised={isHovered}
     >
       <CardMedia className={classes.media} {...getKontentAttrs(product.id, 'name')}>
-        <Img
-          fluid={product.img?.fluid as FluidObject}
+        <ImageElement
+          image={product.img}
           alt={product.img?.description ?? product.name ?? 'Obrázok produktu'}
         />
       </CardMedia>

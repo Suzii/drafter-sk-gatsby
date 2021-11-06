@@ -1,13 +1,13 @@
 import { HomeQuery } from '../../graphql-types';
 import { Maybe, Uuid } from '../@types/global';
-import { FluidImg } from './_common';
+import { KontentImage } from './_common';
 
 export type IntroType = {
   readonly id: Maybe<Uuid>,
   readonly title: Maybe<string>;
   readonly subtitle: Maybe<string>;
   readonly cta: Maybe<string>;
-  readonly image: FluidImg;
+  readonly image: KontentImage;
 };
 
 export const mapIntroFromKontent = (homeQuery: HomeQuery): IntroType => ({
