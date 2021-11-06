@@ -8,7 +8,7 @@ export type ProductTypeModel = {
   readonly id: Maybe<Uuid>,
   readonly title: Maybe<string>,
   readonly type: Maybe<ProductType>,
-  readonly img: KontentImage;
+  readonly img: Maybe<KontentImage>;
 };
 
 export const mapProductTypesFromKontent = ({ kontentItemProductsDisambiguation }: ProductsDisambiguationQuery): ReadonlyArray<ProductTypeModel> =>

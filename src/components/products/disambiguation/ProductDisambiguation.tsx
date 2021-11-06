@@ -56,7 +56,7 @@ export const Tile: React.FC<TileProps> = ({ type }) => {
       <Link to={getUrlByProductType(type.type)} {...getKontentAttrs(type.id, 'image')}>
         <CardMedia>
           <ImageElement
-            image={type.img}
+            image={type.img ?? {} as any}
             alt={type.img?.description ?? 'Typ produktu'}
           />
         </CardMedia>

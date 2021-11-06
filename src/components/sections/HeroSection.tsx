@@ -19,11 +19,13 @@ export const HeroSection: React.FC<Props> = ({ intro }) => {
   return (
     <HeroHeader>
       <HeroGradient />
-      <ImageElement
-        image={intro.image}
-        alt=""
-        className="hero__background-image"
-      />
+      {intro.image && (
+        <ImageElement
+          image={intro.image}
+          alt=""
+          className="hero__background-image"
+        />
+      )}
       <div className="hero__text">
         <Logo variant={LogoType.Compact} className="hero__text--logo" />
 
