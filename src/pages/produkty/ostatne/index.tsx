@@ -30,18 +30,19 @@ export const query = graphql`
                 system { codename, name }
             }
         }
-        allKontentItemOtherProduct {
-            edges {
-                node {
-                    system { id }
-                    elements {
-                        url_slug { value }
-                        produkt_core__name { value }
-                        produkt_core__description { value }
-                        produkt_core__producer { ...TaxonomyElementFields }
-                        produkt_core__country { ...TaxonomyElementFields }
-                        produkt_core__image { ...KontentImage }
-                    }
+        allKontentItemOtherProduct: allKontentItemProducts {
+            __typename
+            system { id }
+            elements {
+                url_slug { value }
+                produkt_core__name { value }
+                produkt_core__description { value }
+                produkt_core__producer { ...TaxonomyElementFields }
+                produkt_core__country { ...TaxonomyElementFields }
+                produkt_core__image { ...KontentImage }
+                ... on kontent_item_diary_product_elements {
+                    diary_type { ...TaxonomyElementFields}
+                    milk_type { ...TaxonomyElementFields}
                 }
             }
         }

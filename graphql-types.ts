@@ -464,7 +464,7 @@ export type Kontent_Item_Rich_Text_Element_Link = {
   url_slug: Scalars['String'];
 };
 
-export type Kontent_Item_Diary_Product_Elements = {
+export type Kontent_Item_Diary_Product_Elements = KontentItemProductElements & {
   produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
   produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
   produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
@@ -477,7 +477,7 @@ export type Kontent_Item_Diary_Product_Elements = {
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
 };
 
-export type Kontent_Item_Diary_Product = Node & Kontent_Item & {
+export type Kontent_Item_Diary_Product = Node & Kontent_Item & KontentItemProduct & {
   system: Kontent_Item_System;
   elements?: Maybe<Kontent_Item_Diary_Product_Elements>;
   preferred_language: Scalars['String'];
@@ -526,16 +526,18 @@ export type Kontent_Item_Intro = Node & Kontent_Item & {
   internal: Internal;
 };
 
-export type Kontent_Item_Meat_Product_Elements = {
+export type Kontent_Item_Meat_Product_Elements = KontentItemProductElements & {
   produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
   produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
   produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
   produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
+  weight?: Maybe<Kontent_Item_Number_Element_Value>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_Value>;
 };
 
-export type Kontent_Item_Meat_Product = Node & Kontent_Item & {
+export type Kontent_Item_Meat_Product = Node & Kontent_Item & KontentItemProduct & {
   system: Kontent_Item_System;
   elements?: Maybe<Kontent_Item_Meat_Product_Elements>;
   preferred_language: Scalars['String'];
@@ -551,16 +553,18 @@ export type Kontent_Item_Meat_ProductGatsbyPathArgs = {
   filePath?: Maybe<Scalars['String']>;
 };
 
-export type Kontent_Item_Other_Product_Elements = {
+export type Kontent_Item_Other_Product_Elements = KontentItemProductElements & {
   produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
   produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
   produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
   produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
+  weight?: Maybe<Kontent_Item_Number_Element_Value>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_Value>;
 };
 
-export type Kontent_Item_Other_Product = Node & Kontent_Item & {
+export type Kontent_Item_Other_Product = Node & Kontent_Item & KontentItemProduct & {
   system: Kontent_Item_System;
   elements?: Maybe<Kontent_Item_Other_Product_Elements>;
   preferred_language: Scalars['String'];
@@ -951,6 +955,27 @@ export type ImageSharpResize = {
   originalName?: Maybe<Scalars['String']>;
 };
 
+export type KontentItemProduct = {
+  elements?: Maybe<KontentItemProductElements>;
+  id: Scalars['ID'];
+  system: Kontent_Item_System;
+  preferred_language: Scalars['String'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type KontentItemProductElements = {
+  produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
+  produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
+  produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
+  produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
+  produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
+  weight?: Maybe<Kontent_Item_Number_Element_Value>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_Value>;
+  url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
+};
+
 export type Query = {
   file?: Maybe<File>;
   allFile: FileConnection;
@@ -992,6 +1017,9 @@ export type Query = {
   allKontentTaxonomy: Kontent_TaxonomyConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  kontentItemProduct?: Maybe<KontentItemProduct>;
+  allKontentItemProduct: KontentItemProductConnection;
+  allKontentItemProducts?: Maybe<Array<Maybe<KontentItemProduct>>>;
 };
 
 
@@ -1448,6 +1476,25 @@ export type QueryImageSharpArgs = {
 export type QueryAllImageSharpArgs = {
   filter?: Maybe<ImageSharpFilterInput>;
   sort?: Maybe<ImageSharpSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryKontentItemProductArgs = {
+  elements?: Maybe<KontentItemProductElementsFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  system?: Maybe<Kontent_Item_SystemFilterInput>;
+  preferred_language?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllKontentItemProductArgs = {
+  filter?: Maybe<KontentItemProductFilterInput>;
+  sort?: Maybe<KontentItemProductSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -4329,6 +4376,8 @@ export type Kontent_Item_Meat_Product_ElementsFilterInput = {
   produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
+  weight?: Maybe<Kontent_Item_Number_Element_ValueFilterInput>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_ValueFilterInput>;
 };
 
 export type Kontent_Item_Meat_ProductConnection = {
@@ -4431,6 +4480,12 @@ export type Kontent_Item_Meat_ProductFieldsEnum =
   | 'elements___url_slug___name'
   | 'elements___url_slug___type'
   | 'elements___url_slug___value'
+  | 'elements___weight___name'
+  | 'elements___weight___type'
+  | 'elements___weight___value'
+  | 'elements___pieces_in_package___name'
+  | 'elements___pieces_in_package___type'
+  | 'elements___pieces_in_package___value'
   | 'preferred_language'
   | 'gatsbyPath'
   | 'id'
@@ -4584,6 +4639,8 @@ export type Kontent_Item_Other_Product_ElementsFilterInput = {
   produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
+  weight?: Maybe<Kontent_Item_Number_Element_ValueFilterInput>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_ValueFilterInput>;
 };
 
 export type Kontent_Item_Other_ProductConnection = {
@@ -4686,6 +4743,12 @@ export type Kontent_Item_Other_ProductFieldsEnum =
   | 'elements___url_slug___name'
   | 'elements___url_slug___type'
   | 'elements___url_slug___value'
+  | 'elements___weight___name'
+  | 'elements___weight___type'
+  | 'elements___weight___value'
+  | 'elements___pieces_in_package___name'
+  | 'elements___pieces_in_package___type'
+  | 'elements___pieces_in_package___value'
   | 'preferred_language'
   | 'gatsbyPath'
   | 'id'
@@ -6360,6 +6423,267 @@ export type ImageSharpSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type KontentItemProductElementsFilterInput = {
+  produkt_core__name?: Maybe<Kontent_Item_Text_Element_ValueFilterInput>;
+  produkt_core__image?: Maybe<Kontent_Item_Asset_Element_ValueFilterInput>;
+  produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_ValueFilterInput>;
+  produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
+  produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
+  weight?: Maybe<Kontent_Item_Number_Element_ValueFilterInput>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_ValueFilterInput>;
+  url_slug?: Maybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
+};
+
+export type KontentItemProductConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<KontentItemProductEdge>;
+  nodes: Array<KontentItemProduct>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<KontentItemProductGroupConnection>;
+};
+
+
+export type KontentItemProductConnectionDistinctArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductConnectionMaxArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductConnectionMinArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductConnectionSumArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: KontentItemProductFieldsEnum;
+};
+
+export type KontentItemProductEdge = {
+  next?: Maybe<KontentItemProduct>;
+  node: KontentItemProduct;
+  previous?: Maybe<KontentItemProduct>;
+};
+
+export type KontentItemProductFieldsEnum =
+  | 'elements___produkt_core__name___name'
+  | 'elements___produkt_core__name___type'
+  | 'elements___produkt_core__name___value'
+  | 'elements___produkt_core__image___name'
+  | 'elements___produkt_core__image___type'
+  | 'elements___produkt_core__image___value'
+  | 'elements___produkt_core__image___value___name'
+  | 'elements___produkt_core__image___value___description'
+  | 'elements___produkt_core__image___value___type'
+  | 'elements___produkt_core__image___value___size'
+  | 'elements___produkt_core__image___value___url'
+  | 'elements___produkt_core__image___value___width'
+  | 'elements___produkt_core__image___value___height'
+  | 'elements___produkt_core__description___name'
+  | 'elements___produkt_core__description___type'
+  | 'elements___produkt_core__description___value'
+  | 'elements___produkt_core__description___modular_content'
+  | 'elements___produkt_core__description___modular_content___id'
+  | 'elements___produkt_core__description___modular_content___preferred_language'
+  | 'elements___produkt_core__description___modular_content___children'
+  | 'elements___produkt_core__description___images'
+  | 'elements___produkt_core__description___images___image_id'
+  | 'elements___produkt_core__description___images___url'
+  | 'elements___produkt_core__description___images___description'
+  | 'elements___produkt_core__description___images___height'
+  | 'elements___produkt_core__description___images___width'
+  | 'elements___produkt_core__description___links'
+  | 'elements___produkt_core__description___links___link_id'
+  | 'elements___produkt_core__description___links___codename'
+  | 'elements___produkt_core__description___links___type'
+  | 'elements___produkt_core__description___links___url_slug'
+  | 'elements___produkt_core__producer___name'
+  | 'elements___produkt_core__producer___type'
+  | 'elements___produkt_core__producer___taxonomy_group'
+  | 'elements___produkt_core__producer___value'
+  | 'elements___produkt_core__producer___value___name'
+  | 'elements___produkt_core__producer___value___codename'
+  | 'elements___produkt_core__country___name'
+  | 'elements___produkt_core__country___type'
+  | 'elements___produkt_core__country___taxonomy_group'
+  | 'elements___produkt_core__country___value'
+  | 'elements___produkt_core__country___value___name'
+  | 'elements___produkt_core__country___value___codename'
+  | 'elements___weight___name'
+  | 'elements___weight___type'
+  | 'elements___weight___value'
+  | 'elements___pieces_in_package___name'
+  | 'elements___pieces_in_package___type'
+  | 'elements___pieces_in_package___value'
+  | 'elements___url_slug___name'
+  | 'elements___url_slug___type'
+  | 'elements___url_slug___value'
+  | 'id'
+  | 'system___codename'
+  | 'system___id'
+  | 'system___language'
+  | 'system___last_modified'
+  | 'system___name'
+  | 'system___type'
+  | 'system___collection'
+  | 'system___workflow_step'
+  | 'preferred_language'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type KontentItemProductGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<KontentItemProductEdge>;
+  nodes: Array<KontentItemProduct>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<KontentItemProductGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type KontentItemProductGroupConnectionDistinctArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductGroupConnectionMaxArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductGroupConnectionMinArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductGroupConnectionSumArgs = {
+  field: KontentItemProductFieldsEnum;
+};
+
+
+export type KontentItemProductGroupConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: KontentItemProductFieldsEnum;
+};
+
+export type KontentItemProductFilterInput = {
+  elements?: Maybe<KontentItemProductElementsFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  system?: Maybe<Kontent_Item_SystemFilterInput>;
+  preferred_language?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type KontentItemProductSortInput = {
+  fields?: Maybe<Array<Maybe<KontentItemProductFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6418,7 +6742,7 @@ export type OtherProductFallbackQuery = { kontentItemOtherProduct?: { system: { 
 export type OtherProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OtherProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: Array<{ codename?: string | null | undefined, name?: string | null | undefined } | null | undefined> | null | undefined, system: { codename: string, name: string } }> }, allKontentItemOtherProduct: { edges: Array<{ node: { system: { id: string }, elements?: { url_slug?: { value?: string | null | undefined } | null | undefined, produkt_core__name?: { value?: string | null | undefined } | null | undefined, produkt_core__description?: { value?: string | null | undefined } | null | undefined, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__image?: { value?: Array<{ description?: string | null | undefined, url: string, width?: number | null | undefined, height?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined } }> } };
+export type OtherProductsQuery = { allKontentTaxonomy: { nodes: Array<{ terms?: Array<{ codename?: string | null | undefined, name?: string | null | undefined } | null | undefined> | null | undefined, system: { codename: string, name: string } }> }, allKontentItemOtherProduct?: Array<{ __typename: 'kontent_item_diary_product', system: { id: string }, elements?: { diary_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, milk_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, url_slug?: { value?: string | null | undefined } | null | undefined, produkt_core__name?: { value?: string | null | undefined } | null | undefined, produkt_core__description?: { value?: string | null | undefined } | null | undefined, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__image?: { value?: Array<{ description?: string | null | undefined, url: string, width?: number | null | undefined, height?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined } | { __typename: 'kontent_item_meat_product', system: { id: string }, elements?: { url_slug?: { value?: string | null | undefined } | null | undefined, produkt_core__name?: { value?: string | null | undefined } | null | undefined, produkt_core__description?: { value?: string | null | undefined } | null | undefined, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__image?: { value?: Array<{ description?: string | null | undefined, url: string, width?: number | null | undefined, height?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined } | { __typename: 'kontent_item_other_product', system: { id: string }, elements?: { url_slug?: { value?: string | null | undefined } | null | undefined, produkt_core__name?: { value?: string | null | undefined } | null | undefined, produkt_core__description?: { value?: string | null | undefined } | null | undefined, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null | undefined> | null | undefined } | null | undefined, produkt_core__image?: { value?: Array<{ description?: string | null | undefined, url: string, width?: number | null | undefined, height?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined } | null | undefined> | null | undefined };
 
 export type OtherProductQueryVariables = Exact<{
   elements__url_slug__value: Scalars['String'];

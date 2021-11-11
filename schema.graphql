@@ -4,6 +4,27 @@ schema {
     query: Query
 }
 
+interface KontentItemProduct {
+    children: [Node!]!
+    elements: KontentItemProductElements
+    id: ID!
+    internal: Internal!
+    parent: Node
+    preferred_language: String!
+    system: kontent_item_system!
+}
+
+interface KontentItemProductElements {
+    pieces_in_package: kontent_item_number_element_value
+    produkt_core__country: kontent_item_taxonomy_element_value
+    produkt_core__description: kontent_item_rich_text_element_value
+    produkt_core__image: kontent_item_asset_element_value
+    produkt_core__name: kontent_item_text_element_value
+    produkt_core__producer: kontent_item_taxonomy_element_value
+    url_slug: kontent_item_url_slug_element_value
+    weight: kontent_item_number_element_value
+}
+
 "Node Interface"
 interface Node {
     children: [Node!]!
@@ -13,7 +34,10 @@ interface Node {
 }
 
 interface kontent_item {
+    children: [Node!]!
     id: ID!
+    internal: Internal!
+    parent: Node
     preferred_language: String!
     system: kontent_item_system!
 }
@@ -123,8 +147,11 @@ type DirectoryConnection {
     distinct(field: DirectoryFieldsEnum!): [String!]!
     edges: [DirectoryEdge!]!
     group(field: DirectoryFieldsEnum!, limit: Int, skip: Int): [DirectoryGroupConnection!]!
+    max(field: DirectoryFieldsEnum!): Float
+    min(field: DirectoryFieldsEnum!): Float
     nodes: [Directory!]!
     pageInfo: PageInfo!
+    sum(field: DirectoryFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -135,11 +162,16 @@ type DirectoryEdge {
 }
 
 type DirectoryGroupConnection {
+    distinct(field: DirectoryFieldsEnum!): [String!]!
     edges: [DirectoryEdge!]!
     field: String!
     fieldValue: String
+    group(field: DirectoryFieldsEnum!, limit: Int, skip: Int): [DirectoryGroupConnection!]!
+    max(field: DirectoryFieldsEnum!): Float
+    min(field: DirectoryFieldsEnum!): Float
     nodes: [Directory!]!
     pageInfo: PageInfo!
+    sum(field: DirectoryFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -252,8 +284,11 @@ type FileConnection {
     distinct(field: FileFieldsEnum!): [String!]!
     edges: [FileEdge!]!
     group(field: FileFieldsEnum!, limit: Int, skip: Int): [FileGroupConnection!]!
+    max(field: FileFieldsEnum!): Float
+    min(field: FileFieldsEnum!): Float
     nodes: [File!]!
     pageInfo: PageInfo!
+    sum(field: FileFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -264,11 +299,16 @@ type FileEdge {
 }
 
 type FileGroupConnection {
+    distinct(field: FileFieldsEnum!): [String!]!
     edges: [FileEdge!]!
     field: String!
     fieldValue: String
+    group(field: FileFieldsEnum!, limit: Int, skip: Int): [FileGroupConnection!]!
+    max(field: FileFieldsEnum!): Float
+    min(field: FileFieldsEnum!): Float
     nodes: [File!]!
     pageInfo: PageInfo!
+    sum(field: FileFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -326,7 +366,7 @@ type ImageSharp implements Node {
         not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
         both PNG and JPG is not supported and will be ignored.
         """
-        formats: [ImageFormat] = [WEBP],
+        formats: [ImageFormat],
         """
 
         The display height of the generated image for layout = FIXED, and the maximum display height of the largest image for layout = CONSTRAINED.
@@ -390,39 +430,17 @@ type ImageSharp implements Node {
     original: ImageSharpOriginal
     parent: Node
     resize(background: String = "rgba(0,0,0,1)", base64: Boolean = false, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionLevel: Int = 9, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = AUTO, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpResize
-    resolutions(background: String = "rgba(0,0,0,1)", base64Width: Int, cropFocus: ImageCropFocus = ATTENTION, duotone: DuotoneGradient, fit: ImageFit = COVER, grayscale: Boolean = false, height: Int, jpegProgressive: Boolean = true, jpegQuality: Int, pngCompressionSpeed: Int = 4, pngQuality: Int, quality: Int, rotate: Int = 0, toFormat: ImageFormat = AUTO, toFormatBase64: ImageFormat = AUTO, traceSVG: Potrace, trim: Float = 0.0, webpQuality: Int, width: Int): ImageSharpResolutions @deprecated(reason : "Resolutions was deprecated in Gatsby v2. It's been renamed to \"fixed\" https://example.com/write-docs-and-fix-this-example-link")
-    sizes(
-        background: String = "rgba(0,0,0,1)",
-        base64Width: Int,
-        cropFocus: ImageCropFocus = ATTENTION,
-        duotone: DuotoneGradient,
-        fit: ImageFit = COVER,
-        grayscale: Boolean = false,
-        jpegProgressive: Boolean = true,
-        jpegQuality: Int,
-        maxHeight: Int,
-        maxWidth: Int,
-        pngCompressionSpeed: Int = 4,
-        pngQuality: Int,
-        quality: Int,
-        rotate: Int = 0,
-        sizes: String = "",
-        "A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]"
-        srcSetBreakpoints: [Int] = [],
-        toFormat: ImageFormat = AUTO,
-        toFormatBase64: ImageFormat = AUTO,
-        traceSVG: Potrace,
-        trim: Float = 0.0,
-        webpQuality: Int
-    ): ImageSharpSizes @deprecated(reason : "Sizes was deprecated in Gatsby v2. It's been renamed to \"fluid\" https://example.com/write-docs-and-fix-this-example-link")
 }
 
 type ImageSharpConnection {
     distinct(field: ImageSharpFieldsEnum!): [String!]!
     edges: [ImageSharpEdge!]!
     group(field: ImageSharpFieldsEnum!, limit: Int, skip: Int): [ImageSharpGroupConnection!]!
+    max(field: ImageSharpFieldsEnum!): Float
+    min(field: ImageSharpFieldsEnum!): Float
     nodes: [ImageSharp!]!
     pageInfo: PageInfo!
+    sum(field: ImageSharpFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -461,11 +479,16 @@ type ImageSharpFluid {
 }
 
 type ImageSharpGroupConnection {
+    distinct(field: ImageSharpFieldsEnum!): [String!]!
     edges: [ImageSharpEdge!]!
     field: String!
     fieldValue: String
+    group(field: ImageSharpFieldsEnum!, limit: Int, skip: Int): [ImageSharpGroupConnection!]!
+    max(field: ImageSharpFieldsEnum!): Float
+    min(field: ImageSharpFieldsEnum!): Float
     nodes: [ImageSharp!]!
     pageInfo: PageInfo!
+    sum(field: ImageSharpFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -484,34 +507,6 @@ type ImageSharpResize {
     width: Int
 }
 
-type ImageSharpResolutions {
-    aspectRatio: Float
-    base64: String
-    height: Float!
-    originalName: String
-    src: String!
-    srcSet: String!
-    srcSetWebp: String
-    srcWebp: String
-    tracedSVG: String
-    width: Float!
-}
-
-type ImageSharpSizes {
-    aspectRatio: Float!
-    base64: String
-    originalImg: String
-    originalName: String
-    presentationHeight: Int!
-    presentationWidth: Int!
-    sizes: String!
-    src: String!
-    srcSet: String!
-    srcSetWebp: String
-    srcWebp: String
-    tracedSVG: String
-}
-
 type Internal {
     content: String
     contentDigest: String!
@@ -523,33 +518,36 @@ type Internal {
     type: String!
 }
 
-type KontentAssetFixed {
-    aspectRatio: Float
-    base64: String!
-    height: Float
-    src: String
-    srcSet: String
-    srcSetWebp: String
-    srcWebp: String
-    width: Float
+type KontentItemProductConnection {
+    distinct(field: KontentItemProductFieldsEnum!): [String!]!
+    edges: [KontentItemProductEdge!]!
+    group(field: KontentItemProductFieldsEnum!, limit: Int, skip: Int): [KontentItemProductGroupConnection!]!
+    max(field: KontentItemProductFieldsEnum!): Float
+    min(field: KontentItemProductFieldsEnum!): Float
+    nodes: [KontentItemProduct!]!
+    pageInfo: PageInfo!
+    sum(field: KontentItemProductFieldsEnum!): Float
+    totalCount: Int!
 }
 
-type KontentAssetFluid {
-    aspectRatio: Float!
-    base64: String!
-    sizes: String!
-    src: String!
-    srcSet: String!
-    srcSetWebp: String
-    srcWebp: String
+type KontentItemProductEdge {
+    next: KontentItemProduct
+    node: KontentItemProduct!
+    previous: KontentItemProduct
 }
 
-type KontentAssetResize {
-    aspectRatio: Float!
-    base64: String!
-    height: Int!
-    src: String!
-    width: Int!
+type KontentItemProductGroupConnection {
+    distinct(field: KontentItemProductFieldsEnum!): [String!]!
+    edges: [KontentItemProductEdge!]!
+    field: String!
+    fieldValue: String
+    group(field: KontentItemProductFieldsEnum!, limit: Int, skip: Int): [KontentItemProductGroupConnection!]!
+    max(field: KontentItemProductFieldsEnum!): Float
+    min(field: KontentItemProductFieldsEnum!): Float
+    nodes: [KontentItemProduct!]!
+    pageInfo: PageInfo!
+    sum(field: KontentItemProductFieldsEnum!): Float
+    totalCount: Int!
 }
 
 type PageInfo {
@@ -575,17 +573,20 @@ type Query {
     allKontentItemPage(filter: kontent_item_pageFilterInput, limit: Int, skip: Int, sort: kontent_item_pageSortInput): kontent_item_pageConnection!
     allKontentItemPartner(filter: kontent_item_partnerFilterInput, limit: Int, skip: Int, sort: kontent_item_partnerSortInput): kontent_item_partnerConnection!
     allKontentItemPartneri(filter: kontent_item_partneriFilterInput, limit: Int, skip: Int, sort: kontent_item_partneriSortInput): kontent_item_partneriConnection!
+    allKontentItemProduct(filter: KontentItemProductFilterInput, limit: Int, skip: Int, sort: KontentItemProductSortInput): KontentItemProductConnection!
     allKontentItemProductType(filter: kontent_item_product_typeFilterInput, limit: Int, skip: Int, sort: kontent_item_product_typeSortInput): kontent_item_product_typeConnection!
+    allKontentItemProducts: [KontentItemProduct]
     allKontentItemProductsDisambiguation(filter: kontent_item_products_disambiguationFilterInput, limit: Int, skip: Int, sort: kontent_item_products_disambiguationSortInput): kontent_item_products_disambiguationConnection!
     allKontentTaxonomy(filter: kontent_taxonomyFilterInput, limit: Int, skip: Int, sort: kontent_taxonomySortInput): kontent_taxonomyConnection!
     allSite(filter: SiteFilterInput, limit: Int, skip: Int, sort: SiteSortInput): SiteConnection!
     allSiteBuildMetadata(filter: SiteBuildMetadataFilterInput, limit: Int, skip: Int, sort: SiteBuildMetadataSortInput): SiteBuildMetadataConnection!
+    allSiteFunction(filter: SiteFunctionFilterInput, limit: Int, skip: Int, sort: SiteFunctionSortInput): SiteFunctionConnection!
     allSitePage(filter: SitePageFilterInput, limit: Int, skip: Int, sort: SitePageSortInput): SitePageConnection!
     allSitePlugin(filter: SitePluginFilterInput, limit: Int, skip: Int, sort: SitePluginSortInput): SitePluginConnection!
     directory(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, changeTime: DateQueryOperatorInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): Directory
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, childrenImageSharp: ImageSharpFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
-    imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput, resolutions: ImageSharpResolutionsFilterInput, sizes: ImageSharpSizesFilterInput): ImageSharp
-    kontentItem(id: StringQueryOperatorInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
+    imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput): ImageSharp
+    kontentItem(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item
     kontentItemDiaryProduct(children: NodeFilterListInput, elements: kontent_item_diary_product_elementsFilterInput, gatsbyPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_diary_product
     kontentItemHomepage(children: NodeFilterListInput, elements: kontent_item_homepage_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_homepage
     kontentItemIntro(children: NodeFilterListInput, elements: kontent_item_intro_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_intro
@@ -594,13 +595,15 @@ type Query {
     kontentItemPage(children: NodeFilterListInput, elements: kontent_item_page_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_page
     kontentItemPartner(children: NodeFilterListInput, elements: kontent_item_partner_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partner
     kontentItemPartneri(children: NodeFilterListInput, elements: kontent_item_partneri_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_partneri
+    kontentItemProduct(children: NodeFilterListInput, elements: KontentItemProductElementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): KontentItemProduct
     kontentItemProductType(children: NodeFilterListInput, elements: kontent_item_product_type_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_product_type
     kontentItemProductsDisambiguation(children: NodeFilterListInput, elements: kontent_item_products_disambiguation_elementsFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, preferred_language: StringQueryOperatorInput, system: kontent_item_systemFilterInput): kontent_item_products_disambiguation
     kontentTaxonomy(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, system: kontent_taxonomy_systemFilterInput, terms: kontent_taxonomy_termFilterListInput): kontent_taxonomy
-    site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput): Site
+    site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, flags: SiteFlagsFilterInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsxRuntime: StringQueryOperatorInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
-    sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, componentPath: StringQueryOperatorInput, context: SitePageContextFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, matchPath: StringQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput): SitePage
-    sitePlugin(browserAPIs: StringQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, nodeAPIs: StringQueryOperatorInput, packageJson: SitePluginPackageJsonFilterInput, parent: NodeFilterInput, pluginFilepath: StringQueryOperatorInput, pluginOptions: SitePluginPluginOptionsFilterInput, resolve: StringQueryOperatorInput, ssrAPIs: StringQueryOperatorInput, version: StringQueryOperatorInput): SitePlugin
+    siteFunction(absoluteCompiledFilePath: StringQueryOperatorInput, children: NodeFilterListInput, functionRoute: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, matchPath: StringQueryOperatorInput, originalAbsoluteFilePath: StringQueryOperatorInput, originalRelativeFilePath: StringQueryOperatorInput, parent: NodeFilterInput, pluginName: StringQueryOperatorInput, relativeCompiledFilePath: StringQueryOperatorInput): SiteFunction
+    sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, matchPath: StringQueryOperatorInput, pageContext: JSONQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput): SitePage
+    sitePlugin(browserAPIs: StringQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, nodeAPIs: StringQueryOperatorInput, packageJson: JSONQueryOperatorInput, parent: NodeFilterInput, pluginFilepath: StringQueryOperatorInput, pluginOptions: JSONQueryOperatorInput, resolve: StringQueryOperatorInput, ssrAPIs: StringQueryOperatorInput, version: StringQueryOperatorInput): SitePlugin
 }
 
 type Site implements Node {
@@ -615,9 +618,11 @@ type Site implements Node {
         locale: String
     ): Date
     children: [Node!]!
+    flags: SiteFlags
     host: String
     id: ID!
     internal: Internal!
+    jsxRuntime: String
     parent: Node
     pathPrefix: String
     polyfill: Boolean
@@ -646,8 +651,11 @@ type SiteBuildMetadataConnection {
     distinct(field: SiteBuildMetadataFieldsEnum!): [String!]!
     edges: [SiteBuildMetadataEdge!]!
     group(field: SiteBuildMetadataFieldsEnum!, limit: Int, skip: Int): [SiteBuildMetadataGroupConnection!]!
+    max(field: SiteBuildMetadataFieldsEnum!): Float
+    min(field: SiteBuildMetadataFieldsEnum!): Float
     nodes: [SiteBuildMetadata!]!
     pageInfo: PageInfo!
+    sum(field: SiteBuildMetadataFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -658,11 +666,16 @@ type SiteBuildMetadataEdge {
 }
 
 type SiteBuildMetadataGroupConnection {
+    distinct(field: SiteBuildMetadataFieldsEnum!): [String!]!
     edges: [SiteBuildMetadataEdge!]!
     field: String!
     fieldValue: String
+    group(field: SiteBuildMetadataFieldsEnum!, limit: Int, skip: Int): [SiteBuildMetadataGroupConnection!]!
+    max(field: SiteBuildMetadataFieldsEnum!): Float
+    min(field: SiteBuildMetadataFieldsEnum!): Float
     nodes: [SiteBuildMetadata!]!
     pageInfo: PageInfo!
+    sum(field: SiteBuildMetadataFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -670,8 +683,11 @@ type SiteConnection {
     distinct(field: SiteFieldsEnum!): [String!]!
     edges: [SiteEdge!]!
     group(field: SiteFieldsEnum!, limit: Int, skip: Int): [SiteGroupConnection!]!
+    max(field: SiteFieldsEnum!): Float
+    min(field: SiteFieldsEnum!): Float
     nodes: [Site!]!
     pageInfo: PageInfo!
+    sum(field: SiteFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -681,12 +697,69 @@ type SiteEdge {
     previous: Site
 }
 
+type SiteFlags {
+    DEV_SSR: Boolean
+    FAST_DEV: Boolean
+    PRESERVE_WEBPACK_CACHE: Boolean
+}
+
+type SiteFunction implements Node {
+    absoluteCompiledFilePath: String!
+    children: [Node!]!
+    functionRoute: String!
+    id: ID!
+    internal: Internal!
+    matchPath: String
+    originalAbsoluteFilePath: String!
+    originalRelativeFilePath: String!
+    parent: Node
+    pluginName: String!
+    relativeCompiledFilePath: String!
+}
+
+type SiteFunctionConnection {
+    distinct(field: SiteFunctionFieldsEnum!): [String!]!
+    edges: [SiteFunctionEdge!]!
+    group(field: SiteFunctionFieldsEnum!, limit: Int, skip: Int): [SiteFunctionGroupConnection!]!
+    max(field: SiteFunctionFieldsEnum!): Float
+    min(field: SiteFunctionFieldsEnum!): Float
+    nodes: [SiteFunction!]!
+    pageInfo: PageInfo!
+    sum(field: SiteFunctionFieldsEnum!): Float
+    totalCount: Int!
+}
+
+type SiteFunctionEdge {
+    next: SiteFunction
+    node: SiteFunction!
+    previous: SiteFunction
+}
+
+type SiteFunctionGroupConnection {
+    distinct(field: SiteFunctionFieldsEnum!): [String!]!
+    edges: [SiteFunctionEdge!]!
+    field: String!
+    fieldValue: String
+    group(field: SiteFunctionFieldsEnum!, limit: Int, skip: Int): [SiteFunctionGroupConnection!]!
+    max(field: SiteFunctionFieldsEnum!): Float
+    min(field: SiteFunctionFieldsEnum!): Float
+    nodes: [SiteFunction!]!
+    pageInfo: PageInfo!
+    sum(field: SiteFunctionFieldsEnum!): Float
+    totalCount: Int!
+}
+
 type SiteGroupConnection {
+    distinct(field: SiteFieldsEnum!): [String!]!
     edges: [SiteEdge!]!
     field: String!
     fieldValue: String
+    group(field: SiteFieldsEnum!, limit: Int, skip: Int): [SiteGroupConnection!]!
+    max(field: SiteFieldsEnum!): Float
+    min(field: SiteFieldsEnum!): Float
     nodes: [Site!]!
     pageInfo: PageInfo!
+    sum(field: SiteFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -694,36 +767,26 @@ type SitePage implements Node {
     children: [Node!]!
     component: String!
     componentChunkName: String!
-    componentPath: String
-    context: SitePageContext
     id: ID!
     internal: Internal!
     internalComponentName: String!
-    isCreatedByStatefulCreatePages: Boolean
     matchPath: String
+    pageContext: JSON
     parent: Node
     path: String!
     pluginCreator: SitePlugin
-    pluginCreatorId: String
 }
 
 type SitePageConnection {
     distinct(field: SitePageFieldsEnum!): [String!]!
     edges: [SitePageEdge!]!
     group(field: SitePageFieldsEnum!, limit: Int, skip: Int): [SitePageGroupConnection!]!
+    max(field: SitePageFieldsEnum!): Float
+    min(field: SitePageFieldsEnum!): Float
     nodes: [SitePage!]!
     pageInfo: PageInfo!
+    sum(field: SitePageFieldsEnum!): Float
     totalCount: Int!
-}
-
-type SitePageContext {
-    _xparams: SitePageContext_xparams
-    elements__url_slug__value: String
-    id: String
-}
-
-type SitePageContext_xparams {
-    elements__url_slug__value: String
 }
 
 type SitePageEdge {
@@ -733,11 +796,16 @@ type SitePageEdge {
 }
 
 type SitePageGroupConnection {
+    distinct(field: SitePageFieldsEnum!): [String!]!
     edges: [SitePageEdge!]!
     field: String!
     fieldValue: String
+    group(field: SitePageFieldsEnum!, limit: Int, skip: Int): [SitePageGroupConnection!]!
+    max(field: SitePageFieldsEnum!): Float
+    min(field: SitePageFieldsEnum!): Float
     nodes: [SitePage!]!
     pageInfo: PageInfo!
+    sum(field: SitePageFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -748,10 +816,10 @@ type SitePlugin implements Node {
     internal: Internal!
     name: String
     nodeAPIs: [String]
-    packageJson: SitePluginPackageJson
+    packageJson: JSON
     parent: Node
     pluginFilepath: String
-    pluginOptions: SitePluginPluginOptions
+    pluginOptions: JSON
     resolve: String
     ssrAPIs: [String]
     version: String
@@ -761,8 +829,11 @@ type SitePluginConnection {
     distinct(field: SitePluginFieldsEnum!): [String!]!
     edges: [SitePluginEdge!]!
     group(field: SitePluginFieldsEnum!, limit: Int, skip: Int): [SitePluginGroupConnection!]!
+    max(field: SitePluginFieldsEnum!): Float
+    min(field: SitePluginFieldsEnum!): Float
     nodes: [SitePlugin!]!
     pageInfo: PageInfo!
+    sum(field: SitePluginFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -773,75 +844,17 @@ type SitePluginEdge {
 }
 
 type SitePluginGroupConnection {
+    distinct(field: SitePluginFieldsEnum!): [String!]!
     edges: [SitePluginEdge!]!
     field: String!
     fieldValue: String
+    group(field: SitePluginFieldsEnum!, limit: Int, skip: Int): [SitePluginGroupConnection!]!
+    max(field: SitePluginFieldsEnum!): Float
+    min(field: SitePluginFieldsEnum!): Float
     nodes: [SitePlugin!]!
     pageInfo: PageInfo!
+    sum(field: SitePluginFieldsEnum!): Float
     totalCount: Int!
-}
-
-type SitePluginPackageJson {
-    dependencies: [SitePluginPackageJsonDependencies]
-    description: String
-    devDependencies: [SitePluginPackageJsonDevDependencies]
-    keywords: [String]
-    license: String
-    main: String
-    name: String
-    peerDependencies: [SitePluginPackageJsonPeerDependencies]
-    version: String
-}
-
-type SitePluginPackageJsonDependencies {
-    name: String
-    version: String
-}
-
-type SitePluginPackageJsonDevDependencies {
-    name: String
-    version: String
-}
-
-type SitePluginPackageJsonPeerDependencies {
-    name: String
-    version: String
-}
-
-type SitePluginPluginOptions {
-    allExtensions: Boolean
-    allPageHeaders: [String]
-    authorizationKey: String
-    base64Width: Int
-    codegenPlugins: [SitePluginPluginOptionsCodegenPlugins]
-    defaultQuality: Int
-    displayName: Boolean
-    documentPaths: [String]
-    failOnError: Boolean
-    includeRawContent: Boolean
-    includeTaxonomies: Boolean
-    includeTypes: Boolean
-    isTSX: Boolean
-    jsxPragma: String
-    languageCodenames: [String]
-    minify: Boolean
-    namespace: String
-    path: String
-    pathCheck: Boolean
-    projectId: String
-    pure: Boolean
-    stripMetadata: Boolean
-    stylesProvider: SitePluginPluginOptionsStylesProvider
-    transpileTemplateLiterals: Boolean
-    usePreviewUrl: Boolean
-}
-
-type SitePluginPluginOptionsCodegenPlugins {
-    resolve: String
-}
-
-type SitePluginPluginOptionsStylesProvider {
-    injectFirst: Boolean
 }
 
 type SiteSiteMetadata {
@@ -853,8 +866,11 @@ type kontent_itemConnection {
     distinct(field: kontent_itemFieldsEnum!): [String!]!
     edges: [kontent_itemEdge!]!
     group(field: kontent_itemFieldsEnum!, limit: Int, skip: Int): [kontent_itemGroupConnection!]!
+    max(field: kontent_itemFieldsEnum!): Float
+    min(field: kontent_itemFieldsEnum!): Float
     nodes: [kontent_item!]!
     pageInfo: PageInfo!
+    sum(field: kontent_itemFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -865,21 +881,23 @@ type kontent_itemEdge {
 }
 
 type kontent_itemGroupConnection {
+    distinct(field: kontent_itemFieldsEnum!): [String!]!
     edges: [kontent_itemEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_itemFieldsEnum!, limit: Int, skip: Int): [kontent_itemGroupConnection!]!
+    max(field: kontent_itemFieldsEnum!): Float
+    min(field: kontent_itemFieldsEnum!): Float
     nodes: [kontent_item!]!
     pageInfo: PageInfo!
+    sum(field: kontent_itemFieldsEnum!): Float
     totalCount: Int!
 }
 
 type kontent_item_asset_element {
     description: String
-    fixed(fit: String, format: String, height: Int, quality: Int, width: Int): KontentAssetFixed
-    fluid(fit: String, format: String, maxHeight: Int, maxWidth: Int, quality: Int, sizes: String, srcSetBreakpoints: [Int!]): KontentAssetFluid
     height: Int
     name: String!
-    resize(fit: String, format: String, height: Int, quality: Int, width: Int): KontentAssetResize
     size: Int!
     type: String!
     url: String!
@@ -913,7 +931,7 @@ type kontent_item_date_time_element_value {
     ): Date
 }
 
-type kontent_item_diary_product implements Node & kontent_item {
+type kontent_item_diary_product implements KontentItemProduct & Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_diary_product_elements
     gatsbyPath(filePath: String): String
@@ -928,8 +946,11 @@ type kontent_item_diary_productConnection {
     distinct(field: kontent_item_diary_productFieldsEnum!): [String!]!
     edges: [kontent_item_diary_productEdge!]!
     group(field: kontent_item_diary_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_diary_productGroupConnection!]!
+    max(field: kontent_item_diary_productFieldsEnum!): Float
+    min(field: kontent_item_diary_productFieldsEnum!): Float
     nodes: [kontent_item_diary_product!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_diary_productFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -940,15 +961,20 @@ type kontent_item_diary_productEdge {
 }
 
 type kontent_item_diary_productGroupConnection {
+    distinct(field: kontent_item_diary_productFieldsEnum!): [String!]!
     edges: [kontent_item_diary_productEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_diary_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_diary_productGroupConnection!]!
+    max(field: kontent_item_diary_productFieldsEnum!): Float
+    min(field: kontent_item_diary_productFieldsEnum!): Float
     nodes: [kontent_item_diary_product!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_diary_productFieldsEnum!): Float
     totalCount: Int!
 }
 
-type kontent_item_diary_product_elements {
+type kontent_item_diary_product_elements implements KontentItemProductElements {
     diary_type: kontent_item_taxonomy_element_value
     milk_type: kontent_item_taxonomy_element_value
     pieces_in_package: kontent_item_number_element_value
@@ -975,8 +1001,11 @@ type kontent_item_homepageConnection {
     distinct(field: kontent_item_homepageFieldsEnum!): [String!]!
     edges: [kontent_item_homepageEdge!]!
     group(field: kontent_item_homepageFieldsEnum!, limit: Int, skip: Int): [kontent_item_homepageGroupConnection!]!
+    max(field: kontent_item_homepageFieldsEnum!): Float
+    min(field: kontent_item_homepageFieldsEnum!): Float
     nodes: [kontent_item_homepage!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_homepageFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -987,11 +1016,16 @@ type kontent_item_homepageEdge {
 }
 
 type kontent_item_homepageGroupConnection {
+    distinct(field: kontent_item_homepageFieldsEnum!): [String!]!
     edges: [kontent_item_homepageEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_homepageFieldsEnum!, limit: Int, skip: Int): [kontent_item_homepageGroupConnection!]!
+    max(field: kontent_item_homepageFieldsEnum!): Float
+    min(field: kontent_item_homepageFieldsEnum!): Float
     nodes: [kontent_item_homepage!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_homepageFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1015,8 +1049,11 @@ type kontent_item_introConnection {
     distinct(field: kontent_item_introFieldsEnum!): [String!]!
     edges: [kontent_item_introEdge!]!
     group(field: kontent_item_introFieldsEnum!, limit: Int, skip: Int): [kontent_item_introGroupConnection!]!
+    max(field: kontent_item_introFieldsEnum!): Float
+    min(field: kontent_item_introFieldsEnum!): Float
     nodes: [kontent_item_intro!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_introFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1027,11 +1064,16 @@ type kontent_item_introEdge {
 }
 
 type kontent_item_introGroupConnection {
+    distinct(field: kontent_item_introFieldsEnum!): [String!]!
     edges: [kontent_item_introEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_introFieldsEnum!, limit: Int, skip: Int): [kontent_item_introGroupConnection!]!
+    max(field: kontent_item_introFieldsEnum!): Float
+    min(field: kontent_item_introFieldsEnum!): Float
     nodes: [kontent_item_intro!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_introFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1042,7 +1084,7 @@ type kontent_item_intro_elements {
     title: kontent_item_text_element_value
 }
 
-type kontent_item_meat_product implements Node & kontent_item {
+type kontent_item_meat_product implements KontentItemProduct & Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_meat_product_elements
     gatsbyPath(filePath: String): String
@@ -1057,8 +1099,11 @@ type kontent_item_meat_productConnection {
     distinct(field: kontent_item_meat_productFieldsEnum!): [String!]!
     edges: [kontent_item_meat_productEdge!]!
     group(field: kontent_item_meat_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_meat_productGroupConnection!]!
+    max(field: kontent_item_meat_productFieldsEnum!): Float
+    min(field: kontent_item_meat_productFieldsEnum!): Float
     nodes: [kontent_item_meat_product!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_meat_productFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1069,21 +1114,28 @@ type kontent_item_meat_productEdge {
 }
 
 type kontent_item_meat_productGroupConnection {
+    distinct(field: kontent_item_meat_productFieldsEnum!): [String!]!
     edges: [kontent_item_meat_productEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_meat_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_meat_productGroupConnection!]!
+    max(field: kontent_item_meat_productFieldsEnum!): Float
+    min(field: kontent_item_meat_productFieldsEnum!): Float
     nodes: [kontent_item_meat_product!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_meat_productFieldsEnum!): Float
     totalCount: Int!
 }
 
-type kontent_item_meat_product_elements {
+type kontent_item_meat_product_elements implements KontentItemProductElements {
+    pieces_in_package: kontent_item_number_element_value
     produkt_core__country: kontent_item_taxonomy_element_value
     produkt_core__description: kontent_item_rich_text_element_value
     produkt_core__image: kontent_item_asset_element_value
     produkt_core__name: kontent_item_text_element_value
     produkt_core__producer: kontent_item_taxonomy_element_value
     url_slug: kontent_item_url_slug_element_value
+    weight: kontent_item_number_element_value
 }
 
 type kontent_item_modular_content_element_value {
@@ -1109,7 +1161,7 @@ type kontent_item_number_element_value {
     value: Float
 }
 
-type kontent_item_other_product implements Node & kontent_item {
+type kontent_item_other_product implements KontentItemProduct & Node & kontent_item {
     children: [Node!]!
     elements: kontent_item_other_product_elements
     gatsbyPath(filePath: String): String
@@ -1124,8 +1176,11 @@ type kontent_item_other_productConnection {
     distinct(field: kontent_item_other_productFieldsEnum!): [String!]!
     edges: [kontent_item_other_productEdge!]!
     group(field: kontent_item_other_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_other_productGroupConnection!]!
+    max(field: kontent_item_other_productFieldsEnum!): Float
+    min(field: kontent_item_other_productFieldsEnum!): Float
     nodes: [kontent_item_other_product!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_other_productFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1136,21 +1191,28 @@ type kontent_item_other_productEdge {
 }
 
 type kontent_item_other_productGroupConnection {
+    distinct(field: kontent_item_other_productFieldsEnum!): [String!]!
     edges: [kontent_item_other_productEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_other_productFieldsEnum!, limit: Int, skip: Int): [kontent_item_other_productGroupConnection!]!
+    max(field: kontent_item_other_productFieldsEnum!): Float
+    min(field: kontent_item_other_productFieldsEnum!): Float
     nodes: [kontent_item_other_product!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_other_productFieldsEnum!): Float
     totalCount: Int!
 }
 
-type kontent_item_other_product_elements {
+type kontent_item_other_product_elements implements KontentItemProductElements {
+    pieces_in_package: kontent_item_number_element_value
     produkt_core__country: kontent_item_taxonomy_element_value
     produkt_core__description: kontent_item_rich_text_element_value
     produkt_core__image: kontent_item_asset_element_value
     produkt_core__name: kontent_item_text_element_value
     produkt_core__producer: kontent_item_taxonomy_element_value
     url_slug: kontent_item_url_slug_element_value
+    weight: kontent_item_number_element_value
 }
 
 type kontent_item_page implements Node & kontent_item {
@@ -1167,8 +1229,11 @@ type kontent_item_pageConnection {
     distinct(field: kontent_item_pageFieldsEnum!): [String!]!
     edges: [kontent_item_pageEdge!]!
     group(field: kontent_item_pageFieldsEnum!, limit: Int, skip: Int): [kontent_item_pageGroupConnection!]!
+    max(field: kontent_item_pageFieldsEnum!): Float
+    min(field: kontent_item_pageFieldsEnum!): Float
     nodes: [kontent_item_page!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_pageFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1179,11 +1244,16 @@ type kontent_item_pageEdge {
 }
 
 type kontent_item_pageGroupConnection {
+    distinct(field: kontent_item_pageFieldsEnum!): [String!]!
     edges: [kontent_item_pageEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_pageFieldsEnum!, limit: Int, skip: Int): [kontent_item_pageGroupConnection!]!
+    max(field: kontent_item_pageFieldsEnum!): Float
+    min(field: kontent_item_pageFieldsEnum!): Float
     nodes: [kontent_item_page!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_pageFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1209,8 +1279,11 @@ type kontent_item_partnerConnection {
     distinct(field: kontent_item_partnerFieldsEnum!): [String!]!
     edges: [kontent_item_partnerEdge!]!
     group(field: kontent_item_partnerFieldsEnum!, limit: Int, skip: Int): [kontent_item_partnerGroupConnection!]!
+    max(field: kontent_item_partnerFieldsEnum!): Float
+    min(field: kontent_item_partnerFieldsEnum!): Float
     nodes: [kontent_item_partner!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_partnerFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1221,11 +1294,16 @@ type kontent_item_partnerEdge {
 }
 
 type kontent_item_partnerGroupConnection {
+    distinct(field: kontent_item_partnerFieldsEnum!): [String!]!
     edges: [kontent_item_partnerEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_partnerFieldsEnum!, limit: Int, skip: Int): [kontent_item_partnerGroupConnection!]!
+    max(field: kontent_item_partnerFieldsEnum!): Float
+    min(field: kontent_item_partnerFieldsEnum!): Float
     nodes: [kontent_item_partner!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_partnerFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1249,8 +1327,11 @@ type kontent_item_partneriConnection {
     distinct(field: kontent_item_partneriFieldsEnum!): [String!]!
     edges: [kontent_item_partneriEdge!]!
     group(field: kontent_item_partneriFieldsEnum!, limit: Int, skip: Int): [kontent_item_partneriGroupConnection!]!
+    max(field: kontent_item_partneriFieldsEnum!): Float
+    min(field: kontent_item_partneriFieldsEnum!): Float
     nodes: [kontent_item_partneri!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_partneriFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1261,11 +1342,16 @@ type kontent_item_partneriEdge {
 }
 
 type kontent_item_partneriGroupConnection {
+    distinct(field: kontent_item_partneriFieldsEnum!): [String!]!
     edges: [kontent_item_partneriEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_partneriFieldsEnum!, limit: Int, skip: Int): [kontent_item_partneriGroupConnection!]!
+    max(field: kontent_item_partneriFieldsEnum!): Float
+    min(field: kontent_item_partneriFieldsEnum!): Float
     nodes: [kontent_item_partneri!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_partneriFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1287,8 +1373,11 @@ type kontent_item_product_typeConnection {
     distinct(field: kontent_item_product_typeFieldsEnum!): [String!]!
     edges: [kontent_item_product_typeEdge!]!
     group(field: kontent_item_product_typeFieldsEnum!, limit: Int, skip: Int): [kontent_item_product_typeGroupConnection!]!
+    max(field: kontent_item_product_typeFieldsEnum!): Float
+    min(field: kontent_item_product_typeFieldsEnum!): Float
     nodes: [kontent_item_product_type!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_product_typeFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1299,11 +1388,16 @@ type kontent_item_product_typeEdge {
 }
 
 type kontent_item_product_typeGroupConnection {
+    distinct(field: kontent_item_product_typeFieldsEnum!): [String!]!
     edges: [kontent_item_product_typeEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_product_typeFieldsEnum!, limit: Int, skip: Int): [kontent_item_product_typeGroupConnection!]!
+    max(field: kontent_item_product_typeFieldsEnum!): Float
+    min(field: kontent_item_product_typeFieldsEnum!): Float
     nodes: [kontent_item_product_type!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_product_typeFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1326,8 +1420,11 @@ type kontent_item_products_disambiguationConnection {
     distinct(field: kontent_item_products_disambiguationFieldsEnum!): [String!]!
     edges: [kontent_item_products_disambiguationEdge!]!
     group(field: kontent_item_products_disambiguationFieldsEnum!, limit: Int, skip: Int): [kontent_item_products_disambiguationGroupConnection!]!
+    max(field: kontent_item_products_disambiguationFieldsEnum!): Float
+    min(field: kontent_item_products_disambiguationFieldsEnum!): Float
     nodes: [kontent_item_products_disambiguation!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_products_disambiguationFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1338,11 +1435,16 @@ type kontent_item_products_disambiguationEdge {
 }
 
 type kontent_item_products_disambiguationGroupConnection {
+    distinct(field: kontent_item_products_disambiguationFieldsEnum!): [String!]!
     edges: [kontent_item_products_disambiguationEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_item_products_disambiguationFieldsEnum!, limit: Int, skip: Int): [kontent_item_products_disambiguationGroupConnection!]!
+    max(field: kontent_item_products_disambiguationFieldsEnum!): Float
+    min(field: kontent_item_products_disambiguationFieldsEnum!): Float
     nodes: [kontent_item_products_disambiguation!]!
     pageInfo: PageInfo!
+    sum(field: kontent_item_products_disambiguationFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1352,13 +1454,10 @@ type kontent_item_products_disambiguation_elements {
 
 type kontent_item_rich_text_element_image {
     description: String
-    fixed(fit: String, format: String, height: Int, quality: Int, width: Int): KontentAssetFixed
-    fluid(fit: String, format: String, maxHeight: Int, maxWidth: Int, quality: Int, sizes: String, srcSetBreakpoints: [Int!]): KontentAssetFluid
-    height: Int!
+    height: Int
     image_id: String!
-    resize(fit: String, format: String, height: Int, quality: Int, width: Int): KontentAssetResize
     url: String!
-    width: Int!
+    width: Int
 }
 
 type kontent_item_rich_text_element_link {
@@ -1394,6 +1493,7 @@ type kontent_item_system {
     ): Date!
     name: String!
     type: String!
+    workflow_step: String
 }
 
 type kontent_item_taxonomy_element {
@@ -1433,8 +1533,11 @@ type kontent_taxonomyConnection {
     distinct(field: kontent_taxonomyFieldsEnum!): [String!]!
     edges: [kontent_taxonomyEdge!]!
     group(field: kontent_taxonomyFieldsEnum!, limit: Int, skip: Int): [kontent_taxonomyGroupConnection!]!
+    max(field: kontent_taxonomyFieldsEnum!): Float
+    min(field: kontent_taxonomyFieldsEnum!): Float
     nodes: [kontent_taxonomy!]!
     pageInfo: PageInfo!
+    sum(field: kontent_taxonomyFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1445,11 +1548,16 @@ type kontent_taxonomyEdge {
 }
 
 type kontent_taxonomyGroupConnection {
+    distinct(field: kontent_taxonomyFieldsEnum!): [String!]!
     edges: [kontent_taxonomyEdge!]!
     field: String!
     fieldValue: String
+    group(field: kontent_taxonomyFieldsEnum!, limit: Int, skip: Int): [kontent_taxonomyGroupConnection!]!
+    max(field: kontent_taxonomyFieldsEnum!): Float
+    min(field: kontent_taxonomyFieldsEnum!): Float
     nodes: [kontent_taxonomy!]!
     pageInfo: PageInfo!
+    sum(field: kontent_taxonomyFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1675,28 +1783,6 @@ enum FileFieldsEnum {
     childImageSharp___resize___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___resize___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___resize___width @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___aspectRatio @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___base64 @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___height @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___originalName @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___srcSet @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___resolutions___width @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___aspectRatio @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___base64 @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___originalImg @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___originalName @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___presentationHeight @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___presentationWidth @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___sizes @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___srcSet @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childImageSharp___sizes___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     children
     childrenImageSharp
     childrenImageSharp___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1769,28 +1855,6 @@ enum FileFieldsEnum {
     childrenImageSharp___resize___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childrenImageSharp___resize___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     childrenImageSharp___resize___width @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___aspectRatio @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___base64 @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___height @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___originalName @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___srcSet @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___resolutions___width @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___aspectRatio @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___base64 @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___originalImg @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___originalName @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___presentationHeight @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___presentationWidth @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___sizes @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___srcSet @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    childrenImageSharp___sizes___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     children___children
     children___children___children
     children___children___children___children
@@ -1898,6 +1962,28 @@ enum FileFieldsEnum {
     size
     sourceInstanceName
     uid
+}
+
+enum GatsbyImageFormat {
+    AUTO
+    AVIF
+    JPG
+    NO_CHANGE
+    PNG
+    WEBP
+}
+
+enum GatsbyImageLayout {
+    CONSTRAINED
+    FIXED
+    FULL_WIDTH
+}
+
+enum GatsbyImagePlaceholder {
+    BLURRED
+    DOMINANT_COLOR
+    NONE
+    TRACED_SVG
 }
 
 enum ImageCropFocus {
@@ -2063,28 +2149,156 @@ enum ImageSharpFieldsEnum {
     resize___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     resize___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     resize___width @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___aspectRatio @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___base64 @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___height @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___originalName @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___srcSet @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    resolutions___width @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___aspectRatio @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___base64 @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___originalImg @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___originalName @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___presentationHeight @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___presentationWidth @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___sizes @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___src @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___srcSet @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___srcSetWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___srcWebp @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    sizes___tracedSVG @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+}
+
+enum KontentItemProductFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    elements___pieces_in_package___name
+    elements___pieces_in_package___type
+    elements___pieces_in_package___value
+    elements___produkt_core__country___name
+    elements___produkt_core__country___taxonomy_group
+    elements___produkt_core__country___type
+    elements___produkt_core__country___value
+    elements___produkt_core__country___value___codename
+    elements___produkt_core__country___value___name
+    elements___produkt_core__description___images
+    elements___produkt_core__description___images___description
+    elements___produkt_core__description___images___height
+    elements___produkt_core__description___images___image_id
+    elements___produkt_core__description___images___url
+    elements___produkt_core__description___images___width
+    elements___produkt_core__description___links
+    elements___produkt_core__description___links___codename
+    elements___produkt_core__description___links___link_id
+    elements___produkt_core__description___links___type
+    elements___produkt_core__description___links___url_slug
+    elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___children
+    elements___produkt_core__description___modular_content___id
+    elements___produkt_core__description___modular_content___preferred_language
+    elements___produkt_core__description___name
+    elements___produkt_core__description___type
+    elements___produkt_core__description___value
+    elements___produkt_core__image___name
+    elements___produkt_core__image___type
+    elements___produkt_core__image___value
+    elements___produkt_core__image___value___description
+    elements___produkt_core__image___value___height
+    elements___produkt_core__image___value___name
+    elements___produkt_core__image___value___size
+    elements___produkt_core__image___value___type
+    elements___produkt_core__image___value___url
+    elements___produkt_core__image___value___width
+    elements___produkt_core__name___name
+    elements___produkt_core__name___type
+    elements___produkt_core__name___value
+    elements___produkt_core__producer___name
+    elements___produkt_core__producer___taxonomy_group
+    elements___produkt_core__producer___type
+    elements___produkt_core__producer___value
+    elements___produkt_core__producer___value___codename
+    elements___produkt_core__producer___value___name
+    elements___url_slug___name
+    elements___url_slug___type
+    elements___url_slug___value
+    elements___weight___name
+    elements___weight___type
+    elements___weight___value
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    preferred_language
+    system___codename
+    system___collection
+    system___id
+    system___language
+    system___last_modified
+    system___name
+    system___type
+    system___workflow_step
 }
 
 enum PotraceTurnPolicy {
@@ -2227,6 +2441,9 @@ enum SiteFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
+    flags___DEV_SSR
+    flags___FAST_DEV
+    flags___PRESERVE_WEBPACK_CACHE
     host
     id
     internal___content
@@ -2237,6 +2454,7 @@ enum SiteFieldsEnum {
     internal___mediaType
     internal___owner
     internal___type
+    jsxRuntime
     parent___children
     parent___children___children
     parent___children___children___children
@@ -2282,6 +2500,102 @@ enum SiteFieldsEnum {
     siteMetadata___title
 }
 
+enum SiteFunctionFieldsEnum {
+    absoluteCompiledFilePath
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    functionRoute
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    matchPath
+    originalAbsoluteFilePath
+    originalRelativeFilePath
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    pluginName
+    relativeCompiledFilePath
+}
+
 enum SitePageFieldsEnum {
     children
     children___children
@@ -2324,10 +2638,6 @@ enum SitePageFieldsEnum {
     children___parent___parent___id
     component
     componentChunkName
-    componentPath
-    context____xparams___elements__url_slug__value
-    context___elements__url_slug__value
-    context___id
     id
     internalComponentName
     internal___content
@@ -2338,8 +2648,8 @@ enum SitePageFieldsEnum {
     internal___mediaType
     internal___owner
     internal___type
-    isCreatedByStatefulCreatePages
     matchPath
+    pageContext
     parent___children
     parent___children___children
     parent___children___children___children
@@ -2379,7 +2689,6 @@ enum SitePageFieldsEnum {
     parent___parent___parent___children
     parent___parent___parent___id
     path
-    pluginCreatorId
     pluginCreator___browserAPIs
     pluginCreator___children
     pluginCreator___children___children
@@ -2407,21 +2716,7 @@ enum SitePageFieldsEnum {
     pluginCreator___internal___type
     pluginCreator___name
     pluginCreator___nodeAPIs
-    pluginCreator___packageJson___dependencies
-    pluginCreator___packageJson___dependencies___name
-    pluginCreator___packageJson___dependencies___version
-    pluginCreator___packageJson___description
-    pluginCreator___packageJson___devDependencies
-    pluginCreator___packageJson___devDependencies___name
-    pluginCreator___packageJson___devDependencies___version
-    pluginCreator___packageJson___keywords
-    pluginCreator___packageJson___license
-    pluginCreator___packageJson___main
-    pluginCreator___packageJson___name
-    pluginCreator___packageJson___peerDependencies
-    pluginCreator___packageJson___peerDependencies___name
-    pluginCreator___packageJson___peerDependencies___version
-    pluginCreator___packageJson___version
+    pluginCreator___packageJson
     pluginCreator___parent___children
     pluginCreator___parent___children___children
     pluginCreator___parent___children___id
@@ -2437,32 +2732,7 @@ enum SitePageFieldsEnum {
     pluginCreator___parent___parent___children
     pluginCreator___parent___parent___id
     pluginCreator___pluginFilepath
-    pluginCreator___pluginOptions___allExtensions
-    pluginCreator___pluginOptions___allPageHeaders
-    pluginCreator___pluginOptions___authorizationKey
-    pluginCreator___pluginOptions___base64Width
-    pluginCreator___pluginOptions___codegenPlugins
-    pluginCreator___pluginOptions___codegenPlugins___resolve
-    pluginCreator___pluginOptions___defaultQuality
-    pluginCreator___pluginOptions___displayName
-    pluginCreator___pluginOptions___documentPaths
-    pluginCreator___pluginOptions___failOnError
-    pluginCreator___pluginOptions___includeRawContent
-    pluginCreator___pluginOptions___includeTaxonomies
-    pluginCreator___pluginOptions___includeTypes
-    pluginCreator___pluginOptions___isTSX
-    pluginCreator___pluginOptions___jsxPragma
-    pluginCreator___pluginOptions___languageCodenames
-    pluginCreator___pluginOptions___minify
-    pluginCreator___pluginOptions___namespace
-    pluginCreator___pluginOptions___path
-    pluginCreator___pluginOptions___pathCheck
-    pluginCreator___pluginOptions___projectId
-    pluginCreator___pluginOptions___pure
-    pluginCreator___pluginOptions___stripMetadata
-    pluginCreator___pluginOptions___stylesProvider___injectFirst
-    pluginCreator___pluginOptions___transpileTemplateLiterals
-    pluginCreator___pluginOptions___usePreviewUrl
+    pluginCreator___pluginOptions
     pluginCreator___resolve
     pluginCreator___ssrAPIs
     pluginCreator___version
@@ -2520,21 +2790,7 @@ enum SitePluginFieldsEnum {
     internal___type
     name
     nodeAPIs
-    packageJson___dependencies
-    packageJson___dependencies___name
-    packageJson___dependencies___version
-    packageJson___description
-    packageJson___devDependencies
-    packageJson___devDependencies___name
-    packageJson___devDependencies___version
-    packageJson___keywords
-    packageJson___license
-    packageJson___main
-    packageJson___name
-    packageJson___peerDependencies
-    packageJson___peerDependencies___name
-    packageJson___peerDependencies___version
-    packageJson___version
+    packageJson
     parent___children
     parent___children___children
     parent___children___children___children
@@ -2574,32 +2830,7 @@ enum SitePluginFieldsEnum {
     parent___parent___parent___children
     parent___parent___parent___id
     pluginFilepath
-    pluginOptions___allExtensions
-    pluginOptions___allPageHeaders
-    pluginOptions___authorizationKey
-    pluginOptions___base64Width
-    pluginOptions___codegenPlugins
-    pluginOptions___codegenPlugins___resolve
-    pluginOptions___defaultQuality
-    pluginOptions___displayName
-    pluginOptions___documentPaths
-    pluginOptions___failOnError
-    pluginOptions___includeRawContent
-    pluginOptions___includeTaxonomies
-    pluginOptions___includeTypes
-    pluginOptions___isTSX
-    pluginOptions___jsxPragma
-    pluginOptions___languageCodenames
-    pluginOptions___minify
-    pluginOptions___namespace
-    pluginOptions___path
-    pluginOptions___pathCheck
-    pluginOptions___projectId
-    pluginOptions___pure
-    pluginOptions___stripMetadata
-    pluginOptions___stylesProvider___injectFirst
-    pluginOptions___transpileTemplateLiterals
-    pluginOptions___usePreviewUrl
+    pluginOptions
     resolve
     ssrAPIs
     version
@@ -2611,7 +2842,92 @@ enum SortOrderEnum {
 }
 
 enum kontent_itemFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
     id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
     preferred_language
     system___codename
     system___collection
@@ -2620,6 +2936,7 @@ enum kontent_itemFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_diary_productFieldsEnum {
@@ -2695,6 +3012,7 @@ enum kontent_item_diary_productFieldsEnum {
     elements___produkt_core__description___links___type
     elements___produkt_core__description___links___url_slug
     elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___children
     elements___produkt_core__description___modular_content___id
     elements___produkt_core__description___modular_content___preferred_language
     elements___produkt_core__description___name
@@ -2781,6 +3099,7 @@ enum kontent_item_diary_productFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_homepageFieldsEnum {
@@ -2826,11 +3145,13 @@ enum kontent_item_homepageFieldsEnum {
     elements___content___name
     elements___content___type
     elements___content___value
+    elements___content___value___children
     elements___content___value___id
     elements___content___value___preferred_language
     elements___subpages___name
     elements___subpages___type
     elements___subpages___value
+    elements___subpages___value___children
     elements___subpages___value___id
     elements___subpages___value___preferred_language
     elements___title___name
@@ -2891,6 +3212,7 @@ enum kontent_item_homepageFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_introFieldsEnum {
@@ -3007,6 +3329,7 @@ enum kontent_item_introFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_meat_productFieldsEnum {
@@ -3049,6 +3372,9 @@ enum kontent_item_meat_productFieldsEnum {
     children___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     children___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     children___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    elements___pieces_in_package___name
+    elements___pieces_in_package___type
+    elements___pieces_in_package___value
     elements___produkt_core__country___name
     elements___produkt_core__country___taxonomy_group
     elements___produkt_core__country___type
@@ -3067,6 +3393,7 @@ enum kontent_item_meat_productFieldsEnum {
     elements___produkt_core__description___links___type
     elements___produkt_core__description___links___url_slug
     elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___children
     elements___produkt_core__description___modular_content___id
     elements___produkt_core__description___modular_content___preferred_language
     elements___produkt_core__description___name
@@ -3094,6 +3421,9 @@ enum kontent_item_meat_productFieldsEnum {
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
+    elements___weight___name
+    elements___weight___type
+    elements___weight___value
     gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
@@ -3150,6 +3480,7 @@ enum kontent_item_meat_productFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_other_productFieldsEnum {
@@ -3192,6 +3523,9 @@ enum kontent_item_other_productFieldsEnum {
     children___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     children___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     children___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    elements___pieces_in_package___name
+    elements___pieces_in_package___type
+    elements___pieces_in_package___value
     elements___produkt_core__country___name
     elements___produkt_core__country___taxonomy_group
     elements___produkt_core__country___type
@@ -3210,6 +3544,7 @@ enum kontent_item_other_productFieldsEnum {
     elements___produkt_core__description___links___type
     elements___produkt_core__description___links___url_slug
     elements___produkt_core__description___modular_content
+    elements___produkt_core__description___modular_content___children
     elements___produkt_core__description___modular_content___id
     elements___produkt_core__description___modular_content___preferred_language
     elements___produkt_core__description___name
@@ -3237,6 +3572,9 @@ enum kontent_item_other_productFieldsEnum {
     elements___url_slug___name
     elements___url_slug___type
     elements___url_slug___value
+    elements___weight___name
+    elements___weight___type
+    elements___weight___value
     gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
@@ -3293,6 +3631,7 @@ enum kontent_item_other_productFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_pageFieldsEnum {
@@ -3338,6 +3677,7 @@ enum kontent_item_pageFieldsEnum {
     elements___content___name
     elements___content___type
     elements___content___value
+    elements___content___value___children
     elements___content___value___id
     elements___content___value___preferred_language
     elements___show_in_navigation___name
@@ -3348,6 +3688,7 @@ enum kontent_item_pageFieldsEnum {
     elements___subpages___name
     elements___subpages___type
     elements___subpages___value
+    elements___subpages___value___children
     elements___subpages___value___id
     elements___subpages___value___preferred_language
     elements___title___name
@@ -3411,6 +3752,7 @@ enum kontent_item_pageFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_partnerFieldsEnum {
@@ -3524,6 +3866,7 @@ enum kontent_item_partnerFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_partneriFieldsEnum {
@@ -3569,6 +3912,7 @@ enum kontent_item_partneriFieldsEnum {
     elements___partners___name
     elements___partners___type
     elements___partners___value
+    elements___partners___value___children
     elements___partners___value___id
     elements___partners___value___preferred_language
     id
@@ -3626,6 +3970,7 @@ enum kontent_item_partneriFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_product_typeFieldsEnum {
@@ -3738,6 +4083,7 @@ enum kontent_item_product_typeFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_item_products_disambiguationFieldsEnum {
@@ -3783,6 +4129,7 @@ enum kontent_item_products_disambiguationFieldsEnum {
     elements___product_types___name
     elements___product_types___type
     elements___product_types___value
+    elements___product_types___value___children
     elements___product_types___value___id
     elements___product_types___value___preferred_language
     id
@@ -3840,6 +4187,7 @@ enum kontent_item_products_disambiguationFieldsEnum {
     system___last_modified
     system___name
     system___type
+    system___workflow_step
 }
 
 enum kontent_taxonomyFieldsEnum {
@@ -4091,8 +4439,6 @@ input ImageSharpFilterInput {
     original: ImageSharpOriginalFilterInput
     parent: NodeFilterInput
     resize: ImageSharpResizeFilterInput
-    resolutions: ImageSharpResolutionsFilterInput
-    sizes: ImageSharpSizesFilterInput
 }
 
 input ImageSharpFilterListInput {
@@ -4142,34 +4488,6 @@ input ImageSharpResizeFilterInput {
     width: IntQueryOperatorInput
 }
 
-input ImageSharpResolutionsFilterInput {
-    aspectRatio: FloatQueryOperatorInput
-    base64: StringQueryOperatorInput
-    height: FloatQueryOperatorInput
-    originalName: StringQueryOperatorInput
-    src: StringQueryOperatorInput
-    srcSet: StringQueryOperatorInput
-    srcSetWebp: StringQueryOperatorInput
-    srcWebp: StringQueryOperatorInput
-    tracedSVG: StringQueryOperatorInput
-    width: FloatQueryOperatorInput
-}
-
-input ImageSharpSizesFilterInput {
-    aspectRatio: FloatQueryOperatorInput
-    base64: StringQueryOperatorInput
-    originalImg: StringQueryOperatorInput
-    originalName: StringQueryOperatorInput
-    presentationHeight: IntQueryOperatorInput
-    presentationWidth: IntQueryOperatorInput
-    sizes: StringQueryOperatorInput
-    src: StringQueryOperatorInput
-    srcSet: StringQueryOperatorInput
-    srcSetWebp: StringQueryOperatorInput
-    srcWebp: StringQueryOperatorInput
-    tracedSVG: StringQueryOperatorInput
-}
-
 input ImageSharpSortInput {
     fields: [ImageSharpFieldsEnum]
     order: [SortOrderEnum] = [ASC]
@@ -4209,6 +4527,32 @@ input JSONQueryOperatorInput {
     ne: JSON
     nin: [JSON]
     regex: JSON
+}
+
+input KontentItemProductElementsFilterInput {
+    pieces_in_package: kontent_item_number_element_valueFilterInput
+    produkt_core__country: kontent_item_taxonomy_element_valueFilterInput
+    produkt_core__description: kontent_item_rich_text_element_valueFilterInput
+    produkt_core__image: kontent_item_asset_element_valueFilterInput
+    produkt_core__name: kontent_item_text_element_valueFilterInput
+    produkt_core__producer: kontent_item_taxonomy_element_valueFilterInput
+    url_slug: kontent_item_url_slug_element_valueFilterInput
+    weight: kontent_item_number_element_valueFilterInput
+}
+
+input KontentItemProductFilterInput {
+    children: NodeFilterListInput
+    elements: KontentItemProductElementsFilterInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
+    preferred_language: StringQueryOperatorInput
+    system: kontent_item_systemFilterInput
+}
+
+input KontentItemProductSortInput {
+    fields: [KontentItemProductFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
 }
 
 input NodeFilterInput {
@@ -4255,9 +4599,11 @@ input SiteBuildMetadataSortInput {
 input SiteFilterInput {
     buildTime: DateQueryOperatorInput
     children: NodeFilterListInput
+    flags: SiteFlagsFilterInput
     host: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
+    jsxRuntime: StringQueryOperatorInput
     parent: NodeFilterInput
     pathPrefix: StringQueryOperatorInput
     polyfill: BooleanQueryOperatorInput
@@ -4265,31 +4611,43 @@ input SiteFilterInput {
     siteMetadata: SiteSiteMetadataFilterInput
 }
 
-input SitePageContextFilterInput {
-    _xparams: SitePageContext_xparamsFilterInput
-    elements__url_slug__value: StringQueryOperatorInput
-    id: StringQueryOperatorInput
+input SiteFlagsFilterInput {
+    DEV_SSR: BooleanQueryOperatorInput
+    FAST_DEV: BooleanQueryOperatorInput
+    PRESERVE_WEBPACK_CACHE: BooleanQueryOperatorInput
 }
 
-input SitePageContext_xparamsFilterInput {
-    elements__url_slug__value: StringQueryOperatorInput
+input SiteFunctionFilterInput {
+    absoluteCompiledFilePath: StringQueryOperatorInput
+    children: NodeFilterListInput
+    functionRoute: StringQueryOperatorInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    matchPath: StringQueryOperatorInput
+    originalAbsoluteFilePath: StringQueryOperatorInput
+    originalRelativeFilePath: StringQueryOperatorInput
+    parent: NodeFilterInput
+    pluginName: StringQueryOperatorInput
+    relativeCompiledFilePath: StringQueryOperatorInput
+}
+
+input SiteFunctionSortInput {
+    fields: [SiteFunctionFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
 }
 
 input SitePageFilterInput {
     children: NodeFilterListInput
     component: StringQueryOperatorInput
     componentChunkName: StringQueryOperatorInput
-    componentPath: StringQueryOperatorInput
-    context: SitePageContextFilterInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     internalComponentName: StringQueryOperatorInput
-    isCreatedByStatefulCreatePages: BooleanQueryOperatorInput
     matchPath: StringQueryOperatorInput
+    pageContext: JSONQueryOperatorInput
     parent: NodeFilterInput
     path: StringQueryOperatorInput
     pluginCreator: SitePluginFilterInput
-    pluginCreatorId: StringQueryOperatorInput
 }
 
 input SitePageSortInput {
@@ -4304,92 +4662,13 @@ input SitePluginFilterInput {
     internal: InternalFilterInput
     name: StringQueryOperatorInput
     nodeAPIs: StringQueryOperatorInput
-    packageJson: SitePluginPackageJsonFilterInput
+    packageJson: JSONQueryOperatorInput
     parent: NodeFilterInput
     pluginFilepath: StringQueryOperatorInput
-    pluginOptions: SitePluginPluginOptionsFilterInput
+    pluginOptions: JSONQueryOperatorInput
     resolve: StringQueryOperatorInput
     ssrAPIs: StringQueryOperatorInput
     version: StringQueryOperatorInput
-}
-
-input SitePluginPackageJsonDependenciesFilterInput {
-    name: StringQueryOperatorInput
-    version: StringQueryOperatorInput
-}
-
-input SitePluginPackageJsonDependenciesFilterListInput {
-    elemMatch: SitePluginPackageJsonDependenciesFilterInput
-}
-
-input SitePluginPackageJsonDevDependenciesFilterInput {
-    name: StringQueryOperatorInput
-    version: StringQueryOperatorInput
-}
-
-input SitePluginPackageJsonDevDependenciesFilterListInput {
-    elemMatch: SitePluginPackageJsonDevDependenciesFilterInput
-}
-
-input SitePluginPackageJsonFilterInput {
-    dependencies: SitePluginPackageJsonDependenciesFilterListInput
-    description: StringQueryOperatorInput
-    devDependencies: SitePluginPackageJsonDevDependenciesFilterListInput
-    keywords: StringQueryOperatorInput
-    license: StringQueryOperatorInput
-    main: StringQueryOperatorInput
-    name: StringQueryOperatorInput
-    peerDependencies: SitePluginPackageJsonPeerDependenciesFilterListInput
-    version: StringQueryOperatorInput
-}
-
-input SitePluginPackageJsonPeerDependenciesFilterInput {
-    name: StringQueryOperatorInput
-    version: StringQueryOperatorInput
-}
-
-input SitePluginPackageJsonPeerDependenciesFilterListInput {
-    elemMatch: SitePluginPackageJsonPeerDependenciesFilterInput
-}
-
-input SitePluginPluginOptionsCodegenPluginsFilterInput {
-    resolve: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsCodegenPluginsFilterListInput {
-    elemMatch: SitePluginPluginOptionsCodegenPluginsFilterInput
-}
-
-input SitePluginPluginOptionsFilterInput {
-    allExtensions: BooleanQueryOperatorInput
-    allPageHeaders: StringQueryOperatorInput
-    authorizationKey: StringQueryOperatorInput
-    base64Width: IntQueryOperatorInput
-    codegenPlugins: SitePluginPluginOptionsCodegenPluginsFilterListInput
-    defaultQuality: IntQueryOperatorInput
-    displayName: BooleanQueryOperatorInput
-    documentPaths: StringQueryOperatorInput
-    failOnError: BooleanQueryOperatorInput
-    includeRawContent: BooleanQueryOperatorInput
-    includeTaxonomies: BooleanQueryOperatorInput
-    includeTypes: BooleanQueryOperatorInput
-    isTSX: BooleanQueryOperatorInput
-    jsxPragma: StringQueryOperatorInput
-    languageCodenames: StringQueryOperatorInput
-    minify: BooleanQueryOperatorInput
-    namespace: StringQueryOperatorInput
-    path: StringQueryOperatorInput
-    pathCheck: BooleanQueryOperatorInput
-    projectId: StringQueryOperatorInput
-    pure: BooleanQueryOperatorInput
-    stripMetadata: BooleanQueryOperatorInput
-    stylesProvider: SitePluginPluginOptionsStylesProviderFilterInput
-    transpileTemplateLiterals: BooleanQueryOperatorInput
-    usePreviewUrl: BooleanQueryOperatorInput
-}
-
-input SitePluginPluginOptionsStylesProviderFilterInput {
-    injectFirst: BooleanQueryOperatorInput
 }
 
 input SitePluginSortInput {
@@ -4430,7 +4709,10 @@ input WebPOptions {
 }
 
 input kontent_itemFilterInput {
+    children: NodeFilterListInput
     id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    parent: NodeFilterInput
     preferred_language: StringQueryOperatorInput
     system: kontent_item_systemFilterInput
 }
@@ -4553,12 +4835,14 @@ input kontent_item_meat_productSortInput {
 }
 
 input kontent_item_meat_product_elementsFilterInput {
+    pieces_in_package: kontent_item_number_element_valueFilterInput
     produkt_core__country: kontent_item_taxonomy_element_valueFilterInput
     produkt_core__description: kontent_item_rich_text_element_valueFilterInput
     produkt_core__image: kontent_item_asset_element_valueFilterInput
     produkt_core__name: kontent_item_text_element_valueFilterInput
     produkt_core__producer: kontent_item_taxonomy_element_valueFilterInput
     url_slug: kontent_item_url_slug_element_valueFilterInput
+    weight: kontent_item_number_element_valueFilterInput
 }
 
 input kontent_item_modular_content_element_valueFilterInput {
@@ -4605,12 +4889,14 @@ input kontent_item_other_productSortInput {
 }
 
 input kontent_item_other_product_elementsFilterInput {
+    pieces_in_package: kontent_item_number_element_valueFilterInput
     produkt_core__country: kontent_item_taxonomy_element_valueFilterInput
     produkt_core__description: kontent_item_rich_text_element_valueFilterInput
     produkt_core__image: kontent_item_asset_element_valueFilterInput
     produkt_core__name: kontent_item_text_element_valueFilterInput
     produkt_core__producer: kontent_item_taxonomy_element_valueFilterInput
     url_slug: kontent_item_url_slug_element_valueFilterInput
+    weight: kontent_item_number_element_valueFilterInput
 }
 
 input kontent_item_pageFilterInput {
@@ -4755,6 +5041,7 @@ input kontent_item_systemFilterInput {
     last_modified: DateQueryOperatorInput
     name: StringQueryOperatorInput
     type: StringQueryOperatorInput
+    workflow_step: StringQueryOperatorInput
 }
 
 input kontent_item_taxonomy_elementFilterInput {
