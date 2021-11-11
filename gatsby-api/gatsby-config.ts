@@ -48,6 +48,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-postcss`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-use-query-params`,
     `gatsby-plugin-image`,
@@ -59,9 +60,6 @@ module.exports = {
     //     name: `images`,
     //     path: `./src/images`,
     //   },
-    // },
-    // {
-    //   resolve: `@rshackleton/gatsby-transformer-kontent-image`,
     // },
     {
       resolve: `gatsby-plugin-netlify`,
