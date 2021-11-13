@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    a, .link {
+        @apply text-secondary-light hover:text-secondary-lighter active:text-secondary
+    }
+
+    .container-fluid {
+        @apply container px-xs sm:px-sm md:px-md lg:px-lg xl:px-xl 2xl:px-2xl
+    }
+}

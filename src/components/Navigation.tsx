@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import { Sitemap } from '../constants/urls';
-import { navBarHeight } from '../styles/theme';
+import { navBarHeight } from '../styles/GlobalStyle';
 import { isActive } from '../utils/urlUtils';
 import { Logo, LogoType } from './Logo';
 
@@ -32,35 +32,35 @@ const Nav = styled.nav`
   //top: 0;
   //left: 0;
   //right:0;
-  z-index: ${p => p.theme.zIndex.appBar};
-
-  width: 100%;
-  min-height: ${navBarHeight};
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-items: center;
-  align-items: center;
-  justify-content: space-around;
-  
-  background-color: ${p => p.theme.palette.primary.main};
-  
-  ul {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-items: center;
-    align-items: center;
-    
-    li {
-      margin-right: 0.5rem;
-      margin-left: 0.5rem;
-      text-transform: uppercase;
-      font-weight: ${p => p.theme.typography.fontWeightBold};
-      font-size: ${p => p.theme.typography.fontSize}px;
-    }
-  }
+  // z-index: ${p => p.theme.zIndex.appBar};
+  //
+  // width: 100%;
+  // min-height: ${navBarHeight};
+  // padding: 0;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-items: center;
+  // align-items: center;
+  // justify-content: space-around;
+  //
+  // background-color: ${p => p.theme.palette.primary.main};
+  //
+  // ul {
+  //   padding: 0;
+  //   list-style: none;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-items: center;
+  //   align-items: center;
+  //  
+  //   li {
+  //     margin-right: 0.5rem;
+  //     margin-left: 0.5rem;
+  //     text-transform: uppercase;
+  //     font-weight: ${p => p.theme.typography.fontWeightBold};
+  //     font-size: ${p => p.theme.typography.fontSize}px;
+  //   }
+  // }
 `;
 
 type LinkStyledProps = { readonly isActive?: boolean };
@@ -69,26 +69,26 @@ const LinkStyled = styled
 (({ isActive, ...rest }) =>
   <Link {...rest} className={classnames(rest.className, isActive && 'active')} />,
 )<LinkStyledProps>`
-  text-decoration: none;
-  color: ${props => props.theme.palette.secondary.main};
-  
-  li > &:hover {
-    color: ${props => props.theme.palette.black};
-    box-shadow: ${props => props.theme.palette.black};
-    text-decoration: none;
-    border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
-  }
-  
-  &.active {
-    border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
-  }
+  // text-decoration: none;
+  // color: ${props => props.theme.palette.secondary.main};
+  //
+  // li > &:hover {
+  //   color: ${props => props.theme.palette.black};
+  //   box-shadow: ${props => props.theme.palette.black};
+  //   text-decoration: none;
+  //   border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
+  // }
+  //
+  // &.active {
+  //   border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
+  // }
 `;
 
 const LogoStyled = styled(Logo)`
-  width: 200px;
-  fill: #26471F;
-  
-  a:hover {
-    text-decoration: none;
-  }
+  //width: 200px;
+  //fill: #26471F;
+  //
+  //a:hover {
+  //  text-decoration: none;
+  //}
 `;
