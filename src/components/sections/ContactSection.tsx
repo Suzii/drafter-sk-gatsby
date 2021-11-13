@@ -10,7 +10,7 @@ import { CompanyInfo, companyInfo, Contact, primaryContact, secondaryContact } f
 import { CONTACT_FRAGMENT } from '../../constants/urls';
 
 export const ContactSection: React.FC = () => (
-  <Section id={CONTACT_FRAGMENT} variant="primary">
+  <Section id={CONTACT_FRAGMENT} className="bg-primary">
     <Container maxWidth="md">
       <Stack>
         <SectionTitle>Kontakt</SectionTitle>
@@ -26,34 +26,34 @@ export const ContactSection: React.FC = () => (
 );
 
 const PersonsStyled = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-evenly;
-  color: ${p => p.theme.palette.secondary.main};
-  
-  & > * {
-    display: flex;
-  }
-
-  a {
-    color: ${p => p.theme.palette.secondary.main};
-  }
-
-  i {
-    margin-right: 0.8rem;
-    width: 1rem;
-  }
-
-  ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  li {
-    margin: 1rem;
-  }
+  // width: 100%;
+  // display: flex;
+  // flex-wrap: wrap;
+  // flex-direction: row;
+  // justify-content: space-evenly;
+  // color: ${p => p.theme.palette.secondary.main};
+  //
+  // & > * {
+  //   display: flex;
+  // }
+  //
+  // a {
+  //   color: ${p => p.theme.palette.secondary.main};
+  // }
+  //
+  // i {
+  //   margin-right: 0.8rem;
+  //   width: 1rem;
+  // }
+  //
+  // ul {
+  //   list-style: none;
+  //   padding-left: 0;
+  // }
+  //
+  // li {
+  //   margin: 1rem;
+  // }
 `;
 
 const Person: React.FC<{ readonly person: Contact, readonly title: string }> = ({ person, title }) => (
@@ -136,13 +136,13 @@ const DtStyled = styled.dt`
   text-align: right;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: ${p => p.theme.typography.fontWeightBold};
+  //font-weight: ${p => p.theme.typography.fontWeightBold};
 `;
 
 const SeparatorStyled = styled.hr`
   width: 100%;
-  color: ${p => p.theme.palette.secondary.main};
+  //color: ${p => p.theme.palette.secondary.main};
   border: 0;
   height: 1px;
-  background: ${p => p.theme.palette.secondary.main};
+  // background: ${p => p.theme.palette.secondary.main};
 `;

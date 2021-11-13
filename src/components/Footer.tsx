@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import { darken, lighten } from 'polished';
+// import { darken, lighten } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
 import { EmailLink } from '../_ui-components/EmailLink';
@@ -53,55 +53,55 @@ const FooterContact: React.FC = () => (
 
 
 const FooterStyled = styled.footer`
-  padding: 0;
-  width: 100%;
-  margin-top: auto;
+  //padding: 0;
+  //width: 100%;
+  //margin-top: auto;
 `;
 
 const FooterPrimary = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 2rem;
-  background-color: ${p => lighten(0.05, p.theme.palette.secondary.main)};
-  color: ${p => p.theme.palette.primary.main};
-  line-height: 1.5rem;
-
-  a {
-    color: ${p => p.theme.palette.primary.main};
-    text-decoration: none;
-
-    &:hover {
-      color: ${p => p.theme.palette.primary.main};
-      text-decoration: underline;
-    }
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      margin-top: 0.5rem;
-    }
-  }
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-around;
+  // padding: 2rem;
+  // background-color: ${p => lighten(0.05, p.theme.palette.secondary.main)};
+  // color: ${p => p.theme.palette.primary.main};
+  // line-height: 1.5rem;
+  //
+  // a {
+  //   color: ${p => p.theme.palette.primary.main};
+  //   text-decoration: none;
+  //
+  //   &:hover {
+  //     color: ${p => p.theme.palette.primary.main};
+  //     text-decoration: underline;
+  //   }
+  // }
+  //
+  // ul {
+  //   list-style: none;
+  //   padding: 0;
+  //   margin: 0;
+  //
+  //   li {
+  //     margin-top: 0.5rem;
+  //   }
+  // }
 `;
 
 const FooterSecondary = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 3rem;
-  text-align: center;
-  background-color: ${p => p.theme.palette.secondary.main};
-  color: ${p => darken(0.1, p.theme.palette.primary.main)};
-
-  a {
-    color: ${p => darken(0.1, p.theme.palette.primary.main)};
-
-    &:hover {
-      color: ${p => p.theme.palette.primary.main};
-    }
-  }
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // height: 3rem;
+  // text-align: center;
+  // background-color: ${p => p.theme.palette.secondary.main};
+  // color: ${p => darken(0.1, p.theme.palette.primary.main)};
+  //
+  // a {
+  //   color: ${p => darken(0.1, p.theme.palette.primary.main)};
+  //
+  //   &:hover {
+  //     color: ${p => p.theme.palette.primary.main};
+  //   }
+  // }
 `;

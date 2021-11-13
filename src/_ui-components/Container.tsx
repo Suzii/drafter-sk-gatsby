@@ -1,6 +1,5 @@
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -25,50 +24,26 @@ export const Main = styled.main`
   width: 100%;
 `;
 
-type SectionColor = 'primary' | 'white' | 'gray';
-const translateSectionColor = (c: SectionColor | undefined, t: DefaultTheme): string => {
-  switch (c) {
-    case 'gray':
-      return t.palette.common.lightGray;
-    case 'primary':
-      return t.palette.primary.main;
-    case 'white':
-      return t.palette.common.white;
-    default:
-      return 'inherit';
-  }
-};
-
-export const Section = styled.section<{
-  readonly isFullHeight?: boolean;
-  readonly variant?: SectionColor;
-}>`
-  width: 100%;
-  padding-top: 2rem;
-  padding-bottom: 3rem;
-
-  background-color: ${p => translateSectionColor(p.variant, p.theme)};
-
-  ${p => p.isFullHeight && (
-    `min-height: 100vh;`
-  )}
-  
-  a {
-    color: ${p => p.theme.palette.secondary.main};
-  }
-`;
-
-export const SectionTitle = styled(({children, className, center = true, ...rest}) =>
-  <Typography
-    variant="h1"
-    className={className}
-    align={center ? "center" : "left"}
-    {...rest}
-  >
+export const Section: React.FC<{ className?: string, id: string }> = ({ children, id, className }) => (
+  <section id={id} className={`py-md w-full ${className}`}>
     {children}
-  </Typography>
-)`
-  text-transform: uppercase;
-  color: ${p => p.theme.palette.secondary.main};
-  margin-bottom: 2rem;
-`;
+  </section>
+);
+
+export const SectionTitle: React.FC = ({ children }) => (
+  <h1 className="font-headings uppercase font-bold text-center text-secondary xl:text-7xl l:text-7xl m:text-6xl sm:text-4xl">
+    {children}
+  </h1>
+);
+
+export const SectionSubtitle: React.FC = ({ children }) => (
+  <h1 className="font-headings font-bold text-center text-secondary text-lg ">
+    {children}
+  </h1>
+);
+
+export const SectionPara: React.FC = ({ children }) => (
+  <p className="font-sans text-gray-800 text-lg">
+    {children}
+  </p>
+);

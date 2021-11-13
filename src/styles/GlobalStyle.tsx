@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 import '../styles/font-face.css';
 import './global.css';
 
+export const navBarHeight = '80px';
+
 export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
@@ -21,8 +23,8 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
   
     font-family: 'Titillium Web', 'Open Sans', sans-serif;
-    font-weight: ${p => p.theme.typography.fontWeightRegular};
-    color: ${p => p.theme.palette.common.darkGray};
+    //font-weight: {p => p.theme.typography.fontWeightRegular};
+    // color: {p => p.theme.palette.common.darkGray};
     text-align: justify;
   
     // gatsby wrappers hack
