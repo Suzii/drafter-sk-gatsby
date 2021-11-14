@@ -14,9 +14,11 @@ module.exports = {
       colors: {
         gray: colors.warmGray,
         primary: {
-          light: '',
+          light: '#ffde8e',
+          lighter: '#ffd33c',
           DEFAULT: '#ffc914',
-          dark: '',
+          darker: '#d2a30c',
+          dark: '#917108',
         },
         secondary: {
           light: '#457a3a',
