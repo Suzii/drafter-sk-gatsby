@@ -7,14 +7,6 @@ module.exports = {
     container: {
       center: true,
     },
-    spacing: {
-      xs: '0.5rem',
-      sm: '1rem',
-      md: '2rem',
-      lg: '4rem',
-      xl: '4rem',
-      '2xl': '8rem',
-    },
     extend: {
       fontFamily: {
         headings: ['Titillium Web', 'Open Sans'],
@@ -33,6 +25,14 @@ module.exports = {
           darker: '#1d3817',
           dark: '#1b3316',
         },
+      },
+      spacing: {
+        xs: '0.5rem',
+        sm: '1rem',
+        md: '2rem',
+        lg: '4rem',
+        xl: '4rem',
+        '2xl': '8rem',
       },
     },
   },
