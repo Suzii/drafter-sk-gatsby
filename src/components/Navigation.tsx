@@ -1,94 +1,101 @@
-import classnames from 'classnames';
+import { Disclosure } from '@headlessui/react';
+import classNames from 'classnames';
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
+import { Icon } from '../_ui-components/Icon';
 import { Sitemap } from '../constants/urls';
-import { navBarHeight } from '../styles/GlobalStyle';
 import { isActive } from '../utils/urlUtils';
 import { Logo, LogoType } from './Logo';
 
-export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = ({ sitemap }) => (
-  <Nav>
-    <LinkStyled to="/">
-      <LogoStyled variant={LogoType.Full} />
-    </LinkStyled>
+export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = (props) => {
+  const navigation = props.sitemap.filter(s => s.isVisible && !s.isIndex);
 
-    <ul role="navigation">
-      {sitemap.map((node, index) =>
-        node.isVisible && !node.isIndex && (
-          <li key={index}>
-            <LinkStyled to={node.url} activeClassName="active" partiallyActive isActive={isActive(node.url)}>
-              {node.title}
-            </LinkStyled>
-          </li>
-        ),
+  return (
+    <Disclosure as='nav' className='bg-primary'>
+      {({ open }) => (
+        <>
+          <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
+            <div className='relative flex items-center justify-between h-16'>
+              <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
+                <Disclosure.Button
+                  className='inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-light'>
+                  <span className='sr-only'>Open main menu</span>
+                  {open ? (
+                    <Icon type='x' className='block h-6 w-6' aria-hidden='true' />
+                  ) : (
+                    <Icon type='menu' className='block h-6 w-6' aria-hidden='true' />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className='flex-1 flex items-center justify-center sm:items-stretch sm:justify-start'>
+                <div className='flex-shrink-0 flex items-center'>
+                  <Link to="/">
+                    <Logo
+                      variant={LogoType.Full}
+                      className='block h-12 w-auto fill-current text-secondary'
+                    />
+                  </Link>
+                </div>
+              </div>
+              <div
+                className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
+                <div className='hidden sm:block sm:ml-6'>
+                  <div className='flex space-x-4'>
+                    {navigation.map((item) =>
+                      !item.isButton
+                        ? (
+                          <Link
+                            key={item.title}
+                            to={item.url}
+                            className={classNames(
+                              isActive(item.url) ? 'text-secondary' : 'text-secondary-darker hover:text-secondary-dark',
+                              'uppercase px-3 py-2 text-md font-headings font-bold',
+                            )}
+                            aria-current={isActive(item.url) ? 'page' : undefined}
+                          >
+                            {item.title}
+                          </Link>
+                        )
+                        : (
+                          <Link
+                            key={item.title}
+                            to={item.url}
+                            className={classNames(
+                              isActive(item.url) ? 'bg-secondary-dark text-primary' : 'text-primary-dark hover:bg-secondary-darker hover:text-primary',
+                              'uppercase bg-secondary px-3 py-2 rounded-md text-md text-primary font-headings font-bold',
+                            )}
+                            aria-current={isActive(item.url) ? 'page' : undefined}
+                          >
+                            {item.title}
+                          </Link>
+                        ))
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className='sm:hidden'>
+            <div className='px-2 pt-2 pb-3 space-y-1'>
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.title}
+                  as={Link}
+                  to={item.url}
+                  className={classNames(
+                    isActive(item.url) ? 'bg-secondary text-primary' : 'text-secondary hover:bg-secondary-lighter hover:text-primary',
+                    'uppercase block px-3 py-2 rounded-md text-base font-headings font-bold',
+                  )}
+                  aria-current={isActive(item.url) ? 'page' : undefined}
+                >
+                  {item.title}
+                </Disclosure.Button>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
       )}
-    </ul>
-  </Nav>
-);
-
-const Nav = styled.nav`
-  //position: absolute;
-  //top: 0;
-  //left: 0;
-  //right:0;
-  // z-index: ${p => p.theme.zIndex.appBar};
-  //
-  // width: 100%;
-  // min-height: ${navBarHeight};
-  // padding: 0;
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-items: center;
-  // align-items: center;
-  // justify-content: space-around;
-  //
-  // background-color: ${p => p.theme.palette.primary.main};
-  //
-  // ul {
-  //   padding: 0;
-  //   list-style: none;
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-items: center;
-  //   align-items: center;
-  //  
-  //   li {
-  //     margin-right: 0.5rem;
-  //     margin-left: 0.5rem;
-  //     text-transform: uppercase;
-  //     font-weight: ${p => p.theme.typography.fontWeightBold};
-  //     font-size: ${p => p.theme.typography.fontSize}px;
-  //   }
-  // }
-`;
-
-type LinkStyledProps = { readonly isActive?: boolean };
-
-const LinkStyled = styled
-(({ isActive, ...rest }) =>
-  <Link {...rest} className={classnames(rest.className, isActive && 'active')} />,
-)<LinkStyledProps>`
-  // text-decoration: none;
-  // color: ${props => props.theme.palette.secondary.main};
-  //
-  // li > &:hover {
-  //   color: ${props => props.theme.palette.black};
-  //   box-shadow: ${props => props.theme.palette.black};
-  //   text-decoration: none;
-  //   border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
-  // }
-  //
-  // &.active {
-  //   border-bottom: 0.2rem solid ${props => props.theme.palette.secondary.main};
-  // }
-`;
-
-const LogoStyled = styled(Logo)`
-  //width: 200px;
-  //fill: #26471F;
-  //
-  //a:hover {
-  //  text-decoration: none;
-  //}
-`;
+    </Disclosure>
+  );
+};

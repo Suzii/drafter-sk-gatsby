@@ -1,10 +1,12 @@
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import {
   faAddressCard,
+  faBars,
   faEnvelope,
   faHandshake,
   faPhone,
   faThumbsUp,
+  faTimes,
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
@@ -17,7 +19,9 @@ export type IconType =
   'email' |
   'experience' |
   'customers' |
-  'fair-approach';
+  'fair-approach' |
+  'x' |
+  'menu';
 
 const mapToIcon = (type: IconType): IconDefinition | null => {
   switch (type) {
@@ -33,6 +37,10 @@ const mapToIcon = (type: IconType): IconDefinition | null => {
       return faEnvelope;
     case 'contact-person':
       return faAddressCard;
+    case 'x':
+      return faTimes;
+    case 'menu':
+      return faBars;
     default:
       return null;
   }

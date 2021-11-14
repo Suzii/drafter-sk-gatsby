@@ -37,12 +37,13 @@ export type Sitemap = readonly {
   readonly url: string;
   readonly isVisible?: boolean;
   readonly isIndex?: boolean;
+  readonly isButton?: boolean;
 }[];
 
 export const sitemap: Sitemap = [
   { title: 'Domov', url: HOME_URL, isVisible: true, isIndex: true },
   { title: 'Kto sme', url: WHO_WE_ARE_URL, isVisible: true },
-  { title: 'Produkty', url: PRODUCTS_URL, isVisible: isFeatureEnabled(Feature.ProductsPage) },
   { title: 'Partneri', url: PARTNERS_URL, isVisible: true },
   { title: 'Kontakt', url: CONTACT_URL, isVisible: true },
+  { title: 'Produkty', url: PRODUCTS_URL, isVisible: isFeatureEnabled(Feature.ProductsPage), isButton: true },
 ];
