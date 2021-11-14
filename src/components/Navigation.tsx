@@ -61,8 +61,8 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = (props) => {
                             key={item.title}
                             to={item.url}
                             className={classNames(
-                              isActive(item.url) ? 'bg-secondary-dark text-primary' : 'text-primary-dark hover:bg-secondary-darker hover:text-primary',
-                              'uppercase bg-secondary px-3 py-2 rounded-md text-md text-primary font-headings font-bold',
+                              isActive(item.url) ? 'bg-secondary-dark text-primary' : 'hover:bg-secondary-darker hover:text-primary',
+                              'uppercase bg-secondary px-3 py-2 rounded-md text-md text-primary font-headings font-bold hover:no-inderline',
                             )}
                             aria-current={isActive(item.url) ? 'page' : undefined}
                           >
