@@ -1,7 +1,6 @@
-import Container from '@material-ui/core/Container';
+import classnames from 'classnames';
 import React from 'react';
-import styled from 'styled-components';
-import { Section, SectionSubtitle, SectionTitle, Stack } from '../../_ui-components/Container';
+import { Section, SectionSubtitle, SectionTitle } from '../../_ui-components/Container';
 import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { OutwardLink } from '../../_ui-components/OutwardLink';
 import { PARTNERS_FRAGMENT } from '../../constants/urls';
@@ -11,26 +10,31 @@ type PartnersSectionProps = {
   readonly partners: ReadonlyArray<PartnerType>;
 };
 
-export const PartnersSection: React.FC<PartnersSectionProps> = ({partners}) => (
+export const PartnersSection: React.FC<PartnersSectionProps> = ({ partners }) => (
   <Section id={PARTNERS_FRAGMENT}>
-    <Container maxWidth="xl">
-      <Stack>
-        <SectionTitle>Partneri</SectionTitle>
-        <SectionSubtitle>
-          Po kliknutí na logo budete presmerovaný na stránky partnera, kde si môžete pozrieť ich výrobky.
-        </SectionSubtitle>
-        <Partners>
-          {partners.map((partner, index) => (
-            <Partner partner={partner} key={index} />
-          ))}
-        </Partners>
-      </Stack>
-    </Container>
+    <div className="space-y-md">
+      <SectionTitle>Partneri</SectionTitle>
+      <SectionSubtitle>
+        Po kliknutí na logo budete presmerovaný na stránky partnera, kde si môžete pozrieť ich výrobky.
+      </SectionSubtitle>
+      <div className="flex flex-wrap items-center justify-around">
+        {partners.map((partner, index) => (
+          <Partner
+            partner={partner}
+            key={index}
+            className="mx-auto"
+          />
+        ))}
+      </div>
+    </div>
   </Section>
 );
 
-const Partner: React.FC<{ readonly partner: PartnerType }> = ({ partner }) => (
-  <PartnerStyled {...getKontentAttrs(partner.id, 'logo')}>
+const Partner: React.FC<{ readonly partner: PartnerType; readonly className?: string }> = ({ partner, className }) => (
+  <div
+    className={classnames('mx-md my-sm transform transition hover:-translate-y-2 ease-out duration-300', className)}
+    {...getKontentAttrs(partner.id, 'logo')}
+  >
     <OutwardLink
       href={partner.link.url}
       title={partner.title.value}
@@ -38,28 +42,9 @@ const Partner: React.FC<{ readonly partner: PartnerType }> = ({ partner }) => (
       <img
         src={partner.logo.imgSrc}
         alt={partner.title.value}
+        className="max-h-24 max-w-48"
       />
     </OutwardLink>
-  </PartnerStyled>
+  </div>
 );
 
-const Partners = styled.div`
-  //display: flex;
-  //flex-wrap: wrap;
-  //justify-content: space-around;
-  //align-items: center;
-  //margin-top: 2rem;
-`;
-
-const PartnerStyled = styled.div`
-  //margin: 0.5rem 1rem;
-  //img {
-  //  max-height: 6rem;
-  //  max-width: 12rem;
-  //}
-  //
-  //&:hover {
-  //  transform: translate(0%, -10%);
-  //  transition: 0.3s ease-out;
-  //}
-`;

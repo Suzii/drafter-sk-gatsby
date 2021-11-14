@@ -32,7 +32,7 @@ export const WhoWeAreSection: React.FC = () => (
       </SectionSubtitle>
       <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-sm justify-items-center justify-around sm:space-y-md md:space-y-0">
         {features.map((feature, index) => (
-          <div className="flex flex-col space-y-sm justify-items-center items-center">
+          <div key={index} className="flex flex-col space-y-sm justify-items-center items-center">
             <span className="text-secondary text-5xl">
               <Icon type={feature.icon} />
             </span>
