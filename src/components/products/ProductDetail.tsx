@@ -1,6 +1,4 @@
 import { ImageElement } from '@kentico/gatsby-kontent-components';
-import { Container, Grid } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
@@ -24,47 +22,24 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
 
   return (
     <Layout>
-      <Container maxWidth="lg">
-        <Section>
-          <Grid
-            container
-            spacing={4}
-            direction="row"
-            alignContent="stretch"
-          >
-            <Grid
-              item
-              xl={4}
-              lg={4}
-              md={4}
-              sm={5}
-              xs={12}
-            >
-              <ImageElement image={product.img ?? {} as any} />
-            </Grid>
-            <Grid
-              item
-              xl={8}
-              lg={8}
-              md={8}
-              sm={7}
-              xs={12}
-            >
-              <SectionTitle center={false} {...getKontentAttrs(product.id, 'name')}>
+      <Section id={product.url}>
+        <div className="container-fluid">
+          <div className="grid grid-cols-12 gap-sm">
+            <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+              <ImageElement image={product.img ?? {} as any} className="w-full"/>
+            </div>
+            <div className="col-span-12 sm:col-span-6 lg:col-span-8 space-y-md">
+              <SectionTitle {...getKontentAttrs(product.id, 'name')}>
                 {product.name}
               </SectionTitle>
 
-              <Typography variant="body1" color="textPrimary" component="div">
-                <ProductInfo properties={product.properties} />
-              </Typography>
+              <ProductInfo properties={product.properties} />
 
-              <Typography variant="body1" component="div">
-                <ProductDescription rte={product.description} />
-              </Typography>
-            </Grid>
-          </Grid>
-        </Section>
-      </Container>
+              <ProductDescription rte={product.description} />
+            </div>
+          </div>
+        </div>
+      </Section>
     </Layout>
   );
 };
