@@ -7,7 +7,7 @@ export const Section: React.FC<{ className?: string, id: string }> = ({ children
 );
 
 export const SectionTitle: React.FC = ({ children }) => (
-  <h1 className="font-headings uppercase font-bold text-center text-secondary xl:text-7xl l:text-7xl m:text-6xl sm:text-4xl">
+  <h1 className="font-headings uppercase font-bold text-center text-secondary xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl text-3xl">
     {children}
   </h1>
 );
