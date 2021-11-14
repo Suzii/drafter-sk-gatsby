@@ -2,7 +2,6 @@
 import { Grid } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import React from 'react';
-import { Main } from '../_ui-components/Container';
 import { KontentSmartLinksToggle } from '../_ui-components/kontentSmartlink/KontentSmartLinksToggle';
 import { sitemap } from '../constants/urls';
 import { GlobalStyle } from '../styles/GlobalStyle';
@@ -17,9 +16,9 @@ const Layout: React.FC = ({ children }) => {
       <GlobalStyle />
       <Grid container direction="column" style={{ height: '100%', minHeight: '100vh' }}>
         <Navigation sitemap={sitemap} />
-        <Main>
+        <main className="w-full">
           {children}
-        </Main>
+        </main>
         <Footer sitemap={sitemap} />
       </Grid>
       {isPreviewEnv && <KontentSmartLinksToggle />}
