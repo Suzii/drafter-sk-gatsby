@@ -16,25 +16,12 @@ export const GlobalStyle = createGlobalStyle`
   }
         
   body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  
     font-family: 'Titillium Web', 'Open Sans', sans-serif;
-    //font-weight: {p => p.theme.typography.fontWeightRegular};
-    // color: {p => p.theme.palette.common.darkGray};
     text-align: justify;
   
     // gatsby wrappers hack
-    & > div { 
+    #___gatsby { 
       width: 100%;
-      min-height: 100vh;
-      
-      & > div {
-        min-height: 100vh;
-      }
     }
   }
   
