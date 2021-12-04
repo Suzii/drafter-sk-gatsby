@@ -1,7 +1,6 @@
-import { Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { Maybe } from '../../@types/global';
+import { SectionSubtitle } from '../../_ui-components/Container';
 import { Filters, SelectedTermsByGroup, useFilterQuery } from '../../_ui-components/filter/Filters';
 import { ProductCommon } from '../../models/products';
 import { TaxonomyGroup } from '../../models/taxonomies/_common';
@@ -9,6 +8,7 @@ import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import { arrayIntersect } from '../../utils/collectionsUtils';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
 import { ProductTypeLinks } from './disambiguation/ProductTypeLinks';
+// import { ProductTypeLinks } from './disambiguation/ProductTypeLinks';
 import { ProductsPageWrapper } from './ProductsPageWrapper';
 import { ProductTile } from './ProductTile';
 
@@ -26,7 +26,7 @@ const satisfiesGroupFilter = <TGroupName extends AllKnownProductTaxonomies>(
   !selectedTerms.length ||
   !!arrayIntersect(
     selectedTerms,
-    product.properties[groupCodename]?.terms.map(t => t.codename) ?? []
+    product.properties[groupCodename]?.terms.map(t => t.codename) ?? [],
   ).length;
 
 const satisfiesFilter = <TGroupName extends AllKnownProductTaxonomies>(
@@ -57,7 +57,9 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
   if (!isFeatureEnabled(Feature.ProductsPage)) {
     return (
       <ProductsPageWrapper>
-        <Typography variant="h6" component="div" align="center">Na stránke stále pracujeme...</Typography>
+        <SectionSubtitle>
+          Na stránke stále pracujeme...
+        </SectionSubtitle>
       </ProductsPageWrapper>
     );
   }
@@ -65,17 +67,19 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
   return (
     <ProductsPageWrapper>
       <ProductTypeLinks />
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={3} lg={3} xl={2}>
+      <div className="container">
+      <div className="grid grid-cols-12 gap-sm">
+        <div className="col-span-12 xs:col-span-12 sm:col-span-12 md:col-span-3 lg:col-span-3 xl:col-span-2">
           <Filters<TGroupName> filters={productTaxonomies} />
-        </Grid>
-        <Grid item xs={12} sm={12} md={9} lg={9} xl={10}>
+        </div>
+        <div className="col-span-12 xs:col-span-12 sm:col-span-12 md:col-span-9 lg:col-span-9 xl:col-span-10">
           {!filteredProducts.length
-            ? (<Typography variant="h6" component="div" align="center">Nenašli sa žiadne produkty vyhovujúce filtrom.</Typography>)
+            ? (<SectionSubtitle>Nenašli sa žiadne produkty vyhovujúce filtrom.</SectionSubtitle>)
             : (<ProductsGrid products={filteredProducts} />)
           }
-        </Grid>
-      </Grid>
+        </div>
+      </div>
+      </div>
     </ProductsPageWrapper>
   );
 };
@@ -85,26 +89,14 @@ type GridProps<TGroupName extends AllKnownProductTaxonomies> = {
 }
 
 export const ProductsGrid = <TGroupName extends AllKnownProductTaxonomies>({ products }: GridProps<TGroupName>) => (
-  <Grid
-    container
-    spacing={2}
-    direction="row"
-    justify="flex-start"
-    alignItems="stretch"
-  >
+  <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-sm">
     {products.map(product => (
-      <Grid
+      <div
+        className="flex"
         key={product.id}
-        item
-        style={{ display: 'flex' }}
-        xl={2}
-        lg={3}
-        md={4}
-        sm={6}
-        xs={12}
       >
         <ProductTile product={product} />
-      </Grid>
+      </div>
     ))}
-  </Grid>
+  </div>
 );
