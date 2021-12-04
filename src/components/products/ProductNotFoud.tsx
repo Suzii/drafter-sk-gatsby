@@ -1,14 +1,14 @@
-import { Container, Typography } from '@material-ui/core';
 import React from 'react';
-import { Section } from '../../_ui-components/Container';
+import { Section, SectionSubtitle, SectionTitle } from '../../_ui-components/Container';
 import Layout from '../Layout';
 
 export const ProductNotFound = () => (
   <Layout>
-    <Container maxWidth="lg">
-      <Section id="404">
-        <Typography variant="h3" component="div" align="center">Hľadaný produkt sa nenašiel</Typography>
+    <div className="container-fluid">
+      <Section id="404" className="space-y-md">
+        <SectionTitle>Hups...</SectionTitle>
+        <SectionSubtitle>Hľadaný produkt sa nenašiel</SectionSubtitle>
       </Section>
-    </Container>
+    </div>
   </Layout>
 );

@@ -68,17 +68,17 @@ export const ProductsList = <TGroupName extends AllKnownProductTaxonomies>({
     <ProductsPageWrapper>
       <ProductTypeLinks />
       <div className="container">
-      <div className="grid grid-cols-12 gap-sm">
-        <div className="col-span-12 xs:col-span-12 sm:col-span-12 md:col-span-3 lg:col-span-3 xl:col-span-2">
-          <Filters<TGroupName> filters={productTaxonomies} />
+        <div className="grid grid-cols-12 gap-sm">
+          <div className="col-span-12 xs:col-span-12 sm:col-span-12 md:col-span-3 lg:col-span-3 xl:col-span-2">
+            <Filters<TGroupName> filters={productTaxonomies} />
+          </div>
+          <div className="col-span-12 xs:col-span-12 sm:col-span-12 md:col-span-9 lg:col-span-9 xl:col-span-10">
+            {!filteredProducts.length
+              ? (<SectionSubtitle>Nenašli sa žiadne produkty vyhovujúce filtrom.</SectionSubtitle>)
+              : (<ProductsGrid products={filteredProducts} />)
+            }
+          </div>
         </div>
-        <div className="col-span-12 xs:col-span-12 sm:col-span-12 md:col-span-9 lg:col-span-9 xl:col-span-10">
-          {!filteredProducts.length
-            ? (<SectionSubtitle>Nenašli sa žiadne produkty vyhovujúce filtrom.</SectionSubtitle>)
-            : (<ProductsGrid products={filteredProducts} />)
-          }
-        </div>
-      </div>
       </div>
     </ProductsPageWrapper>
   );
