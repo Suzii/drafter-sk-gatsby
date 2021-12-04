@@ -4,7 +4,9 @@ import {
   faBars,
   faEnvelope,
   faHandshake,
+  faMinus,
   faPhone,
+  faPlus,
   faThumbsUp,
   faTimes,
   faUsers,
@@ -21,7 +23,9 @@ export type IconType =
   'customers' |
   'fair-approach' |
   'x' |
-  'menu';
+  'menu' |
+  'plus' |
+  'minus';
 
 const mapToIcon = (type: IconType): IconDefinition | null => {
   switch (type) {
@@ -41,6 +45,10 @@ const mapToIcon = (type: IconType): IconDefinition | null => {
       return faTimes;
     case 'menu':
       return faBars;
+    case 'plus':
+      return faPlus;
+    case 'minus':
+      return faMinus
     default:
       return null;
   }

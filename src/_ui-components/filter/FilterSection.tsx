@@ -1,26 +1,27 @@
-import { Checkbox, Collapse, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { Disclosure } from '@headlessui/react';
+import React from 'react';
 import { useIsSmallScreen } from '../../hooks/useIsSmallScreen';
+import { Icon } from '../Icon';
 import { FilterTerm } from './Filters';
 
 type FilterSectionProps = {
   readonly selectedTerms: ReadonlyArray<string>;
   readonly onSelectedTermsChanged: (updateCallback: (prev: ReadonlyArray<string>) => ReadonlyArray<string>) => void;
+  readonly filterId: string;
   readonly filterName: string;
   readonly getTermName: (term: FilterTerm) => string;
   readonly allTerms: ReadonlyArray<FilterTerm>;
 };
 
 export const FilterSection: React.FC<FilterSectionProps> = ({
+  filterId,
   filterName,
   getTermName,
   allTerms,
   selectedTerms,
   onSelectedTermsChanged,
 }) => {
-  const [isOpen, setIsOpen] = useState(!useIsSmallScreen());
+  const isSmallScreen = useIsSmallScreen();
 
   const toggleTerm = (value: string) =>
     onSelectedTermsChanged(prevState =>
@@ -30,52 +31,48 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     );
 
   return (
-    <FilterStyled>
-      <List dense disablePadding subheader={(
-        <Typography variant="h6" component="div" className="header" onClick={() => setIsOpen(!isOpen)}>
-          {filterName}
-          {isOpen ? <ExpandLess /> : <ExpandMore />}
-        </Typography>
-      )}>
-        <Collapse in={isOpen} timeout="auto">
-          {allTerms.map(t => (
-            <ListItem key={t.codename} role={undefined} dense button onClick={() => toggleTerm(t.codename)}>
-              <ListItemIcon>
-                <Checkbox
-                  size="small"
-                  edge="start"
-                  name={t.codename}
-                  value={t.codename}
-                  id={t.codename}
-                  checked={selectedTerms.includes(t.codename)}
-                  inputProps={{ 'aria-labelledby': t.codename }}
-                />
-              </ListItemIcon>
-              <ListItemText id={t.codename} primary={getTermName(t)} />
-            </ListItem>
-          ))}
-        </Collapse>
-      </List>
-    </FilterStyled>
+    <div className="bg-gray-100 px-sm py-sm">
+      <Disclosure as="div" key={filterId} className="" defaultOpen={!isSmallScreen}>
+        {({ open }) => (
+          <>
+            <h3 className="">
+              <Disclosure.Button className="w-full flex items-center justify-between text-md text-secondary hover:text-secondary-dark">
+                <span className="uppercase font-semibold flex">{filterName}</span>
+                <span className="ml-6 flex items-center">
+                  {open ? (
+                    <Icon type="minus" className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <Icon type="plus" className="h-5 w-5" aria-hidden="true" />
+                  )}
+                </span>
+              </Disclosure.Button>
+            </h3>
+            <Disclosure.Panel className="pt-sm">
+              <div className="space-y-sm">
+                {allTerms.map((t, optionIdx) => (
+                  <div key={t.codename} className="flex items-center">
+                    <input
+                      id={`filter-${t.codename}-${optionIdx}`}
+                      name={`${t.codename}[]`}
+                      value={t.codename}
+                      type="checkbox"
+                      checked={selectedTerms.includes(t.codename)}
+                      className="h-4 w-4 border-gray-300 rounded text-secondary-lighter focus:ring-secondary-lighter"
+                      onChange={(e) => { e.preventDefault(); toggleTerm(t.codename); }}
+                    />
+                    <label
+                      htmlFor={`filter-${t.codename}-${optionIdx}`}
+                      className="ml-sm text-sm text-gray-700"
+                    >
+                      {getTermName(t)}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+    </div>
   );
 };
-
-const FilterStyled = styled.div`
-  background-color: ${p => p.theme.palette.common.lightGray};
-  padding: 1rem;
-
-  .header {
-    text-transform: uppercase;
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-  }
-
-  .MuiCheckbox-root {
-    padding: 4px;
-  }
-
-  .MuiListItemIcon-root {
-    min-width: 0;
-  }
-`;

@@ -1,4 +1,3 @@
-import { Grid } from '@material-ui/core';
 import React from 'react';
 import { ArrayParam, useQueryParams } from 'use-query-params';
 import { FilterSection } from './FilterSection';
@@ -65,19 +64,20 @@ export const Filters = <TGroupNames extends string>({ filters }: FiltersProps<TG
   const [selectedTermsByGroup, onSelectedTermsChanged] = useFilterQuery<TGroupNames>(filters);
 
   return (
-    <Grid container spacing={2} direction="column">
+    <div className="flex flex-col space-y-sm">
       {filters.map(f => (
-        <Grid item key={f.groupCodename}>
+        <div key={f.groupCodename}>
           <FilterSection
             key={f.groupCodename}
             selectedTerms={selectedTermsByGroup[f.groupCodename]}
             onSelectedTermsChanged={(termUpdateCallback) => onSelectedTermsChanged(f.groupCodename, termUpdateCallback)}
+            filterId={f.groupCodename}
             filterName={f.groupName}
             getTermName={(t) => t.name}
             allTerms={f.allTerms}
           />
-        </Grid>
+        </div>
       ))}
-    </Grid>
+    </div>
   );
 };
