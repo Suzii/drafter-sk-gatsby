@@ -9,7 +9,7 @@ import { Navigation } from './Navigation';
 
 const Layout: React.FC = ({ children }) => {
   return (
-    <div className="w-full">
+    <div className="w-full bg-gray-50">
       <GlobalStyle />
       <div className="grid w-full h-full min-h-screen">
         <Navigation sitemap={sitemap} />
