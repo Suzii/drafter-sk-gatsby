@@ -18,7 +18,7 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = (props) => {
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <Disclosure.Button
-                  className="inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-light">
+                  className="inline-flex items-center justify-center p-2 text-secondary hover:text-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-light">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <Icon type="x" className="block h-6 w-6" aria-hidden="true" />
@@ -62,7 +62,7 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = (props) => {
                             to={item.url}
                             className={classNames(
                               isActive(item.url) ? 'bg-secondary-dark text-primary' : 'hover:bg-secondary-darker hover:text-primary',
-                              'uppercase bg-secondary px-3 py-2 rounded-md text-md text-primary font-headings font-bold hover:no-inderline',
+                              'uppercase bg-secondary px-3 py-2 text-md text-primary font-headings font-bold hover:no-inderline',
                             )}
                             aria-current={isActive(item.url) ? 'page' : undefined}
                           >
@@ -85,7 +85,7 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = (props) => {
                   to={item.url}
                   className={classNames(
                     isActive(item.url) ? 'bg-secondary text-primary' : 'text-secondary hover:bg-secondary-lighter hover:text-primary',
-                    'uppercase block px-3 py-2 rounded-md text-base font-headings font-bold',
+                    'uppercase block px-3 py-2 text-base font-headings font-bold',
                   )}
                   aria-current={isActive(item.url) ? 'page' : undefined}
                 >

@@ -52,7 +52,7 @@ export const HeroSection: React.FC<Props> = ({ intro }) => {
         {isFeatureEnabled(Feature.ProductsPage) && intro.cta && (
           <Link
             to={PRODUCTS_URL}
-            className="bg-primary rounded-md py-xs px-sm text-gray-100 no-underline hover:no-underline hover:bg-primary-light text-sm sm:text-md md:text-xl lg:text-xl font-light"
+            className="bg-gray-100 bg-opacity-30 text-white py-xs px-sm text-gray-100 no-underline hover:no-underline hover:bg-primary hover:bg-opacity-100 text-sm sm:text-md md:text-xl lg:text-xl font-medium"
             {...getKontentAttrs(intro.id, 'cta')}
           >
             {intro.cta}
