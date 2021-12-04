@@ -2,6 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import {
   faAddressCard,
   faBars,
+  faEdit,
   faEnvelope,
   faHandshake,
   faMinus,
@@ -25,7 +26,8 @@ export type IconType =
   'x' |
   'menu' |
   'plus' |
-  'minus';
+  'minus' |
+  'pencil';
 
 const mapToIcon = (type: IconType): IconDefinition | null => {
   switch (type) {
@@ -49,6 +51,8 @@ const mapToIcon = (type: IconType): IconDefinition | null => {
       return faPlus;
     case 'minus':
       return faMinus
+    case 'pencil':
+      return faEdit;
     default:
       return null;
   }
