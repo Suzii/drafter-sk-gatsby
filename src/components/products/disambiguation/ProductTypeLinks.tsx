@@ -1,31 +1,14 @@
-import { Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
 import { getUrlByProductType } from '../../../constants/urls';
 import { ProductType } from '../../../models/products/productTypes';
 
 export const ProductTypeLinks = () => (
-  <ProductTypeLinksStyled>
-    <Grid
-      container
-      spacing={2}
-      direction="row"
-      justify="center"
-      alignItems="stretch"
-    >
-      <Grid item>
-        <ProductTypeLink title="Mliečne" type="diary" />
-      </Grid>
-      <Grid item>
-        <ProductTypeLink title="Mäsové" type="meat" />
-      </Grid>
-      <Grid item>
-        <ProductTypeLink title="Ostatné" type="other" />
-      </Grid>
-    </Grid>
-  </ProductTypeLinksStyled>
+  <div className="m-md flex justify-center space-x-md">
+    <ProductTypeLink title="Mliečne" type="diary" />
+    <ProductTypeLink title="Mäsové" type="meat" />
+    <ProductTypeLink title="Ostatné" type="other" />
+  </div>
 );
 
 type ProductTypeTileProps = {
@@ -34,22 +17,9 @@ type ProductTypeTileProps = {
 };
 
 export const ProductTypeLink: React.FC<ProductTypeTileProps> = ({ type, title }) => (
-  <Typography variant="h6" className="tile">
-    <Link to={getUrlByProductType(type)} activeClassName="active">
+  <h2 className="uppercase font-semibold text-secondary">
+    <Link to={getUrlByProductType(type)} activeStyle={{ textDecoration: 'underline' }}>
       {title}
     </Link>
-  </Typography>
+  </h2>
 );
-
-const ProductTypeLinksStyled = styled.div`
-  margin: 2rem;
-
-  .tile {
-    text-transform: uppercase;
-    color: ${p => p.theme.palette.secondary.main};
-  }
-
-  .active {
-    text-decoration: underline;
-  }
-`;
