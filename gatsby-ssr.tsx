@@ -1,4 +1,5 @@
-import React from 'react';
+import type { GatsbySSR } from 'gatsby';
+import * as React from 'react';
 
 const HtmlAttributes = {
   lang: 'sk',
@@ -20,12 +21,12 @@ const HeadComponents = [
   <meta name="theme-color" content="#ffffff" />,
 ];
 
-const BodyAttributes = {
+const BodyAttributes: any = {
   'data-kontent-project-id': `${process.env.GATSBY_KONTENT_PROJECT_ID}`,
   'data-kontent-language-codename':`${process.env.GATSBY_KONTENT_LANGUAGE_CODENAMES}`,
 };
 
-export const onRenderBody = ({
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({
   setHeadComponents,
   setHtmlAttributes,
   setBodyAttributes,
