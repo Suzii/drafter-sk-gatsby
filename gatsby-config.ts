@@ -1,13 +1,13 @@
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
+import type { GatsbyConfig } from 'gatsby';
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const config = require('gatsby-plugin-config').default;
-const usePreviewUrl = !!config.KONTENT_PREVIEW_API_KEY;
+const usePreviewUrl = !!process.env.KONTENT_PREVIEW_API_KEY;
 
-module.exports = {
+const gatsbyConfig: GatsbyConfig = {
   flags: {
     PRESERVE_WEBPACK_CACHE: true,
     FAST_DEV: true,
@@ -25,11 +25,11 @@ module.exports = {
     {
       resolve: '@kentico/gatsby-source-kontent',
       options: {
-        projectId: config.GATSBY_KONTENT_PROJECT_ID,
-        languageCodenames: [config.GATSBY_KONTENT_LANGUAGE_CODENAMES],
+        projectId: process.env.GATSBY_KONTENT_PROJECT_ID,
+        languageCodenames: [process.env.GATSBY_KONTENT_LANGUAGE_CODENAMES],
         includeTaxonomies: true,
         usePreviewUrl,
-        authorizationKey: usePreviewUrl ? config.KONTENT_PREVIEW_API_KEY : undefined,
+        authorizationKey: usePreviewUrl ? process.env.KONTENT_PREVIEW_API_KEY : undefined,
       },
     },
     {
@@ -71,3 +71,5 @@ module.exports = {
     },
   ],
 };
+
+export default gatsbyConfig;
