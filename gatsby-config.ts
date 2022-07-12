@@ -50,7 +50,6 @@ const gatsbyConfig: GatsbyConfig = {
     },
     `gatsby-plugin-postcss`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-use-query-params`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

@@ -58,7 +58,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                       type="checkbox"
                       checked={selectedTerms.includes(t.codename)}
                       className="h-4 w-4 border-gray-300 text-secondary-lighter focus:ring-secondary-lighter"
-                      onChange={(e) => { e.preventDefault(); toggleTerm(t.codename); }}
+                      onChange={_ => toggleTerm(t.codename)}
                     />
                     <label
                       htmlFor={`filter-${t.codename}-${optionIdx}`}

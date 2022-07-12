@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrayParam, useQueryParams } from 'use-query-params';
+import { getQueryParams, queryParamsEventEmitter, setQueryParams } from 'react-use-query-param-string';
 import { FilterSection } from './FilterSection';
 
 export type FilterTerm = {
@@ -20,44 +20,92 @@ type FiltersProps<TGroupNames extends string> = {
 };
 
 export type SelectedTermsByGroup<TGroupNames extends string> = {
-  [P in TGroupNames]: ReadonlyArray<string>;
+  readonly [P in TGroupNames]: ReadonlyArray<string>;
 };
 
-type QueryArrayValue = (string | null)[] | null | undefined;
-type QueryMap<TGroupNames extends string> = {
-  [P in TGroupNames]: QueryArrayValue;
+type ParsedQueryString = {
+  readonly [key: string]: string | null;
 };
-const fixArrayType = (value: QueryArrayValue): ReadonlyArray<string> =>
-  !value || !Array.isArray(value)
-    ? []
-    : value.filter(x => !!x) as string[];
+type QueryArrayValue = readonly (string | null)[] | null | undefined;
+type QueryMap<TGroupNames extends string = string> = {
+  readonly [P in TGroupNames]: QueryArrayValue;
+};
 
-const parseFiltersFromQuery = <TGroupNames extends string>(filters: FiltersConfig<TGroupNames>, query: QueryMap<TGroupNames>): SelectedTermsByGroup<TGroupNames> =>
-  filters.reduce((acc, nextGroup) =>
-      ({ ...acc, [nextGroup.groupCodename]: fixArrayType(query[nextGroup.groupCodename]) }),
-    {} as any,
+export function useQueryParamMap(): [QueryMap, (val: QueryMap) => void] {
+  const [initialized, setInitialized] = React.useState(false);
+  const [updateTime, setUpdateTime] = React.useState(0);
+  const [value, setStateValue] = React.useState<ParsedQueryString>({});
+
+  const toQueryString = (val: QueryMap): ParsedQueryString =>
+    Object.keys(val).reduce((acc, key) => ({...acc, [key]: val[key]?.join(',')}), {});
+  const fromQueryString = (val: ParsedQueryString): QueryMap =>
+    Object.keys(val).reduce((acc, key) => ({...acc, [key]: val[key]?.split(',')}), {});
+
+  const setValue = React.useCallback(
+    (val: QueryMap) => {
+      const newQuery = { ...getQueryParams() as ParsedQueryString, ...toQueryString(val) };
+      Object.keys(newQuery).forEach(key => !newQuery[key] && delete newQuery[key])
+
+      setStateValue(newQuery);
+      setQueryParams(newQuery);
+    },
+    [],
   );
 
-export const useFilterQuery = <TGroupNames extends string>(filters: FiltersConfig<TGroupNames>) => {
-  const queryParamsMap = filters.map(f => f.groupCodename).reduce((acc, groupName) =>
-      ({ ...acc, [groupName]: ArrayParam }),
-    {});
+  const fetchValue = React.useCallback(() => {
+    const queryParams = getQueryParams() as ParsedQueryString;
+    setStateValue(queryParams);
+  }, []);
 
-  const [filtersQuery, setFiltersQuery] = useQueryParams(queryParamsMap);
-  const selectedTermsByGroup = parseFiltersFromQuery(filters, filtersQuery as QueryMap<TGroupNames>);
+  React.useEffect(() => {
+    if (!initialized) {
+      fetchValue();
+      setInitialized(true);
+    }
+  }, [fetchValue, initialized]);
+
+  React.useEffect(() => {
+    if (updateTime > 0) {
+      fetchValue();
+    }
+  }, [fetchValue, updateTime]);
+
+  React.useEffect(() => {
+    const updateListener = () => {
+      setUpdateTime(Date.now());
+    };
+    queryParamsEventEmitter.addListener('update', updateListener);
+    return () => {
+      queryParamsEventEmitter.removeListener('update', updateListener);
+    };
+  }, []);
+
+  return [fromQueryString(value), setValue];
+}
+
+export const useFilterQuery = <TGroupNames extends string>(filters: FiltersConfig<TGroupNames>): readonly [
+  SelectedTermsByGroup<TGroupNames>,
+  (groupCodename: TGroupNames, termsUpdateCallback: (prev: ReadonlyArray<string>) => ReadonlyArray<string>) => void
+] => {
+  const [queryParams, updateQueryParams] = useQueryParamMap();
+
+  const currentFilter: SelectedTermsByGroup<TGroupNames> = filters
+    .map(f => f.groupCodename)
+    .reduce((acc, groupName) =>
+      ({
+        ...acc,
+        [groupName]: queryParams[groupName] ?? []}),
+    {} as SelectedTermsByGroup<TGroupNames>);
 
   const onSelectedTermsChanged = (
     groupCodename: TGroupNames,
     termsUpdateCallback: (prev: ReadonlyArray<string>) => ReadonlyArray<string>,
-  ) => {
-    const newFilter = {
-      ...selectedTermsByGroup,
-      [groupCodename]: termsUpdateCallback(selectedTermsByGroup[groupCodename]),
-    };
-    setFiltersQuery(newFilter, 'pushIn');
-  };
+  ) => updateQueryParams( {
+    ...currentFilter,
+    [groupCodename]: termsUpdateCallback(currentFilter[groupCodename] ?? [])
+  });
 
-  return [selectedTermsByGroup, onSelectedTermsChanged] as const;
+  return [currentFilter, onSelectedTermsChanged];
 };
 
 export const Filters = <TGroupNames extends string>({ filters }: FiltersProps<TGroupNames>) => {
