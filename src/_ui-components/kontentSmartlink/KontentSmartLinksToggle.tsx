@@ -1,6 +1,6 @@
 import KontentSmartLink from '@kentico/kontent-smart-link';
 import React, { useEffect } from 'react';
-import { StringParam, useQueryParams } from 'use-query-params';
+import { useQueryParamString } from 'react-use-query-param-string';
 import { Icon } from '../Icon';
 
 const queryParam = 'preview';
@@ -15,10 +15,10 @@ export const KontentSmartLinksToggle: React.FC = () => {
     };
   }, []);
 
-  const [values, setValues] = useQueryParams({ [queryParam]: StringParam });
+  const [value, setValue] = useQueryParamString(queryParam, 'false');
 
-  const isOn = values[queryParam] !== undefined;
-  const toggle = () => setValues({ [queryParam]: isOn ? undefined : null }, 'pushIn');
+  const isOn = value === 'true';
+  const toggle = () => setValue(isOn ? 'false' : 'true');
 
   return (
     <div
