@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 @layer components {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
+    body {
+        font-family: 'Titillium Web', 'Open Sans', sans-serif;
+        text-align: justify;
+    }
+
+    /* gatsby wrappers hack */
+    #___gatsby {
+        width: 100%;
+    }
+
     a, .link {
         @apply text-secondary-light hover:text-secondary-lighter active:text-secondary
     }
