@@ -2,8 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 import '../styles/font-face.css';
 import './global.css';
 
-export const navBarHeight = '4rem';
-
 export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;

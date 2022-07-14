@@ -1,11 +1,9 @@
 import { ImageElement } from '@kentico/gatsby-kontent-components';
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
 import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { PRODUCTS_URL } from '../../constants/urls';
 import { IntroType } from '../../models/intro';
-import { navBarHeight } from '../../styles/GlobalStyle';
 import { Feature, isFeatureEnabled } from '../../utils/featureToggles';
 import { nbsp } from '../../utils/stringUtils';
 import { Logo, LogoType } from '../Logo';
@@ -16,14 +14,16 @@ type Props = {
 
 export const HeroSection: React.FC<Props> = ({ intro }) => {
   return (
-    <HeroHeader className="relative flex items-center justify-center">
-      <HeroGradient className="z-10 absolute w-full h-full" />
+    <div className="relative flex items-center justify-center h-[calc(100vh_-_theme(space.navHeight))]">
+      <div className="z-10 absolute w-full h-full bg-black/60" />
       {intro.image && (
-        <ImageElement
-          image={intro.image}
-          alt=""
-          className="hero__background-image z-0 absolute w-full h-full"
-        />
+        <div className="z-0 absolute w-full h-full">
+          <ImageElement
+            image={intro.image}
+            alt=""
+            className="w-full h-full"
+          />
+        </div>
       )}
       <div
         className="z-20 flex flex-col items-center m-auto text-center z-100 uppercase text-gray-100 space-y-md font-headings font-bold"
@@ -59,14 +59,6 @@ export const HeroSection: React.FC<Props> = ({ intro }) => {
           </Link>
         )}
       </div>
-    </HeroHeader>
+    </div>
   );
 };
-
-const HeroGradient = styled.div`
-  background: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))
-`
-
-const HeroHeader = styled.header`
-  min-height: ${`calc(100vh - ${navBarHeight})`};
-`;
