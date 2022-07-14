@@ -11,7 +11,7 @@ export const Navigation: React.FC<{ readonly sitemap: Sitemap }> = (props) => {
   const navigation = props.sitemap.filter(s => s.isVisible && !s.isIndex);
 
   return (
-    <Disclosure as="nav" className="max-h-16 bg-primary">
+    <Disclosure as="nav" className="max-h-navHeight bg-primary">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-6 lg:px-8">
