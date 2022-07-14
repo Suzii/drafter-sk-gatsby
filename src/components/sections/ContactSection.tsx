@@ -80,12 +80,12 @@ const CompanyInfoComponent: React.FC<{ readonly info: CompanyInfo }> = ({ info }
 );
 
 const DdStyled: React.FC = ({ children }) => (
-  <dd className="mx-sm overflow-ellipsis text-left w-1/2">
+  <dd className="mx-sm text-ellipsis text-left w-1/2">
     {children}
   </dd>
 );
 const DtStyled: React.FC = ({ children }) => (
-  <dt className="overflow-ellipsis text-right font-bold w-1/2">
+  <dt className="text-ellipsis text-right font-bold w-1/2">
     {children}
   </dt>
 );

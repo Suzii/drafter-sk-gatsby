@@ -1,8 +1,7 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false,
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -12,7 +11,7 @@ module.exports = {
         headings: ['Titillium Web', 'Open Sans'],
       },
       colors: {
-        gray: colors.warmGray,
+        gray: colors.stone,
         primary: {
           light: '#ffde8e',
           lighter: '#ffd33c',
@@ -36,12 +35,6 @@ module.exports = {
         xl: '4rem',
         '2xl': '8rem',
       },
-    },
-  },
-  variants: {
-    extend: {
-      backgroundColor: ['active'],
-      textColor: ['active'],
     },
   },
   plugins: [
