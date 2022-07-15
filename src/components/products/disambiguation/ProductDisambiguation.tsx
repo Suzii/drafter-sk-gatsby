@@ -27,20 +27,20 @@ type TileProps = {
 };
 
 export const Tile: React.FC<TileProps> = ({ type }) => (
-  <div className="flex-1 flex flex-col bg-white relative shadow-sm hover:shadow-lg transition duration-500">
-    <Link to={getUrlByProductType(type.type)} {...getKontentAttrs(type.id, 'image')}>
-      <ImageElement
-        className=""
-        image={type.img ?? {} as any}
-        alt={type.img?.description ?? 'Typ produktu'}
-      />
-    </Link>
-    <div className="py-sm px-sm bg-white" {...getKontentAttrs(type.id, 'title')}>
-      <Link to={getUrlByProductType(type.type)}>
-        <div className="text-secondary text-center font-semibold text-md hover:text-secondary-dark hover:cursor-pointer">
-          {type?.title}
-        </div>
-      </Link>
+  <Link
+    className="flex-1 flex flex-col bg-white relative shadow-sm hover:shadow-lg transition duration-500"
+    to={getUrlByProductType(type.type)}
+    {...getKontentAttrs(type.id, 'image')}
+  >
+    <ImageElement
+      className=""
+      image={type.img ?? {} as any}
+      alt={type.img?.description ?? 'Typ produktu'}
+    />
+    <div className="mt-auto py-sm px-sm bg-white" {...getKontentAttrs(type.id, 'title')}>
+      <div className="text-secondary text-center font-semibold text-md hover:text-secondary-dark hover:cursor-pointer">
+        {type?.title}
+      </div>
     </div>
-  </div>
+  </Link>
 );
