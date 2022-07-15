@@ -1,2 +1,4 @@
+const isBrowser = () => typeof window !== "undefined"
+
 export const useIsSmallScreen = (): boolean =>
-  window.matchMedia("(max-width: 640px)").matches;
+  isBrowser() && window.matchMedia("(max-width: 640px)").matches;
