@@ -21,13 +21,14 @@ export const KontentSmartLinksToggle: React.FC = () => {
   const toggle = () => setValue(isOn ? 'false' : 'true');
 
   return (
-    <div
-      className="z-50 fixed right-md bottom-md"
+    <button
+      className="z-50 fixed right-md bottom-md text-secondary bg-primary hover:bg-primary-lighter p-xs rounded-md"
       onClick={toggle}
     >
-      <button color="primary p-md">
-        {isOn ? <Icon type="x" /> : <Icon type="pencil" />}
-      </button>
-    </div>
+      {isOn
+        ? (<><Icon type="x" />&nbsp;Schovať</>)
+        : (<><Icon type="pencil" />&nbsp;Upraviť</>)
+      }
+    </button>
   );
 };
