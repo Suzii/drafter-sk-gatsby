@@ -16,6 +16,17 @@
     body {
         font-family: 'Titillium Web', 'Open Sans', sans-serif;
         text-align: justify;
+
+        --ksl-color-background-default: #ffc914;
+        --ksl-color-background-default-disabled: #917108;
+        --ksl-color-background-default-hover: #ffd33c;
+        --ksl-color-primary: #26471f;
+        --ksl-color-primary-transparent: rgba(38, 71, 31, 0.5);
+        --ksl-color-primary-hover: rgba(38, 71, 31, 1);
+        --ksl-color-text-default: #26471f;
+        --ksl-color-text-default-disabled: #57534e;
+        --ksl-color-text-secondary: #ffffff;
+        --ksl-z-index: 9000;
     }
 
     /* gatsby wrappers hack */
