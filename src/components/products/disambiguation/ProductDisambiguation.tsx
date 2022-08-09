@@ -1,4 +1,3 @@
-import { ImageElement } from '@kentico/gatsby-kontent-components';
 import { Link } from 'gatsby';
 import React from 'react';
 import { getKontentAttrs } from '../../../_ui-components/kontentSmartlink/KontentSmartlink';
@@ -32,13 +31,13 @@ export const Tile: React.FC<TileProps> = ({ type }) => (
     to={getUrlByProductType(type.type)}
     {...getKontentAttrs(type.id, 'image')}
   >
-    <ImageElement
-      className=""
-      image={type.img ?? {} as any}
-      alt={type.img?.description ?? 'Typ produktu'}
-    />
+    {/*<ImageElement*/}
+    {/*  className=""*/}
+    {/*  image={type.img ?? {} as any}*/}
+    {/*  alt={type.img?.description ?? 'Typ produktu'}*/}
+    {/*/>*/}
     <div className="mt-auto py-sm px-sm bg-white" {...getKontentAttrs(type.id, 'title')}>
-      <div className="text-secondary text-center font-semibold text-md hover:text-secondary-dark hover:cursor-pointer">
+      <div className="text-secondary text-center font-semibold text-xl hover:text-secondary-dark hover:cursor-pointer">
         {type?.title}
       </div>
     </div>
