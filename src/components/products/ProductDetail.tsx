@@ -8,7 +8,7 @@ import { ProductCommon } from '../../models/products';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
 import Layout from '../Layout';
 import { ProductDescription } from './ProductDescription';
-import { ProductInfo } from './ProductInfo';
+import { ProductInfo, ProductPackaging } from './ProductInfo';
 import { ProductNotFound } from './ProductNotFoud';
 
 type Props<TGroupName extends AllKnownProductTaxonomies> = {
@@ -38,7 +38,7 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
               </SectionTitle>
 
               <ProductInfo properties={product.properties} />
-
+              <ProductPackaging piecesInPackage={product.piecesInPackage } weight={product.weight}/>
               <ProductDescription rte={product.description} />
             </div>
           </div>
