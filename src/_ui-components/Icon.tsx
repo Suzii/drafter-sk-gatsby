@@ -4,6 +4,7 @@ import {
   faBars,
   faEnvelope,
   faHandshake,
+  faImage,
   faMinus,
   faPencil,
   faPhone,
@@ -27,7 +28,8 @@ export type IconType =
   'menu' |
   'plus' |
   'minus' |
-  'pencil';
+  'pencil' |
+  'no-image';
 
 const mapToIcon = (type: IconType): IconDefinition | null => {
   switch (type) {
@@ -53,6 +55,8 @@ const mapToIcon = (type: IconType): IconDefinition | null => {
       return faMinus
     case 'pencil':
       return faPencil;
+    case  'no-image':
+      return faImage;
     default:
       return null;
   }

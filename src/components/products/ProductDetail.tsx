@@ -2,6 +2,7 @@ import { ImageElement } from '@kentico/gatsby-kontent-components';
 import React from 'react';
 import { Maybe } from '../../@types/global';
 import { Section, SectionTitle } from '../../_ui-components/Container';
+import { Icon } from '../../_ui-components/Icon';
 import { getKontentAttrs } from '../../_ui-components/kontentSmartlink/KontentSmartlink';
 import { ProductCommon } from '../../models/products';
 import { AllKnownProductTaxonomies } from '../../models/taxonomies/taxonomies';
@@ -26,7 +27,10 @@ export const ProductDetail = <TGroupName extends AllKnownProductTaxonomies>({ pr
         <div className="container-fluid">
           <div className="grid grid-cols-12 gap-sm">
             <div className="col-span-12 sm:col-span-6 lg:col-span-4">
-              <ImageElement image={product.img ?? {} as any} className="w-full"/>
+              {product.img
+                ? <ImageElement image={product.img ?? {} as any} className="w-full"/>
+                : <Icon type="no-image" className="w-full h-full" />
+              }
             </div>
             <div className="col-span-12 sm:col-span-6 lg:col-span-8 space-y-md">
               <SectionTitle {...getKontentAttrs(product.id, 'name')}>
