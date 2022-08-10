@@ -27,6 +27,8 @@ export const query = graphql`
                 diary_type { ...TaxonomyElementFields }
                 milk_type { ...TaxonomyElementFields }
                 produkt_core__image { ...KontentImage }
+                weight_freeform { value }
+                pieces_in_package { value }
             }
         }
     }

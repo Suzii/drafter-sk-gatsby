@@ -469,15 +469,16 @@ export type Kontent_Item_Rich_Text_Element_Link = {
 };
 
 export type Kontent_Item_Diary_Product_Elements = {
-  produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
-  produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
-  produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
+  weight_freeform?: Maybe<Kontent_Item_Text_Element_Value>;
   produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
+  produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
+  pieces_in_package?: Maybe<Kontent_Item_Number_Element_Value>;
   milk_type?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   diary_type?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
+  produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
+  produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
   weight?: Maybe<Kontent_Item_Number_Element_Value>;
-  pieces_in_package?: Maybe<Kontent_Item_Number_Element_Value>;
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
 };
 
@@ -531,12 +532,12 @@ export type Kontent_Item_Intro = Node & Kontent_Item & {
 };
 
 export type Kontent_Item_Meat_Product_Elements = {
+  url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
+  produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
+  produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
   produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
   produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
-  produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
-  produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
-  url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
 };
 
 export type Kontent_Item_Meat_Product = Node & Kontent_Item & {
@@ -556,12 +557,12 @@ export type Kontent_Item_Meat_ProductGatsbyPathArgs = {
 };
 
 export type Kontent_Item_Other_Product_Elements = {
-  produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
-  produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
-  produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
   produkt_core__producer?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
   produkt_core__country?: Maybe<Kontent_Item_Taxonomy_Element_Value>;
+  produkt_core__name?: Maybe<Kontent_Item_Text_Element_Value>;
   url_slug?: Maybe<Kontent_Item_Url_Slug_Element_Value>;
+  produkt_core__image?: Maybe<Kontent_Item_Asset_Element_Value>;
+  produkt_core__description?: Maybe<Kontent_Item_Rich_Text_Element_Value>;
 };
 
 export type Kontent_Item_Other_Product = Node & Kontent_Item & {
@@ -3524,15 +3525,16 @@ export type Kontent_ItemSortInput = {
 };
 
 export type Kontent_Item_Diary_Product_ElementsFilterInput = {
-  produkt_core__name?: InputMaybe<Kontent_Item_Text_Element_ValueFilterInput>;
-  produkt_core__image?: InputMaybe<Kontent_Item_Asset_Element_ValueFilterInput>;
-  produkt_core__description?: InputMaybe<Kontent_Item_Rich_Text_Element_ValueFilterInput>;
+  weight_freeform?: InputMaybe<Kontent_Item_Text_Element_ValueFilterInput>;
   produkt_core__producer?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   produkt_core__country?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
+  produkt_core__name?: InputMaybe<Kontent_Item_Text_Element_ValueFilterInput>;
+  pieces_in_package?: InputMaybe<Kontent_Item_Number_Element_ValueFilterInput>;
   milk_type?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   diary_type?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
+  produkt_core__image?: InputMaybe<Kontent_Item_Asset_Element_ValueFilterInput>;
+  produkt_core__description?: InputMaybe<Kontent_Item_Rich_Text_Element_ValueFilterInput>;
   weight?: InputMaybe<Kontent_Item_Number_Element_ValueFilterInput>;
-  pieces_in_package?: InputMaybe<Kontent_Item_Number_Element_ValueFilterInput>;
   url_slug?: InputMaybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
 };
 
@@ -3540,6 +3542,28 @@ export type Kontent_Item_Text_Element_ValueFilterInput = {
   name?: InputMaybe<StringQueryOperatorInput>;
   type?: InputMaybe<StringQueryOperatorInput>;
   value?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type Kontent_Item_Taxonomy_Element_ValueFilterInput = {
+  name?: InputMaybe<StringQueryOperatorInput>;
+  type?: InputMaybe<StringQueryOperatorInput>;
+  taxonomy_group?: InputMaybe<StringQueryOperatorInput>;
+  value?: InputMaybe<Kontent_Item_Taxonomy_ElementFilterListInput>;
+};
+
+export type Kontent_Item_Taxonomy_ElementFilterListInput = {
+  elemMatch?: InputMaybe<Kontent_Item_Taxonomy_ElementFilterInput>;
+};
+
+export type Kontent_Item_Taxonomy_ElementFilterInput = {
+  name?: InputMaybe<StringQueryOperatorInput>;
+  codename?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type Kontent_Item_Number_Element_ValueFilterInput = {
+  name?: InputMaybe<StringQueryOperatorInput>;
+  type?: InputMaybe<StringQueryOperatorInput>;
+  value?: InputMaybe<FloatQueryOperatorInput>;
 };
 
 export type Kontent_Item_Asset_Element_ValueFilterInput = {
@@ -3596,28 +3620,6 @@ export type Kontent_Item_Rich_Text_Element_LinkFilterInput = {
   codename?: InputMaybe<StringQueryOperatorInput>;
   type?: InputMaybe<StringQueryOperatorInput>;
   url_slug?: InputMaybe<StringQueryOperatorInput>;
-};
-
-export type Kontent_Item_Taxonomy_Element_ValueFilterInput = {
-  name?: InputMaybe<StringQueryOperatorInput>;
-  type?: InputMaybe<StringQueryOperatorInput>;
-  taxonomy_group?: InputMaybe<StringQueryOperatorInput>;
-  value?: InputMaybe<Kontent_Item_Taxonomy_ElementFilterListInput>;
-};
-
-export type Kontent_Item_Taxonomy_ElementFilterListInput = {
-  elemMatch?: InputMaybe<Kontent_Item_Taxonomy_ElementFilterInput>;
-};
-
-export type Kontent_Item_Taxonomy_ElementFilterInput = {
-  name?: InputMaybe<StringQueryOperatorInput>;
-  codename?: InputMaybe<StringQueryOperatorInput>;
-};
-
-export type Kontent_Item_Number_Element_ValueFilterInput = {
-  name?: InputMaybe<StringQueryOperatorInput>;
-  type?: InputMaybe<StringQueryOperatorInput>;
-  value?: InputMaybe<FloatQueryOperatorInput>;
 };
 
 export type Kontent_Item_Url_Slug_Element_ValueFilterInput = {
@@ -3680,9 +3682,39 @@ export type Kontent_Item_Diary_ProductFieldsEnum =
   | 'system___type'
   | 'system___collection'
   | 'system___workflow_step'
+  | 'elements___weight_freeform___name'
+  | 'elements___weight_freeform___type'
+  | 'elements___weight_freeform___value'
+  | 'elements___produkt_core__producer___name'
+  | 'elements___produkt_core__producer___type'
+  | 'elements___produkt_core__producer___taxonomy_group'
+  | 'elements___produkt_core__producer___value'
+  | 'elements___produkt_core__producer___value___name'
+  | 'elements___produkt_core__producer___value___codename'
+  | 'elements___produkt_core__country___name'
+  | 'elements___produkt_core__country___type'
+  | 'elements___produkt_core__country___taxonomy_group'
+  | 'elements___produkt_core__country___value'
+  | 'elements___produkt_core__country___value___name'
+  | 'elements___produkt_core__country___value___codename'
   | 'elements___produkt_core__name___name'
   | 'elements___produkt_core__name___type'
   | 'elements___produkt_core__name___value'
+  | 'elements___pieces_in_package___name'
+  | 'elements___pieces_in_package___type'
+  | 'elements___pieces_in_package___value'
+  | 'elements___milk_type___name'
+  | 'elements___milk_type___type'
+  | 'elements___milk_type___taxonomy_group'
+  | 'elements___milk_type___value'
+  | 'elements___milk_type___value___name'
+  | 'elements___milk_type___value___codename'
+  | 'elements___diary_type___name'
+  | 'elements___diary_type___type'
+  | 'elements___diary_type___taxonomy_group'
+  | 'elements___diary_type___value'
+  | 'elements___diary_type___value___name'
+  | 'elements___diary_type___value___codename'
   | 'elements___produkt_core__image___name'
   | 'elements___produkt_core__image___type'
   | 'elements___produkt_core__image___value'
@@ -3711,36 +3743,9 @@ export type Kontent_Item_Diary_ProductFieldsEnum =
   | 'elements___produkt_core__description___links___codename'
   | 'elements___produkt_core__description___links___type'
   | 'elements___produkt_core__description___links___url_slug'
-  | 'elements___produkt_core__producer___name'
-  | 'elements___produkt_core__producer___type'
-  | 'elements___produkt_core__producer___taxonomy_group'
-  | 'elements___produkt_core__producer___value'
-  | 'elements___produkt_core__producer___value___name'
-  | 'elements___produkt_core__producer___value___codename'
-  | 'elements___produkt_core__country___name'
-  | 'elements___produkt_core__country___type'
-  | 'elements___produkt_core__country___taxonomy_group'
-  | 'elements___produkt_core__country___value'
-  | 'elements___produkt_core__country___value___name'
-  | 'elements___produkt_core__country___value___codename'
-  | 'elements___milk_type___name'
-  | 'elements___milk_type___type'
-  | 'elements___milk_type___taxonomy_group'
-  | 'elements___milk_type___value'
-  | 'elements___milk_type___value___name'
-  | 'elements___milk_type___value___codename'
-  | 'elements___diary_type___name'
-  | 'elements___diary_type___type'
-  | 'elements___diary_type___taxonomy_group'
-  | 'elements___diary_type___value'
-  | 'elements___diary_type___value___name'
-  | 'elements___diary_type___value___codename'
   | 'elements___weight___name'
   | 'elements___weight___type'
   | 'elements___weight___value'
-  | 'elements___pieces_in_package___name'
-  | 'elements___pieces_in_package___type'
-  | 'elements___pieces_in_package___value'
   | 'elements___url_slug___name'
   | 'elements___url_slug___type'
   | 'elements___url_slug___value'
@@ -4340,12 +4345,12 @@ export type Kontent_Item_IntroSortInput = {
 };
 
 export type Kontent_Item_Meat_Product_ElementsFilterInput = {
+  url_slug?: InputMaybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
+  produkt_core__producer?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
+  produkt_core__country?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   produkt_core__name?: InputMaybe<Kontent_Item_Text_Element_ValueFilterInput>;
   produkt_core__image?: InputMaybe<Kontent_Item_Asset_Element_ValueFilterInput>;
   produkt_core__description?: InputMaybe<Kontent_Item_Rich_Text_Element_ValueFilterInput>;
-  produkt_core__producer?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
-  produkt_core__country?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
-  url_slug?: InputMaybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
 };
 
 export type Kontent_Item_Meat_ProductConnection = {
@@ -4402,6 +4407,21 @@ export type Kontent_Item_Meat_ProductFieldsEnum =
   | 'system___type'
   | 'system___collection'
   | 'system___workflow_step'
+  | 'elements___url_slug___name'
+  | 'elements___url_slug___type'
+  | 'elements___url_slug___value'
+  | 'elements___produkt_core__producer___name'
+  | 'elements___produkt_core__producer___type'
+  | 'elements___produkt_core__producer___taxonomy_group'
+  | 'elements___produkt_core__producer___value'
+  | 'elements___produkt_core__producer___value___name'
+  | 'elements___produkt_core__producer___value___codename'
+  | 'elements___produkt_core__country___name'
+  | 'elements___produkt_core__country___type'
+  | 'elements___produkt_core__country___taxonomy_group'
+  | 'elements___produkt_core__country___value'
+  | 'elements___produkt_core__country___value___name'
+  | 'elements___produkt_core__country___value___codename'
   | 'elements___produkt_core__name___name'
   | 'elements___produkt_core__name___type'
   | 'elements___produkt_core__name___value'
@@ -4433,21 +4453,6 @@ export type Kontent_Item_Meat_ProductFieldsEnum =
   | 'elements___produkt_core__description___links___codename'
   | 'elements___produkt_core__description___links___type'
   | 'elements___produkt_core__description___links___url_slug'
-  | 'elements___produkt_core__producer___name'
-  | 'elements___produkt_core__producer___type'
-  | 'elements___produkt_core__producer___taxonomy_group'
-  | 'elements___produkt_core__producer___value'
-  | 'elements___produkt_core__producer___value___name'
-  | 'elements___produkt_core__producer___value___codename'
-  | 'elements___produkt_core__country___name'
-  | 'elements___produkt_core__country___type'
-  | 'elements___produkt_core__country___taxonomy_group'
-  | 'elements___produkt_core__country___value'
-  | 'elements___produkt_core__country___value___name'
-  | 'elements___produkt_core__country___value___codename'
-  | 'elements___url_slug___name'
-  | 'elements___url_slug___type'
-  | 'elements___url_slug___value'
   | 'preferred_language'
   | 'gatsbyPath'
   | 'id'
@@ -4595,12 +4600,12 @@ export type Kontent_Item_Meat_ProductSortInput = {
 };
 
 export type Kontent_Item_Other_Product_ElementsFilterInput = {
-  produkt_core__name?: InputMaybe<Kontent_Item_Text_Element_ValueFilterInput>;
-  produkt_core__image?: InputMaybe<Kontent_Item_Asset_Element_ValueFilterInput>;
-  produkt_core__description?: InputMaybe<Kontent_Item_Rich_Text_Element_ValueFilterInput>;
   produkt_core__producer?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
   produkt_core__country?: InputMaybe<Kontent_Item_Taxonomy_Element_ValueFilterInput>;
+  produkt_core__name?: InputMaybe<Kontent_Item_Text_Element_ValueFilterInput>;
   url_slug?: InputMaybe<Kontent_Item_Url_Slug_Element_ValueFilterInput>;
+  produkt_core__image?: InputMaybe<Kontent_Item_Asset_Element_ValueFilterInput>;
+  produkt_core__description?: InputMaybe<Kontent_Item_Rich_Text_Element_ValueFilterInput>;
 };
 
 export type Kontent_Item_Other_ProductConnection = {
@@ -4657,9 +4662,24 @@ export type Kontent_Item_Other_ProductFieldsEnum =
   | 'system___type'
   | 'system___collection'
   | 'system___workflow_step'
+  | 'elements___produkt_core__producer___name'
+  | 'elements___produkt_core__producer___type'
+  | 'elements___produkt_core__producer___taxonomy_group'
+  | 'elements___produkt_core__producer___value'
+  | 'elements___produkt_core__producer___value___name'
+  | 'elements___produkt_core__producer___value___codename'
+  | 'elements___produkt_core__country___name'
+  | 'elements___produkt_core__country___type'
+  | 'elements___produkt_core__country___taxonomy_group'
+  | 'elements___produkt_core__country___value'
+  | 'elements___produkt_core__country___value___name'
+  | 'elements___produkt_core__country___value___codename'
   | 'elements___produkt_core__name___name'
   | 'elements___produkt_core__name___type'
   | 'elements___produkt_core__name___value'
+  | 'elements___url_slug___name'
+  | 'elements___url_slug___type'
+  | 'elements___url_slug___value'
   | 'elements___produkt_core__image___name'
   | 'elements___produkt_core__image___type'
   | 'elements___produkt_core__image___value'
@@ -4688,21 +4708,6 @@ export type Kontent_Item_Other_ProductFieldsEnum =
   | 'elements___produkt_core__description___links___codename'
   | 'elements___produkt_core__description___links___type'
   | 'elements___produkt_core__description___links___url_slug'
-  | 'elements___produkt_core__producer___name'
-  | 'elements___produkt_core__producer___type'
-  | 'elements___produkt_core__producer___taxonomy_group'
-  | 'elements___produkt_core__producer___value'
-  | 'elements___produkt_core__producer___value___name'
-  | 'elements___produkt_core__producer___value___codename'
-  | 'elements___produkt_core__country___name'
-  | 'elements___produkt_core__country___type'
-  | 'elements___produkt_core__country___taxonomy_group'
-  | 'elements___produkt_core__country___value'
-  | 'elements___produkt_core__country___value___name'
-  | 'elements___produkt_core__country___value___codename'
-  | 'elements___url_slug___name'
-  | 'elements___url_slug___type'
-  | 'elements___url_slug___value'
   | 'preferred_language'
   | 'gatsbyPath'
   | 'id'
@@ -6411,7 +6416,7 @@ export type DiaryProductFallbackQueryVariables = Exact<{
 }>;
 
 
-export type DiaryProductFallbackQuery = { kontentItemDiaryProduct?: { system: { id: string }, elements?: { url_slug?: { value?: string | null } | null, produkt_core__name?: { value?: string | null } | null, produkt_core__description?: { value?: string | null } | null, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, diary_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, milk_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__image?: { value?: Array<{ description?: string | null, url: string, width?: number | null, height?: number | null } | null> | null } | null } | null } | null };
+export type DiaryProductFallbackQuery = { kontentItemDiaryProduct?: { system: { id: string }, elements?: { url_slug?: { value?: string | null } | null, produkt_core__name?: { value?: string | null } | null, produkt_core__description?: { value?: string | null } | null, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, diary_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, milk_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__image?: { value?: Array<{ description?: string | null, url: string, width?: number | null, height?: number | null } | null> | null } | null, weight_freeform?: { value?: string | null } | null, pieces_in_package?: { value?: number | null } | null } | null } | null };
 
 export type DiaryProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6423,7 +6428,7 @@ export type DiaryProductQueryVariables = Exact<{
 }>;
 
 
-export type DiaryProductQuery = { kontentItemDiaryProduct?: { system: { id: string }, elements?: { url_slug?: { value?: string | null } | null, produkt_core__name?: { value?: string | null } | null, produkt_core__description?: { value?: string | null } | null, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, diary_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, milk_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__image?: { value?: Array<{ description?: string | null, url: string, width?: number | null, height?: number | null } | null> | null } | null } | null } | null };
+export type DiaryProductQuery = { kontentItemDiaryProduct?: { system: { id: string }, elements?: { url_slug?: { value?: string | null } | null, produkt_core__name?: { value?: string | null } | null, produkt_core__description?: { value?: string | null } | null, produkt_core__producer?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__country?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, diary_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, milk_type?: { name: string, taxonomy_group: string, value?: Array<{ name: string, codename: string } | null> | null } | null, produkt_core__image?: { value?: Array<{ description?: string | null, url: string, width?: number | null, height?: number | null } | null> | null } | null, weight_freeform?: { value?: string | null } | null, pieces_in_package?: { value?: number | null } | null } | null } | null };
 
 export type OtherProductFallbackQueryVariables = Exact<{
   fallback_slug?: InputMaybe<Scalars['String']>;

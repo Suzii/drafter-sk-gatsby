@@ -29,6 +29,8 @@ export const mapDiaryProductFromKontent = ({ kontentItemDiaryProduct: p }: Diary
   description: p?.elements?.produkt_core__description,
   img: p?.elements?.produkt_core__image?.value?.[0] ?? null,
   url: PRODUCT_URL('diary', p?.elements?.url_slug?.value ?? ''),
+  weight: p?.elements?.weight_freeform?.value ?? null,
+  piecesInPackage: p?.elements?.pieces_in_package?.value ?? null,
   properties: {
     producer: mapTaxonomyElement(p?.elements?.produkt_core__producer),
     country: mapTaxonomyElement(p?.elements?.produkt_core__country),
